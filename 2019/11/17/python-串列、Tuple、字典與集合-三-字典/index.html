@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Python 字典 &lt;!--more--&gt;  字典(Dictionary)  字典與串列很像，但他不在乎項目的順序，且不會用0或1等位移值還選擇項目 必須為每一個值指定一個獨一無二的鍵 這個鍵通常是個字串，但其實可以用任何一種不可變的Python類型：布林、整數、浮點數、tuple、字串... 字典通常是可變的，可以添加、刪除、改變他們的 &quot;鍵&#x2F;值&quot;元素   其他語">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python 串列、Tuple、字典與集合(三)-字典">
+<meta property="og:url" content="https://pingjing0628.github.io/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="Python 字典 &lt;!--more--&gt;  字典(Dictionary)  字典與串列很像，但他不在乎項目的順序，且不會用0或1等位移值還選擇項目 必須為每一個值指定一個獨一無二的鍵 這個鍵通常是個字串，但其實可以用任何一種不可變的Python類型：布林、整數、浮點數、tuple、字串... 字典通常是可變的，可以添加、刪除、改變他們的 &quot;鍵&#x2F;值&quot;元素   其他語">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2019-11-17T07:08:50.000Z">
+<meta property="article:modified_time" content="2020-12-15T15:15:38.137Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="字典">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>python 串列、Tuple、字典與集合(三)-字典</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E5%9B%9B-%E9%9B%86%E5%90%88/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%BA%8C-Tuple/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/&text=python 串列、Tuple、字典與集合(三)-字典" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/&title=python 串列、Tuple、字典與集合(三)-字典" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/&is_video=false&description=python 串列、Tuple、字典與集合(三)-字典" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=python 串列、Tuple、字典與集合(三)-字典&body=Check out this article: https://pingjing0628.github.io/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/&title=python 串列、Tuple、字典與集合(三)-字典" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/&title=python 串列、Tuple、字典與集合(三)-字典" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/&title=python 串列、Tuple、字典與集合(三)-字典" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/&title=python 串列、Tuple、字典與集合(三)-字典" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/&name=python 串列、Tuple、字典與集合(三)-字典&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/&t=python 串列、Tuple、字典與集合(三)-字典" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">Python 字典</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">字典(Dictionary)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.1.1.</span> <span class="toc-text">用 {}來建立</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.1.2.</span> <span class="toc-text">用dict()來轉換</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.1.3.</span> <span class="toc-text">用[鍵]來添加或變更項目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.1.4.</span> <span class="toc-text">用 update()來合併字典</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.1.5.</span> <span class="toc-text">用 del與鍵來刪除項目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.1.6.</span> <span class="toc-text">用 clear()來刪除所有項目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.1.7.</span> <span class="toc-text">用 in來測試鍵</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.1.8.</span> <span class="toc-text">用[鍵]來取得一個項目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.1.9.</span> <span class="toc-text">使用 keys()來取得所有的鍵</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.1.10.</span> <span class="toc-text">用 values()來取得所有的值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.1.11.</span> <span class="toc-text">用 items()來取得所有的鍵&#x2F;值對</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.1.12.</span> <span class="toc-text">用 &#x3D;來指派，用 copy()來複製</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        python 串列、Tuple、字典與集合(三)-字典
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-11-17T07:08:50.000Z" itemprop="datePublished">2019-11-17</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Python/">Python</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/python/" rel="tag">python</a>, <a class="tag-link" href="/tags/%E5%AD%97%E5%85%B8/" rel="tag">字典</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2>Python 字典</h2>
+<p>&lt;!--more--&gt;</p>
+<hr>
+<h3>字典(Dictionary)</h3>
+<ul>
+<li>字典與串列很像，但他不在乎項目的順序，且不會用0或1等位移值還選擇項目</li>
+<li>必須為每一個值指定一個獨一無二的<strong>鍵</strong></li>
+<li>這個鍵通常是個字串，但其實可以用任何一種不可變的Python類型：布林、整數、浮點數、tuple、字串...</li>
+<li>字典通常是可變的，可以添加、刪除、改變他們的 &quot;鍵/值&quot;元素</li>
+</ul>
+<blockquote>
+<p>其他語言可能會將字典稱為<strong>關聯陣列(associative array)、雜湊(Hash)或 hashmap</strong>，在Python，字典也可稱為dict還減少字母數</p>
+</blockquote>
+<h4>用 <code>{}</code>來建立</h4>
+<ul>
+<li>要建立字典，要用大括號包住以逗號分隔的<strong>鍵</strong>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>empty_dict = &#123;&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>empty_dict</span><br><span class="line">&#123;&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4>用<code>dict()</code>來轉換</h4>
+<ul>
+<li>可以使用<code>dict()</code>，將雙值序列轉換到字典裡面，每一個序列的第一個項目都會被當成鍵，第二個項目會被當成值
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>lol = [[<span class="string">'a'</span>, <span class="string">'b'</span>], [<span class="string">'c'</span>, <span class="string">'d'</span>], [<span class="string">'e'</span>, <span class="string">'f'</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dict(lol)</span><br><span class="line">&#123;<span class="string">'c'</span>: <span class="string">'d'</span>, <span class="string">'a'</span>: <span class="string">'b'</span>, <span class="string">'e'</span> :<span class="string">'f'</span>&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>字典裡的鍵的順序都是任意排列的</p>
+</blockquote>
+<ul>
+<li>可以使用任何存放雙項目序列的序列</li>
+</ul>
+<ol>
+<li>
+<p>一個含有雙項目tuple的串列
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>lot = [(<span class="string">'a'</span>, <span class="string">'b'</span>), (<span class="string">'c'</span>, <span class="string">'d'</span>), (<span class="string">'e'</span>, <span class="string">'f'</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dict(lot)</span><br><span class="line">&#123;<span class="string">'c'</span>: <span class="string">'d'</span>, <span class="string">'a'</span>: <span class="string">'b'</span>, <span class="string">'e'</span> :<span class="string">'f'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>一個含有雙項目串列的tuple
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>tol = ([<span class="string">'a'</span>, <span class="string">'b'</span>], [<span class="string">'c'</span>, <span class="string">'d'</span>], [<span class="string">'e'</span>, <span class="string">'f'</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dict(tol)</span><br><span class="line">&#123;<span class="string">'c'</span>: <span class="string">'d'</span>, <span class="string">'a'</span>: <span class="string">'b'</span>, <span class="string">'e'</span> :<span class="string">'f'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>一個含有雙字元字串的串列
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>los = [<span class="string">'ab'</span>, <span class="string">'cd'</span>, <span class="string">'ef'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dict(los)</span><br><span class="line">&#123;<span class="string">'c'</span>: <span class="string">'d'</span>, <span class="string">'a'</span>: <span class="string">'b'</span>, <span class="string">'e'</span> :<span class="string">'f'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>一個含有雙字元字串的tuple
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>tos = (<span class="string">'ab'</span>, <span class="string">'cd'</span>, <span class="string">'ef'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dict(tos)</span><br><span class="line">&#123;<span class="string">'c'</span>: <span class="string">'d'</span>, <span class="string">'a'</span>: <span class="string">'b'</span>, <span class="string">'e'</span> :<span class="string">'f'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+</ol>
+<h4>用[鍵]來添加或變更項目</h4>
+<ul>
+<li>
+<p>用項目的鍵來參考並指派值，就可以將一個項目加到字典</p>
+</li>
+<li>
+<p>若字典裡已經有此鍵，則既有的值就會被換成新的值</p>
+</li>
+<li>
+<p>若鍵是新的，則會與值一起被加到字典裡</p>
+</li>
+<li>
+<p>製作一個字典，且姓為鍵，名為值
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>pythons = &#123;</span><br><span class="line">	<span class="string">'Chapmon'</span>: <span class="string">'Graham'</span>,</span><br><span class="line">	<span class="string">'Cleese'</span>: <span class="string">'John'</span>,</span><br><span class="line">	<span class="string">'Idle'</span>: <span class="string">'Eric'</span>,</span><br><span class="line">	<span class="string">'Jones'</span>: <span class="string">'Terry'</span>,</span><br><span class="line">	<span class="string">'Palin'</span>: <span class="string">'Michael'</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pythons</span><br><span class="line">&#123;<span class="string">'Cleese'</span>: <span class="string">'John'</span>, <span class="string">'Jones'</span>: <span class="string">'Terry'</span>, <span class="string">'Palin'</span>: <span class="string">'Michael'</span>, <span class="string">'Chapmon'</span>: <span class="string">'Graham'</span>, <span class="string">'Idle'</span>: <span class="string">'Eric'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>少加入一位成員
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>pythons[<span class="string">'Gilliam'</span>] = <span class="string">'Gerry'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pythons</span><br><span class="line">&#123;<span class="string">'Cleese'</span>: <span class="string">'John'</span>, <span class="string">'Gilliam'</span>: <span class="string">'Gerry'</span>, <span class="string">'Jones'</span>: <span class="string">'Terry'</span>, <span class="string">'Palin'</span>: <span class="string">'Michael'</span>, <span class="string">'Chapmon'</span>: <span class="string">'Graham'</span>, <span class="string">'Idle'</span>: <span class="string">'Eric'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>但是打錯名字了，藉由使用同一個鍵，去修正
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>pythons[<span class="string">'Gilliam'</span>] = <span class="string">'Terry'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pythons</span><br><span class="line">&#123;<span class="string">'Cleese'</span>: <span class="string">'John'</span>, <span class="string">'Gilliam'</span>: <span class="string">'Terry'</span>, <span class="string">'Jones'</span>: <span class="string">'Terry'</span>, <span class="string">'Palin'</span>: <span class="string">'Michael'</span>, <span class="string">'Chapmon'</span>: <span class="string">'Graham'</span>, <span class="string">'Idle'</span>: <span class="string">'Eric'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<h4>用 <code>update()</code>來合併字典</h4>
+<ul>
+<li>
+<p>使用 <code>update()</code>將一個字典的鍵與值複製到另一個
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>pythons = &#123;</span><br><span class="line">	<span class="string">'Chapmon'</span>: <span class="string">'Graham'</span>,</span><br><span class="line">	<span class="string">'Cleese'</span>: <span class="string">'John'</span>,</span><br><span class="line">	<span class="string">'Gilliam'</span>: <span class="string">'Terry'</span></span><br><span class="line">	<span class="string">'Idle'</span>: <span class="string">'Eric'</span>,</span><br><span class="line">	<span class="string">'Jones'</span>: <span class="string">'Terry'</span>,</span><br><span class="line">	<span class="string">'Palin'</span>: <span class="string">'Michael'</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pythons</span><br><span class="line">&#123;<span class="string">'Cleese'</span>: <span class="string">'John'</span>, <span class="string">'Gilliam'</span>: <span class="string">'Terry'</span>, <span class="string">'Jones'</span>: <span class="string">'Terry'</span>, <span class="string">'Palin'</span>: <span class="string">'Michael'</span>, <span class="string">'Chapmon'</span>: <span class="string">'Graham'</span>, <span class="string">'Idle'</span>: <span class="string">'Eric'</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>others = &#123;<span class="string">'Marx'</span>: <span class="string">'Groucho'</span>, <span class="string">'Howard'</span>: <span class="string">'Moe'</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pythons.update(others)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pythons</span><br><span class="line">&#123;<span class="string">'Cleese'</span>: <span class="string">'John'</span>, <span class="string">'Howard'</span>: <span class="string">'Moe'</span>, <span class="string">'Gilliam'</span>: <span class="string">'Terry'</span>, <span class="string">'Jones'</span>: <span class="string">'Terry'</span>, <span class="string">'Palin'</span>: <span class="string">'Michael'</span>, <span class="string">'Marx'</span>: <span class="string">'Groucho'</span>, <span class="string">'Chapmon'</span>: <span class="string">'Graham'</span>, <span class="string">'Idle'</span>: <span class="string">'Eric'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>若第二個字典與要合併的字典有相同的鍵時，第二個字典的值會勝出
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>first = &#123;<span class="string">'a'</span>: <span class="number">1</span>, <span class="string">'b'</span>: <span class="number">2</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>second = &#123;<span class="string">'b'</span>: <span class="string">'platypus'</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>first.update(second)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>first</span><br><span class="line">&#123;<span class="string">'b'</span>: <span class="string">'platpyus'</span>, <span class="string">'a'</span>: <span class="number">1</span>&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<h4>用 <code>del</code>與鍵來刪除項目</h4>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> pythons[<span class="string">'Marx'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pythons</span><br><span class="line">&#123;<span class="string">'Cleese'</span>: <span class="string">'John'</span>, <span class="string">'Howard'</span>: <span class="string">'Moe'</span>, <span class="string">'Gilliam'</span>: <span class="string">'Terry'</span>, <span class="string">'Jones'</span>: <span class="string">'Terry'</span>, <span class="string">'Palin'</span>: <span class="string">'Michael'</span>, <span class="string">'Chapmon'</span>: <span class="string">'Graham'</span>, <span class="string">'Idle'</span>: <span class="string">'Eric'</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> pythons[<span class="string">'Howard'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pythons</span><br><span class="line">&#123;<span class="string">'Cleese'</span>: <span class="string">'John'</span>, <span class="string">'Gilliam'</span>: <span class="string">'Terry'</span>, <span class="string">'Jones'</span>: <span class="string">'Terry'</span>, <span class="string">'Palin'</span>: <span class="string">'Michael'</span>, <span class="string">'Chapmon'</span>: <span class="string">'Graham'</span>, <span class="string">'Idle'</span>: <span class="string">'Eric'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<h4>用 <code>clear()</code>來刪除所有項目</h4>
+<ul>
+<li>可以使用 <code>clear()</code>或重新指派一個空的字典{}
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>pythons.clear()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pythons</span><br><span class="line">&#123;&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pythons = &#123;&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pythons</span><br><span class="line">&#123;&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4>用 <code>in</code>來測試鍵</h4>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>pythons = &#123;</span><br><span class="line">	<span class="string">'Chapmon'</span>: <span class="string">'Graham'</span>,</span><br><span class="line">	<span class="string">'Cleese'</span>: <span class="string">'John'</span>,</span><br><span class="line">	<span class="string">'Jones'</span>: <span class="string">'Terry'</span>,</span><br><span class="line">	<span class="string">'Palin'</span>: <span class="string">'Michael'</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'Chapman'</span> <span class="keyword">in</span> pythons</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'Palin'</span> <span class="keyword">in</span> pythons</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'Gilliam'</span> <span class="keyword">in</span> pythons</span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure></p>
+<h4>用[鍵]來取得一個項目</h4>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>pythons[<span class="string">'Cleese'</span>]</span><br><span class="line">John</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>
+<p>若不存在於字典，則會得到例外
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>pythons[<span class="string">'Marx'</span>]</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">	File <span class="string">"stdin"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">KeyError: <span class="string">'Marx'</span></span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>避免這件事的兩種方式，一是使用 <code>in</code>測試鍵
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'Marx'</span> n pythons</span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>二是使用特殊的字典函式 <code>get()</code>，要提供字典、鍵、及一個選用的值，若鍵存在，則可以取得他的值
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>python.get(<span class="string">'Cleese'</span>)</span><br><span class="line"><span class="string">'John'</span></span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>若不存在，則會取得選用的值(若有指定的話)
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>pythons.get(<span class="string">'Marx'</span>, <span class="string">'Not a python'</span>)</span><br><span class="line"><span class="string">'Not a python'</span></span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>否則會得到None
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>pythons.get(<span class="string">'Marx'</span>)</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<h4>使用 <code>keys()</code>來取得所有的鍵</h4>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>signals = &#123;</span><br><span class="line">	<span class="string">'green'</span>: <span class="string">'go'</span>,</span><br><span class="line">	<span class="string">'yellow'</span>: <span class="string">'go faster'</span>,</span><br><span class="line">	<span class="string">'red'</span>: <span class="string">'smile for the camera'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>signals.keys()</span><br><span class="line">dict_keys([<span class="string">'green'</span>, <span class="string">'red'</span>, <span class="string">'yellow'</span>])</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>在Python 2 <code>keys()</code>會回傳一個串列，Python 3 會回傳 <code>dict_keys()</code>，他是可迭代得鍵資料，適合用在大型的字典，不會浪費時間與記憶體來建立及儲存可能用不到的串列，但通常你其實<strong>想要</strong>一個串列
+在Python 3 ，必須呼叫 <code>list()</code>來將<code>dict_keys()</code>物件轉換成串列
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(signals.keys())</span><br><span class="line">[<span class="string">'green'</span>, <span class="string">'red'</span>, <span class="string">'yellow'</span>]</span><br></pre></td></tr></table></figure>
+在Python 3 ，也需要使用 <code>list()</code>函式來將 <code>values()</code>與 <code>items()</code>的結果轉成一般的Python串列</p>
+</blockquote>
+<h4>用 <code>values()</code>來取得所有的值</h4>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(signals.values())</span><br><span class="line">[<span class="string">'go'</span>, <span class="string">'go faster'</span>, <span class="string">'smile for the camera'</span>]</span><br></pre></td></tr></table></figure></p>
+<h4>用 <code>items()</code>來取得所有的鍵/值對</h4>
+<ul>
+<li>每一個鍵與值都會以tuple的形式回傳
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(signals.items())</span><br><span class="line">[(<span class="string">'green'</span>, <span class="string">'go'</span>), (<span class="string">'red'</span>, <span class="string">'go faster'</span>), (<span class="string">'yellow'</span>, <span class="string">'smile for the camera'</span>)]</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4>用 <code>=</code>來指派，用 <code>copy()</code>來複製</h4>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>signals = &#123;</span><br><span class="line">	<span class="string">'green'</span>: <span class="string">'go'</span>,</span><br><span class="line">	<span class="string">'yellow'</span>: <span class="string">'go faster'</span>,</span><br><span class="line">	<span class="string">'red'</span>: <span class="string">'smile for the camera'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>save_signals = signals</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>signals[<span class="string">'blue'</span>] = <span class="string">'confuse everyone'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>save_signals</span><br><span class="line">&#123;<span class="string">'blue'</span>: <span class="string">'confuse everyone'</span>, <span class="string">'green'</span>: <span class="string">'go'</span>, <span class="string">'yellow'</span>: <span class="string">'go faster'</span>, <span class="string">'red'</span>: <span class="string">'smile for the camera'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>要將某個字典內的鍵與值複製到其他字典來避免這種情形，使用 <code>copy()</code>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>signals = &#123;</span><br><span class="line">	<span class="string">'green'</span>: <span class="string">'go'</span>,</span><br><span class="line">	<span class="string">'yellow'</span>: <span class="string">'go faster'</span>,</span><br><span class="line">	<span class="string">'red'</span>: <span class="string">'smile for the camera'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>original_signals = signals.copy()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>signals[<span class="string">'blue'</span>] = <span class="string">'confuse everyone'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>save_signals</span><br><span class="line">&#123;<span class="string">'blue'</span>: <span class="string">'confuse everyone'</span>, <span class="string">'green'</span>: <span class="string">'go'</span>, <span class="string">'yellow'</span>: <span class="string">'go faster'</span>, <span class="string">'red'</span>: <span class="string">'smile for the camera'</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>original_signals</span><br><span class="line">&#123;<span class="string">'green'</span>: <span class="string">'go'</span>, <span class="string">'yellow'</span>: <span class="string">'go faster'</span>, <span class="string">'red'</span>: <span class="string">'smile for the camera'</span>&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">Python 字典</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">字典(Dictionary)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.1.1.</span> <span class="toc-text">用 {}來建立</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.1.2.</span> <span class="toc-text">用dict()來轉換</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.1.3.</span> <span class="toc-text">用[鍵]來添加或變更項目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.1.4.</span> <span class="toc-text">用 update()來合併字典</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.1.5.</span> <span class="toc-text">用 del與鍵來刪除項目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.1.6.</span> <span class="toc-text">用 clear()來刪除所有項目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.1.7.</span> <span class="toc-text">用 in來測試鍵</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.1.8.</span> <span class="toc-text">用[鍵]來取得一個項目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.1.9.</span> <span class="toc-text">使用 keys()來取得所有的鍵</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.1.10.</span> <span class="toc-text">用 values()來取得所有的值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.1.11.</span> <span class="toc-text">用 items()來取得所有的鍵&#x2F;值對</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.1.12.</span> <span class="toc-text">用 &#x3D;來指派，用 copy()來複製</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/&text=python 串列、Tuple、字典與集合(三)-字典" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/&title=python 串列、Tuple、字典與集合(三)-字典" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/&is_video=false&description=python 串列、Tuple、字典與集合(三)-字典" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=python 串列、Tuple、字典與集合(三)-字典&body=Check out this article: https://pingjing0628.github.io/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/&title=python 串列、Tuple、字典與集合(三)-字典" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/&title=python 串列、Tuple、字典與集合(三)-字典" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/&title=python 串列、Tuple、字典與集合(三)-字典" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/&title=python 串列、Tuple、字典與集合(三)-字典" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/&name=python 串列、Tuple、字典與集合(三)-字典&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/&t=python 串列、Tuple、字典與集合(三)-字典" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

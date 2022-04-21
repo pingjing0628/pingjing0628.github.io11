@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Using net&#x2F;http to serve &lt;!-- more --&gt;  承上篇文章，針對wiki 檔案進行http的操作 增加view 功能   增加一個function，將request URL中的&#x2F;view&#x2F; 過濾，取其後面的值作為文章title   呼叫 loadPage function 12345func viewHandler(w http.ResponseWrite">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GoLang-web application-The net&#x2F;http package">
+<meta property="og:url" content="https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="Using net&#x2F;http to serve &lt;!-- more --&gt;  承上篇文章，針對wiki 檔案進行http的操作 增加view 功能   增加一個function，將request URL中的&#x2F;view&#x2F; 過濾，取其後面的值作為文章title   呼叫 loadPage function 12345func viewHandler(w http.ResponseWrite">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-01-08T15:45:15.000Z">
+<meta property="article:modified_time" content="2020-12-15T15:15:38.128Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="GoLang">
+<meta property="article:tag" content="pointer">
+<meta property="article:tag" content="net&#x2F;http">
+<meta property="article:tag" content="handler">
+<meta property="article:tag" content="error">
+<meta property="article:tag" content="closure">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>GoLang-web application-The net/http package</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2020/02/27/GoLang-Database-model-design-using-gorm/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2020/01/08/GoLang-web-application-Creating-a-data-structure-with-methods/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/&text=GoLang-web application-The net/http package" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/&title=GoLang-web application-The net/http package" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/&is_video=false&description=GoLang-web application-The net/http package" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=GoLang-web application-The net/http package&body=Check out this article: https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/&title=GoLang-web application-The net/http package" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/&title=GoLang-web application-The net/http package" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/&title=GoLang-web application-The net/http package" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/&title=GoLang-web application-The net/http package" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/&name=GoLang-web application-The net/http package&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/&t=GoLang-web application-The net/http package" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">Using net&#x2F;http to serve</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">增加view 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">Editing Pages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">處理不存在的Pages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">Saving pages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">Error Handling</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">Template caching</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.7.</span> <span class="toc-text">Validation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.8.</span> <span class="toc-text">Literals and Closures</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.9.</span> <span class="toc-text">REFERENCES</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        GoLang-web application-The net/http package
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-01-08T15:45:15.000Z" itemprop="datePublished">2020-01-08</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/GoLang/">GoLang</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/GoLang/" rel="tag">GoLang</a>, <a class="tag-link" href="/tags/closure/" rel="tag">closure</a>, <a class="tag-link" href="/tags/error/" rel="tag">error</a>, <a class="tag-link" href="/tags/handler/" rel="tag">handler</a>, <a class="tag-link" href="/tags/net-http/" rel="tag">net/http</a>, <a class="tag-link" href="/tags/pointer/" rel="tag">pointer</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2>Using net/http to serve</h2>
+<p>&lt;!-- more --&gt;</p>
+<hr>
+<p>承上篇文章，針對wiki 檔案進行http的操作</p>
+<h3>增加view 功能</h3>
+<ol>
+<li>
+<p>增加一個function，將request URL中的/view/ 過濾，取其後面的值作為文章title</p>
+</li>
+<li>
+<p>呼叫 loadPage function
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">viewHandler</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">	title := r.URL.Path[<span class="built_in">len</span>(<span class="string">"/view/"</span>):]</span><br><span class="line">	p, _ := loadPage(title)</span><br><span class="line">	fmt.Fprintf(w, <span class="string">"&lt;h1&gt;%s&lt;/h1&gt;&lt;div&gt;%s&lt;/div&gt;"</span>, p.Title, p.Body)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>接著，在main function 中去設定view 路由</p>
+</li>
+<li>
+<p>並設定聽port 8080
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	http.HandleFunc(<span class="string">"/view/"</span>, viewHandler)</span><br><span class="line">	log.Fatal(http.ListenAndServe(<span class="string">":8080"</span>, <span class="literal">nil</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+</ol>
+<h3>Editing Pages</h3>
+<ol>
+<li>
+<p>增加編輯和儲存的路由
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	http.HandleFunc(<span class="string">"/view/"</span>, viewHandler)</span><br><span class="line">    http.HandleFunc(<span class="string">"/edit/"</span>, editHandler)</span><br><span class="line">    http.HandleFunc(<span class="string">"/save/"</span>, saveHandler)</span><br><span class="line">	log.Fatal(http.ListenAndServe(<span class="string">":8080"</span>, <span class="literal">nil</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>增加編輯 function
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">editHandler</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">	title := r.URL.Path[<span class="built_in">len</span>(<span class="string">"/edit/"</span>):]</span><br><span class="line">	p, err := loadPage(title)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		p = &amp;Page&#123;Title: title&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Fprintf(w, <span class="string">"&lt;h1&gt;Editing %s&lt;/h1&gt;"</span>+</span><br><span class="line">		<span class="string">"&lt;form action=\"/save/%s\" method=\"POST\"&gt;"</span>+</span><br><span class="line">		<span class="string">"&lt;textarea name=\"body\"&gt;%s&lt;/textarea&gt;&lt;br&gt;"</span>+</span><br><span class="line">		<span class="string">"&lt;input type=\"submit\" value=\"Save\"&gt;"</span>+</span><br><span class="line">		<span class="string">"&lt;/form&gt;"</span>,</span><br><span class="line">		p.Title, p.Title, p.Body)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+但使用 html hardcode有點醜陋</p>
+</li>
+<li>
+<p>所以可以使用<code>html/template</code> package</p>
+</li>
+</ol>
+<ul>
+<li>建立一個<code>edit.html</code>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Editing &#123;&#123;.Title&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/save/&#123;&#123;.Title&#125;&#125;"</span> <span class="attr">method</span>=<span class="string">"POST"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">textarea</span> <span class="attr">name</span>=<span class="string">"body"</span> <span class="attr">rows</span>=<span class="string">"20"</span> <span class="attr">cols</span>=<span class="string">"80"</span>&gt;</span>&#123;&#123;printf "%s" .Body&#125;&#125;<span class="tag">&lt;/<span class="name">textarea</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"Save"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="4">
+<li>
+<p>將 edit function 改成使用 html
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">editHandler</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    title := r.URL.Path[<span class="built_in">len</span>(<span class="string">"/edit/"</span>):]</span><br><span class="line">    p, err := loadPage(title)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        p = &amp;Page&#123;Title: title&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    t, _ := template.ParseFiles(<span class="string">"edit.html"</span>)</span><br><span class="line">    t.Execute(w, p)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<code>template.ParseFiles</code>會讀取 html 內的內容然後 return <code>*template.Template</code></p>
+</li>
+<li>
+<p>也可以將 view 轉成使用 html 檔案</p>
+</li>
+</ol>
+<ul>
+<li><code>view.html</code>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt;&#123;&#123;.Title&#125;&#125;&lt;/h1&gt;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;[&lt;a href="/edit/&#123;&#123;.Title&#125;&#125;"&gt;edit&lt;/a&gt;]&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;div&gt;&#123;&#123;printf "%s" .Body&#125;&#125;&lt;/div&gt;</span><br></pre></td></tr></table></figure></li>
+<li><code>viewHandler</code>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">viewHandler</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    title := r.URL.Path[<span class="built_in">len</span>(<span class="string">"/view/"</span>):]</span><br><span class="line">    p, _ := loadPage(title)</span><br><span class="line">    t, _ := template.ParseFiles(<span class="string">"view.html"</span>)</span><br><span class="line">    t.Execute(w, p)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="6">
+<li>將重複使用的程式共用 function
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">renderTemplate</span><span class="params">(w http.ResponseWriter, tmpl <span class="keyword">string</span>, p *Page)</span></span> &#123;</span><br><span class="line">    t, _ := template.ParseFiles(tmpl + <span class="string">".html"</span>)</span><br><span class="line">    t.Execute(w, p)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+然後將  viewHandler 和改成使用這個 function
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">viewHandler</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    title := r.URL.Path[<span class="built_in">len</span>(<span class="string">"/view/"</span>):]</span><br><span class="line">    p, _ := loadPage(title)</span><br><span class="line">    renderTemplate(w, <span class="string">"view"</span>, p)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">editHandler</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    title := r.URL.Path[<span class="built_in">len</span>(<span class="string">"/edit/"</span>):]</span><br><span class="line">    p, err := loadPage(title)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        p = &amp;Page&#123;Title: title&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    renderTemplate(w, <span class="string">"edit"</span>, p)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3>處理不存在的Pages</h3>
+<p><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">viewHandler</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    title := r.URL.Path[<span class="built_in">len</span>(<span class="string">"/view/"</span>):]</span><br><span class="line">    p, err := loadPage(title)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        http.Redirect(w, r, <span class="string">"/edit/"</span>+title, http.StatusFound)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    renderTemplate(w, <span class="string">"view"</span>, p)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>Saving pages</h3>
+<p><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">saveHandler</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    title := r.URL.Path[<span class="built_in">len</span>(<span class="string">"/save/"</span>):]</span><br><span class="line">    body := r.FormValue(<span class="string">"body"</span>)</span><br><span class="line">    p := &amp;Page&#123;Title: title, Body: []<span class="keyword">byte</span>(body)&#125;</span><br><span class="line">    p.save()</span><br><span class="line">    http.Redirect(w, r, <span class="string">"/view/"</span>+title, http.StatusFound)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<code>FormValue</code> return type string. 需要轉換值為 []byte 去符合 Page struct</p>
+<h3>Error Handling</h3>
+<p>Handle the error in <code>renderTemplate</code>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">renderTemplate</span><span class="params">(w http.ResponseWriter, tmpl <span class="keyword">string</span>, p *Page)</span></span> &#123;</span><br><span class="line">    t, err := template.ParseFiles(tmpl + <span class="string">".html"</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        http.Error(w, err.Error(), http.StatusInternalServerError)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    err = t.Execute(w, p)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        http.Error(w, err.Error(), http.StatusInternalServerError)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>fix up <code>saveHandler</code>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">saveHandler</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    title := r.URL.Path[<span class="built_in">len</span>(<span class="string">"/save/"</span>):]</span><br><span class="line">    body := r.FormValue(<span class="string">"body"</span>)</span><br><span class="line">    p := &amp;Page&#123;Title: title, Body: []<span class="keyword">byte</span>(body)&#125;</span><br><span class="line">    err := p.save()</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        http.Error(w, err.Error(), http.StatusInternalServerError)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    http.Redirect(w, r, <span class="string">"/view/"</span>+title, http.StatusFound)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>Template caching</h3>
+<p>建立一個全域變數
+<code>var templates = template.Must(template.ParseFiles(&quot;edit.html&quot;, &quot;view.html&quot;))</code></p>
+<p>修改<code>renderTemplate</code> function
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">renderTemplate</span><span class="params">(w http.ResponseWriter, tmpl <span class="keyword">string</span>, p *Page)</span></span> &#123;</span><br><span class="line">    err := templates.ExecuteTemplate(w, tmpl+<span class="string">".html"</span>, p)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        http.Error(w, err.Error(), http.StatusInternalServerError)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>Validation</h3>
+<p>增加regex的格式驗證
+<code>var validPath = regexp.MustCompile(&quot;^/(edit|save|view)/([a-zA-Z0-9]+)$&quot;)</code></p>
+<p>增加function使用validPath去驗證title
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getTitle</span><span class="params">(w http.ResponseWriter, r *http.Request)</span> <span class="params">(<span class="keyword">string</span>, error)</span></span> &#123;</span><br><span class="line">    m := validPath.FindStringSubmatch(r.URL.Path)</span><br><span class="line">    <span class="keyword">if</span> m == <span class="literal">nil</span> &#123;</span><br><span class="line">        http.NotFound(w, r)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>, errors.New(<span class="string">"Invalid Page Title"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> m[<span class="number">2</span>], <span class="literal">nil</span> <span class="comment">// The title is the second subexpression.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>將 <code>getTitle</code> function 加入 handlers裡
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">viewHandler</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    title, err := getTitle(w, r)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    p, err := loadPage(title)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        http.Redirect(w, r, <span class="string">"/edit/"</span>+title, http.StatusFound)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    renderTemplate(w, <span class="string">"view"</span>, p)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">editHandler</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    title, err := getTitle(w, r)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    p, err := loadPage(title)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        p = &amp;Page&#123;Title: title&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    renderTemplate(w, <span class="string">"edit"</span>, p)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">saveHandler</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    title, err := getTitle(w, r)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    body := r.FormValue(<span class="string">"body"</span>)</span><br><span class="line">    p := &amp;Page&#123;Title: title, Body: []<span class="keyword">byte</span>(body)&#125;</span><br><span class="line">    err = p.save()</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        http.Error(w, err.Error(), http.StatusInternalServerError)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    http.Redirect(w, r, <span class="string">"/view/"</span>+title, http.StatusFound)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>Literals and Closures</h3>
+<p>在每個handler中抓取error的情況會使用很多重複的程式碼，可以將每個handlers中的error 和 validation 用一個function包起來</p>
+<ol>
+<li>
+<p>將每個handler function 加上title string
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">viewHandler</span><span class="params">(w http.ResponseWriter, r *http.Request, title <span class="keyword">string</span>)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="title">editHandler</span><span class="params">(w http.ResponseWriter, r *http.Request, title <span class="keyword">string</span>)</span></span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="title">saveHandler</span><span class="params">(w http.ResponseWriter, r *http.Request, title <span class="keyword">string</span>)</span></span></span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>定義function
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">makeHandler</span><span class="params">(fn <span class="keyword">func</span>(http.ResponseWriter, *http.Request, <span class="keyword">string</span>)</span>) <span class="title">http</span>.<span class="title">HandlerFunc</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">        m := validPath.FindStringSubmatch(r.URL.Path) <span class="comment">//extract the page title from the Request</span></span><br><span class="line">        <span class="keyword">if</span> m == <span class="literal">nil</span> &#123;</span><br><span class="line">            http.NotFound(w, r)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        fn(w, r, m[<span class="number">2</span>]) <span class="comment">//call the provided handler 'fn'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+這個return function 是一個closure(閉包)
+這個閉包會取得request 路徑上的title, 然後透過TitleValidator驗證他的格式
+若title不合法，則error會寫入 ResponseWriter (http.NotFound)
+若合法，則此function <code>fn</code> 會被呼叫</p>
+</li>
+<li>
+<p>將makeHandler加至 main function
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    http.HandleFunc(<span class="string">"/view/"</span>, makeHandler(viewHandler))</span><br><span class="line">    http.HandleFunc(<span class="string">"/edit/"</span>, makeHandler(editHandler))</span><br><span class="line">    http.HandleFunc(<span class="string">"/save/"</span>, makeHandler(saveHandler))</span><br><span class="line"></span><br><span class="line">    log.Fatal(http.ListenAndServe(<span class="string">":8080"</span>, <span class="literal">nil</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>從handler function裡移除<code>getTitle</code></p>
+</li>
+</ol>
+<h3>REFERENCES</h3>
+<ul>
+<li><a href="https://golang.org/doc/articles/wiki/#tmp_13" target="_blank" rel="noopener">Writing Web Applications</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">Using net&#x2F;http to serve</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">增加view 功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">Editing Pages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">處理不存在的Pages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">Saving pages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">Error Handling</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">Template caching</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.7.</span> <span class="toc-text">Validation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.8.</span> <span class="toc-text">Literals and Closures</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.9.</span> <span class="toc-text">REFERENCES</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/&text=GoLang-web application-The net/http package" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/&title=GoLang-web application-The net/http package" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/&is_video=false&description=GoLang-web application-The net/http package" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=GoLang-web application-The net/http package&body=Check out this article: https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/&title=GoLang-web application-The net/http package" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/&title=GoLang-web application-The net/http package" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/&title=GoLang-web application-The net/http package" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/&title=GoLang-web application-The net/http package" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/&name=GoLang-web application-The net/http package&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/&t=GoLang-web application-The net/http package" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

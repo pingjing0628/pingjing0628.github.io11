@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Middleware &lt;!--more--&gt;   Middleware提供了一種方便的機制來過濾進入應用程序的 HTTP 請求。 最簡單的使用方法就是比對使用者的請求資料是不是符合我們的要求，如果符合，就繼續下一個個程序；如果不符合，可以導向另外一個頁面 or 回傳一個錯誤訊息。 假設我們有&lt;font color&#x3D;&quot;red&quot;&gt;重複要驗證&lt;&#x2F;font">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Laravel Middleware">
+<meta property="og:url" content="https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="Middleware &lt;!--more--&gt;   Middleware提供了一種方便的機制來過濾進入應用程序的 HTTP 請求。 最簡單的使用方法就是比對使用者的請求資料是不是符合我們的要求，如果符合，就繼續下一個個程序；如果不符合，可以導向另外一個頁面 or 回傳一個錯誤訊息。 假設我們有&lt;font color&#x3D;&quot;red&quot;&gt;重複要驗證&lt;&#x2F;font">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2019-10-27T07:51:08.000Z">
+<meta property="article:modified_time" content="2020-12-15T15:15:38.131Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="Laravel">
+<meta property="article:tag" content="Middleware">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Laravel Middleware</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2019/10/27/PHP-Setter-and-Getter/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2019/10/27/Laravel-CSRF/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/&text=Laravel Middleware" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/&title=Laravel Middleware" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/&is_video=false&description=Laravel Middleware" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Laravel Middleware&body=Check out this article: https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/&title=Laravel Middleware" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/&title=Laravel Middleware" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/&title=Laravel Middleware" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/&title=Laravel Middleware" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/&name=Laravel Middleware&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/&t=Laravel Middleware" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">Middleware</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">2.</span> <span class="toc-text">Start using middleware</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">3.</span> <span class="toc-text">Before Middleware</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">4.</span> <span class="toc-text">After Middleware</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">5.</span> <span class="toc-text">Registering Middleware</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">5.1.</span> <span class="toc-text">全域使用(Global Middleware)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">5.2.</span> <span class="toc-text">為 Route 指派 Middleware</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">5.2.1.</span> <span class="toc-text">使用方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#"><span class="toc-number">5.2.1.1.</span> <span class="toc-text">一個中介層：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#"><span class="toc-number">5.2.1.2.</span> <span class="toc-text">多個中介層：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">5.3.</span> <span class="toc-text">Middleware 群組化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">5.3.1.</span> <span class="toc-text">官方文件小重點：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">5.4.</span> <span class="toc-text">Middleware Parameters</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">5.5.</span> <span class="toc-text">Before Middleware VS After Middleware</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Laravel Middleware
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-10-27T07:51:08.000Z" itemprop="datePublished">2019-10-27</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Laravel/">Laravel</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Laravel/" rel="tag">Laravel</a>, <a class="tag-link" href="/tags/Middleware/" rel="tag">Middleware</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2>Middleware</h2>
+<p>&lt;!--more--&gt;</p>
+<hr>
+<ul>
+<li>Middleware提供了一種方便的機制來過濾進入應用程序的 HTTP 請求。</li>
+<li>最簡單的使用方法就是比對使用者的請求資料是不是符合我們的要求，如果符合，就繼續下一個個程序；如果不符合，可以導向另外一個頁面 or 回傳一個錯誤訊息。</li>
+<li>假設我們有&lt;font color=&quot;red&quot;&gt;重複要驗證&lt;/font&gt;的資料，我們可以寫在 Middleware，不用每次在 Controller 中各 function 執行的時候都要重複寫。</li>
+</ul>
+<h2>Start using middleware</h2>
+<p><code>php artisan make:middleware filename</code></p>
+<ul>
+<li>Laravel 預設和新創建的 middleware 都存放在 app/Http/Middleware 裡.</li>
+</ul>
+<h2>Before Middleware</h2>
+<ul>
+<li>Before Middleware 我翻譯成「前行中介層」，就是先執行中介層內容，再丟給下一個接收的人處理。
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Middleware</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Closure</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BeforeMiddleware</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span><span class="params">($request, Closure $next)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// Perform action       //先執行任務  </span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'before'</span>.<span class="string">'&lt;br/&gt;'</span>;</span><br><span class="line">        <span class="keyword">return</span> $next($request); <span class="comment">//這裡才處理 request</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2>After Middleware</h2>
+<ul>
+<li>為「後行中介層」，就是先請下一個接收 request 的人先執行，執行完在回頭執行中介層內容。
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Middleware</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Closure</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AfterMiddleware</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span><span class="params">($request, Closure $next)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $response = $next($request); <span class="comment">//先處理 request （next 本身是閉包，會先處理 request)</span></span><br><span class="line">        <span class="comment">// Perform action			 //這裡才執行任務</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;/br&gt;'</span>.<span class="string">'after'</span>;</span><br><span class="line">        <span class="keyword">return</span> $response;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2>Registering Middleware</h2>
+<h3>全域使用(Global Middleware)</h3>
+<ul>
+<li>
+<p>希望在對應用程序的每個 HTTP request 期間運行中介層，請在<code>app/Http/Kernel.php</code> class的<code>middleware</code>屬性中列出中介層類。
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Foundation</span>\<span class="title">Http</span>\<span class="title">Kernel</span> <span class="title">as</span> <span class="title">HttpKernel</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Kernel</span> <span class="keyword">extends</span> <span class="title">HttpKernel</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> $middleware = [</span><br><span class="line">        \App\Http\Middleware\CheckForMaintenanceMode::class,</span><br><span class="line">        \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,</span><br><span class="line">        \App\Http\Middleware\TrimStrings::class,</span><br><span class="line">        \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,</span><br><span class="line">        \App\Http\Middleware\TrustProxies::class,</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//這裡可以把我們新建立的 BeforeMiddleware 加入</span></span><br><span class="line">        \App\Http\Middleware\BeforeMiddleware::class,</span><br><span class="line"></span><br><span class="line">    ];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>請注意，一但設定為全域使用，那麼任何請求進來一定都要先經過這個中介層處理，所以使用上要特別小心，否則萬一中介層出現 bug，你又忘記自己設定了全域中介層，那...這個 bug 就有得找了！</p>
+</li>
+</ul>
+<h3>為 Route 指派 Middleware</h3>
+<ul>
+<li>如果要分配中介層給特定的 route，可以在 <code>app/Http/Kernel.php</code> 中的 <code>$routeMiddleware</code> 屬性，自定義中介層的 key name
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Foundation</span>\<span class="title">Http</span>\<span class="title">Kernel</span> <span class="title">as</span> <span class="title">HttpKernel</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Kernel</span> <span class="keyword">extends</span> <span class="title">HttpKernel</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> $routeMiddleware = [</span><br><span class="line">        <span class="string">'auth'</span> =&gt; \Illuminate\Auth\Middleware\Authenticate::class,</span><br><span class="line">        <span class="string">'auth.basic'</span> =&gt; \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,</span><br><span class="line">        <span class="string">'bindings'</span> =&gt; \Illuminate\Routing\Middleware\SubstituteBindings::class,</span><br><span class="line">        <span class="string">'can'</span> =&gt; \Illuminate\Auth\Middleware\Authorize::class,</span><br><span class="line">        <span class="string">'guest'</span> =&gt; \App\Http\Middleware\RedirectIfAuthenticated::class,</span><br><span class="line">        <span class="string">'throttle'</span> =&gt; \Illuminate\Routing\Middleware\ThrottleRequests::class,</span><br><span class="line">    ];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4>使用方法：</h4>
+<p>一旦定義了中介層的 key name，在 route 中就可以使用以下方法直接調用</p>
+<h5>一個中介層：</h5>
+<ul>
+<li>方法一：
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Route::get(<span class="string">'admin/profile'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">&#125;)-&gt;middleware(<span class="string">'auth'</span>);</span><br></pre></td></tr></table></figure></li>
+<li>方法二：
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Route::middleware(<span class="string">'auth'</span>)-&gt;get(<span class="string">'admin/profile'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+方法二比較符合 Laravel 的執行流程，因為流程是先經過中介層，再進到 Route 裡的 function。</li>
+<li>方法三：
+你也可以使用完整 class name
+PS：完整的意思就是要列出「路徑 + class name」
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Middleware</span>\<span class="title">CheckAge</span>; <span class="comment">//路徑，最終停在一個 CheckAge.php 的檔案</span></span><br><span class="line"></span><br><span class="line">Route::get(<span class="string">'admin/profile'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">&#125;)-&gt;middleware(CheckAge::class); <span class="comment">// CheckAge.php 中有一個 CheckAge 的 class name</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5>多個中介層：</h5>
+<p>也可以同時調用好幾個 middleware (當然要先定義好 key 值)
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Route::middleware(<span class="string">'first'</span>, <span class="string">'second'</span>)-&gt;get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3>Middleware 群組化</h3>
+<ul>
+<li>有時候為了方便重複調用多個中介層，就可以把好幾個中介層，群組在一個 key name 之中，只要定義在 <code>app/Http/Kernel.php</code> 中的 <code>$middlewareGroups</code> 屬性</li>
+<li>Ex:
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * The application's route middleware groups.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@var</span> array</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">protected</span> $middlewareGroups = [</span><br><span class="line">    <span class="string">'web'</span> =&gt; [</span><br><span class="line">        \App\Http\Middleware\EncryptCookies::class,</span><br><span class="line">        \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,</span><br><span class="line">        \Illuminate\Session\Middleware\StartSession::class,</span><br><span class="line">        \Illuminate\View\Middleware\ShareErrorsFromSession::class,</span><br><span class="line">        \App\Http\Middleware\VerifyCsrfToken::class,</span><br><span class="line">        \Illuminate\Routing\Middleware\SubstituteBindings::class,</span><br><span class="line">    ],</span><br><span class="line"></span><br><span class="line">    <span class="string">'api'</span> =&gt; [</span><br><span class="line">        <span class="string">'throttle:60,1'</span>,</span><br><span class="line">        <span class="string">'auth:api'</span>,</span><br><span class="line">    ],</span><br><span class="line">];</span><br></pre></td></tr></table></figure></li>
+<li>可以使用與使用「單一中介層」類似的方法將 middleware group 分配給 route 和 controller。</li>
+<li>Ex:
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方法一：</span></span><br><span class="line">Route::get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">&#125;)-&gt;middleware(<span class="string">'web'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//方法二：</span></span><br><span class="line">Route::group([<span class="string">'middleware'</span> =&gt; [<span class="string">'web'</span>]], <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4>官方文件小重點：</h4>
+<blockquote>
+<p>Out of the box, the web middleware group is automatically applied to your routes/web.php file by the RouteServiceProvider.
+官方文件這句話就是如果我們使用 web.php 來設定 route 的話，那 Laravel 內建就會調用 'web' 這個 middleware group!</p>
+</blockquote>
+<h3>Middleware Parameters</h3>
+<ul>
+<li>
+<p>中介層是可以接受額外的變數。加入的方法就是在中介層裡面的 handle 方法中加入第三個參數。</p>
+</li>
+<li>
+<p>也就是在 $next 參數之後，額外新增一個參數。</p>
+</li>
+<li>
+<p>Ex:
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Middleware</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Closure</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CheckRole</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Handle the incoming request.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  \Illuminate\Http\Request  $request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  \Closure  $next</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  string  $role</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span><span class="params">($request, Closure $next, $role)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (! $request-&gt;user()-&gt;hasRole($role)) &#123;</span><br><span class="line">            <span class="comment">// Redirect...</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> $next($request);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>使用方法：
+可以在定義 route 時，透過 : 分隔 middleware name 和 middleware parameters</p>
+</li>
+<li>
+<p>Ex:
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Route::put(<span class="string">'post/&#123;id&#125;'</span>, <span class="function"><span class="keyword">function</span> <span class="params">($id)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">&#125;)-&gt;middleware(<span class="string">'role:editor'</span>);  <span class="comment">//role 就是 middleware key name，</span></span><br><span class="line">				 <span class="comment">//editor 就是 middleware parameter</span></span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>ps:如果有多個參數，就以「,」分隔
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//middleware 設定</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span><span class="params">($request, Closure $next, $greet, $name)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> $greet.<span class="string">', '</span>;</span><br><span class="line">        <span class="keyword">echo</span> $name.<span class="string">'&lt;/br&gt;'</span>;</span><br><span class="line">        <span class="keyword">return</span> $next($request);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>PS:記得要去 <code>app/Http/Kernel.php</code> 定義中介層的 key name。我的範例是取名為 'before'
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//route 設定</span></span><br><span class="line">    Route::middleware(<span class="string">'before:Hello,Kao'</span>)-&gt;get(<span class="string">'/before'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>如此一來
+before 為中介層的 key name
+Hello 為中介層中 handle 中的參數 $greet
+Kao 為 handle 中的參數 $name</p>
+</li>
+</ul>
+<h3>Before Middleware VS After Middleware</h3>
+<ol>
+<li>
+<p>我們延用上面的 Before Middleware 和 After Middleware 的範例程式。</p>
+</li>
+<li>
+<p><code>app/Http/Kernel.php</code> 也定義了中介層的 key name
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> $routeMiddleware = [</span><br><span class="line">       <span class="string">'before'</span> =&gt; \App\Http\Middleware\BeforeMiddleware::class,</span><br><span class="line">       <span class="string">'after'</span> =&gt; \App\Http\Middleware\AfterMiddleware::class,</span><br><span class="line">   ];</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>接著我們 route 設定如下
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Route::middleware(<span class="string">'before'</span>)-&gt;get(<span class="string">'/before'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'in Route'</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">Route::middleware(<span class="string">'after'</span>)-&gt;get(<span class="string">'/after'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'in Route'</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+</li>
+</ol>
+<ul>
+<li>
+<p>實際跑跑看</p>
+</li>
+<li>
+<p>這裡就可以看到差別，因為我們故意將 route 設定成只執行印出 in Route 的動作，所以我們可以得知 Before Middleware 先執行自己的內容，在執行 route 的內容，而反過來的 After Middleware 則是先執行 route 的內容，才回去執行自己的內容。</p>
+</li>
+<li>
+<p>這裡的關鍵就是 $next 這個參數是在'前'還是'後'，由於 $next 本身是一個 closure 所以會執行一個動作就是把 $request 當成參數交給下一個程式執行，而那一位「下一個程式」這裡先不探討是誰，我只知道它都會執行 route 裡的 function!最終，等「下一個程式」也跑完了，程序就會回到 $next 調用之後，接著執行 $next 之後的程式。</p>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">Middleware</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">2.</span> <span class="toc-text">Start using middleware</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">3.</span> <span class="toc-text">Before Middleware</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">4.</span> <span class="toc-text">After Middleware</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">5.</span> <span class="toc-text">Registering Middleware</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">5.1.</span> <span class="toc-text">全域使用(Global Middleware)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">5.2.</span> <span class="toc-text">為 Route 指派 Middleware</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">5.2.1.</span> <span class="toc-text">使用方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#"><span class="toc-number">5.2.1.1.</span> <span class="toc-text">一個中介層：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#"><span class="toc-number">5.2.1.2.</span> <span class="toc-text">多個中介層：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">5.3.</span> <span class="toc-text">Middleware 群組化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">5.3.1.</span> <span class="toc-text">官方文件小重點：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">5.4.</span> <span class="toc-text">Middleware Parameters</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">5.5.</span> <span class="toc-text">Before Middleware VS After Middleware</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/&text=Laravel Middleware" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/&title=Laravel Middleware" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/&is_video=false&description=Laravel Middleware" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Laravel Middleware&body=Check out this article: https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/&title=Laravel Middleware" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/&title=Laravel Middleware" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/&title=Laravel Middleware" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/&title=Laravel Middleware" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/&name=Laravel Middleware&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/&t=Laravel Middleware" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

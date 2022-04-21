@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="4 系統程式 (System Program)  Software License    Software Licence Def licence Open source code Ex     Trial software 試用一段時間, 若欲長期使用需付費 Yes No ACDSee   Shareware 同上, 但限制較寬鬆 Yes No WinRAR   Freeware free Ye">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter4-系統程式-part1">
+<meta property="og:url" content="https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="4 系統程式 (System Program)  Software License    Software Licence Def licence Open source code Ex     Trial software 試用一段時間, 若欲長期使用需付費 Yes No ACDSee   Shareware 同上, 但限制較寬鬆 Yes No WinRAR   Freeware free Ye">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/assembler.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/compiler.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/lexical.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/syntax.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/parsingTree.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/semantic.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/error.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/interpreter.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/macro.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/summary.png">
+<meta property="article:published_time" content="2021-07-02T15:21:49.000Z">
+<meta property="article:modified_time" content="2021-07-05T09:28:47.004Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="System Program">
+<meta property="article:tag" content="Software">
+<meta property="article:tag" content="Assembler">
+<meta property="article:tag" content="Linker&#x2F;Loader">
+<meta property="article:tag" content="Compiler">
+<meta property="article:tag" content="Interpreter">
+<meta property="article:tag" content="Marco">
+<meta property="article:tag" content="Subroutine">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/assembler.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Chapter4-系統程式-part1</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part3/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/&text=Chapter4-系統程式-part1" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/&title=Chapter4-系統程式-part1" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/&is_video=false&description=Chapter4-系統程式-part1" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter4-系統程式-part1&body=Check out this article: https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/&title=Chapter4-系統程式-part1" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/&title=Chapter4-系統程式-part1" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/&title=Chapter4-系統程式-part1" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/&title=Chapter4-系統程式-part1" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/&name=Chapter4-系統程式-part1&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/&t=Chapter4-系統程式-part1" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">4 系統程式 (System Program)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">Software License</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">Open Source Software</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">System Program</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.1.</span> <span class="toc-text">Assembler (組譯器)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.2.</span> <span class="toc-text">Linker&#x2F;Loader (鏈結器&#x2F;載入器) &#x3D;&gt; linking loader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.3.</span> <span class="toc-text">Compiler (編譯器)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.4.</span> <span class="toc-text">Interpreter (直譯器)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.5.</span> <span class="toc-text">Compare Compiler vs Interpreter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.6.</span> <span class="toc-text">Macro 巨集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.7.</span> <span class="toc-text">Subroutine 副程式 &#x3D;&gt; 又稱 close subroutine</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.8.</span> <span class="toc-text">Compare Macro vs Subroutine</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">Summary</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Chapter4-系統程式-part1
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-07-02T15:21:49.000Z" itemprop="datePublished">2021-07-02</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/">計算機概論</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Assembler/" rel="tag">Assembler</a>, <a class="tag-link" href="/tags/Compiler/" rel="tag">Compiler</a>, <a class="tag-link" href="/tags/Interpreter/" rel="tag">Interpreter</a>, <a class="tag-link" href="/tags/Linker-Loader/" rel="tag">Linker/Loader</a>, <a class="tag-link" href="/tags/Marco/" rel="tag">Marco</a>, <a class="tag-link" href="/tags/Software/" rel="tag">Software</a>, <a class="tag-link" href="/tags/Subroutine/" rel="tag">Subroutine</a>, <a class="tag-link" href="/tags/System-Program/" rel="tag">System Program</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1>4 系統程式 (System Program)</h1>
+<hr>
+<h2>Software License</h2>
+<table>
+<thead>
+<tr>
+<th>Software Licence</th>
+<th>Def</th>
+<th>licence</th>
+<th>Open source code</th>
+<th>Ex</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Trial software</strong></td>
+<td>試用一段時間, 若欲長期使用需付費</td>
+<td>Yes</td>
+<td>No</td>
+<td>ACDSee</td>
+</tr>
+<tr>
+<td><strong>Shareware</strong></td>
+<td>同上, 但限制較寬鬆</td>
+<td>Yes</td>
+<td>No</td>
+<td>WinRAR</td>
+</tr>
+<tr>
+<td><strong>Freeware</strong></td>
+<td>free</td>
+<td>Yes</td>
+<td>No</td>
+<td>IE, MSN</td>
+</tr>
+<tr>
+<td><strong>Public domain</strong></td>
+<td>free</td>
+<td>No</td>
+<td>No</td>
+<td>X</td>
+</tr>
+<tr>
+<td><strong>Open software</strong></td>
+<td>free</td>
+<td>No</td>
+<td>Yes</td>
+<td>Redhat, Open Office</td>
+</tr>
+</tbody>
+</table>
+<h2>Open Source Software</h2>
+<p>Def:</p>
+<ul>
+<li>指沒有 licence 限制, 可 free 使用, 且可拿到程式碼</li>
+<li><strong>從 Open source 取得的程式, 修改後亦無 licence 所屬也為 Open source</strong></li>
+</ul>
+<h2>System Program</h2>
+<h3><strong>Assembler (組譯器)</strong></h3>
+<ul>
+<li>Def: 將組合語言轉成 object code (<strong>目的碼, 為機器可識別之程式</strong>), 以便系統執行之</li>
+<li>圖：<img src="assembler.png" alt=""></li>
+</ul>
+<h3><strong>Linker/Loader (鏈結器/載入器)</strong> =&gt; linking loader</h3>
+<ul>
+<li>欲將 object code 載入 memory 中, 過程需
+<ol>
+<li><strong>linking (連結)</strong>: 將 object code 中的外部參考之宣告, 正式跟外部函式庫鏈結</li>
+<li><strong>relocation (重定址)</strong>: 將程式中參考位址依實際 memory 所在重新計算其實際的位址</li>
+<li><strong>loading (載入)</strong>: 正式將上述完成之 object code 載入 memory 中</li>
+</ol>
+</li>
+</ul>
+<h3><strong>Compiler (編譯器)</strong></h3>
+<ul>
+<li>Def: 將高階語言 (c, c++) 轉成低階的 object code</li>
+<li>圖：<img src="compiler.png" alt=""></li>
+<li>Compiler 過程：
+<ol>
+<li>Lexical Analysis</li>
+<li>Syntax Analysis</li>
+<li>Semantic Analysis</li>
+<li>Intermediate Code Optimization</li>
+<li>Machine Dependent Code Generation and Optimization</li>
+<li>Generate the Object Code<br>
+1.~ 4. =&gt; <strong>Machine Independent</strong><br>
+5.~ 6. =&gt; <strong>Machine Dependent</strong></li>
+</ol>
+</li>
+<li>Lexical Analysis 語彙分析
+<ul>
+<li>Scan the program and find out the token (語彙單元)
+<ol>
+<li><strong>Terminal Symbol (終端符號)</strong> =&gt; keyword, 保留字</li>
+<li><strong>Identifier (識別字)</strong> =&gt; 變數</li>
+<li><strong>Liferal (常數)</strong> =&gt; 文, 數字</li>
+</ol>
+<ul>
+<li>Ex: int(1) x(2) = (1) 20(3);(1)</li>
+</ul>
+</li>
+<li>圖：<img src="lexical.png" alt=""></li>
+</ul>
+</li>
+<li>Syntax Analysis 語法分析
+<ul>
+<li>Def: 判別程式敘述是否合乎文法 (Grammer)
+<ul>
+<li>合乎：建立出 <strong>parsing tree 或 syntax tree</strong></li>
+<li>不合乎：output syntax tree</li>
+</ul>
+</li>
+<li>圖：<img src="syntax.png" alt=""></li>
+<li>文法 (Grammer)
+<ul>
+<li>Note: 剖析工具: parser (剖析器)</li>
+<li>Def: <code>G = &lt;N, T, P, S&gt;</code>
+<ul>
+<li>N: Non-terminal symbol set (非終端)</li>
+<li>T: Terminal symbol set (終端)</li>
+<li>P: Production rules (推衍規則)</li>
+<li>S: Start symbol (S ∈ N) (起始)</li>
+</ul>
+</li>
+<li>Ex:<br>
+<code>G = &lt;N, T, P, S&gt;</code>, <code>N = {s, A, B}</code>, <code>T = {a, b}</code>,<br>
+<code>P = {S -&gt; A|B; A -&gt; aA|a; B -&gt; bB|b;}</code> (-&gt; 為推衍符號),<br>
+<code>S = s ∈ N</code> (S 為起始符號, s 為起始符號的名稱), 問 abaa, aaa 是否合乎文法？<br>
+<strong>Sol:</strong>
+<ol>
+<li>S -&gt; A -&gt; aA -&gt; 此無法推出 b, 故不合乎文法</li>
+<li>S -&gt; A -&gt; aA -&gt; aaA -&gt; aaa, 可推論出, 故合乎文法</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>Parsing tree 剖析樹
+<ul>
+<li>Def: 剖析文法敘述所建立之樹</li>
+<li>作法:
+<ul>
+<li>N 必為 Tree 中的非終端節點 (degree &gt;= 1)</li>
+<li>T 必為 Tree 中的終端節點 (degree = 0)</li>
+</ul>
+</li>
+<li>Ex:<br>
+<code>G = &lt;N, T, P, S&gt;</code>, <code>N = {E, T, F}</code>, <code>T = {+, -, *, /, id (,)}</code>,<br>
+<code>P = {E -&gt; E+T|E-T|T; T -&gt; T*F|T/F|F; F -&gt; id|(E);}</code>, <code>S = E ∈ N</code>,<br>
+問
+<ol>
+<li>id + id * id 合法建立剖析樹</li>
+<li>id * (id - id / id)?</li>
+</ol>
+<ul>
+<li>Note: 括號 &quot;()&quot;, 不可以被分割於 2 不同區塊之中
+<strong>Sol:</strong><br>
+<img src="parsingTree.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Syntax tree 語法樹
+<ul>
+<li>目的：
+<ul>
+<li>簡化剖析樹</li>
+<li>只保留 Terminal symbol</li>
+<li>利用中序追蹤可還原運算式</li>
+</ul>
+</li>
+<li>Note: <strong>括號不需考慮</strong> (因為已有 priority 之考量)</li>
+</ul>
+</li>
+<li>文法種類
+<table>
+<thead>
+<tr>
+<th>Note</th>
+<th>Type</th>
+<th>別名</th>
+<th>自動機</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>自由度最大</strong></td>
+<td>0</td>
+<td>Unrestricted (不受限) grammer (AI)</td>
+<td>Turing Machine (杜林機)</td>
+</tr>
+<tr>
+<td><strong>如變數的宣告</strong></td>
+<td>1</td>
+<td>Context-sensitive (上下文相關) grammer</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>高階語法</strong></td>
+<td>2</td>
+<td>Context-free (上下文無關) grammer</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>3</td>
+<td>Regular grammer</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>Semantic Analysis 語意分析
+<ul>
+<li>目的：依剖析結果, 呼叫對應的 semantic routine 或 action routine 以產生 <strong>intermediate code (中間碼)</strong> (<strong>類似目的碼一樣由 0, 1 組成, 但和機器獨立謂之</strong>)</li>
+<li>圖：<img src="semantic.png" alt=""></li>
+</ul>
+</li>
+<li>Intermediate Code Optimization 中間碼最佳化
+<ul>
+<li>目的：
+<ol>
+<li>精簡中間碼</li>
+<li>所佔用 space 下降</li>
+<li>效益提高</li>
+</ol>
+</li>
+<li>常用技巧：
+<ol>
+<li>刪除共通運算式<br>
+<code>A = B + C * D + 2</code><br>
+<code>F = 5 + (B + C + D) / 3</code><br>
+令 B, C, D 皆不變<br>
+α = B + C * D</li>
+<li>先求出常數運算<br>
+Ex: <code>A = 3.14 * 2.56 / 3.2 + 8 - E</code><br>
+求 α = 3.14 * 2.56 / 3.2 + 8</li>
+<li>布林運算式最佳化
+<ul>
+<li>Ex1: if (A and B), A B 皆為 Condition (條件式)<br>
+若 A = false, B 不做 =&gt; 結果必為 false</li>
+<li>Ex2: if (A or B), 若 A = true, B 不做 =&gt; 結果必為 True</li>
+<li>Note: 此概念為：
+<ul>
+<li>短路：short-circuit</li>
+<li>又稱 <strong>&quot;捷徑運算&quot;</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>程式中常見的 error<br>
+<img src="error.png" alt=""></li>
+</ul>
+<h3><strong>Interpreter (直譯器)</strong></h3>
+<ul>
+<li>Def:
+<ul>
+<li>不事先將 source code 轉成 object code</li>
+<li>直接拿 source code 執行, 依原始程式 logical 順序進行</li>
+<li>執行期間 interpreter 須留在 memory 之中</li>
+</ul>
+</li>
+<li>圖：<img src="interpreter.png" alt=""></li>
+</ul>
+<h3>Compare Compiler vs Interpreter</h3>
+<table>
+<thead>
+<tr>
+<th>Compiler</th>
+<th>Interpreter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>執行不需於 memory 中</td>
+<td>需要</td>
+</tr>
+<tr>
+<td>會事先產生 object code (<strong>有最佳化, 故效益佳</strong>)</td>
+<td>不會, 直接依 logical 執行, 產生結果</td>
+</tr>
+<tr>
+<td>全部 scan, 故比較沒有漏洞</td>
+<td>較易有漏洞</td>
+</tr>
+<tr>
+<td>修改 =&gt; recompile (彈性差)</td>
+<td>不需 recompile (彈性佳)</td>
+</tr>
+<tr>
+<td>開發時期較不適用</td>
+<td>適用</td>
+</tr>
+<tr>
+<td>找 bug 較不易</td>
+<td>較易找到 bug 所在</td>
+</tr>
+<tr>
+<td>初學者較不易</td>
+<td>初學者較易上手</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3>Macro 巨集</h3>
+<ul>
+<li>Def: 開放式副程式 (Open subroutine)<br>
+將一連串的指令定義為巨集指令, 當 source code 轉換時, 遇到巨集呼叫, 就將對應的連串指令插入於呼叫處</li>
+<li>圖：<img src="macro.png" alt=""></li>
+<li>特性：
+<ol>
+<li>巨集呼叫於<strong>程式轉換</strong>期間, 而非 <strong>runtime</strong></li>
+<li>呼叫 Ｎ 次, 需插入巨集本文 N 次 =&gt; <strong>浪費空間</strong></li>
+<li>執行階段, 不需做控制移轉 =&gt; <strong>快</strong></li>
+<li>多此使用一單獨定義的常式 (定義一次, 可使用多次)</li>
+</ol>
+</li>
+</ul>
+<h3>Subroutine 副程式 =&gt; 又稱 close subroutine</h3>
+<ul>
+<li>Def: 於<strong>執行中</strong>, 當 subroutine 被呼叫才<strong>動態</strong>的去呼叫之, 並將資料及控制權移轉給他, 待完成, 再移轉回來</li>
+<li>優點：只佔用一份 memory =&gt; 省 space</li>
+<li>缺點：需做控制權移轉 =&gt; speed 下降</li>
+</ul>
+<h3>Compare Macro vs Subroutine</h3>
+<table>
+<thead>
+<tr>
+<th>MACRO</th>
+<th>Subroutine</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Speed 快</td>
+<td>Speed 慢</td>
+</tr>
+<tr>
+<td>以空間換時間</td>
+<td>以時間換空間</td>
+</tr>
+<tr>
+<td>space 浪費</td>
+<td>space 省</td>
+</tr>
+</tbody>
+</table>
+<h2>Summary</h2>
+<p><img src="summary.png" alt=""></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">4 系統程式 (System Program)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">Software License</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">Open Source Software</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">System Program</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.1.</span> <span class="toc-text">Assembler (組譯器)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.2.</span> <span class="toc-text">Linker&#x2F;Loader (鏈結器&#x2F;載入器) &#x3D;&gt; linking loader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.3.</span> <span class="toc-text">Compiler (編譯器)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.4.</span> <span class="toc-text">Interpreter (直譯器)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.5.</span> <span class="toc-text">Compare Compiler vs Interpreter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.6.</span> <span class="toc-text">Macro 巨集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.7.</span> <span class="toc-text">Subroutine 副程式 &#x3D;&gt; 又稱 close subroutine</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.8.</span> <span class="toc-text">Compare Macro vs Subroutine</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">Summary</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/&text=Chapter4-系統程式-part1" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/&title=Chapter4-系統程式-part1" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/&is_video=false&description=Chapter4-系統程式-part1" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter4-系統程式-part1&body=Check out this article: https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/&title=Chapter4-系統程式-part1" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/&title=Chapter4-系統程式-part1" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/&title=Chapter4-系統程式-part1" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/&title=Chapter4-系統程式-part1" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/&name=Chapter4-系統程式-part1&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/&t=Chapter4-系統程式-part1" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

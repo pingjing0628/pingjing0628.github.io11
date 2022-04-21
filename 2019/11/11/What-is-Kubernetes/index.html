@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Kubernetes &lt;!--more--&gt;   容器的全自動管理&#x2F;調度平台，誕生自Google Borg 不限制application類型，只要能容器化都吃 具有各種抽象化的資源類型  web&#x2F;database task runner auto scaler Ingress    Why is Container  一致性的執行環境 方便的應用部署，有利於CI&#x2F;CD 清楚的分離Dev">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What is Kubernetes?">
+<meta property="og:url" content="https://pingjing0628.github.io/2019/11/11/What-is-Kubernetes/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="Kubernetes &lt;!--more--&gt;   容器的全自動管理&#x2F;調度平台，誕生自Google Borg 不限制application類型，只要能容器化都吃 具有各種抽象化的資源類型  web&#x2F;database task runner auto scaler Ingress    Why is Container  一致性的執行環境 方便的應用部署，有利於CI&#x2F;CD 清楚的分離Dev">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://docs.microsoft.com/zh-tw/dotnet/architecture/microservices/docker-application-development-process/media/image1.png">
+<meta property="og:image" content="http://www.mundodocker.com.br/wp-content/uploads/2017/06/namespaces.png">
+<meta property="og:image" content="http://i0.wp.com/foxutech.com/wp-content/uploads/2018/02/Kubernetes-Pod.jpg">
+<meta property="og:image" content="https://prod-edxapp.edx-cdn.org/assets/courseware/v1/bfc5b38f02fcd9cd9c290750ecbc70a1/asset-v1:LinuxFoundationX+LFS158x+2T2017+type@asset+block/replicaset-1.png">
+<meta property="og:image" content="https://codelabs.developers.google.com/codelabs/k8s-kickstart/img/6a62a850f2be0c9b.png">
+<meta property="og:image" content="https://codelabs.developers.google.com/codelabs/k8s-kickstart/img/8d107e36763fd5c1.png">
+<meta property="article:published_time" content="2019-11-11T07:44:19.000Z">
+<meta property="article:modified_time" content="2020-12-15T15:15:38.134Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="Kubernetes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://docs.microsoft.com/zh-tw/dotnet/architecture/microservices/docker-application-development-process/media/image1.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>What is Kubernetes?</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2019/11/16/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2019/11/11/What-is-Kubernetes/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2019/11/11/What-is-Kubernetes/&text=What is Kubernetes?" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2019/11/11/What-is-Kubernetes/&title=What is Kubernetes?" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2019/11/11/What-is-Kubernetes/&is_video=false&description=What is Kubernetes?" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=What is Kubernetes?&body=Check out this article: https://pingjing0628.github.io/2019/11/11/What-is-Kubernetes/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2019/11/11/What-is-Kubernetes/&title=What is Kubernetes?" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2019/11/11/What-is-Kubernetes/&title=What is Kubernetes?" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2019/11/11/What-is-Kubernetes/&title=What is Kubernetes?" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2019/11/11/What-is-Kubernetes/&title=What is Kubernetes?" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2019/11/11/What-is-Kubernetes/&name=What is Kubernetes?&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2019/11/11/What-is-Kubernetes/&t=What is Kubernetes?" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">Kubernetes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.</span> <span class="toc-text">Why is Container</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">3.</span> <span class="toc-text">Docker</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">3.1.</span> <span class="toc-text">Docker生命週期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">3.2.</span> <span class="toc-text">Docker Registry</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">4.</span> <span class="toc-text">Kubernetes 資源介紹</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">4.1.</span> <span class="toc-text">Kubernetes Nodes</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">4.2.</span> <span class="toc-text">Kubernetes 抽象資源</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        What is Kubernetes?
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-11-11T07:44:19.000Z" itemprop="datePublished">2019-11-11</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Kubernetes/">Kubernetes</a> › <a class="category-link" href="/categories/Kubernetes/deploy/">deploy</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Kubernetes/" rel="tag">Kubernetes</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3>Kubernetes</h3>
+<p>&lt;!--more--&gt;</p>
+<hr>
+<ul>
+<li>容器的全自動管理/調度平台，誕生自Google Borg</li>
+<li>不限制application類型，只要能容器化都吃</li>
+<li>具有各種抽象化的資源類型
+<ul>
+<li>web/database</li>
+<li>task runner</li>
+<li>auto scaler</li>
+<li>Ingress</li>
+</ul>
+</li>
+</ul>
+<h3>Why is Container</h3>
+<ul>
+<li>一致性的執行環境</li>
+<li>方便的應用部署，有利於CI/CD</li>
+<li>清楚的分離Dev與Ops，有利於分工</li>
+<li>以應用為中心的管理方式</li>
+</ul>
+<h3>Docker</h3>
+<hr>
+<h4>Docker生命週期</h4>
+<ol>
+<li>Code your app</li>
+<li>Write Dockerfile</li>
+<li>Create images. Defined at Dockerfiles</li>
+<li>Define services at writing</li>
+<li>Run containers / Compose app</li>
+<li>Test your app or microservices</li>
+<li>Push or continue developing</li>
+</ol>
+<ul>
+<li>寫好的dockerfile，build 成image後只是存在你build 好的那台機器上面，所以若是要share給別人使用的話，就是要放到第三方的地方，所以image會放在registry的地方
+<img src="https://docs.microsoft.com/zh-tw/dotnet/architecture/microservices/docker-application-development-process/media/image1.png" class="" width="1000" height="400" title="vi-vim-cheat-sheet"></li>
+</ul>
+<h4>Docker Registry</h4>
+<ul>
+<li>維護方式跟 github 機制有87%像，但只是拿來放docker image</li>
+<li>DockerHub ，目前最大的public registry</li>
+<li>private registry
+<ul>
+<li>VMware Harbor</li>
+<li>gitlab registry
+<ul>
+<li>在900之後，有一個內建的registry，gitlab.com上面就有提供一個免費的registry，可以build 自己的code，丟到gitlab registry</li>
+</ul>
+</li>
+<li>Cloud: AWS/GCP/Azure...</li>
+</ul>
+</li>
+</ul>
+<h3>Kubernetes 資源介紹</h3>
+<hr>
+<h4>Kubernetes Nodes</h4>
+<ul>
+<li>Node (就是實體機，分成以下兩個)
+<ol>
+<li>Worker Node
+<ul>
+<li>負責 Resource 的執行</li>
+<li>監控 Resource 的健康狀態</li>
+</ul>
+</li>
+<li>Master Node
+<ul>
+<li>管理與監控 Node</li>
+<li>負責調度所有的 Resource</li>
+<li>儲存整個 Cluster 的運作狀態</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>架設方式
+<ul>
+<li>自架：minikube/kubeadm/Rancher 2.x(不建議自己架，因為會有很多雷)</li>
+<li>直接用 Cloud AWS/GCP/Azure/DigitalOcean</li>
+</ul>
+</li>
+</ul>
+<h4>Kubernetes 抽象資源</h4>
+<ol>
+<li>Namespace</li>
+</ol>
+<ul>
+<li>一組資源的集合</li>
+<li>隔離不同 namespace 之間的資源 (persistant volume除外)</li>
+<li>預設有 kube-system/kube-public/default
+<img src="http://www.mundodocker.com.br/wp-content/uploads/2017/06/namespaces.png" class="" width="600" height="300" title="vi-vim-cheat-sheet"></li>
+</ul>
+<ol start="2">
+<li>Pod</li>
+</ol>
+<ul>
+<li>Kubernetes中最小執行單位</li>
+<li>一個完整的 application 部署封裝，可能有一個以上的container</li>
+<li>共享儲存空間/網路
+<img src="http://i0.wp.com/foxutech.com/wp-content/uploads/2018/02/Kubernetes-Pod.jpg" class="" width="800" height="300" title="vi-vim-cheat-sheet"></li>
+</ul>
+<ol start="3">
+<li>ReplicaSet</li>
+</ol>
+<ul>
+<li>保證Pod數量跟設定中要求的一樣
+ex: 譬如今天保證要有3台在運作，那麼就可以把replica設成3，假設今天把一台pod刪掉，那麼他今天就會再幫你生一台新的出來，那如果有多的話，就會把最舊的那台砍掉</li>
+<li>少了就補齊，多了就砍掉，絕對不多不少</li>
+<li>支援動態縮放
+<img src="https://prod-edxapp.edx-cdn.org/assets/courseware/v1/bfc5b38f02fcd9cd9c290750ecbc70a1/asset-v1:LinuxFoundationX+LFS158x+2T2017+type@asset+block/replicaset-1.png" class="" width="500" height="300" title="vi-vim-cheat-sheet"></li>
+</ul>
+<ol start="4">
+<li>Deployment</li>
+</ol>
+<ul>
+<li>
+<p>管理 Pod 與 ReplicaSet</p>
+</li>
+<li>
+<p>聲明式更新</p>
+</li>
+<li>
+<p>支援Rolling Update</p>
+</li>
+<li>
+<p><strong>Rolling Update</strong></p>
+</li>
+<li>
+<p>此image版本為1.0，若此時想換成2.0時
+<img src="https://codelabs.developers.google.com/codelabs/k8s-kickstart/img/6a62a850f2be0c9b.png" class="" width="600" height="400" title="vi-vim-cheat-sheet"></p>
+</li>
+<li>
+<p>此時deployment會去開一個新的replicaSet，這個replicaSet會去開一個新的Pod，而這個Pod會去用2.0的image，此時2.0開了新的一台，而就的那邊就會關掉一台，且不會斷掉，以此類推，最後就會把舊的1.0的都關掉，變成2.0的Pod(先開新的，確定能夠使用，才把1.0關掉)
+<img src="https://codelabs.developers.google.com/codelabs/k8s-kickstart/img/8d107e36763fd5c1.png" class="" width="800" height="400" title="vi-vim-cheat-sheet"></p>
+</li>
+</ul>
+<ol start="5">
+<li>Job (與deployment不同的是，deployment是提供一個持續性的服務，不會斷掉)</li>
+</ol>
+<ul>
+<li>啟動Pod並且執行指定次數 (譬如像是migration，就是在上版的那一次要跑而已，run完即結束)</li>
+<li>Pod 如果執行錯誤，會重新開啟直到完成(重新開啟的次數是可以設定的)</li>
+</ul>
+<ol start="6">
+<li>Services</li>
+</ol>
+<ul>
+<li>用來存取Pod的資源(因為Pod 不會讓外面的Cluster直接存取到，所以中間會經過Services)</li>
+<li>可透過 Kubernetes內部的 DNS來對應</li>
+<li>有提供各種的 Service Types：
+<ul>
+<li>ClusterIP</li>
+<li>Node Port</li>
+<li>LoadBalancer</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">Kubernetes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.</span> <span class="toc-text">Why is Container</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">3.</span> <span class="toc-text">Docker</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">3.1.</span> <span class="toc-text">Docker生命週期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">3.2.</span> <span class="toc-text">Docker Registry</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">4.</span> <span class="toc-text">Kubernetes 資源介紹</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">4.1.</span> <span class="toc-text">Kubernetes Nodes</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">4.2.</span> <span class="toc-text">Kubernetes 抽象資源</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2019/11/11/What-is-Kubernetes/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2019/11/11/What-is-Kubernetes/&text=What is Kubernetes?" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2019/11/11/What-is-Kubernetes/&title=What is Kubernetes?" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2019/11/11/What-is-Kubernetes/&is_video=false&description=What is Kubernetes?" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=What is Kubernetes?&body=Check out this article: https://pingjing0628.github.io/2019/11/11/What-is-Kubernetes/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2019/11/11/What-is-Kubernetes/&title=What is Kubernetes?" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2019/11/11/What-is-Kubernetes/&title=What is Kubernetes?" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2019/11/11/What-is-Kubernetes/&title=What is Kubernetes?" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2019/11/11/What-is-Kubernetes/&title=What is Kubernetes?" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2019/11/11/What-is-Kubernetes/&name=What is Kubernetes?&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2019/11/11/What-is-Kubernetes/&t=What is Kubernetes?" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

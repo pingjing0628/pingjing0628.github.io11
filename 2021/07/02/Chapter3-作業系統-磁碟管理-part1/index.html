@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="3.9 磁碟管理 (Disk Management) 目錄  Free space management  Link list Combination Counting   Allocation Method (配置方法)  連續性配置 (contiguous allocation) 鏈結式配置 (linked allocation)  FAT (file allocation table)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter3-作業系統-磁碟管理-part1">
+<meta property="og:url" content="https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="3.9 磁碟管理 (Disk Management) 目錄  Free space management  Link list Combination Counting   Allocation Method (配置方法)  連續性配置 (contiguous allocation) 鏈結式配置 (linked allocation)  FAT (file allocation table)">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/bitVector.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/linkList.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/combination.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/combinationEx.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/countingEx.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/contiguous.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/linked.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/FATEx.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/FAT.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/indexEx.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/i-node.png">
+<meta property="article:published_time" content="2021-07-01T16:08:39.000Z">
+<meta property="article:modified_time" content="2021-07-02T14:11:15.289Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="Disk Management">
+<meta property="article:tag" content="Free space management">
+<meta property="article:tag" content="Bit vector">
+<meta property="article:tag" content="Linked list">
+<meta property="article:tag" content="Combination">
+<meta property="article:tag" content="Counting">
+<meta property="article:tag" content="Allocation Method">
+<meta property="article:tag" content="FAT">
+<meta property="article:tag" content="i-node">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/bitVector.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Chapter3-作業系統-磁碟管理-part1</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part2/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2021/06/24/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%99%9B%E6%93%AC%E8%A8%98%E6%86%B6%E9%AB%94-part2/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/&text=Chapter3-作業系統-磁碟管理-part1" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/&title=Chapter3-作業系統-磁碟管理-part1" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/&is_video=false&description=Chapter3-作業系統-磁碟管理-part1" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter3-作業系統-磁碟管理-part1&body=Check out this article: https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/&title=Chapter3-作業系統-磁碟管理-part1" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/&title=Chapter3-作業系統-磁碟管理-part1" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/&title=Chapter3-作業系統-磁碟管理-part1" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/&title=Chapter3-作業系統-磁碟管理-part1" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/&name=Chapter3-作業系統-磁碟管理-part1&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/&t=Chapter3-作業系統-磁碟管理-part1" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">3.9 磁碟管理 (Disk Management)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">目錄</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">Free Space Management</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">Allocation Method (配置方法)</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Chapter3-作業系統-磁碟管理-part1
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-07-01T16:08:39.000Z" itemprop="datePublished">2021-07-02</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/">計算機概論</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Allocation-Method/" rel="tag">Allocation Method</a>, <a class="tag-link" href="/tags/Bit-vector/" rel="tag">Bit vector</a>, <a class="tag-link" href="/tags/Combination/" rel="tag">Combination</a>, <a class="tag-link" href="/tags/Counting/" rel="tag">Counting</a>, <a class="tag-link" href="/tags/Disk-Management/" rel="tag">Disk Management</a>, <a class="tag-link" href="/tags/FAT/" rel="tag">FAT</a>, <a class="tag-link" href="/tags/Free-space-management/" rel="tag">Free space management</a>, <a class="tag-link" href="/tags/Linked-list/" rel="tag">Linked list</a>, <a class="tag-link" href="/tags/i-node/" rel="tag">i-node</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1>3.9 磁碟管理 (Disk Management)</h1>
+<h2>目錄</h2>
+<ul>
+<li><strong>Free space management</strong>
+<ul>
+<li><strong>Link list</strong></li>
+<li><strong>Combination</strong></li>
+<li><strong>Counting</strong></li>
+</ul>
+</li>
+<li><strong>Allocation Method (配置方法)</strong>
+<ul>
+<li><strong>連續性配置 (contiguous allocation)</strong></li>
+<li><strong>鏈結式配置 (linked allocation)</strong>
+<ul>
+<li><strong>FAT (file allocation table)</strong></li>
+</ul>
+</li>
+<li><strong>索引配置 (index allocation)</strong>
+<ul>
+<li><strong>i-node</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Disk structure</li>
+<li>Disk access time</li>
+<li>Disk scheduling
+<ul>
+<li>FCFS</li>
+<li>SSTF</li>
+<li>SCAN</li>
+<li>C-SCAN</li>
+<li>LOOK</li>
+<li>C-LOOK</li>
+</ul>
+</li>
+<li>補充</li>
+<li>RAID</li>
+<li>RAID 的種類
+<ul>
+<li>RAID1</li>
+<li>RAID0+1</li>
+<li>RAID2</li>
+<li>RAID3 vs RAID4</li>
+<li>RAID5</li>
+<li>RAID6</li>
+</ul>
+</li>
+<li>Summary</li>
+</ul>
+<hr>
+<h2>Free Space Management</h2>
+<ol>
+<li><strong>Bit Vector (位元向量)</strong></li>
+</ol>
+<ul>
+<li>圖：<img src="bitVector.png" alt=""></li>
+<li>Def: 給各 block 一個 bit, 當 bit
+<ul>
+<li>bit = 0, 則 free block</li>
+<li>bit = 1, 則 use</li>
+</ul>
+</li>
+<li>Ex: <code>011001110001</code></li>
+<li>優點：
+<ol>
+<li>easy to implement</li>
+<li>找連續可用的 block 容易</li>
+</ol>
+</li>
+<li>缺點：當 block 太多, 則 bit vector 不適用</li>
+</ul>
+<ol start="2">
+<li><strong>Link list (鏈結串列)</strong></li>
+</ol>
+<ul>
+<li>Def: 將 free block 以 link 方式串接</li>
+<li>Ex: <img src="linkList.png" alt=""></li>
+<li>優點：insert / delete free block 容易</li>
+<li>缺點：
+<ol>
+<li>檔案配置不便</li>
+<li>link broken, data lose</li>
+</ol>
+</li>
+</ul>
+<ol start="3">
+<li><strong>Combination (組合)</strong></li>
+</ol>
+<ul>
+<li>Def: 將一 Node 給予多個格子合併而成</li>
+<li><img src="combination.png" alt=""></li>
+<li>Ex: <img src="combinationEx.png" alt=""></li>
+</ul>
+<ol start="4">
+<li><strong>Counting (計數法)</strong></li>
+</ol>
+<ul>
+<li>Def: 在 linked list 中 Node 加入一空間, 放連續 free block 之數量 (<strong>連續的 free block 越多, 串列越短</strong>)</li>
+<li>Ex: <img src="countingEx.png" alt=""></li>
+</ul>
+<hr>
+<h2>Allocation Method (配置方法)</h2>
+<ol>
+<li><strong>連續性配置 (contiguous allocation)</strong></li>
+</ol>
+<ul>
+<li>Def: 檔案大小 = n blocks 時, O.S. 需找到連續 free block &gt;= n, 方可配置</li>
+<li>優點：
+<ol>
+<li>search time 短 =&gt; 因為 data 鄰近度</li>
+<li>support sequential 及 random access =&gt; 處理快</li>
+</ol>
+</li>
+<li>缺點：
+<ol>
+<li>有 external 碎裂</li>
+<li>檔案大小無法任意擴充</li>
+<li>file size 需事先宣告<br>
+(2, 3 會導致沒有彈性)</li>
+</ol>
+</li>
+<li><strong>Solution:</strong>
+<ol>
+<li><strong>Repack (壓縮), 但極度耗時</strong></li>
+<li><strong>disk defragmentation 磁碟重組: 將 file 的分配重組, 以求能達:</strong>
+<ul>
+<li>access time 下降 =&gt; 速度快</li>
+<li>連續空間變多 =&gt; 外部碎裂下降</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>圖：<img src="contiguous.png" alt=""></li>
+</ul>
+<ol start="2">
+<li><strong>鏈結式配置 (linked allocation)</strong></li>
+</ol>
+<ul>
+<li>Def: 檔案大小 = n blocks 時, O.S. 需找到 free block &gt;= n, 即可配置</li>
+<li>優點：
+<ol>
+<li>No external 碎裂</li>
+<li>檔案可以擴充</li>
+<li>file size 不需事先宣告<br>
+(2, 3 有彈性)</li>
+</ol>
+</li>
+<li>缺點：
+<ol>
+<li>search time 長 (因為 data 不見得於鄰近處)</li>
+<li>support sequential 較慢, 不支援 random access</li>
+</ol>
+</li>
+<li>圖：<img src="linked.png" alt=""></li>
+<li><strong>FAT (file allocation table)</strong>
+<ul>
+<li>Def:
+<ul>
+<li>用於 Dos, OS/2 之中</li>
+<li>FAT Stored in the disk, 紀錄各 file block 的 link 關係</li>
+</ul>
+</li>
+<li>Ex: <img src="FATEx.png" alt=""></li>
+<li>Note: windows PC 版用 &quot;NTFS&quot; 格式</li>
+<li>圖：<img src="FAT.png" alt=""></li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li><strong>索引配置 (index allocation)</strong></li>
+</ol>
+<ul>
+<li>Def: 各 file 皆有自己的 index block, 用以指向其 block 對應到 disk block 的編號為何</li>
+<li>Ex: <img src="indexEx.png" alt=""></li>
+<li>優點：結合 Contiguous Allocation &amp; Linked Allocation 的優點 =&gt; speed up 又有彈性</li>
+<li>缺點：
+<ol>
+<li>index block 需佔用額外空間</li>
+<li>index block 大小不易決定</li>
+</ol>
+</li>
+<li><strong>i-node (unix-like 常用)</strong>
+<ul>
+<li>概念：<img src="i-node.png" alt=""></li>
+<li>說明：<br>
+1 ~ 12: direct index block (最重要的)<br>
+13: single indirect index block<br>
+14: double indirect index block<br>
+15: triple indirect index block</li>
+<li>Ex:<br>
+1~10: direct block<br>
+11: single indirect block<br>
+12: double indirect block<br>
+13: triple indirect block
+<hr>
+each data block = 4 bytes<br>
+each index block = 4 k<br>
+each index size = 4<br>
+total data size = ?<br>
+<strong>Sol:</strong><br>
+<code>10 * 4 bytes</code> + <code>4k/4 * 4 bytes</code> +<br>
+<code>k * k * 4 bytes</code> + <code>k * k * k * 4 bytes</code><br>
+= <code>40 bytes + 4kB + 4k^2B + 4k^3B</code></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">3.9 磁碟管理 (Disk Management)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">目錄</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">Free Space Management</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">Allocation Method (配置方法)</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/&text=Chapter3-作業系統-磁碟管理-part1" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/&title=Chapter3-作業系統-磁碟管理-part1" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/&is_video=false&description=Chapter3-作業系統-磁碟管理-part1" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter3-作業系統-磁碟管理-part1&body=Check out this article: https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/&title=Chapter3-作業系統-磁碟管理-part1" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/&title=Chapter3-作業系統-磁碟管理-part1" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/&title=Chapter3-作業系統-磁碟管理-part1" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/&title=Chapter3-作業系統-磁碟管理-part1" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/&name=Chapter3-作業系統-磁碟管理-part1&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/&t=Chapter3-作業系統-磁碟管理-part1" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

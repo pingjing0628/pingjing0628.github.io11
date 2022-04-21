@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Docker ENTRYPOINT &lt;!--more--&gt;  ENTRYPOINT的目的和 CMD一樣 當指定了ENTRYPOINT後，CMD的含義就發生了改變，不再是直接的運行其命令，而是將CMD的內容作為參數傳給ENTRYPOINT指令，換句話說實際執行時，將變為： &lt;ENTRYPOINT&gt; &quot;&lt;CMD&gt;&quot;   狀況一 假設需要得知自己當">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker-ENTRYPOINT介紹">
+<meta property="og:url" content="https://pingjing0628.github.io/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="Docker ENTRYPOINT &lt;!--more--&gt;  ENTRYPOINT的目的和 CMD一樣 當指定了ENTRYPOINT後，CMD的含義就發生了改變，不再是直接的運行其命令，而是將CMD的內容作為參數傳給ENTRYPOINT指令，換句話說實際執行時，將變為： &lt;ENTRYPOINT&gt; &quot;&lt;CMD&gt;&quot;   狀況一 假設需要得知自己當">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2019-12-22T14:08:51.000Z">
+<meta property="article:modified_time" content="2020-12-15T15:15:38.134Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="dockerfile">
+<meta property="article:tag" content="Entrypoint">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>docker-ENTRYPOINT介紹</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2020/01/04/GoLang-1a2b-game-practice/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2019/12/22/docker-Multi-Stage/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/&text=docker-ENTRYPOINT介紹" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/&title=docker-ENTRYPOINT介紹" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/&is_video=false&description=docker-ENTRYPOINT介紹" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=docker-ENTRYPOINT介紹&body=Check out this article: https://pingjing0628.github.io/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/&title=docker-ENTRYPOINT介紹" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/&title=docker-ENTRYPOINT介紹" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/&title=docker-ENTRYPOINT介紹" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/&title=docker-ENTRYPOINT介紹" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/&name=docker-ENTRYPOINT介紹&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/&t=docker-ENTRYPOINT介紹" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">Docker ENTRYPOINT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">2.</span> <span class="toc-text">&lt;!--more--&gt;</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.1.</span> <span class="toc-text">狀況一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.2.</span> <span class="toc-text">狀況二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.3.</span> <span class="toc-text">REFERENCES</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        docker-ENTRYPOINT介紹
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-12-22T14:08:51.000Z" itemprop="datePublished">2019-12-22</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/docker/">docker</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Entrypoint/" rel="tag">Entrypoint</a>, <a class="tag-link" href="/tags/docker/" rel="tag">docker</a>, <a class="tag-link" href="/tags/dockerfile/" rel="tag">dockerfile</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2>Docker ENTRYPOINT</h2>
+<h2>&lt;!--more--&gt;</h2>
+<ul>
+<li><code>ENTRYPOINT</code>的目的和 <code>CMD</code>一樣</li>
+<li>當指定了<code>ENTRYPOINT</code>後，<code>CMD</code>的含義就發生了改變，不再是直接的運行其命令，而是將<code>CMD</code>的內容作為參數傳給<code>ENTRYPOINT</code>指令，換句話說實際執行時，將變為：
+<code>&lt;ENTRYPOINT&gt; &quot;&lt;CMD&gt;&quot;</code></li>
+</ul>
+<hr>
+<h3>狀況一</h3>
+<p>假設需要得知自己當前公網IP，可以先用CMD來實現：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu:18.04</span><br><span class="line">RUN apt-get update \</span><br><span class="line">    &amp;&amp; apt-get install -y curl \</span><br><span class="line">    &amp;&amp; rm -rf &#x2F;var&#x2F;lib&#x2F;apt&#x2F;lists&#x2F;*</span><br><span class="line">CMD [ &quot;curl&quot;, &quot;-s&quot;, &quot;https:&#x2F;&#x2F;ip.cn&quot; ]</span><br></pre></td></tr></table></figure>
+執行 <code>docker build -t myip</code>建立image
+則查詢ip執行
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run myip</span><br><span class="line">當前 IP：61.148.226.66 來自：北京市 聯通</span><br></pre></td></tr></table></figure></p>
+<p>上述的<code>CMD</code>中可以看到實質命令是<code>curl</code>，那若希望顯示HTTP header 訊息，就需要加上<code>-i</code>參數。
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run myip -i</span><br><span class="line">docker: Error response from daemon: invalid header field value &quot;oci runtime error: container_linux.go:247: starting container process caused \&quot;exec: \\\&quot;-i\\\&quot;: executable file not found in $PATH\&quot;\n&quot;.</span><br></pre></td></tr></table></figure>
+出現找不到可執行檔案的錯誤訊息，因為這裡的<code>-i</code>替換了原來的<code>CMD</code>，而不是添加在原來的<code>curl -s https://ip.cn</code>後面。而<code>-i</code>根本不是命令，所以自然找不到，必須重新完整的輸入命令才可以執行
+<code>docker run myip curl -s https://ip.cn -i</code></p>
+<p><strong>使用Entrypoint</strong>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu:18.04</span><br><span class="line">RUN apt-get update \</span><br><span class="line">    &amp;&amp; apt-get install -y curl \</span><br><span class="line">    &amp;&amp; rm -rf &#x2F;var&#x2F;lib&#x2F;apt&#x2F;lists&#x2F;*</span><br><span class="line">ENTRYPOINT [ &quot;curl&quot;, &quot;-s&quot;, &quot;https:&#x2F;&#x2F;ip.cn&quot; ]</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> docker run myip</span><br><span class="line">當前 IP：61.148.226.66 來自：北京市 聯通</span><br><span class="line"></span><br><span class="line">$ docker run myip -i</span><br><span class="line">HTTP&#x2F;1.1 200 OK</span><br><span class="line">Server: nginx&#x2F;1.8.0</span><br><span class="line">Date: Tue, 22 Nov 2016 05:12:40 GMT</span><br><span class="line">Content-Type: text&#x2F;html; charset&#x3D;UTF-8</span><br><span class="line">Vary: Accept-Encoding</span><br><span class="line">X-Powered-By: PHP&#x2F;5.6.24-1~dotdeb+7.1</span><br><span class="line">X-Cache: MISS from cache-2</span><br><span class="line">X-Cache-Lookup: MISS from cache-2:80</span><br><span class="line">X-Cache: MISS from proxy-2_6</span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line">Via: 1.1 cache-2:80, 1.1 proxy-2_6:8006</span><br><span class="line">Connection: keep-alive</span><br><span class="line"></span><br><span class="line">當前 IP：61.148.226.66 來自：北京市 聯通</span><br></pre></td></tr></table></figure>
+因為當存在<code>ENTRYPOINT</code>後，<code>CMD</code>的內容將會作為參數傳給<code>ENTRYPOINT</code>，而這裡<code>-i</code>就是新的<code>CMD</code>，因此會作為參數傳給<code>curl</code>，從而達到了我們預期的效果。</p>
+<hr>
+<h3>狀況二</h3>
+<p>啟動容器就是啟動主進程，但有些時候，啟動主進程前，需要一些準備工作。
+比如<code>mysql</code>的資料庫，可能需要一些資料庫配置、初始化的工作，這些工作要在最終的<code>mysql</code>服務器運行之前解決。
+此外，可能希望避免使用<code>root</code>使用者去啟動服務，從而提高安全性，而在啟動服務前還需要以<code>root</code>身份執行一些必要的準備工作，最後切換到服務使用者身份啟動服務。或者除了服務外，其它命令依舊可以使用<code>root</code>身份執行，方便調整等。
+這些準備工作是和容器<code>CMD</code>無關，都需要事先進行一個預處理的工作。這種情況下，可以寫一個腳本，然後放入<code>ENTRYPOINT</code>中去執行，而這個腳本會將接到的參數（也就是&lt;CMD&gt;）作為命令，在腳本最後執行。比如官方鏡像redis中就是這麼做的：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">FROM alpine:3.4</span><br><span class="line">...</span><br><span class="line">RUN addgroup -S redis &amp;&amp; adduser -S -G redis redis</span><br><span class="line">...</span><br><span class="line">ENTRYPOINT [&quot;docker-entrypoint.sh&quot;]</span><br><span class="line"></span><br><span class="line">EXPOSE 6379</span><br><span class="line">CMD [ &quot;redis-server&quot; ]</span><br></pre></td></tr></table></figure>
+在最後指定了<code>ENTRYPOINT</code>為<code>docker-entrypoint.sh</code>腳本。</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;sh</span><br><span class="line">...</span><br><span class="line"># allow the container to be started with &#96;--user&#96;</span><br><span class="line">if [ &quot;$1&quot; &#x3D; &#39;redis-server&#39; -a &quot;$(id -u)&quot; &#x3D; &#39;0&#39; ]; then</span><br><span class="line">    chown -R redis .</span><br><span class="line">    exec su-exec redis &quot;$0&quot; &quot;$@&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">exec &quot;$@&quot;</span><br></pre></td></tr></table></figure>
+該腳本的內容就是根據<code>CMD</code>的內容來判斷，如果是<code>redis-server</code>的話，則切換到redis使用者身份啟動服務器，否則依舊使用root身份執行。
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -it redis id</span><br><span class="line">uid&#x3D;0(root) gid&#x3D;0(root) groups&#x3D;0(root)</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3>REFERENCES</h3>
+<ul>
+<li><a href="https://yeasy.gitbooks.io/docker_practice/image/dockerfile/entrypoint.html" target="_blank" rel="noopener">Entrypoint</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">Docker ENTRYPOINT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">2.</span> <span class="toc-text">&lt;!--more--&gt;</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.1.</span> <span class="toc-text">狀況一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.2.</span> <span class="toc-text">狀況二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.3.</span> <span class="toc-text">REFERENCES</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/&text=docker-ENTRYPOINT介紹" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/&title=docker-ENTRYPOINT介紹" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/&is_video=false&description=docker-ENTRYPOINT介紹" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=docker-ENTRYPOINT介紹&body=Check out this article: https://pingjing0628.github.io/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/&title=docker-ENTRYPOINT介紹" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/&title=docker-ENTRYPOINT介紹" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/&title=docker-ENTRYPOINT介紹" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/&title=docker-ENTRYPOINT介紹" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/&name=docker-ENTRYPOINT介紹&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/&t=docker-ENTRYPOINT介紹" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="1.2 進制轉換  10 進制 -&gt; r 進制 格式： (整數、小數)10 &#x3D;&gt; 右下方的 10 1. 整數：      (1) 連除以 r, 直到商數為 0     (2) 由下而上取餘數 2. 小數：     (1) 將小數部分連乘以 r, 直到小數部分為 0     (2) 由上而下取整數  Note: 電腦儲存長度有限，故結果會產生截尾誤差  例 1: 10 -&gt; r,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter1-基本電腦概論-進制轉換">
+<meta property="og:url" content="https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="1.2 進制轉換  10 進制 -&gt; r 進制 格式： (整數、小數)10 &#x3D;&gt; 右下方的 10 1. 整數：      (1) 連除以 r, 直到商數為 0     (2) 由下而上取餘數 2. 小數：     (1) 將小數部分連乘以 r, 直到小數部分為 0     (2) 由上而下取整數  Note: 電腦儲存長度有限，故結果會產生截尾誤差  例 1: 10 -&gt; r,">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/2%E9%80%B2%E5%88%B6.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/4%E9%80%B2%E5%88%B6.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/16%E9%80%B2%E5%88%B6.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/10%E9%80%B2%E5%88%B6%E5%88%B016%E9%80%B2%E5%88%B6.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/16%E8%BD%898%E9%80%B2%E5%88%B6.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/16%E8%BD%894%E9%80%B2%E5%88%B6.png">
+<meta property="article:published_time" content="2021-02-17T08:34:04.000Z">
+<meta property="article:modified_time" content="2021-03-31T17:15:36.818Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="進制">
+<meta property="article:tag" content="數值運算">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/2%E9%80%B2%E5%88%B6.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Chapter1-基本電腦概論-進制轉換</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2021/02/21/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E8%A3%9C%E6%95%B8-Complement/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/&text=Chapter1-基本電腦概論-進制轉換" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/&title=Chapter1-基本電腦概論-進制轉換" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/&is_video=false&description=Chapter1-基本電腦概論-進制轉換" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter1-基本電腦概論-進制轉換&body=Check out this article: https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/&title=Chapter1-基本電腦概論-進制轉換" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/&title=Chapter1-基本電腦概論-進制轉換" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/&title=Chapter1-基本電腦概論-進制轉換" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/&title=Chapter1-基本電腦概論-進制轉換" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/&name=Chapter1-基本電腦概論-進制轉換&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/&t=Chapter1-基本電腦概論-進制轉換" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">1.2 進制轉換</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">10 進制 -&gt; r 進制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">r 進制 -&gt; 10 進制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">2 的冪次方系統互換</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">數值運算(+, -, *, &#x2F;)</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Chapter1-基本電腦概論-進制轉換
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-02-17T08:34:04.000Z" itemprop="datePublished">2021-02-17</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/">計算機概論</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/%E6%95%B8%E5%80%BC%E9%81%8B%E7%AE%97/" rel="tag">數值運算</a>, <a class="tag-link" href="/tags/%E9%80%B2%E5%88%B6/" rel="tag">進制</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1>1.2 進制轉換</h1>
+<hr>
+<h2>10 進制 -&gt; r 進制</h2>
+<pre><code>格式： (整數、小數)10 =&gt; 右下方的 10
+1. 整數： 
+    (1) 連除以 r, 直到商數為 0
+    (2) 由下而上取餘數
+2. 小數：
+    (1) 將小數部分連乘以 r, 直到小數部分為 0
+    (2) 由上而下取整數
+</code></pre>
+<p>Note: 電腦儲存長度有限，故結果會產生截尾誤差</p>
+<ul>
+<li>例 1: 10 -&gt; r, (43.375)10 = ()2 = ()4 = ()8 = ()16
+<ol>
+<li>
+<p>2 進制：
+<img src="2%E9%80%B2%E5%88%B6.png" alt="">
+= (101011.011)2</p>
+</li>
+<li>
+<p>4 進制：
+<img src="4%E9%80%B2%E5%88%B6.png" alt="">
+= (223.12)4</p>
+</li>
+<li>
+<p>16 進制：
+<img src="16%E9%80%B2%E5%88%B6.png" alt="">
+= (2B.6)16</p>
+</li>
+</ol>
+</li>
+</ul>
+<p>Note:
+<img src="10%E9%80%B2%E5%88%B6%E5%88%B016%E9%80%B2%E5%88%B6.png" alt=""></p>
+<ul>
+<li>
+<p>例 2: 下列何者無法以 2 進制精確表示法？<br>
+=&gt; ( check: 將分數約分, 若分母不為 2 的冪次方則謂之)<br>
+(A) 2/8    2^2<br>
+(B) 3/16   2^4<br>
+(C) 9 7/18 2^2<br>
+(D) 2/5</p>
+<p>Ans: D</p>
+</li>
+<li>
+<p>例 3: (0.4)10 = (0.0110)2 =&gt; (0110 上方會加上長線為表示循環數)<br>
+Sol:<br>
+0.4 * 2 = 0.8<br>
+0.8 * 2 = 1.6<br>
+0.6 * 2 = 1.2<br>
+0.2 * 2 = 0.4<br>
+0.4 * 2 = X</p>
+</li>
+<li>
+<p>例 4: x = 10/3; y = x * 3; 問為何 y 不等於 10?<br>
+Sol: 因為在第一個時間點已經發生截尾誤差</p>
+</li>
+</ul>
+<h2>r 進制 -&gt; 10 進制</h2>
+<pre><code>格式： (Xn....X1 X0 . Y0 Y1...Ym)r
+       |     |  |    |  |    |      =&gt;(整數.小數)10
+     r^n+..+r^1+r^0+r^-1+r^-2+r^-m   
+</code></pre>
+<ul>
+<li>例: (B2.C)16 = (178.75)10<br>
+Sol:<br>
+= 11 * 16^1+2 * 16^0+12 * 16^-1<br>
+= 176 + 2 + 12/16<br>
+= 178.75</li>
+</ul>
+<h2>2 的冪次方系統互換</h2>
+<pre><code>Case1: 2^0, 2^1, 2^2....2^n
+    將 2 -&gt; 4, 8, 16 進制
+    將每 2 3 4 bits 為一單位作轉換
+
+Case2: 4, 8, 16 -&gt; 2 進制
+    將一數值用 4 3 2 個 bits 表示之
+</code></pre>
+<p>Note:</p>
+<ul>
+<li>
+<p>整數由右往左數, 不足左邊補 0</p>
+</li>
+<li>
+<p>小數由左往右數, 不足右邊補 0</p>
+</li>
+<li>
+<p>例 Case1:
+(001100100.011010)2<br>
+= (1210.1222)4<br>
+= (144.324)8<br>
+= (64.6A)16</p>
+</li>
+<li>
+<p>例 Case2:
+(AB.2F)16 = (253.136)8<br>
+(010101011.001011110)2</p>
+</li>
+</ul>
+<h2>數值運算(+, -, *, /)</h2>
+<ul>
+<li>
+<p>例 1: (EACB)16 + (OAD2)16 = (172635)8<br>
+Sol:
+<img src="16%E8%BD%898%E9%80%B2%E5%88%B6.png" alt=""></p>
+<pre><code>  Case2 =&gt; (001111010110011101)2
+  Case1 =&gt; (1 7 2 6 3 5)8
+</code></pre>
+</li>
+<li>
+<p>例 2: (12CA)16 + (OD9C)16 = (110232)4<br>
+Sol:
+<img src="16%E8%BD%894%E9%80%B2%E5%88%B6.png" alt=""></p>
+<pre><code>  Case2 =&gt; (0000010100101110)2
+  Case1 =&gt; (0 0 1 1 0 2 3 2)4
+</code></pre>
+</li>
+<li>
+<p>例 3: (9)10 + (9)10 = (1010001)2<br>
+Sol: (9)10 * (9)10 = (81)10 = (1010001)2</p>
+</li>
+</ul>
+<ul>
+<li>例 4: (CB.A)16 -&gt; (203.625)10<br>
+Sol: CB.A = 16^1 * C + 16^0 * B + 16^-1 * A<br>
+= 12 * 16 + 11 * 1 + 10 * 1/16<br>
+= 192 + 11 + 5/8<br>
+= (203.625)10</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">1.2 進制轉換</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">10 進制 -&gt; r 進制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">r 進制 -&gt; 10 進制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">2 的冪次方系統互換</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">數值運算(+, -, *, &#x2F;)</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/&text=Chapter1-基本電腦概論-進制轉換" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/&title=Chapter1-基本電腦概論-進制轉換" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/&is_video=false&description=Chapter1-基本電腦概論-進制轉換" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter1-基本電腦概論-進制轉換&body=Check out this article: https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/&title=Chapter1-基本電腦概論-進制轉換" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/&title=Chapter1-基本電腦概論-進制轉換" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/&title=Chapter1-基本電腦概論-進制轉換" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/&title=Chapter1-基本電腦概論-進制轉換" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/&name=Chapter1-基本電腦概論-進制轉換&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/&t=Chapter1-基本電腦概論-進制轉換" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

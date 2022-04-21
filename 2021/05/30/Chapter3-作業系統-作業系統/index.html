@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="3.1 作業系統 O.S. 作用  為 user 和 Hardware 間溝通的橋樑 提供一個易於執行的環境 ex: Dos -&gt; Windows 資源 (Hardware) 的分配及管理 避免為和系統的動作發生   作業系統型態   Multiprogramming (多元程式規劃) Def: 指將多個 process 同時載入 memory 中  以並行或平行方式處理 當一 proces">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter3-作業系統-作業系統">
+<meta property="og:url" content="https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="3.1 作業系統 O.S. 作用  為 user 和 Hardware 間溝通的橋樑 提供一個易於執行的環境 ex: Dos -&gt; Windows 資源 (Hardware) 的分配及管理 避免為和系統的動作發生   作業系統型態   Multiprogramming (多元程式規劃) Def: 指將多個 process 同時載入 memory 中  以並行或平行方式處理 當一 proces">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/multiprogramming.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/time_sharing.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/perfermance_compare.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/multiprocessor.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/clustered.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/grid_computing.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/cloud.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/compare.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/spooling.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/caching.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/memory_hierarchy.png">
+<meta property="article:published_time" content="2021-05-30T08:47:35.000Z">
+<meta property="article:modified_time" content="2021-06-03T09:48:01.186Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="O.S">
+<meta property="article:tag" content="作業系統">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/multiprogramming.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Chapter3-作業系統-作業系統</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2021/04/01/Chapter2-%E6%95%B8%E4%BD%8D%E9%82%8F%E8%BC%AF-Digital-Logical/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/&text=Chapter3-作業系統-作業系統" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/&title=Chapter3-作業系統-作業系統" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/&is_video=false&description=Chapter3-作業系統-作業系統" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter3-作業系統-作業系統&body=Check out this article: https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/&title=Chapter3-作業系統-作業系統" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/&title=Chapter3-作業系統-作業系統" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/&title=Chapter3-作業系統-作業系統" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/&title=Chapter3-作業系統-作業系統" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/&name=Chapter3-作業系統-作業系統&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/&t=Chapter3-作業系統-作業系統" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">3.1 作業系統</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">O.S. 作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">作業系統型態</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.2.1.</span> <span class="toc-text">Network Computing</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">Clustered System (叢集式)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">Grid Computing (網格計算)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">Cloud</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">Compare</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">作業系統演進</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.1.</span> <span class="toc-text">Summary</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Chapter3-作業系統-作業系統
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-05-30T08:47:35.000Z" itemprop="datePublished">2021-05-30</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/">計算機概論</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/O-S/" rel="tag">O.S</a>, <a class="tag-link" href="/tags/%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/" rel="tag">作業系統</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1>3.1 作業系統</h1>
+<h2>O.S. 作用</h2>
+<ol>
+<li>為 user 和 Hardware 間溝通的橋樑</li>
+<li>提供一個易於執行的環境 ex: Dos -&gt; Windows</li>
+<li>資源 (Hardware) 的分配及管理</li>
+<li>避免為和系統的動作發生</li>
+</ol>
+<hr>
+<h2>作業系統型態</h2>
+<ol>
+<li>
+<p><strong>Multiprogramming (多元程式規劃)</strong><br>
+Def: 指將多個 process 同時載入 memory 中</p>
+<ul>
+<li>以並行或平行方式處理</li>
+<li>當一 process 需 wait I/O, CPU 得交由另一 process 使用</li>
+<li>圖：<img src="multiprogramming.png" alt=""></li>
+</ul>
+</li>
+<li>
+<p><strong>Time sharing (分時系統)</strong><br>
+Def:</p>
+<ul>
+<li>
+<p>採 Round Robin CPU Scheduling 及資源共享的技術</p>
+</li>
+<li>
+<p>各 process 可輪流使用一固定的 CPU 時間</p>
+</li>
+<li>
+<p>適用於 interactive system</p>
+</li>
+<li>
+<p><strong>可達到 Multitasking 之效</strong></p>
+</li>
+<li>
+<p>圖：<img src="time_sharing.png" alt=""></p>
+</li>
+<li>
+<p>Note:</p>
+<ol>
+<li>interactive (交談式) =&gt; Online (線上作業), ex: game, FB, ptt<br>
+注重：公平性, 反應時間, 互動性</li>
+<li></li>
+</ol>
+<p>單工：一次只處理一個工作, 結束才換下一個, ex: 早期的 Dos 系統<br>
+多工(Multitasking)：一次可同時(以並行或平行的方式)執行多個工作, 利用 Time-sharing 達成<br>
+ex: Unix</p>
+<ol start="3">
+<li>Batched System (批次系統) =&gt; offline<br>
+將同質性的作業收集, 於一特定時間在統一處理, ex: 會計帳</li>
+</ol>
+</li>
+<li>
+<p><img src="perfermance_compare.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Multiprocessor (多處理系統) =&gt; 平行系統</strong><br>
+Def: 指一電腦內有多顆 processor, 如此可同時執行多個工作(以平行方式), <strong>但不一定能減少每個 process 使用 CPU 的時間</strong><br>
+特色：</p>
+<ol>
+<li>各 processor 受相同的 O.S., Clock 控制, 並共用 Memory space</li>
+<li>processor 之間溝通 =&gt; <strong>&quot;Shared Memory&quot;</strong></li>
+<li>為 tightly coupled (緊密, 耦合)的架構 =&gt; 一個掛, 全掛<br>
+<img src="multiprocessor.png" alt=""></li>
+</ol>
+</li>
+<li>
+<p><strong>Distributed System (分散式系統)</strong></p>
+<ul>
+<li>
+<p>特色：</p>
+<ol>
+<li>各 process 有專屬的 O.S., Clock, Memory 等資源</li>
+<li>Process 間的溝通採 <strong>&quot;Message passing&quot;</strong></li>
+<li>為 loosely coupled (鬆散, 耦合) system</li>
+</ol>
+</li>
+<li>
+<p>Why Distributed System?</p>
+<ol>
+<li>Speed up</li>
+<li>Resource sharing</li>
+<li>Communication</li>
+<li>Fault tolerant (容錯性) =&gt; reliability 高 (可靠性)</li>
+</ol>
+</li>
+<li>
+<h3>Network Computing</h3>
+<h4>Clustered System (叢集式)</h4>
+<p>Def:</p>
+<ul>
+<li>類似平行系統, 可同時執行多個工作</li>
+<li>But 一般採用 &quot;LAN 將多台 Host 連結&quot;, 形成一大型的服務網路</li>
+<li>圖：<img src="clustered.png" alt=""></li>
+<li>可達：
+<ol>
+<li>Load Balance (負載平衡)</li>
+<li>High Availability (HA 高可用性)</li>
+<li>Fault Tolerant</li>
+</ol>
+</li>
+</ul>
+<h4>Grid Computing (網格計算)</h4>
+<p>Def:</p>
+<ul>
+<li>利用世界各地分享的資源來共同完成一大型任務</li>
+<li>利用將問題切成多個 subproblem, 並分散給各地資源處理, 以求快速求解<br>
+缺點：難以普及 (需專家才有辦法對巨大問題分割)<br>
+圖：<img src="grid_computing.png" alt=""></li>
+</ul>
+<h4>Cloud</h4>
+<p>Def:</p>
+<ul>
+<li>data &amp; service in the cloud</li>
+<li>accessiable with any device</li>
+<li>ingeneral device will use browser to connect into cloud<br>
+特色：</li>
+<li>user &quot;just use&quot;, 不需做</li>
+<li>系統具強大的可擴充性 (scalability)<br>
+Cloud 衍生的服務</li>
+<li>圖：<img src="cloud.png" alt=""></li>
+</ul>
+<h4>Compare</h4>
+<table>
+<thead>
+<tr>
+<th>Des</th>
+<th>Grid</th>
+<th>Cloud</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>領導</td>
+<td>學術界</td>
+<td>Service provider</td>
+</tr>
+<tr>
+<td>標準</td>
+<td>有</td>
+<td>無</td>
+</tr>
+<tr>
+<td>特性</td>
+<td>一次處理巨大的量</td>
+<td>一次量少, 頻率極高</td>
+</tr>
+<tr>
+<td>Open source</td>
+<td>完全</td>
+<td>部分開放</td>
+</tr>
+</tbody>
+</table>
+<p>圖：<img src="compare.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Real-time System (即時系統)</strong><br>
+Def: 對工作的即時性要求極高, 若不能在指定時間內完成, 就算失敗<br>
+指定時間內 =&gt; <strong>為精準掌控時程, 一般較少採用輔助儲存裝置(ex: disk, tape)</strong> No disk, no virtual memory, tape 為 secondary storage<br>
+可分為：</p>
+<ol>
+<li>Hard R.T. =&gt; 即為上述</li>
+<li>Soft R.T. =&gt; 需滿足
+<ul>
+<li>具 priority scheduling</li>
+<li>具 preemptive 之特色</li>
+<li>降低 kernel 的處理時間</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>Handheld System (手持系統)</strong><br>
+Def: 於手持裝置上執行之系統, ex: smart phone, PDA, Pad<br>
+限制：1. Speed 較慢 2. Memory space 較小 3. Monitor 較小</p>
+</li>
+<li>
+<p><strong>Embedded System (嵌入式系統)</strong><br>
+Def: 指開發出的系統, 並非在一般 PC 執行, 而是嵌入 3C 家電等裝置中, 使其具智慧化的效果</p>
+</li>
+</ol>
+<hr>
+<h2>作業系統演進</h2>
+<ul>
+<li>
+<p>Offline (離線作業)<br>
+Def: 指藉由系統的離峰時間, 將 data 先行載入到高速 device, 使 CPU 之後可從此取得 data<br>
+=&gt; CPU utilization(使用率) 上升, CPU idle time 下降, 系統 performance 上升</p>
+</li>
+<li>
+<p>Spooling (電腦週邊同步連線作業)<br>
+Def: 利用高速 device (disk), 存方低速 device (tape) 的 data 使 CPU idle time 下降, 且於 Spooling 中 <strong>&quot;可共用 I/O device 之資源&quot;</strong><br>
+圖：<img src="spooling.png" alt=""></p>
+</li>
+<li>
+<p>Buffering (緩衝)<br>
+Def:</p>
+<ul>
+<li>用以解決速度不對等的問題</li>
+<li>一般會在高速 device 切一暫存空間當低速 device 的緩衝區, <strong>如此 CPU 可直接面對高速 device 即可</strong></li>
+</ul>
+</li>
+<li>
+<p>Spooling vs Buffering<br>
+Spooling 自身的 CPU 計算可和其他工作的 I/O 運作重疊執行<br>
+Buffering 自身的 CPU 計算只可和自身的的 I/O 運作執行<br>
+Note: 實際上 buffering 中 上圖 (2), (3) overlay execution 不易達成, 所以 job 可分成 I/O bound job, CPU bound job</p>
+</li>
+<li>
+<p>Compare</p>
+<table>
+<thead>
+<tr>
+<th>I/O Bound</th>
+<th>CPU Bound</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>需大量運作, 少量的 CPU 計算</td>
+<td>相反</td>
+</tr>
+<tr>
+<td>Speed 受限於 I/O device 的效能</td>
+<td>Speed 受限於 CPU 的效能</td>
+</tr>
+<tr>
+<td>Input: CPU 常面對空的 Buffer</td>
+<td>Input: I/O device 常面對滿的 Buffer</td>
+</tr>
+<tr>
+<td>Output: CPU 常面對滿的 Buffer</td>
+<td>Output: I/O device 常面對空的 Buffer</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Caching (快取)<br>
+Def: 將常用的 data 複製一份到高速 device 中以提高 CPU 存取的 I/O 效能, <strong>可以加速 CPU 資料存取時間</strong><br>
+圖：<img src="caching.png" alt=""></p>
+</li>
+<li>
+<p>回寫策略</p>
+<table>
+<thead>
+<tr>
+<th>Write-through</th>
+<th>Write back</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cache 一更動, 馬上寫回</td>
+<td>當 cache 的 data 須搬離 cache 之後再將之寫回</td>
+</tr>
+<tr>
+<td>優點：Cache, memory 之間的 data 保持一致性</td>
+<td>優點：Speed 較快</td>
+</tr>
+<tr>
+<td>缺點：Speed 不佳</td>
+<td>缺點：Cache, memory 的 data 可能不一致</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3>Summary</h3>
+<p><img src="memory_hierarchy.png" alt=""></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">3.1 作業系統</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">O.S. 作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">作業系統型態</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.2.1.</span> <span class="toc-text">Network Computing</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">Clustered System (叢集式)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">Grid Computing (網格計算)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">Cloud</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">Compare</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">作業系統演進</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.1.</span> <span class="toc-text">Summary</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/&text=Chapter3-作業系統-作業系統" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/&title=Chapter3-作業系統-作業系統" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/&is_video=false&description=Chapter3-作業系統-作業系統" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter3-作業系統-作業系統&body=Check out this article: https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/&title=Chapter3-作業系統-作業系統" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/&title=Chapter3-作業系統-作業系統" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/&title=Chapter3-作業系統-作業系統" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/&title=Chapter3-作業系統-作業系統" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/&name=Chapter3-作業系統-作業系統&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/&t=Chapter3-作業系統-作業系統" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

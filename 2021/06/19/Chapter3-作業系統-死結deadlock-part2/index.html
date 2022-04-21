@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="3.5 死結 Deadlock 目錄  四要件 Deadlock 處理方式 Deadlock Free   deadlock 處理  Preventation 預防：欲使 deadlock 不會發生 作法：大破四要件之一 Avoidance 避免：利用避免演算法確保資源分配不會產生 deadlock 作法：Banker&#39;s algo. check 安全否 Detection &amp; Recov">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter3-作業系統-死結deadlock-part2">
+<meta property="og:url" content="https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="3.5 死結 Deadlock 目錄  四要件 Deadlock 處理方式 Deadlock Free   deadlock 處理  Preventation 預防：欲使 deadlock 不會發生 作法：大破四要件之一 Avoidance 避免：利用避免演算法確保資源分配不會產生 deadlock 作法：Banker&#39;s algo. check 安全否 Detection &amp; Recov">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/%E6%89%93%E7%A0%B4Hold&amp;wait.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/%E6%89%93%E7%A0%B4circular1.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/%E6%89%93%E7%A0%B4circular2.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/%E5%8F%8D%E8%AD%89.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/deadlockAvoidance.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/V.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/E.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/resourceAllocate.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/PiToRj.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/%E5%96%AE%E4%B8%80%E9%87%8Fex.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/%E6%9A%AB%E6%99%82%E6%80%A7%E9%85%8D%E7%BD%AE1.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/%E6%9A%AB%E6%99%82%E6%80%A7%E9%85%8D%E7%BD%AE2.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/desc.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/deadlockDetection.png">
+<meta property="article:published_time" content="2021-06-19T03:16:05.000Z">
+<meta property="article:modified_time" content="2021-06-19T08:53:02.834Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="O.S">
+<meta property="article:tag" content="Deadlock">
+<meta property="article:tag" content="Deadlock free">
+<meta property="article:tag" content="Starvation">
+<meta property="article:tag" content="Preventation">
+<meta property="article:tag" content="Avoidance">
+<meta property="article:tag" content="Detection">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/%E6%89%93%E7%A0%B4Hold&amp;wait.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Chapter3-作業系統-死結deadlock-part2</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2021/06/20/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A8%8B%E5%BA%8F%E9%96%93%E7%9A%84%E6%BA%9D%E9%80%9A-part1/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2021/06/18/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part1/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/&text=Chapter3-作業系統-死結deadlock-part2" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/&title=Chapter3-作業系統-死結deadlock-part2" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/&is_video=false&description=Chapter3-作業系統-死結deadlock-part2" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter3-作業系統-死結deadlock-part2&body=Check out this article: https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/&title=Chapter3-作業系統-死結deadlock-part2" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/&title=Chapter3-作業系統-死結deadlock-part2" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/&title=Chapter3-作業系統-死結deadlock-part2" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/&title=Chapter3-作業系統-死結deadlock-part2" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/&name=Chapter3-作業系統-死結deadlock-part2&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/&t=Chapter3-作業系統-死結deadlock-part2" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">3.5 死結 Deadlock</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">目錄</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">deadlock 處理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.2.1.</span> <span class="toc-text">Deadlock Preventation &#x3D;&gt; 打破四要件之一 (打破其中一個即可)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.2.2.</span> <span class="toc-text">Deadlock Avoidance</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">Avoidance algo.</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.2.3.</span> <span class="toc-text">Deadlock detection algo</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">Deadlock detection &amp; recovery (資源皆單一量 &#x3D;&gt; 採&quot;Wait-for&quot; graph 等候圖)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">Deadlock recovery</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">deadlock free</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Chapter3-作業系統-死結deadlock-part2
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-06-19T03:16:05.000Z" itemprop="datePublished">2021-06-19</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/">計算機概論</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Avoidance/" rel="tag">Avoidance</a>, <a class="tag-link" href="/tags/Deadlock/" rel="tag">Deadlock</a>, <a class="tag-link" href="/tags/Deadlock-free/" rel="tag">Deadlock free</a>, <a class="tag-link" href="/tags/Detection/" rel="tag">Detection</a>, <a class="tag-link" href="/tags/O-S/" rel="tag">O.S</a>, <a class="tag-link" href="/tags/Preventation/" rel="tag">Preventation</a>, <a class="tag-link" href="/tags/Starvation/" rel="tag">Starvation</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1>3.5 死結 Deadlock</h1>
+<h2>目錄</h2>
+<ul>
+<li>四要件</li>
+<li><strong>Deadlock 處理方式</strong></li>
+<li><strong>Deadlock Free</strong></li>
+</ul>
+<hr>
+<h2>deadlock 處理</h2>
+<ol>
+<li>Preventation 預防：欲使 deadlock 不會發生<br>
+作法：大破四要件之一</li>
+<li>Avoidance 避免：利用避免演算法確保資源分配不會產生 deadlock<br>
+作法：Banker's algo. check 安全否</li>
+<li>Detection &amp; Recovery 偵測, 若有恢復</li>
+</ol>
+<h3>Deadlock Preventation =&gt; 打破四要件之一 (打破其中一個即可)</h3>
+<ol>
+<li><strong>打破 &quot;互斥&quot;</strong></li>
+</ol>
+<ul>
+<li><strong>難達成, 因為此為資源先天的限制</strong>, ex: 印表機</li>
+</ul>
+<ol start="2">
+<li><strong>打破 &quot;Hold and Wait&quot;</strong> (要就全拿, 不要就都不拿)</li>
+</ol>
+<ul>
+<li>作法 1: process 若無法取得, 所需的所有資源, 則需空手</li>
+<li>作法 2: 提出申請時, 需將手中持有的資源 release</li>
+<li>圖：<img src="%E6%89%93%E7%A0%B4Hold&amp;wait.png" alt=""></li>
+</ul>
+<ol start="3">
+<li><strong>打破 &quot;No preemptive&quot; =&gt; 將之改為 preemptive</strong></li>
+</ol>
+<ul>
+<li>不建議, 因為資源先天限制, ex: 印表機, 印了 3 行被搶奪</li>
+</ul>
+<ol start="4">
+<li><strong>打破 Circular Waiting</strong></li>
+</ol>
+<ul>
+<li>作法 1:
+<ul>
+<li>給予各 resource 一獨立編號</li>
+<li>資源申請須以編號遞增的方式提出</li>
+<li>圖：<img src="%E6%89%93%E7%A0%B4circular1.png" alt="">
+<img src="%E6%89%93%E7%A0%B4circular2.png" alt=""></li>
+</ul>
+</li>
+<li>反證：令仍然會有 Circular waiting, 假設滿足 2 條件下, 則存在如下的 waiting cycle:
+<img src="%E5%8F%8D%E8%AD%89.png" alt=""></li>
+</ul>
+<h3>Deadlock Avoidance</h3>
+<ul>
+<li>圖：<img src="deadlockAvoidance.png" alt=""></li>
+<li>Note:
+<ul>
+<li>Safe state (安全狀態):<br>
+指可以找到 &gt;= 1 組執行順序, 確保所有的 process 皆可執行完畢<br>
+Ex: 5 process (P0 ~ P4) =&gt; <code>P2-&gt;P4-&gt;P1-&gt;P0-&gt;P3</code></li>
+<li>Unsafe state:<br>
+指找不到上述一組執行的順序謂之<br>
+Ex: <code>P2-&gt;P4-&gt;.....?</code></li>
+</ul>
+</li>
+</ul>
+<h4>Avoidance algo.</h4>
+<ul>
+<li>
+<p>資源皆單一量 =&gt; 修改資源分配圖</p>
+</li>
+<li>
+<p>資源非單一量 =&gt; Banker's algo. <code>m * n^2</code>, O(n^2) 效率較佳</p>
+<ul>
+<li>m = 資源種類數 (印表機, disk, 螢幕) , n = process 數量</li>
+</ul>
+</li>
+<li>
+<p>Note: Resource Allocation Graph 資源分配圖<br>
+Def: 一圖形 G = &lt;V, E&gt;, 其中 V 為頂點, E 為邊</p>
+<ul>
+<li>V 分為：<img src="V.png" alt=""></li>
+<li>E 分為：<img src="E.png" alt=""></li>
+<li>在 Resource Allocation Graph 中的性質
+<ol>
+<li>當資源皆為單一量 -&gt; 有 cycle, 有 deadlock</li>
+<li>當資源非單一量 -&gt; 有 cycle, &quot;不見得有 deadlock&quot;
+<ul>
+<li>圖：<img src="resourceAllocate.png" alt=""></li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>資源皆為單一量的 avoidance algo.<br>
+於 Resource Allocation Graph 中多加入一種邊 &quot;chian edge&quot; 鏈結邊, Pi...Rj =&gt; 指 Pi 在未來會對 Rj 提出申請
+<ul>
+<li>判別： <strong>Pi 正式對 Rj 提申請</strong>
+<ol>
+<li>先作暫時性配置<br>
+<img src="PiToRj.png" alt=""></li>
+<li>Check 是否有 cycle
+<ul>
+<li>有 -&gt; Unsafe</li>
+<li>無 -&gt; Safe</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>Ex: 若 P2 對 R2 正式提出申請, 是否可以？<br>
+圖：<img src="%E5%96%AE%E4%B8%80%E9%87%8Fex.png" alt=""><br>
+Sol: 有 cycle, 故 unsafe state, 所以申請駁回 (若 P1 則可以)</li>
+</ul>
+</li>
+</ol>
+<ol start="2">
+<li>Banker's algo. 題型<br>
+Ex: 系統有 5 個 process {P0...P4}, 三種 resource {A, B, C}, A = 10, B = 5, C = 7, 令時間 T0 時如下圖, 問若 P1 提出 Request1 = (1, 0, 2), 是否可配置？<br>
+圖：<img src="%E6%9A%AB%E6%99%82%E6%80%A7%E9%85%8D%E7%BD%AE1.png" alt=""><br>
+Sol:
+<ul>
+<li>
+<p>Step 1: Need = Max - Allocation (Need: 指 process i 最多尚需多少資源才能完成工作)</p>
+</li>
+<li>
+<p>Step 2:<br>
+Request i (1, 0, 2) &lt;= Need i (1, 2, 2)<br>
+Request i (1, 0, 2) &lt;= Available i (3, 3, 2)</p>
+</li>
+<li>
+<p>Step 3: 暫時性配置<br>
+圖：<img src="%E6%9A%AB%E6%99%82%E6%80%A7%E9%85%8D%E7%BD%AE2.png" alt=""></p>
+</li>
+<li>
+<p>找執行順序：P1 -&gt; P3 -&gt; P4 -&gt; P0 -&gt; P2,<br>
+因為找到執行的順序, 故為 safe state =&gt; <strong>故申請核準</strong></p>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3>Deadlock detection algo</h3>
+<ul>
+<li>資源皆單一量：<strong>修改資源分配圖 (&quot;Wait-for&quot; graph) =&gt; O(n^2)</strong></li>
+<li>資源非單一量：<strong>deadlock detection algo. =&gt; O(m * n^2)</strong></li>
+</ul>
+<h4>Deadlock detection &amp; recovery (資源皆單一量 =&gt; 採&quot;Wait-for&quot; graph 等候圖)</h4>
+<ul>
+<li>Def: 定期偵測系統是否有 deadlock, 若有則須設法做 deadlock recovery 的動作</li>
+<li>說明: 將 Resource Allocation Graph 中的<br>
+<img src="desc.png" alt=""></li>
+<li>Check: <code>有 cycle =&gt; 有 deadlock</code>, <code>No cycle =&gt; No deadlock</code></li>
+<li>Ex:
+<img src="deadlockDetection.png" alt=""></li>
+</ul>
+<h4>Deadlock recovery</h4>
+<ul>
+<li>由 user 自己處理</li>
+<li>由系統處理
+<ul>
+<li>全砍：
+<ul>
+<li>優點：簡單</li>
+<li>缺點：成本高</li>
+</ul>
+</li>
+<li>一次砍一個：
+<ul>
+<li>優點：成本低</li>
+<li>缺點：複雜</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>deadlock free</h2>
+<p>Def: 在此條件下, 系統沒有 deadlock 問題, 故不需對其做處理, <strong>欲滿足 deadlock free</strong>, 則：</p>
+<ol>
+<li>1 &lt;= Max i &lt;= m (資源數量)</li>
+<li>總和(i=1至n) Max i &lt; m + n (n 為 process 數), <strong>process i 完成工作最多所需的資源數</strong></li>
+</ol>
+<p>Ex:</p>
+<ul>
+<li>6 台印表機 each process 完成工作最多需 ? 台 printer?</li>
+<li>問系統中在 deadlock free 下, 最多可有多少 process ?<br>
+Sol:</li>
+</ul>
+<ol>
+<li>1 &lt;= Max i &lt;= m =&gt; 1 &lt; <strong>2</strong> &lt;= 6</li>
+<li>總和(i=1至n) Max i &lt; m + n =&gt; 2n &lt; 6 + n, 所以 n &lt; 6, 故 n 最大為 5</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">3.5 死結 Deadlock</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">目錄</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">deadlock 處理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.2.1.</span> <span class="toc-text">Deadlock Preventation &#x3D;&gt; 打破四要件之一 (打破其中一個即可)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.2.2.</span> <span class="toc-text">Deadlock Avoidance</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">Avoidance algo.</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.2.3.</span> <span class="toc-text">Deadlock detection algo</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">Deadlock detection &amp; recovery (資源皆單一量 &#x3D;&gt; 採&quot;Wait-for&quot; graph 等候圖)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">Deadlock recovery</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">deadlock free</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/&text=Chapter3-作業系統-死結deadlock-part2" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/&title=Chapter3-作業系統-死結deadlock-part2" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/&is_video=false&description=Chapter3-作業系統-死結deadlock-part2" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter3-作業系統-死結deadlock-part2&body=Check out this article: https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/&title=Chapter3-作業系統-死結deadlock-part2" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/&title=Chapter3-作業系統-死結deadlock-part2" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/&title=Chapter3-作業系統-死結deadlock-part2" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/&title=Chapter3-作業系統-死結deadlock-part2" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/&name=Chapter3-作業系統-死結deadlock-part2&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/&t=Chapter3-作業系統-死結deadlock-part2" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

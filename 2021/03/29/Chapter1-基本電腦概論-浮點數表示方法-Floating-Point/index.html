@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="1.3 補數  對應方式  超碼 (Excess code)  excess - α code &#x3D;&gt; 代表超 α 碼 一般若有 N bit 則超 2^N-1 碼, 即 excess - 2^N-1 code ex: 5 bits 一般為 excess - 2^5-1 code 令： x: 原始值, α: 超碼, c: 超碼後內容, 則: c &#x3D; x + α  ex1: (1011.11)2,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter1-基本電腦概論-浮點數表示方法(Floating - Point)">
+<meta property="og:url" content="https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="1.3 補數  對應方式  超碼 (Excess code)  excess - α code &#x3D;&gt; 代表超 α 碼 一般若有 N bit 則超 2^N-1 碼, 即 excess - 2^N-1 code ex: 5 bits 一般為 excess - 2^5-1 code 令： x: 原始值, α: 超碼, c: 超碼後內容, 則: c &#x3D; x + α  ex1: (1011.11)2,">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/%E5%B0%8D%E6%87%89%E6%96%B9%E5%BC%8F.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/%E5%9C%96%E7%A4%BA.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/Single_precision.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/Double_precision.png">
+<meta property="article:published_time" content="2021-03-29T15:51:27.000Z">
+<meta property="article:modified_time" content="2021-03-31T17:14:59.361Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="浮點數">
+<meta property="article:tag" content="超碼">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/%E5%B0%8D%E6%87%89%E6%96%B9%E5%BC%8F.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Chapter1-基本電腦概論-浮點數表示方法(Floating - Point)</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2021/02/21/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E8%A3%9C%E6%95%B8-Complement/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/&text=Chapter1-基本電腦概論-浮點數表示方法(Floating - Point)" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/&title=Chapter1-基本電腦概論-浮點數表示方法(Floating - Point)" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/&is_video=false&description=Chapter1-基本電腦概論-浮點數表示方法(Floating - Point)" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter1-基本電腦概論-浮點數表示方法(Floating - Point)&body=Check out this article: https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/&title=Chapter1-基本電腦概論-浮點數表示方法(Floating - Point)" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/&title=Chapter1-基本電腦概論-浮點數表示方法(Floating - Point)" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/&title=Chapter1-基本電腦概論-浮點數表示方法(Floating - Point)" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/&title=Chapter1-基本電腦概論-浮點數表示方法(Floating - Point)" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/&name=Chapter1-基本電腦概論-浮點數表示方法(Floating - Point)&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/&t=Chapter1-基本電腦概論-浮點數表示方法(Floating - Point)" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">1.3 補數</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">對應方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">超碼 (Excess code)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">Floating-point 的邊界值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">IEEE754 浮點數表示法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">特殊值</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Chapter1-基本電腦概論-浮點數表示方法(Floating - Point)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-03-29T15:51:27.000Z" itemprop="datePublished">2021-03-29</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/">計算機概論</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/%E6%B5%AE%E9%BB%9E%E6%95%B8/" rel="tag">浮點數</a>, <a class="tag-link" href="/tags/%E8%B6%85%E7%A2%BC/" rel="tag">超碼</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1>1.3 補數</h1>
+<hr>
+<h2>對應方式</h2>
+<p><img src="%E5%B0%8D%E6%87%89%E6%96%B9%E5%BC%8F.png" alt=""></p>
+<h2>超碼 (Excess code)</h2>
+<ul>
+<li>excess - α code =&gt; 代表超 α 碼</li>
+<li>一般若有 N bit 則超 2^N-1 碼, 即 excess - 2^N-1 code</li>
+<li>ex: 5 bits 一般為 excess - 2^5-1 code</li>
+<li>令： x: 原始值, α: 超碼, c: 超碼後內容, 則: <strong>c = x + α</strong></li>
+</ul>
+<p><strong>ex1:</strong> (1011.11)2, 若格式 S(1) C(5) M(10), 問以<br>
+(1) excess-16 表示<br>
+(2) 以 2's complement 表示 the result?<br>
+<strong>Sol:</strong><br>
+正規化 = +(0.101111)2 * 2^4<br>
+(1) excess-16</p>
+<table>
+<thead>
+<tr>
+<th>S</th>
+<th>C</th>
+<th>M</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>10100</td>
+<td>1011110000</td>
+</tr>
+</tbody>
+</table>
+<p><code>α = 16</code><br>
+<code>c = x + α = 4 + 16 = 20</code></p>
+<p>(2) 2's complement<br>
+<code>+4 = 00100</code></p>
+<table>
+<thead>
+<tr>
+<th>S</th>
+<th>C</th>
+<th>M</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>00100</td>
+<td>1011110000</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ex2:</strong> 5 bits, 採 excess-16, 則<br>
+(1)x = -12, c = ?<br>
+(2) x = 3, c = ?<br>
+(3) c = 01001, x = ?<br>
+(4) c = 11011, x = ?<br>
+(5) x 可表示的 range?<br>
+<strong>Sol:</strong></p>
+<ol>
+<li>c = x + α = -12 + 16 = 4 = (00100)excess-16</li>
+<li>c = x + α = 3 + 16 = 19 = (10011)excess-16</li>
+<li>c = (01001)10 = 9, x = c - α =&gt; 9-16 = -7</li>
+<li>c = (11011) = 27, x = 27 - 16 = 11</li>
+<li>
+<table>
+<thead>
+<tr>
+<th>計算組合</th>
+<th>..</th>
+<th>..</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c</td>
+<td>最小(0)</td>
+<td>最大(11111)</td>
+</tr>
+<tr>
+<td>-α</td>
+<td>-16</td>
+<td>16</td>
+</tr>
+<tr>
+<td>x:</td>
+<td>-16 ~ + 15 =&gt; 同 2's 補數表示法</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<p><strong>ex3:</strong> (0.00001101)2, 若格式 S(1) C(5) M(10), 問以<br>
+(1) excess-16表示<br>
+(2) 以 2's complement 表示的 result?<br>
+<strong>Sol:</strong><br>
+正規化 = +(0.1101)2 x 2^-4<br>
+(1) excess-16<br>
+<code>c = x + α</code><br>
+<code>-4 + 16 = 12</code></p>
+<table>
+<thead>
+<tr>
+<th>S</th>
+<th>C</th>
+<th>M</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>01100</td>
+<td>1101000000</td>
+</tr>
+</tbody>
+</table>
+<p>(2) 2's complement
+<code>+4 = 00100 =&gt; -4 = 11100</code></p>
+<table>
+<thead>
+<tr>
+<th>S</th>
+<th>C</th>
+<th>M</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>11100</td>
+<td>1101000000</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ex4:</strong>[反向題] - floating-point 格式 S(1) C(5) M(10), 內容為： 1110011110100100, 若指數分別以<br>
+(1) excess-16<br>
+(2) 2's complement, 求原始值？<br>
+<strong>Sol:</strong><br>
+(1)</p>
+<table>
+<thead>
+<tr>
+<th>S</th>
+<th>C</th>
+<th>M</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>11001</td>
+<td>1110100100</td>
+</tr>
+</tbody>
+</table>
+<p>=&gt; -(0.1110100100)2 x 2^9<br>
+<code>x = c - α =&gt; 25 - 16 = 9</code></p>
+<p>(2)</p>
+<table>
+<thead>
+<tr>
+<th>S</th>
+<th>C</th>
+<th>M</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>11001</td>
+<td>1110100100</td>
+</tr>
+</tbody>
+</table>
+<p>=&gt; -(0.1110100100)2 x 2^-7<br>
+2's complement 表示法 1 1001 =&gt; -0111 = -7</p>
+<h2>Floating-point 的邊界值</h2>
+<ul>
+<li>最大正數, 最小正數, 最大負數, 最小負數</li>
+</ul>
+<ol>
+<li>
+<p>圖示：
+<img src="%E5%9C%96%E7%A4%BA.png" alt=""></p>
+</li>
+<li>
+<p>註明：<br>
+|1| = |4|<br>
+|2| = |3|<br>
+=&gt; 只差正負數</p>
+</li>
+<li>
+<p>ex: floating-point 格式： S(1) C(5) M(10), C 用 excess-code 表示, 則：<br>
+(1) 最大值：(正數, 指數最大, 尾數最大)<br>
+所以 Max = +(0.1111111111)2 x 2^15 = +(1-2^-10) x 2^15 = 2^15-2^5<br>
+(2) 最小正數(正數, 指數最小, 尾數最小)<br>
+所以 最小正數 = +(0.1) x 2^-16 = +2^-17<br>
+(3) 最大負數(負數, 指數最小, 尾數最小)<br>
+所以 最大負數 = -(0.1) x 2^-16 = -2^-17<br>
+(4) 最小值<br>
+所以 Min = -(0.1111111111)2 x 2^15 = -(1-2^-10) x 2^15</p>
+</li>
+<li>
+<table>
+<thead>
+<tr>
+<th>Note:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(0.1.......1)2 = 1 - 2^-N</td>
+</tr>
+<tr>
+<td>(0.0......01)2 = 2^-N</td>
+</tr>
+<tr>
+<td>(100.......0)2 = 2^N</td>
+</tr>
+<tr>
+<td>(1.........1)2 = 2^N - 1</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<h2>IEEE754 浮點數表示法</h2>
+<p>分為：</p>
+<ul>
+<li>單精確度 Single precision =&gt; 32 bits<br>
+=&gt; S(1) C(E)(8) M(F)(23)<br>
+=&gt; 正規化表示方式：<br>
+<img src="Single_precision.png" alt=""></li>
+<li>倍精確度 Double precision =&gt; 64 bits<br>
+=&gt; S(1) C(11) M(52)<br>
+=&gt; 正規化表示方式：<br>
+<img src="Double_precision.png" alt=""></li>
+</ul>
+<h2>特殊值</h2>
+<ol>
+<li>E = 255, F = 0 =&gt; 代表正無限大<br>
+255 代表全為 1 時, 保留給系統不可使用</li>
+<li>E = 0, F = 0 =&gt; 代表正負0<br>
+0 代表全為 0 時, 保留給系統不可使用</li>
+<li>E = 255, F != 0 =&gt; 代表 NaN(Not a number)</li>
+<li>E = 0, F != 0 =&gt; 代表無法正規化</li>
+</ol>
+<p><strong>ex:</strong> (98.625)10, 以 IEEE754 單精確表示之結果 = ?<br>
+<strong>Sol:</strong><br>
+<code>c = x + α = 6 + 127 = 133</code></p>
+<p>(98.625)10<br>
+= + (1100010.101)2<br>
+= +(1.100010101)2 x 2^6</p>
+<table>
+<thead>
+<tr>
+<th>S</th>
+<th>C</th>
+<th>M</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>10000101</td>
+<td>10001010100000000000000</td>
+</tr>
+</tbody>
+</table>
+<p>=&gt; (42C54000)16</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">1.3 補數</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">對應方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">超碼 (Excess code)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">Floating-point 的邊界值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">IEEE754 浮點數表示法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">特殊值</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/&text=Chapter1-基本電腦概論-浮點數表示方法(Floating - Point)" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/&title=Chapter1-基本電腦概論-浮點數表示方法(Floating - Point)" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/&is_video=false&description=Chapter1-基本電腦概論-浮點數表示方法(Floating - Point)" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter1-基本電腦概論-浮點數表示方法(Floating - Point)&body=Check out this article: https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/&title=Chapter1-基本電腦概論-浮點數表示方法(Floating - Point)" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/&title=Chapter1-基本電腦概論-浮點數表示方法(Floating - Point)" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/&title=Chapter1-基本電腦概論-浮點數表示方法(Floating - Point)" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/&title=Chapter1-基本電腦概論-浮點數表示方法(Floating - Point)" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/&name=Chapter1-基本電腦概論-浮點數表示方法(Floating - Point)&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/&t=Chapter1-基本電腦概論-浮點數表示方法(Floating - Point)" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

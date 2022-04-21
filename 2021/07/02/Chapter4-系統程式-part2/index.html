@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="4 系統程式 (System Program)  補充 - Linking 的種類  Static Linking (like MACRO) Dynamic Linking (like Subroutine)  Static Linking  指在 linking 時會將外部參考的函式皆搬到程式中, 成為程式的一部份, 故程式將較佔 space, 但後續執行不需去呼叫外部函式 巨集 &#x3D;&gt; 程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter4-系統程式-part2">
+<meta property="og:url" content="https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="4 系統程式 (System Program)  補充 - Linking 的種類  Static Linking (like MACRO) Dynamic Linking (like Subroutine)  Static Linking  指在 linking 時會將外部參考的函式皆搬到程式中, 成為程式的一部份, 故程式將較佔 space, 但後續執行不需去呼叫外部函式 巨集 &#x3D;&gt; 程">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/staticLinking.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/p-code.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/java-compiler.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/jvm.png">
+<meta property="article:published_time" content="2021-07-02T15:21:54.000Z">
+<meta property="article:modified_time" content="2021-07-05T09:27:00.563Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="System Program">
+<meta property="article:tag" content="Static Linking">
+<meta property="article:tag" content="Dynamic Linking">
+<meta property="article:tag" content="P-code Compiler">
+<meta property="article:tag" content="Java Compiler">
+<meta property="article:tag" content="JVM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/staticLinking.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Chapter4-系統程式-part2</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/&text=Chapter4-系統程式-part2" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/&title=Chapter4-系統程式-part2" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/&is_video=false&description=Chapter4-系統程式-part2" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter4-系統程式-part2&body=Check out this article: https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/&title=Chapter4-系統程式-part2" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/&title=Chapter4-系統程式-part2" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/&title=Chapter4-系統程式-part2" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/&title=Chapter4-系統程式-part2" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/&name=Chapter4-系統程式-part2&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/&t=Chapter4-系統程式-part2" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">4 系統程式 (System Program)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">補充 - Linking 的種類</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.1.</span> <span class="toc-text">Static Linking</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.2.</span> <span class="toc-text">Dynamic Linking</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.3.</span> <span class="toc-text">Compare</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">P-code compiler</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">Java-compiler</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">JVM - Java Virtual Machine</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Chapter4-系統程式-part2
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-07-02T15:21:54.000Z" itemprop="datePublished">2021-07-02</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/">計算機概論</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Dynamic-Linking/" rel="tag">Dynamic Linking</a>, <a class="tag-link" href="/tags/JVM/" rel="tag">JVM</a>, <a class="tag-link" href="/tags/Java-Compiler/" rel="tag">Java Compiler</a>, <a class="tag-link" href="/tags/P-code-Compiler/" rel="tag">P-code Compiler</a>, <a class="tag-link" href="/tags/Static-Linking/" rel="tag">Static Linking</a>, <a class="tag-link" href="/tags/System-Program/" rel="tag">System Program</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1>4 系統程式 (System Program)</h1>
+<hr>
+<h2>補充 - Linking 的種類</h2>
+<ul>
+<li>Static Linking (like MACRO)</li>
+<li>Dynamic Linking (like Subroutine)</li>
+</ul>
+<h3>Static Linking</h3>
+<ul>
+<li>指在 linking 時會將外部參考的函式皆搬到程式中, 成為程式的一部份, 故<strong>程式將較佔 space, 但後續執行不需去呼叫外部函式</strong></li>
+<li>巨集 =&gt; 程式碼被撐大</li>
+<li>Static Linking =&gt; 執行檔會被撐大</li>
+<li>圖：<img src="staticLinking.png" alt=""></li>
+</ul>
+<h3>Dynamic Linking</h3>
+<ul>
+<li>Linking 時, 只將外部參考和外部函式所在做繫結, 不將外部函式載入, 故執行時在動態呼叫之</li>
+<li>Ex: .dll =&gt; Dynamic Linking Library</li>
+</ul>
+<h3>Compare</h3>
+<table>
+<thead>
+<tr>
+<th>Static Linking</th>
+<th>Dynamic Linking</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>可執行檔較大</td>
+<td>較小</td>
+</tr>
+<tr>
+<td>不需外部呼叫 =&gt; 快</td>
+<td>需要 =&gt; 慢</td>
+</tr>
+<tr>
+<td>若外部程式改 =&gt; 需 relinking</td>
+<td>不需</td>
+</tr>
+<tr>
+<td>不受外在影響 =&gt; 較安全</td>
+<td>受影響 (駭客可以改, 由於動態呼叫, 因此會被影響) =&gt; 較不安全</td>
+</tr>
+</tbody>
+</table>
+<h2>P-code compiler</h2>
+<ul>
+<li>Def: 為 pesudo-machine 之 object code
+<ul>
+<li>類似中間碼</li>
+<li>與機器獨立</li>
+<li>高可攜性 =&gt; <strong>具跨平台 cross platform</strong></li>
+</ul>
+</li>
+<li>圖：<img src="p-code.png" alt=""></li>
+<li>優點：只要機器上有 P-code interpreter 即可執行 =&gt; 具可攜性</li>
+<li>缺點：P-code 使用 interpreter 執行, 所以執行速度較慢</li>
+<li>中間碼：類似目的碼, 由 0, 1 組成, 但和機器獨立</li>
+</ul>
+<h2>Java-compiler</h2>
+<p><img src="java-compiler.png" alt=""></p>
+<h2>JVM - Java Virtual Machine</h2>
+<p><img src="jvm.png" alt=""></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">4 系統程式 (System Program)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">補充 - Linking 的種類</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.1.</span> <span class="toc-text">Static Linking</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.2.</span> <span class="toc-text">Dynamic Linking</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.3.</span> <span class="toc-text">Compare</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">P-code compiler</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">Java-compiler</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">JVM - Java Virtual Machine</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/&text=Chapter4-系統程式-part2" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/&title=Chapter4-系統程式-part2" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/&is_video=false&description=Chapter4-系統程式-part2" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter4-系統程式-part2&body=Check out this article: https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/&title=Chapter4-系統程式-part2" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/&title=Chapter4-系統程式-part2" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/&title=Chapter4-系統程式-part2" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/&title=Chapter4-系統程式-part2" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/&name=Chapter4-系統程式-part2&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/&t=Chapter4-系統程式-part2" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

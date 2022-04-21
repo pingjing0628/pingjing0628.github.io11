@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Mockery &lt;!---more--&gt;  先建立一個服務  先於 app底下建立一個 Services資料夾  建立測試資料  於 Tests\Unit 底下建立一個 Services資料夾，在建立一個 ClientTest.php的檔案 建立一個 test_query()的function function 內建立連線且設定需送出與回傳的值 12345$guzzleClient-&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用 PHPUnit + Mockery 開發 API">
+<meta property="og:url" content="https://pingjing0628.github.io/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="Mockery &lt;!---more--&gt;  先建立一個服務  先於 app底下建立一個 Services資料夾  建立測試資料  於 Tests\Unit 底下建立一個 Services資料夾，在建立一個 ClientTest.php的檔案 建立一個 test_query()的function function 內建立連線且設定需送出與回傳的值 12345$guzzleClient-&amp;">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2019-11-03T15:21:47.000Z">
+<meta property="article:modified_time" content="2020-12-15T15:15:38.139Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="phpunit">
+<meta property="article:tag" content="mockery">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>利用 PHPUnit + Mockery 開發 API</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2019/11/11/What-is-Kubernetes/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2019/11/03/PHP-%E8%89%AF%E5%A5%BD%E7%BF%92%E6%85%A3-%E8%B3%87%E6%96%99%E5%BA%AB/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/&text=利用 PHPUnit + Mockery 開發 API" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/&title=利用 PHPUnit + Mockery 開發 API" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/&is_video=false&description=利用 PHPUnit + Mockery 開發 API" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=利用 PHPUnit + Mockery 開發 API&body=Check out this article: https://pingjing0628.github.io/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/&title=利用 PHPUnit + Mockery 開發 API" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/&title=利用 PHPUnit + Mockery 開發 API" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/&title=利用 PHPUnit + Mockery 開發 API" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/&title=利用 PHPUnit + Mockery 開發 API" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/&name=利用 PHPUnit + Mockery 開發 API&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/&t=利用 PHPUnit + Mockery 開發 API" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">Mockery</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">先建立一個服務</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">建立測試資料</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">回到服務資料夾內建立連線檔案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">想要紀錄呼叫api次數</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">加上環境檔的key，使用依賴注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">為何要使用測試</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        利用 PHPUnit + Mockery 開發 API
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-11-03T15:21:47.000Z" itemprop="datePublished">2019-11-03</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/PHP/">PHP</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/PHP/" rel="tag">PHP</a>, <a class="tag-link" href="/tags/mockery/" rel="tag">mockery</a>, <a class="tag-link" href="/tags/phpunit/" rel="tag">phpunit</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2>Mockery</h2>
+<p>&lt;!---more--&gt;</p>
+<hr>
+<h3>先建立一個服務</h3>
+<ul>
+<li>先於 <code>app</code>底下建立一個 <code>Services</code>資料夾</li>
+</ul>
+<h3>建立測試資料</h3>
+<ul>
+<li>於 <code>Tests\Unit</code> 底下建立一個 <code>Services</code>資料夾，在建立一個 <code>ClientTest.php</code>的檔案</li>
+<li>建立一個 <code>test_query()</code>的function</li>
+<li>function 內建立連線且設定需送出與回傳的值
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$guzzleClient-&gt;shouldReceive(<span class="string">'request'</span>)-&gt;andReturn(</span><br><span class="line">        <span class="keyword">new</span> Response(<span class="number">200</span>, [], file_get_contents(<span class="keyword">__DIR__</span>.<span class="string">'/result.txt'</span>))</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">$client = <span class="keyword">new</span> Client($guzzleClient, $log, $key);</span><br></pre></td></tr></table></figure></li>
+<li>確認建立連線後，檢視所需得到的資料格式，在建立 <code>ClientTest.php</code>的檔案同層建立 <code>result.txt</code>假資料</li>
+<li>而後於檔案上方引入，並使用
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> <span class="title">Mockery</span> <span class="title">as</span> <span class="title">m</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$guzzleClient = m::mock(GuzzleClient::class);</span><br></pre></td></tr></table></figure></li>
+<li>最後放入測試資料的格式驗證
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">$this</span>-&gt;assertArraySubset([</span><br><span class="line">    <span class="string">'price'</span> =&gt; <span class="number">9165.74788036</span>,</span><br><span class="line">    <span class="string">'volume_24h'</span> =&gt; <span class="number">15782991288.054</span>,</span><br><span class="line">    <span class="string">'percent_change_1h'</span> =&gt; <span class="number">-0.537992</span>,</span><br><span class="line">    <span class="string">'percent_change_24h'</span> =&gt; <span class="number">-1.19578</span>,</span><br><span class="line">    <span class="string">'percent_change_7d'</span> =&gt; <span class="number">16.4927</span>,</span><br><span class="line">    <span class="string">'market_cap'</span> =&gt; <span class="number">162835578819.6922</span>,</span><br><span class="line">    <span class="string">'last_updated'</span> =&gt; <span class="string">'2019-06-18T12:14:22.000Z'</span>,</span><br><span class="line">], $client-&gt;query(<span class="string">'btC'</span>));</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3>回到服務資料夾內建立連線檔案</h3>
+<ul>
+<li>建立連線的 <code>Client</code> 檔案，使用GuzzleHttp連線，並於建構子中依賴注入</li>
+<li>建立 <code>query()</code>透過key去發出 <code>request</code> ，並將取回的資料進行 <code>json_decode()</code>，於最後透過laravel collection的方法，filter 出符合的值
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(GuzzleClient $client)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;client = $client;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">query</span><span class="params">($symbol = <span class="string">'BTC'</span>)</span></span></span><br><span class="line"><span class="function">    </span></span><br><span class="line">    $response = $this-&gt;client-&gt;request('GET','https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest', [</span><br><span class="line">        <span class="string">'headers'</span> =&gt; [</span><br><span class="line">            <span class="string">'X-CMC_PRO_API_KEY'</span> =&gt; <span class="string">'xxxxxxx'</span>,</span><br><span class="line">        ],</span><br><span class="line">    ]);</span><br><span class="line"></span><br><span class="line">    $results = json_decode($response-&gt;getBody()-&gt;getContents(), <span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Arr::get(collect($results[<span class="string">'data'</span>])-&gt;filter(<span class="function"><span class="keyword">function</span> <span class="params">($item)</span> <span class="title">use</span> <span class="params">($symbol)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> $item[<span class="string">'symbol'</span>] === trim(strtoupper($symbol));</span><br><span class="line">    &#125;)-&gt;first(), <span class="string">'quote.USD'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3>想要紀錄呼叫api次數</h3>
+<ul>
+<li>
+<p>由於紀錄log是呼出去，因此需使用 <code>spy</code>去監測紀錄</p>
+</li>
+<li>
+<p>於服務資料夾下建立 <code>Log.php</code>檔案，並建立 <code>info()</code>function
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Services</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Log</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">info</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>在測試檔案中加上log , 也於連線方法上引入
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$log = m::spy(Log::class);</span><br><span class="line">$client = <span class="keyword">new</span> Client($guzzleClient, $log);</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>需在驗證連線上加上 <code>once()</code>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$guzzleClient-&gt;shouldReceive(<span class="string">'request'</span>)-&gt;andReturn(</span><br><span class="line">    <span class="keyword">new</span> Response(<span class="number">200</span>, [], file_get_contents(<span class="keyword">__DIR__</span>.<span class="string">'/result.txt'</span>))</span><br><span class="line">)-&gt;once();</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>於測試程式最後加上
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$log-&gt;shouldHaveReceived(<span class="string">'info'</span>)-&gt;with(<span class="string">'xxxxxxxx'</span>)-&gt;once();</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>最後需在此方法之上加入 <code>teardown()</code> function</p>
+</li>
+<li>
+<p>此意思是代表 在每個測試後執行，另外也可以只在整個測試類別執行一次的
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">tearDown</span><span class="params">()</span>:<span class="title">void</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">parent</span>::tearDown();</span><br><span class="line">    m::close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>最後在連線的建構子上加上
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(GuzzleClient $client, Log $log)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;client = $client;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;log = $log;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>query()加上
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">$this</span>-&gt;log-&gt;info(<span class="string">'xxxxxxxx'</span>);</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<h3>加上環境檔的key，使用依賴注入</h3>
+<ul>
+<li>
+<p>於 <code>Providers</code>資料夾內的 <code>AppServiceProvider</code>加上
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">register</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;app-&gt;singleton(Client::class, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Client(<span class="keyword">new</span> GuzzleClient, <span class="keyword">new</span> Log(), env(<span class="string">'CMC_API_KEY'</span>));</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>連線檔案的建構子加上key依賴注入
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(GuzzleClient $client, Log $log, $key = null)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;client = $client;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;log = $log;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;key = $key;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>query()內也更改key的引入
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">$this</span>-&gt;log-&gt;info(<span class="keyword">$this</span>-&gt;key);</span><br><span class="line"></span><br><span class="line">$response = <span class="keyword">$this</span>-&gt;client-&gt;request(<span class="string">'GET'</span>,<span class="string">'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'</span>, [</span><br><span class="line">    <span class="string">'headers'</span> =&gt; [</span><br><span class="line">        <span class="string">'X-CMC_PRO_API_KEY'</span> =&gt; <span class="keyword">$this</span>-&gt;key,</span><br><span class="line">    ],</span><br><span class="line">]);</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>測試檔案key的更改
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">test_query</span><span class="params">()</span> //<span class="title">this</span> <span class="title">test</span> <span class="title">failed</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $key = <span class="string">'xxx'</span>;</span><br><span class="line">    $guzzleClient = m::mock(GuzzleClient::class);</span><br><span class="line">    $guzzleClient-&gt;shouldReceive(<span class="string">'request'</span>)-&gt;andReturn(</span><br><span class="line">        <span class="keyword">new</span> Response(<span class="number">200</span>, [], file_get_contents(<span class="keyword">__DIR__</span>.<span class="string">'/result.txt'</span>))</span><br><span class="line">    )-&gt;once();</span><br><span class="line"></span><br><span class="line">    $log = m::spy(Log::class);</span><br><span class="line">    $client = <span class="keyword">new</span> Client($guzzleClient, $log, $key); </span><br><span class="line">    <span class="comment">// assertions</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">$this</span>-&gt;assertArraySubset([</span><br><span class="line">        <span class="string">'price'</span> =&gt; <span class="number">9165.74788036</span>,</span><br><span class="line">        <span class="string">'volume_24h'</span> =&gt; <span class="number">15782991288.054</span>,</span><br><span class="line">        <span class="string">'percent_change_1h'</span> =&gt; <span class="number">-0.537992</span>,</span><br><span class="line">        <span class="string">'percent_change_24h'</span> =&gt; <span class="number">-1.19578</span>,</span><br><span class="line">        <span class="string">'percent_change_7d'</span> =&gt; <span class="number">16.4927</span>,</span><br><span class="line">        <span class="string">'market_cap'</span> =&gt; <span class="number">162835578819.6922</span>,</span><br><span class="line">        <span class="string">'last_updated'</span> =&gt; <span class="string">'2019-06-18T12:14:22.000Z'</span>,</span><br><span class="line">    ], $client-&gt;query(<span class="string">'btC'</span>)); </span><br><span class="line"></span><br><span class="line">    $log-&gt;shouldHaveReceived(<span class="string">'info'</span>)-&gt;with($key)-&gt;once();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<h3>為何要使用測試</h3>
+<ul>
+<li>寫測試不是為了驗證結果，而是為了驗證過程</li>
+<li>要用什麼測試，假資料或是等等等，須自行摸索</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">Mockery</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">先建立一個服務</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">建立測試資料</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">回到服務資料夾內建立連線檔案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">想要紀錄呼叫api次數</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">加上環境檔的key，使用依賴注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">為何要使用測試</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/&text=利用 PHPUnit + Mockery 開發 API" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/&title=利用 PHPUnit + Mockery 開發 API" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/&is_video=false&description=利用 PHPUnit + Mockery 開發 API" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=利用 PHPUnit + Mockery 開發 API&body=Check out this article: https://pingjing0628.github.io/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/&title=利用 PHPUnit + Mockery 開發 API" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/&title=利用 PHPUnit + Mockery 開發 API" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/&title=利用 PHPUnit + Mockery 開發 API" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/&title=利用 PHPUnit + Mockery 開發 API" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/&name=利用 PHPUnit + Mockery 開發 API&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/&t=利用 PHPUnit + Mockery 開發 API" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

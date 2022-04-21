@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Slice Type &lt;!--more--&gt;  Slice 跟陣列使用起來很像，最大的不同是，陣列是值， Slice 是參考到一個陣列。  建立   要建立一個全新的 Slice有兩種方法，一個是使用 make函式： 123456789package mainimport &quot;fmt&quot;func main() &amp;#123;	slice :&#x3D; make([]int, 5)	fmt.Print">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GoLang-Slice Type">
+<meta property="og:url" content="https://pingjing0628.github.io/2019/12/01/GoLang-Slice-Type/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="Slice Type &lt;!--more--&gt;  Slice 跟陣列使用起來很像，最大的不同是，陣列是值， Slice 是參考到一個陣列。  建立   要建立一個全新的 Slice有兩種方法，一個是使用 make函式： 123456789package mainimport &quot;fmt&quot;func main() &amp;#123;	slice :&#x3D; make([]int, 5)	fmt.Print">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2019-12-01T15:50:23.000Z">
+<meta property="article:modified_time" content="2020-12-15T15:15:38.126Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="GoLang">
+<meta property="article:tag" content="Slice">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>GoLang-Slice Type</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2019/12/02/GoLang-Map-Type/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2019/12/01/GoLang-Array-Type/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2019/12/01/GoLang-Slice-Type/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2019/12/01/GoLang-Slice-Type/&text=GoLang-Slice Type" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2019/12/01/GoLang-Slice-Type/&title=GoLang-Slice Type" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2019/12/01/GoLang-Slice-Type/&is_video=false&description=GoLang-Slice Type" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=GoLang-Slice Type&body=Check out this article: https://pingjing0628.github.io/2019/12/01/GoLang-Slice-Type/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2019/12/01/GoLang-Slice-Type/&title=GoLang-Slice Type" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2019/12/01/GoLang-Slice-Type/&title=GoLang-Slice Type" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2019/12/01/GoLang-Slice-Type/&title=GoLang-Slice Type" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2019/12/01/GoLang-Slice-Type/&title=GoLang-Slice Type" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2019/12/01/GoLang-Slice-Type/&name=GoLang-Slice Type&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2019/12/01/GoLang-Slice-Type/&t=GoLang-Slice Type" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">Slice Type</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">2.</span> <span class="toc-text">&lt;!--more--&gt;</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.1.</span> <span class="toc-text">建立</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.2.</span> <span class="toc-text">操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.3.</span> <span class="toc-text">從陣列或 Slice 產生 Slice</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        GoLang-Slice Type
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-12-01T15:50:23.000Z" itemprop="datePublished">2019-12-01</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/GoLang/">GoLang</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/GoLang/" rel="tag">GoLang</a>, <a class="tag-link" href="/tags/Slice/" rel="tag">Slice</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2>Slice Type</h2>
+<h2>&lt;!--more--&gt;</h2>
+<ul>
+<li><code>Slice</code> 跟陣列使用起來很像，最大的不同是，陣列是值， <code>Slice</code> 是參考到一個陣列。</li>
+</ul>
+<h3>建立</h3>
+<ul>
+<li>
+<p>要建立一個全新的 <code>Slice</code>有兩種方法，一個是使用 <code>make</code>函式：
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	slice := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">	fmt.Println(slice)  <span class="comment">// [0 0 0 0 0]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>另一個方法是<strong>指定初值</strong>，雖然用法跟陣列很像，但形態不一樣就不能拿來一起比較。
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"reflect"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	slice := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Println(slice)  <span class="comment">// [1 2 3 4 5]</span></span><br><span class="line"></span><br><span class="line">	arr := [...]<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Println(reflect.TypeOf(slice))  <span class="comment">// []int</span></span><br><span class="line">	fmt.Println(reflect.TypeOf(arr))    <span class="comment">// [5]int</span></span><br><span class="line">	fmt.Println(arr == slice)           <span class="comment">// invalid operation: arr == slice (mismatched types [5]int and []int)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Slice 是參考到一個陣列
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	slice := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line">	ref := slice</span><br><span class="line"></span><br><span class="line">	fmt.Println(slice)  <span class="comment">// [1 2 3 4 5]</span></span><br><span class="line">	fmt.Println(ref)    <span class="comment">// [1 2 3 4 5]</span></span><br><span class="line"></span><br><span class="line">	slice[<span class="number">0</span>] = <span class="number">100</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(slice)  <span class="comment">// [100 2 3 4 5]</span></span><br><span class="line">	fmt.Println(ref)    <span class="comment">// [100 2 3 4 5]</span></span><br><span class="line"></span><br><span class="line">	ref[<span class="number">4</span>] = <span class="number">500</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(slice)  <span class="comment">// [100 2 3 4 500]</span></span><br><span class="line">	fmt.Println(ref)    <span class="comment">// [100 2 3 4 500]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<h3>操作</h3>
+<ul>
+<li>
+<p>對 <code>Slice</code> 做一些操作</p>
+</li>
+<li>
+<p><code>len</code> 函式可以查長度</p>
+</li>
+<li>
+<p><code>cap</code> 可以查參考的陣列有多少容量
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	slice := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="built_in">len</span>(slice))  <span class="comment">// 3</span></span><br><span class="line">	fmt.Println(<span class="built_in">cap</span>(slice))  <span class="comment">// 3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p><code>append</code> 函式可以追加新元素在 Slice 最後面
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	slice1 := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Println(slice1)       <span class="comment">// [1 2 3]</span></span><br><span class="line">	fmt.Println(<span class="built_in">len</span>(slice1))  <span class="comment">// 3</span></span><br><span class="line">	fmt.Println(<span class="built_in">cap</span>(slice1))  <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line">	slice2 := <span class="built_in">append</span>(slice1, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">	fmt.Println(slice2)       <span class="comment">// [1 2 3 10]</span></span><br><span class="line">	fmt.Println(<span class="built_in">len</span>(slice2))  <span class="comment">// 4</span></span><br><span class="line">	fmt.Println(<span class="built_in">cap</span>(slice2))  <span class="comment">// 6</span></span><br><span class="line"></span><br><span class="line">	slice3 := <span class="built_in">append</span>(slice2, <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line">	fmt.Println(slice3)       <span class="comment">// [1 2 3 10 20]</span></span><br><span class="line">	fmt.Println(<span class="built_in">len</span>(slice3))  <span class="comment">// 5</span></span><br><span class="line">	fmt.Println(<span class="built_in">cap</span>(slice3))  <span class="comment">// 6</span></span><br><span class="line"></span><br><span class="line">	slice3[<span class="number">0</span>] = <span class="number">100</span></span><br><span class="line">	fmt.Println(slice1)       <span class="comment">// [1 2 3]</span></span><br><span class="line">	fmt.Println(slice2)       <span class="comment">// [100 2 3 10]</span></span><br><span class="line">	fmt.Println(slice3)       <span class="comment">// [100 2 3 10 20]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p><code>slice1</code> 加入新元素產生出 <code>slice2</code> 有發生長度與容量的變化（長度 + 1 ，容量 * 2），並且最後面 <code>slice1</code> 與 <code>slice2</code> 的值<strong>沒有</strong>參考到同個陣列。</p>
+</li>
+<li>
+<p><code>slice2</code> 加入新元素產生出 <code>slice3</code> 只有長度 + 1 而已，最後面的值<strong>有</strong>參考到同個陣列。</p>
+</li>
+<li>
+<p><code>Slice</code> 新增元素超過了容量的時候，它會產生新的陣列，且容量有兩倍，給新的 <code>Slice</code> 參考；而容量夠用的時候，則不會產生新陣列。</p>
+</li>
+<li>
+<p><code>copy</code> 函式可以複製內容到另一個 <code>Slice</code> 裡
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	src := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</span><br><span class="line">	dst1 := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">2</span>)</span><br><span class="line">	dst2 := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">3</span>)</span><br><span class="line">	dst3 := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">	fmt.Println(src)     <span class="comment">// [1 2 3]</span></span><br><span class="line">	fmt.Println(dst1)    <span class="comment">// [0 0]</span></span><br><span class="line">	fmt.Println(dst2)    <span class="comment">// [0 0 0]</span></span><br><span class="line">	fmt.Println(dst3)    <span class="comment">// [0 0 0 0]</span></span><br><span class="line"></span><br><span class="line">	<span class="built_in">copy</span>(dst1, src)</span><br><span class="line">	<span class="built_in">copy</span>(dst2, src)</span><br><span class="line">	<span class="built_in">copy</span>(dst3, src)</span><br><span class="line"></span><br><span class="line">	fmt.Println(src)     <span class="comment">// [1 2 3]</span></span><br><span class="line">	fmt.Println(dst1)    <span class="comment">// [1 2]</span></span><br><span class="line">	fmt.Println(dst2)    <span class="comment">// [1 2 3]</span></span><br><span class="line">	fmt.Println(dst3)    <span class="comment">// [1 2 3 0]</span></span><br><span class="line"></span><br><span class="line">	src[<span class="number">0</span>] = <span class="number">100</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(src)     <span class="comment">// [100 2 3]</span></span><br><span class="line">	fmt.Println(dst1)    <span class="comment">// [1 2]</span></span><br><span class="line">	fmt.Println(dst2)    <span class="comment">// [1 2 3]</span></span><br><span class="line">	fmt.Println(dst3)    <span class="comment">// [1 2 3 0]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>複製時，即使長度不一還是會執行成功，只是會沒有複製完全。</p>
+</li>
+</ul>
+<h3>從陣列或 Slice 產生 Slice</h3>
+<ul>
+<li>
+<p>除了從頭建一個新的 <code>Slice</code> 外，也可以從陣列或 <code>Slice</code> 上產生新的 <code>Slice</code>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	arr := [...]<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125; <span class="comment">// array</span></span><br><span class="line"></span><br><span class="line">	slice := arr[<span class="number">1</span>:<span class="number">4</span>]</span><br><span class="line"></span><br><span class="line">	fmt.Println(slice)        <span class="comment">// [2 3 4]</span></span><br><span class="line">	fmt.Println(<span class="built_in">len</span>(slice))   <span class="comment">// 3</span></span><br><span class="line">	fmt.Println(<span class="built_in">cap</span>(slice))   <span class="comment">// 4</span></span><br><span class="line"></span><br><span class="line">	slice2 := slice[<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">	fmt.Println(slice2)       <span class="comment">// [3 4]</span></span><br><span class="line">	fmt.Println(<span class="built_in">len</span>(slice2))  <span class="comment">// 2</span></span><br><span class="line">	fmt.Println(<span class="built_in">cap</span>(slice2))  <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line">	slice2[<span class="number">0</span>] = <span class="number">300</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(arr)          <span class="comment">// [1 2 300 4 5]</span></span><br><span class="line">	fmt.Println(slice)        <span class="comment">// [2 300 4]</span></span><br><span class="line">	fmt.Println(slice2)       <span class="comment">// [300 4 5]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p><code>[1:4]</code> 代表的意思是，從**「第 1 個元素開始，到第 4 個元素，不含第 4 個元素」**，因此取得 [2 3 4] 三個元素。而容量會從第 1 個元素開始，一直到結尾。</p>
+</li>
+<li>
+<p><code>[1:3]</code> 會從 [2 3 4] 這個 <code>Slice</code> 取元素，所以取到的是 [3 4] ，容量是 3。</p>
+</li>
+<li>
+<p>因為沒有使用 <code>append</code> 函式，所以都參考到第一個陣列。</p>
+</li>
+<li>
+<p>另外也可以使用 <code>[:]</code> 來取得全部陣列的內容。</p>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">Slice Type</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">2.</span> <span class="toc-text">&lt;!--more--&gt;</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.1.</span> <span class="toc-text">建立</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.2.</span> <span class="toc-text">操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.3.</span> <span class="toc-text">從陣列或 Slice 產生 Slice</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2019/12/01/GoLang-Slice-Type/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2019/12/01/GoLang-Slice-Type/&text=GoLang-Slice Type" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2019/12/01/GoLang-Slice-Type/&title=GoLang-Slice Type" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2019/12/01/GoLang-Slice-Type/&is_video=false&description=GoLang-Slice Type" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=GoLang-Slice Type&body=Check out this article: https://pingjing0628.github.io/2019/12/01/GoLang-Slice-Type/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2019/12/01/GoLang-Slice-Type/&title=GoLang-Slice Type" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2019/12/01/GoLang-Slice-Type/&title=GoLang-Slice Type" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2019/12/01/GoLang-Slice-Type/&title=GoLang-Slice Type" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2019/12/01/GoLang-Slice-Type/&title=GoLang-Slice Type" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2019/12/01/GoLang-Slice-Type/&name=GoLang-Slice Type&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2019/12/01/GoLang-Slice-Type/&t=GoLang-Slice Type" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

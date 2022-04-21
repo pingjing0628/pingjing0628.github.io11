@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="1.5 數碼、文字碼  BCD 碼 利用 4 個 bits (2進制) 表示 10 進制中每一位數之值 有6種組合不用： 1010(10), 1011(11), 1100(12), 1101(13), 1110(14), 1111(15) 8, 4, -2, -1 碼 (BCD 碼之變形) Excess-3 code &#x3D; BCD code + 3 有6種組合不用： 0000(0), 0001(1)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter1-基本電腦概論-數碼, 文字碼">
+<meta property="og:url" content="https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="1.5 數碼、文字碼  BCD 碼 利用 4 個 bits (2進制) 表示 10 進制中每一位數之值 有6種組合不用： 1010(10), 1011(11), 1100(12), 1101(13), 1110(14), 1111(15) 8, 4, -2, -1 碼 (BCD 碼之變形) Excess-3 code &#x3D; BCD code + 3 有6種組合不用： 0000(0), 0001(1)">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/self-complement.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/10%E8%BD%89Gray.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/5.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/6.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/7.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/Gray%E8%BD%892.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/ExGray%E8%BD%892.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/%E9%8C%AF%E8%AA%A4%E7%A2%BC%E5%81%B5%E6%B8%AC.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/%E5%81%B6%E5%90%8C%E4%BD%8D.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/%E5%A5%87%E5%90%8C%E4%BD%8D.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/CRC.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/%E9%80%81%E6%96%B9step1.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/%E9%80%81%E6%96%B9step2.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/%E6%94%B6%E6%96%B9check.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/exstep1.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/exstep2.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/exHammingcode.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/summary.png">
+<meta property="article:published_time" content="2021-03-31T16:46:09.000Z">
+<meta property="article:modified_time" content="2021-05-30T04:30:18.983Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="數碼">
+<meta property="article:tag" content="文字碼">
+<meta property="article:tag" content="格雷碼">
+<meta property="article:tag" content="ASCII">
+<meta property="article:tag" content="CRC">
+<meta property="article:tag" content="Hamming code">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/self-complement.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Chapter1-基本電腦概論-數碼, 文字碼</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2021/04/01/Chapter2-%E6%95%B8%E4%BD%8D%E9%82%8F%E8%BC%AF-Digital-Logical/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/&text=Chapter1-基本電腦概論-數碼, 文字碼" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/&title=Chapter1-基本電腦概論-數碼, 文字碼" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/&is_video=false&description=Chapter1-基本電腦概論-數碼, 文字碼" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter1-基本電腦概論-數碼, 文字碼&body=Check out this article: https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/&title=Chapter1-基本電腦概論-數碼, 文字碼" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/&title=Chapter1-基本電腦概論-數碼, 文字碼" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/&title=Chapter1-基本電腦概論-數碼, 文字碼" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/&title=Chapter1-基本電腦概論-數碼, 文字碼" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/&name=Chapter1-基本電腦概論-數碼, 文字碼&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/&t=Chapter1-基本電腦概論-數碼, 文字碼" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">1.5 數碼、文字碼</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">BCD 碼</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">8, 4, -2, -1 碼 (BCD 碼之變形)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">Excess-3 code &#x3D; BCD code + 3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">Gray code (格雷碼)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">ASCII (American Standard Code for Information Interchange)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">EBCDIC (Extended BCDIC)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.7.</span> <span class="toc-text">Unicode (萬用&#x2F;完全&#x2F;統一碼)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.8.</span> <span class="toc-text">錯誤碼的偵測與更正</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.8.1.</span> <span class="toc-text">(1)Parity Check: 同位元檢查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.8.2.</span> <span class="toc-text">(2) CRC (Cycle Redundancy Check): 循環冗餘檢查碼</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.8.3.</span> <span class="toc-text">(3) Hamming Code (漢明碼) 又稱 Error Correcting Code (ECC)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.9.</span> <span class="toc-text">Summary</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Chapter1-基本電腦概論-數碼, 文字碼
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-03-31T16:46:09.000Z" itemprop="datePublished">2021-04-01</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/">計算機概論</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/ASCII/" rel="tag">ASCII</a>, <a class="tag-link" href="/tags/CRC/" rel="tag">CRC</a>, <a class="tag-link" href="/tags/Hamming-code/" rel="tag">Hamming code</a>, <a class="tag-link" href="/tags/%E6%95%B8%E7%A2%BC/" rel="tag">數碼</a>, <a class="tag-link" href="/tags/%E6%96%87%E5%AD%97%E7%A2%BC/" rel="tag">文字碼</a>, <a class="tag-link" href="/tags/%E6%A0%BC%E9%9B%B7%E7%A2%BC/" rel="tag">格雷碼</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1>1.5 數碼、文字碼</h1>
+<hr>
+<h2>BCD 碼</h2>
+<p>利用 4 個 bits (2進制) 表示 10 進制中每一位數之值<br>
+<strong>有6種組合不用：</strong> 1010(10), 1011(11), 1100(12), 1101(13), 1110(14), 1111(15)</p>
+<h2>8, 4, -2, -1 碼 (BCD 碼之變形)</h2>
+<h2>Excess-3 code = BCD code + 3</h2>
+<p><strong>有6種組合不用：</strong> 0000(0), 0001(1), 0010(2), 1101(13), 1110(14), 1111(15)<br>
+具有<strong>Self-Complement(自我補數)</strong> 功能<br>
+當 10 進制位數值轉成 excess-3 code後, 再取 1's complement 會同於 10 進制取 9's 補數<br>
+Ex:
+<img src="self-complement.png" alt=""><br>
+8, 4, -2, -1 (+3)=&gt; excess-3 code</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">10 進位</th>
+<th style="text-align:center">BCD</th>
+<th style="text-align:center">8, 4, -1, -2</th>
+<th style="text-align:center">excess-3 code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0000</td>
+<td style="text-align:center">0000</td>
+<td style="text-align:center">0011</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0001</td>
+<td style="text-align:center">0111</td>
+<td style="text-align:center">0100</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0010</td>
+<td style="text-align:center">0110</td>
+<td style="text-align:center">0101</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0011</td>
+<td style="text-align:center">0101</td>
+<td style="text-align:center">0110</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">0100</td>
+<td style="text-align:center">0100</td>
+<td style="text-align:center">0111</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">0101</td>
+<td style="text-align:center">1011</td>
+<td style="text-align:center">1000</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">0110</td>
+<td style="text-align:center">1010</td>
+<td style="text-align:center">1001</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">0111</td>
+<td style="text-align:center">1001</td>
+<td style="text-align:center">1010</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">1000</td>
+<td style="text-align:center">1000</td>
+<td style="text-align:center">1011</td>
+</tr>
+<tr>
+<td style="text-align:center">9</td>
+<td style="text-align:center">1001</td>
+<td style="text-align:center">1111</td>
+<td style="text-align:center">1100</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ex:</strong><br>
+(42)10<br>
+= (0100 0010)BCD<br>
+= (0100 0110)8, 4, -2, -1<br>
+= (0111 0101)excess-3<br>
+<strong>Ex:</strong><br>
+48 bits 採 BCD 編號後可表示多少組合？<br>
+(A) 2^48 (B) 2^12 (C) 10^48 (D) 10^12<br>
+D<br>
+48/4 = 12 (若 BCD 拿掉, 則選 A)</p>
+<h2>Gray code (格雷碼)</h2>
+<p><strong>Def:</strong> 任何 2 個連續數字利用 2 進位表示只有一個 bit 不同謂之<br>
+<strong>特色:</strong><br>
+1. Gray Code 不唯一, 欲得唯一的 Gray Code, 用 <strong>reflected (反射) Gray Code</strong>
+2. 適用於 data 傳輸
+3. 每次僅更動 1 bit</p>
+<p><strong>Ex:</strong></p>
+<table>
+<thead>
+<tr>
+<th>10 進位</th>
+<th>Gray Code</th>
+<th>Reflected Gray Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>00</td>
+<td>11</td>
+</tr>
+<tr>
+<td>1</td>
+<td>01</td>
+<td>10</td>
+</tr>
+<tr>
+<td>2</td>
+<td>11</td>
+<td>00</td>
+</tr>
+<tr>
+<td>3</td>
+<td>10</td>
+<td>01</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Part1:</strong> 10 進制 -&gt; Gray Code<br>
+<strong>作法：</strong><br>
+(1) 將 10 進制 -&gt; 2 進制<br>
+(2) 若 2 進制為 (Xn, Xn-1, .....X0)2, 則 Gray Code 如：<br>
+<img src="10%E8%BD%89Gray.png" alt=""><br>
+<strong>Ex:</strong><br>
+A ⊕ B -&gt; 若 A, B (1) 相同為 0, (2) 相異為 1<br>
+<strong>Ex:</strong><br>
+(5)10, (6)10, (7)10, 以 4 bits, 化成 Gray Code<br>
+<strong>Sol:</strong><br>
+1. (5)10 = (0101)2<br>
+<img src="5.png" alt=""><br>
+2. (6)10 = (0110)2<br>
+<img src="6.png" alt=""><br>
+3. (7)10 = (0111)2<br>
+<img src="7.png" alt=""></p>
+<p><strong>Part2:</strong> Gray Code -&gt; 10 進制<br>
+<strong>作法：</strong><br>
+若一 Gray Code:(Gn, Gn-1, ...G0)Gray, 則<br>
+(1) Gn 直接留下(即最左位元)<br>
+(2) 將 Gn 和 Gn-1 做 ⊕ 得到 R2, 而 R2 跟 Gn-2 做 ⊕<br>
+<img src="Gray%E8%BD%892.png" alt=""><br>
+<strong>Ex:</strong>  (0101)Gray Code = (6)10<br>
+<img src="ExGray%E8%BD%892.png" alt=""></p>
+<h2>ASCII (American Standard Code for Information Interchange)</h2>
+<p><strong>特色:</strong><br>
+(1) 理論上由 <strong>7 個 bits</strong> (2^7 = 128 組合) 所組成，而實際應用是由 8 bits (1 byte) 組成
+(2) 常用字元：<br>
+'A' -&gt; (65)10 -&gt; (41)16<br>
+'a' -&gt; (97)10 -&gt; (61)16<br>
+'0' -&gt; (48)10 -&gt; (30)16<br>
+(3) 編號順序 '0' &lt; 'A' &lt; 'a' =&gt; 特殊符號(，, Esc) &lt; 數字 &lt; 大寫 &lt; 小寫<br>
+ASCII 100 = (97) =&gt; a, (98) =&gt; b, (99) =&gt; c, (100) =&gt; d</p>
+<h2>EBCDIC (Extended BCDIC)</h2>
+<p><strong>特色：</strong><br>
+(1) 由 IBM 所發明，中大型主機採用 (現在也均用 ASCII)<br>
+(2) 用 8 bits 表示一字元<br>
+(3) 編碼順序(和 ASCII 相反) -&gt; 小寫 &lt; 大寫 &lt; 數字</p>
+<h2>Unicode (萬用/完全/統一碼)</h2>
+<p><strong>特色：</strong><br>
+(1) 用 16 bits 表示字元符號<br>
+(2) 前 128 個字元符號和 ASCII 相同<br>
+(3) 主要解決 <strong>跨國語系</strong> 問題<br>
+(4) 目前常使用的格式為 UTF-8, UTF-8 表示中, 日, 韓文需 3 個 Byte (Taiwan =&gt; 6 bytes)<br>
+Note: 繁體中文 =&gt; Big5, 簡體中文 =&gt; GBK</p>
+<h2>錯誤碼的偵測與更正</h2>
+<ol>
+<li>Parity Check =&gt; 只能 Detect Errors</li>
+<li>CRC =&gt; 只能 Detect Errors</li>
+<li>Hamming Code =&gt; 具有 error correction 之能力<br>
+<img src="%E9%8C%AF%E8%AA%A4%E7%A2%BC%E5%81%B5%E6%B8%AC.png" alt=""></li>
+</ol>
+<h3>(1)Parity Check: 同位元檢查</h3>
+<ul>
+<li>
+<p>偶同位(Even Parity Check):<br>
+<img src="%E5%81%B6%E5%90%8C%E4%BD%8D.png" alt=""></p>
+</li>
+<li>
+<p>奇同位(Odd Parity Check):<br>
+<img src="%E5%A5%87%E5%90%8C%E4%BD%8D.png" alt=""></p>
+</li>
+</ul>
+<p><strong>Ex:</strong><br>
+M(x) = 1010100, 問採偶同位, T(x) = ?
+<strong>Sol:</strong><br>
+10101001 = T(x)
+<strong>Ex:</strong><br>
+下列何者為非奇同位？<br>
+(A) 0011010<br>
+(B) 1100100<br>
+(C) 1000000<br>
+(D) 0010111</p>
+<h3>(2) CRC (Cycle Redundancy Check): 循環冗餘檢查碼</h3>
+<p><strong>特性：</strong>  應用多項式除法概念, 其中除法利用減法取代, 而減法採 ⊕ 運算</p>
+<ul>
+<li>多項式 x^5 + x^4 + 1 =&gt; 位元串 11001</li>
+<li>圖示：
+<img src="CRC.png" alt=""><br>
+(1) 送方作法：<br>
+step1:<br>
+<img src="%E9%80%81%E6%96%B9step1.png" alt=""><br>
+step2:<br>
+<img src="%E9%80%81%E6%96%B9step2.png" alt="">
+(2) 收方檢查：<br>
+<img src="%E6%94%B6%E6%96%B9check.png" alt="">
+<strong>Ex:</strong><br>
+M(x) = 1101011011, G(x) = x^4+x+1 =&gt; 10011<br>
+<strong>Sol:</strong><br>
+step1:<br>
+<img src="exstep1.png" alt=""><br>
+step2:<br>
+<img src="exstep2.png" alt=""></li>
+</ul>
+<h3>(3) Hamming Code (漢明碼) 又稱 Error Correcting Code (ECC)</h3>
+<p><strong>特性：</strong> 有更正錯誤的能力<br>
+<strong>作法：</strong> 決定需要幾個 Hamming Code Bits:</p>
+<ul>
+<li>規定：於漢明碼中編號為 2 的冪次方位置, 必定為 Hamming Code Bit</li>
+<li>公式： 2^k ≥ n+k+1 -&gt; k: Hamming Code Bits 數, n: Message 的 Bits 數</li>
+<li>2^k ≥ 10+k+1, 所以 k = 4</li>
+</ul>
+<p><strong>特色：</strong> Hamming Code 可做 error correct, 但只同時允許 1 個 bit 出錯, 若 ≥ 2 個 errors, 無法更正<br>
+<strong>Ex:</strong>  M(x)=0100001100, 採 Hamming Code,<br>
+則 =&gt; 2^k ≥ n+k+1, 又 n = 10, 所以 2^k ≥ 10+k+1 =&gt; k=4<br>
+<img src="exHammingcode.png" alt=""></p>
+<p><strong>數碼的漢明距(Hamming Code Distance)</strong><br>
+<strong>Def:</strong></p>
+<ol>
+<li>指 2 個數碼之不同位元值之個數</li>
+<li>一組數碼的 H.D = min{兩倆互相比較之 H.D }</li>
+</ol>
+<ul>
+<li>若要偵測 n 個 error -&gt; H.D 至少 ≥ n+1</li>
+<li>若要更正 n 個 error -&gt; H.D 至少 ≥ 2n+1</li>
+</ul>
+<p><strong>Ex:</strong><br>
+A: 010101<br>
+B: 111111<br>
+=&gt; AB 之 H.D = 3</p>
+<p><strong>Ex:</strong><br>
+C: 000011<br>
+=&gt; min{AB, AC, BC} = 3</p>
+<h2>Summary</h2>
+<p><img src="summary.png" alt=""></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">1.5 數碼、文字碼</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">BCD 碼</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">8, 4, -2, -1 碼 (BCD 碼之變形)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">Excess-3 code &#x3D; BCD code + 3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">Gray code (格雷碼)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">ASCII (American Standard Code for Information Interchange)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">EBCDIC (Extended BCDIC)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.7.</span> <span class="toc-text">Unicode (萬用&#x2F;完全&#x2F;統一碼)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.8.</span> <span class="toc-text">錯誤碼的偵測與更正</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.8.1.</span> <span class="toc-text">(1)Parity Check: 同位元檢查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.8.2.</span> <span class="toc-text">(2) CRC (Cycle Redundancy Check): 循環冗餘檢查碼</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.8.3.</span> <span class="toc-text">(3) Hamming Code (漢明碼) 又稱 Error Correcting Code (ECC)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.9.</span> <span class="toc-text">Summary</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/&text=Chapter1-基本電腦概論-數碼, 文字碼" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/&title=Chapter1-基本電腦概論-數碼, 文字碼" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/&is_video=false&description=Chapter1-基本電腦概論-數碼, 文字碼" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter1-基本電腦概論-數碼, 文字碼&body=Check out this article: https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/&title=Chapter1-基本電腦概論-數碼, 文字碼" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/&title=Chapter1-基本電腦概論-數碼, 文字碼" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/&title=Chapter1-基本電腦概論-數碼, 文字碼" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/&title=Chapter1-基本電腦概論-數碼, 文字碼" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/&name=Chapter1-基本電腦概論-數碼, 文字碼&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/&t=Chapter1-基本電腦概論-數碼, 文字碼" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="1.1 電腦系統介紹  電腦發展史    名稱 組成 體積 Note     1G 第一代電腦 由真空管 大 溫度高，速度慢   2G 第二代電腦 由電晶體 小 速度快，成本低，耗電低   3G 第三代電腦 由積體電路 更小 速度更快，成本更低，耗電更低   4G 第四代電腦 由超大積體電路     5G 第五代電腦 引入人工智慧技術      電腦架構 常見：范紐曼架構 Von-Neumann">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter1-基本電腦概論-電腦系統介紹">
+<meta property="og:url" content="https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="1.1 電腦系統介紹  電腦發展史    名稱 組成 體積 Note     1G 第一代電腦 由真空管 大 溫度高，速度慢   2G 第二代電腦 由電晶體 小 速度快，成本低，耗電低   3G 第三代電腦 由積體電路 更小 速度更快，成本更低，耗電更低   4G 第四代電腦 由超大積體電路     5G 第五代電腦 引入人工智慧技術      電腦架構 常見：范紐曼架構 Von-Neumann">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/%E5%BE%AA%E5%BA%8F%E5%9F%B7%E8%A1%8C.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/5_units.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/Von_Neumann_bottleneck.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/maching_cycle.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/%E5%82%B3%E7%B5%B1%E6%8C%87%E4%BB%A4.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/In_pipeline.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/Ex1.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/Control_bus.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/RISC.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/CISC.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/Pipe+parallel.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/DRAM_vs_SRAM.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/RGB.png">
+<meta property="article:published_time" content="2021-01-31T11:57:21.000Z">
+<meta property="article:modified_time" content="2021-03-31T17:08:52.264Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="電腦架構">
+<meta property="article:tag" content="匯流排">
+<meta property="article:tag" content="CPU">
+<meta property="article:tag" content="記憶體">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/%E5%BE%AA%E5%BA%8F%E5%9F%B7%E8%A1%8C.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Chapter1-基本電腦概論-電腦系統介紹</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2021/01/31/Hexo-command/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/&text=Chapter1-基本電腦概論-電腦系統介紹" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/&title=Chapter1-基本電腦概論-電腦系統介紹" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/&is_video=false&description=Chapter1-基本電腦概論-電腦系統介紹" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter1-基本電腦概論-電腦系統介紹&body=Check out this article: https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/&title=Chapter1-基本電腦概論-電腦系統介紹" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/&title=Chapter1-基本電腦概論-電腦系統介紹" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/&title=Chapter1-基本電腦概論-電腦系統介紹" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/&title=Chapter1-基本電腦概論-電腦系統介紹" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/&name=Chapter1-基本電腦概論-電腦系統介紹&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/&t=Chapter1-基本電腦概論-電腦系統介紹" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">1.1 電腦系統介紹</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">電腦發展史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">電腦架構</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">五大單元結構</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">補充：Von Neumann 瓶頸</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">機器指令週期 (Machine Cycle)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">Pipeline 管線技術</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.0.1.</span> <span class="toc-text">例：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">儲存單位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.7.</span> <span class="toc-text">匯流排</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.7.0.1.</span> <span class="toc-text">例：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.8.</span> <span class="toc-text">常見的時間單位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.9.</span> <span class="toc-text">硬體介紹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.10.</span> <span class="toc-text">CPU 的種類</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.11.</span> <span class="toc-text">記憶體階層</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.12.</span> <span class="toc-text">記憶體的種類</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.13.</span> <span class="toc-text">ROM vs RAM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.14.</span> <span class="toc-text">DRAM vs SRAM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.15.</span> <span class="toc-text">I&#x2F;O的定址方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.16.</span> <span class="toc-text">圖形表示法</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Chapter1-基本電腦概論-電腦系統介紹
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-01-31T11:57:21.000Z" itemprop="datePublished">2021-01-31</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/">計算機概論</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/CPU/" rel="tag">CPU</a>, <a class="tag-link" href="/tags/%E5%8C%AF%E6%B5%81%E6%8E%92/" rel="tag">匯流排</a>, <a class="tag-link" href="/tags/%E8%A8%98%E6%86%B6%E9%AB%94/" rel="tag">記憶體</a>, <a class="tag-link" href="/tags/%E9%9B%BB%E8%85%A6%E6%9E%B6%E6%A7%8B/" rel="tag">電腦架構</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1>1.1 電腦系統介紹</h1>
+<hr>
+<h2>電腦發展史</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名稱</th>
+<th style="text-align:center">組成</th>
+<th style="text-align:center">體積</th>
+<th style="text-align:right">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1G 第一代電腦</td>
+<td style="text-align:center">由真空管</td>
+<td style="text-align:center">大</td>
+<td style="text-align:right">溫度高，速度慢</td>
+</tr>
+<tr>
+<td style="text-align:left">2G 第二代電腦</td>
+<td style="text-align:center">由電晶體</td>
+<td style="text-align:center">小</td>
+<td style="text-align:right">速度快，成本低，耗電低</td>
+</tr>
+<tr>
+<td style="text-align:left">3G 第三代電腦</td>
+<td style="text-align:center">由積體電路</td>
+<td style="text-align:center">更小</td>
+<td style="text-align:right">速度更快，成本更低，耗電更低</td>
+</tr>
+<tr>
+<td style="text-align:left">4G 第四代電腦</td>
+<td style="text-align:center">由超大積體電路</td>
+<td style="text-align:center"></td>
+<td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:left">5G 第五代電腦</td>
+<td style="text-align:center">引入人工智慧技術</td>
+<td style="text-align:center"></td>
+<td style="text-align:right"></td>
+</tr>
+</tbody>
+</table>
+<h2>電腦架構</h2>
+<p>常見：范紐曼架構 Von-Neumann
+特色：</p>
+<ol>
+<li>採用 <strong>內儲程式 Stored Programming</strong> 概念：
+指欲執行的程式(Program)跟資料(data)必須先載入記憶體(Mem.)中，再由 CPU 從 memory 中抓取資料處理之
+<ul>
+<li>程式：
+Def: 由指令組合之集合，永已達到某一特定任務</li>
+<li>指令：
+Instruction: 電腦最基本的執行單位，過程不可分割
+ex: 3+5 =&gt; <code>+</code> 是指令</li>
+</ul>
+</li>
+<li><strong>循序執行 Sequential Execution</strong>:
+指令會依序一一執行
+<ul>
+<li>圖示：
+<img src="%E5%BE%AA%E5%BA%8F%E5%9F%B7%E8%A1%8C.png" alt=""></li>
+</ul>
+</li>
+</ol>
+<h2>五大單元結構</h2>
+<p><img src="5_units.png" alt=""></p>
+<h4>補充：Von Neumann 瓶頸</h4>
+<p>說明：<br>
+在 CPU 和 Mem. 處理速度不斷上升之下，資料的傳輸速度將成為瓶頸<br>
+<img src="Von_Neumann_bottleneck.png" alt=""></p>
+<h2>機器指令週期 (Machine Cycle)</h2>
+<p>Def: 為 CPU 執行一個指令所需的時間<br>
+5個步驟：</p>
+<ol>
+<li>Instruction Fetch (IF) 指令擷取： 從記憶體中擷取指令</li>
+<li>Decode (DE) 解碼： 針對擷取指令解碼，以了解所需運算為何</li>
+<li>Fetch Operation (FO) 擷取運算元： 從記憶體中擷取 CPU 運算所需資料</li>
+<li>Execution (EX) 執行： 針對擷取資料進行運算</li>
+<li>Write to Memory (WM) 攜回記憶體：將運算結果寫回記憶體 (反正執行一定要抓運算元)
+<img src="maching_cycle.png" alt=""></li>
+</ol>
+<h2>Pipeline 管線技術</h2>
+<p>Def: 指不同指令的不同執行週期重疊執行 (Overlay execution) 謂之<br>
+目的：提升系統的執行效能 (system performance 上升)<br>
+傳統指令：<br>
+<img src="%E5%82%B3%E7%B5%B1%E6%8C%87%E4%BB%A4.png" alt=""></p>
+<p>In Pipeline:<br>
+<img src="In_pipeline.png" alt="">
+<strong>CPU 速度沒變快，只是效能提高</strong></p>
+<h4>例：</h4>
+<blockquote>
+<p>Q: IF=3, DE=5, FO=2, EX=3, WM=2,問採 Pipeline 下, 100條指令, 所需花的總時間？<br>
+Sol:<br>
+<img src="Ex1.png" alt="">
+<code>Max(IF, DE, FO, EX, WM) = 5</code><br>
+(N 條指令)<br>
+公式1: 第一條指令總時間 + (N-1) * Max(各週期值) = 510<br>
+(3+5+2+3+2) + 99 * 5<br>
+(常用)<br>
+公式2: 以最大週期數算所有週期 = 520</p>
+</blockquote>
+<h2>儲存單位</h2>
+<ol>
+<li>bit (位元) =&gt; 0 &amp; 1 =&gt; 為最基本單位</li>
+<li>byte (位元組)  byte = 8 bits</li>
+<li></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>說明</th>
+<th>Tera</th>
+<th>Giga</th>
+<th>Mega</th>
+<th>Kilo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>正確</td>
+<td>2^40</td>
+<td>2^30</td>
+<td>2^20</td>
+<td>2^10</td>
+</tr>
+<tr>
+<td>近似</td>
+<td>10^12</td>
+<td>10^9</td>
+<td>10^6</td>
+<td>10^3</td>
+</tr>
+</tbody>
+</table>
+<p>容量, 儲存相關 =&gt; 2進制<br>
+速度相關 =&gt; 10 進制</p>
+<h2>匯流排</h2>
+<ol>
+<li>位址匯流排(Address Bus)
+<ul>
+<li>負責傳送 CPU 所要存取的位址</li>
+<li>可決定 CPU 所能處理的記憶體容量</li>
+<li>N 條位址線可以擁有 2 的 N 次方的記憶空間，而其位址為 0 至 2 的 N 次方來減 1 (從 0 開始，編號 0~2^N^-1)</li>
+</ul>
+</li>
+<li>資料匯流排(Data Bus)
+<ul>
+<li>負責傳送 CPU 所要存取的資料</li>
+<li>其線數的多少代表 CPU 的字組 Word (大小)</li>
+<li>N 位元 CPU 亦就是此 CPU 有 N 條資料線 64 bits = 8 bytes word</li>
+</ul>
+</li>
+<li>控制匯流排(Control Bus)
+<ul>
+<li>負責傳送 CPU 所發出的控制訊號</li>
+<li>Ex: 計算 =&gt; address line + data line
+<img src="Control_bus.png" alt=""></li>
+</ul>
+</li>
+</ol>
+<h4>例：</h4>
+<blockquote>
+<p>Q1: 電腦 Mem size = 4GB, 有 30 條 address line(決定格數), 問 CPU word size(data line =&gt; 決定格子大小)?<br>
+Sol:<br>
+格數 *  格子大小 = 總 Mem.<br>
+2^30 * X = 4GB<br>
+X = 4 bytes = 32 bits</p>
+</blockquote>
+<blockquote>
+<p>Q2: Mem size = 4GB, 又 data line 有 32 條(32 bits = 4 bytes), 問 address line 至少有幾條？<br>
+Sol:<br>
+X * 4 bytes = 4GB<br>
+x = 1G = 2^30 格子 =&gt; 30 條</p>
+</blockquote>
+<h2>常見的時間單位</h2>
+<table>
+<thead>
+<tr>
+<th>毫(sec)</th>
+<th>微(sec)</th>
+<th>奈(sec)</th>
+<th>皮(sec)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 ms</td>
+<td>1 us</td>
+<td>1 ns</td>
+<td>1 ps</td>
+</tr>
+<tr>
+<td>10^-3 sec</td>
+<td>10^-6 sec</td>
+<td>10^-9 sec</td>
+<td>10^-12 sec</td>
+</tr>
+</tbody>
+</table>
+<p>1 秒 = 10^3 ms = 10^6 us = 10^9 ns = 10^12 ps</p>
+<h2>硬體介紹</h2>
+<ul>
+<li>CPU (Central Processing Unit) 中央處理器
+<ol>
+<li>於大型電腦中的 CPU = Control Unit + A.L.U + Memory</li>
+<li>於 PC 中的 CPU = Control Unit + A.L.U + Register + Cache Memory</li>
+</ol>
+</li>
+<li>CPU 速度衡量單位
+<ol>
+<li>MIPS (Million Instruction Per Second): 每秒百萬個指令</li>
+<li>MFLOPS (Million Floating-Point Operation Per Second): 每秒執行百萬個浮點數指令<br>
+優點： 衡量的基準點更趨一致性</li>
+<li>CPI (Clock Per Instruction): 一條指令花多少的 clock cycle
+<ul>
+<li>clock (時脈): 電腦內部一個類似時鐘的裝置</li>
+<li>clock cycle (時脈週期): clock 計數一次稱為一個 clock cycle</li>
+<li>clock rate (時脈頻率): 指 clock 計算的速度<br>
+ex: (1) 1MHz =&gt; 每秒做 10 的 6 次方個 clock cycle<br>
+(2) 2GHz =&gt; 每秒做 2 * 10 的 9 次方 clock cycle</li>
+<li>Ex: CPI=5 =&gt; 代表一指令執行需 5 個 clock cycle</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>Ex: 下列哪個選項錯？<br>
+(A) 8KB = 2^13 bytes (2^3 * 2^30)<br>
+(B) 8MB = 2^13 KB (2^3 * 2^20 = 2^13 * 2^10)<br>
+(C) 8GB = 2^33 bytes (2^3 * 2^30 = 2^33)<br>
+(D) 8GHz = 2^33 Hz (2^3 * 10^9 = 2^20) 錯</li>
+</ul>
+</li>
+</ul>
+<h2>CPU 的種類</h2>
+<ol>
+<li>RISC(Reduced): 最大特點是指令長度固定，指令格式種類少，定址方式種類少，易於設計超純量(Superscalar) 和 Pipeline，暫存器數量多，RISC 比 CISC 性能高很多
+<img src="RISC.png" alt=""></li>
+<li>CISC(Complex): 大量的複雜指令、可變得指令長度、多種的定址方式，大大增加了解碼的難度
+<img src="CISC.png" alt=""></li>
+</ol>
+<ul>
+<li>
+<p>比較：</p>
+<table>
+<thead>
+<tr>
+<th>RISC</th>
+<th>CISC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>指令數目少  定址模式少  register 多</td>
+<td>指令數目多  定址模式多  register 少</td>
+</tr>
+<tr>
+<td>指令長度固定，decode 易</td>
+<td>指令長度不一，decode 不易</td>
+</tr>
+<tr>
+<td>Compiler 翻譯出來的指令數目較多</td>
+<td>Compiler 翻譯出來的指令數目較少</td>
+</tr>
+<tr>
+<td>需強力的 Compiler 支援</td>
+<td>不需強力的 Compiler 支援</td>
+</tr>
+<tr>
+<td>代表的有 IBM RS6000, Alphachip</td>
+<td>Intel Pentium 系列</td>
+</tr>
+<tr>
+<td>指令數目少，所以能使用 <strong>硬體線路控制 (Hardware Control)</strong> 來製作  =&gt; 速度快</td>
+<td>指令複雜度，採用 <strong>微程式 (Microprogramming control)</strong> 方式製作  =&gt; 較有彈性</td>
+</tr>
+<tr>
+<td>配合 <strong>Pipeline (管線技術)</strong> 和 <strong>Superscalar (超純量)</strong>  =&gt; 效果佳  因為每個指令只需花一個 clock cycle</td>
+<td>較 RISC 差</td>
+</tr>
+</tbody>
+</table>
+<p>Note: <strong>Pipeline (管線技術)</strong> 和 <strong>Superscalar (超純量)</strong> =&gt; 即 Pipeline + Parallel processing =&gt; 週期長度固定</p>
+<p>圖示：
+<img src="Pipe+parallel.png" alt=""></p>
+</li>
+</ul>
+<h2>記憶體階層</h2>
+<p>Q: Why Memory Hierarchy?<br>
+A: 欲於 Speed 和 Cost 之間取得一平衡點</p>
+<ul>
+<li>策略：
+<ol>
+<li>常用的 data =&gt; 往 speed 快的放</li>
+<li>不常用的 data =&gt; 往 cost 低的放</li>
+</ol>
+</li>
+</ul>
+<h2>記憶體的種類</h2>
+<ol>
+<li>RAM (Random Access Memory) 隨機存取記憶體： SRAM, DRAM</li>
+<li>ROM (Read Only Memory) 唯讀記憶體
+<ul>
+<li>PROM (Programming ROM) 可程式唯讀記憶體<br>
+寫入方式：燒錄器<br>
+Read many, Write once</li>
+<li>EPROM (Erasable-Programming ROM) 可抹除式的可程式僅讀記憶體<br>
+寫入方式：UV Light 紫外線<br>
+Read many, Write many</li>
+<li>EEPROM (Electically Erasable-Programming ROM) 電子式(可覆寫)的可抹除-可程式化的唯讀記憶體<br>
+寫入方式：電流<br>
+Read many, Write many<br>
+相較於 EPROM 可寫入更多次</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>Note: Flash ROM 快閃記憶體 (目前常用的 ROM) =&gt; 比 EEPROM 密度高(容量大)，又更便宜</li>
+</ul>
+<h2>ROM vs RAM</h2>
+<table>
+<thead>
+<tr>
+<th>ROM</th>
+<th>RAM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>容量較小</td>
+<td>容量較大</td>
+</tr>
+<tr>
+<td>只可讀</td>
+<td>可讀可寫</td>
+</tr>
+<tr>
+<td>Power-off, data 存在</td>
+<td>Power-off, data 消失</td>
+</tr>
+<tr>
+<td>儲存：BIOS, Bootstrap Loade</td>
+<td>儲存：program, data</td>
+</tr>
+<tr>
+<td>非揮發性 (Non-Volatile)</td>
+<td>揮發性 (Volatile)</td>
+</tr>
+</tbody>
+</table>
+<h2>DRAM vs SRAM</h2>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>DRAM (Dynamic) 動態隨機存取記憶體</th>
+<th>SRAM (Static)靜態隨機存取記憶體</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>存取速度</td>
+<td>慢</td>
+<td>快</td>
+</tr>
+<tr>
+<td>價格</td>
+<td>低</td>
+<td>高</td>
+</tr>
+<tr>
+<td>使用元件</td>
+<td>電容 (capaitor)</td>
+<td>正反器 (filp-flop)</td>
+</tr>
+<tr>
+<td>更新電路(Refresh)</td>
+<td>需更新</td>
+<td>不需更新</td>
+</tr>
+<tr>
+<td>電路密度</td>
+<td>密度高</td>
+<td>密度低</td>
+</tr>
+<tr>
+<td>用途</td>
+<td>作為主記憶體 (Main Memory)</td>
+<td>作為快取記憶體 (Cache)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Ex: <img src="DRAM_vs_SRAM.png" alt=""></li>
+</ul>
+<h2>I/O的定址方式</h2>
+<ol>
+<li>隔離式 I/O (isolated I/O): 不佔記憶體空間，但須額外指令來區分</li>
+<li>記憶體映射式 I/O (memory mapped I/O): 不需額外指令，但佔 Memory 空間</li>
+</ol>
+<h2>圖形表示法</h2>
+<ol>
+<li>點陣圖 bitmap
+<ul>
+<li>graphic 由許多點集合而成，每一個點為一個像素 (pixel)， pixel 是顯示器的基本單位 (Bit 是最基本的儲存單位)</li>
+<li>當 pixel 越多解析度就越高</li>
+</ul>
+</li>
+<li>向量圖 vector graphic
+<ul>
+<li>利用 Math 貝茲 (Bezier) 曲線去描述圖形輪廓</li>
+<li>可任意的將圖形放大、縮小、旋轉，而不會出現鋸齒狀</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>
+<p>Ex1: 圖形 size 為 1024 * 768, 而每個 pixels 需使用 24 bits, 問此圖 size?<br>
+Sol: 1024 * 768 * 24 bits(3 bytes) = 2304 KB 約等於 2.3 MB</p>
+</li>
+<li>
+<p>Ex2: 呈上，此圖可表示的顏色有幾種？<br>
+Sol: 1 bit =&gt; 2^1.....N bits = 2^N, Ans: 2 的 24 次方</p>
+</li>
+<li>
+<p>Ex3: 若轉為黑白差幾倍？<br>
+Sol: 各 pixel 只需 1 bit, 所以差 24 倍</p>
+</li>
+<li>
+<p>Ex4: 圖 1024 * 768, 由三色系 RGB 組成, 又各色系需 8 bits, 問圖的大小？<br>
+Sol: 8 bits = 1 byte
+<img src="RGB.png" alt=""></p>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">1.1 電腦系統介紹</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">電腦發展史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">電腦架構</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">五大單元結構</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">補充：Von Neumann 瓶頸</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">機器指令週期 (Machine Cycle)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">Pipeline 管線技術</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.0.1.</span> <span class="toc-text">例：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">儲存單位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.7.</span> <span class="toc-text">匯流排</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.7.0.1.</span> <span class="toc-text">例：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.8.</span> <span class="toc-text">常見的時間單位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.9.</span> <span class="toc-text">硬體介紹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.10.</span> <span class="toc-text">CPU 的種類</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.11.</span> <span class="toc-text">記憶體階層</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.12.</span> <span class="toc-text">記憶體的種類</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.13.</span> <span class="toc-text">ROM vs RAM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.14.</span> <span class="toc-text">DRAM vs SRAM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.15.</span> <span class="toc-text">I&#x2F;O的定址方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.16.</span> <span class="toc-text">圖形表示法</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/&text=Chapter1-基本電腦概論-電腦系統介紹" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/&title=Chapter1-基本電腦概論-電腦系統介紹" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/&is_video=false&description=Chapter1-基本電腦概論-電腦系統介紹" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter1-基本電腦概論-電腦系統介紹&body=Check out this article: https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/&title=Chapter1-基本電腦概論-電腦系統介紹" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/&title=Chapter1-基本電腦概論-電腦系統介紹" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/&title=Chapter1-基本電腦概論-電腦系統介紹" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/&title=Chapter1-基本電腦概論-電腦系統介紹" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/&name=Chapter1-基本電腦概論-電腦系統介紹&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/&t=Chapter1-基本電腦概論-電腦系統介紹" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

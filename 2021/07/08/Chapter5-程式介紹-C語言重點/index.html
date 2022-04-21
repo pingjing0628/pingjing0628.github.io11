@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="5.2 C 語言重點  C Language  結構  xxx.c header: 表頭 body: object code   Ex: # include &lt;stdio.h&gt; &#x3D;&gt; stdio.h 為 linker, 外部函式庫之 header file  變數 vs 常數    Variable Constant     會隨著執行而更動的數值 不變   佔用 memory">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter5-程式介紹-C語言重點">
+<meta property="og:url" content="https://pingjing0628.github.io/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="5.2 C 語言重點  C Language  結構  xxx.c header: 表頭 body: object code   Ex: # include &lt;stdio.h&gt; &#x3D;&gt; stdio.h 為 linker, 外部函式庫之 header file  變數 vs 常數    Variable Constant     會隨著執行而更動的數值 不變   佔用 memory">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-07-08T09:10:18.000Z">
+<meta property="article:modified_time" content="2022-04-20T15:05:11.851Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="C">
+<meta property="article:tag" content="運算子">
+<meta property="article:tag" content="位元運算">
+<meta property="article:tag" content="Pointer">
+<meta property="article:tag" content="雙重指標">
+<meta property="article:tag" content="Structure Programming Language">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Chapter5-程式介紹-C語言重點</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2022/04/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E6%A6%82%E8%AB%96/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/&text=Chapter5-程式介紹-C語言重點" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/&title=Chapter5-程式介紹-C語言重點" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/&is_video=false&description=Chapter5-程式介紹-C語言重點" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter5-程式介紹-C語言重點&body=Check out this article: https://pingjing0628.github.io/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/&title=Chapter5-程式介紹-C語言重點" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/&title=Chapter5-程式介紹-C語言重點" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/&title=Chapter5-程式介紹-C語言重點" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/&title=Chapter5-程式介紹-C語言重點" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/&name=Chapter5-程式介紹-C語言重點&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/&t=Chapter5-程式介紹-C語言重點" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">5.2 C 語言重點</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">C Language</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">變數 vs 常數</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">變數宣告</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">Compare Static typed and Dynamic typed</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">常見的 data type 介紹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">變數種類</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.7.</span> <span class="toc-text">變數的存取順序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.8.</span> <span class="toc-text">Standard I&#x2F;O library 標準輸出&#x2F;輸入函式庫</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Chapter5-程式介紹-C語言重點
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-07-08T09:10:18.000Z" itemprop="datePublished">2021-07-08</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/">計算機概論</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/C/" rel="tag">C</a>, <a class="tag-link" href="/tags/Pointer/" rel="tag">Pointer</a>, <a class="tag-link" href="/tags/Structure-Programming-Language/" rel="tag">Structure Programming Language</a>, <a class="tag-link" href="/tags/%E4%BD%8D%E5%85%83%E9%81%8B%E7%AE%97/" rel="tag">位元運算</a>, <a class="tag-link" href="/tags/%E9%81%8B%E7%AE%97%E5%AD%90/" rel="tag">運算子</a>, <a class="tag-link" href="/tags/%E9%9B%99%E9%87%8D%E6%8C%87%E6%A8%99/" rel="tag">雙重指標</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1>5.2 C 語言重點</h1>
+<hr>
+<h2>C Language</h2>
+<ul>
+<li>結構
+<ul>
+<li>xxx.c</li>
+<li>header: 表頭</li>
+<li>body: object code</li>
+</ul>
+</li>
+<li>Ex:
+<code># include &lt;stdio.h&gt;</code> =&gt; stdio.h 為 linker, 外部函式庫之 header file</li>
+</ul>
+<h2>變數 vs 常數</h2>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Constant</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>會隨著執行而更動的數值</td>
+<td>不變</td>
+</tr>
+<tr>
+<td>佔用 memory space 來存取</td>
+<td>不需</td>
+</tr>
+<tr>
+<td>int x;</td>
+<td>ex: 'a' or 100</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Note: 常數變數 (constant variable)<br>
+Define: <code>const int x = 10;</code></li>
+</ul>
+<h2>變數宣告</h2>
+<p>格式： <code>type (space) variable;</code><br>
+ex: int x;</p>
+<h2>Compare Static typed and Dynamic typed</h2>
+<table>
+<thead>
+<tr>
+<th>Static typed</th>
+<th>Dynamic typed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>宣告時, 即需決定 data 之型態</td>
+<td>不需, runtime 才決定</td>
+</tr>
+<tr>
+<td>int x;</td>
+<td>var x; x = 100;</td>
+</tr>
+<tr>
+<td>java, C, C++</td>
+<td>javascript, ruby</td>
+</tr>
+</tbody>
+</table>
+<h2>常見的 data type 介紹</h2>
+<ol>
+<li>boolean (布林):</li>
+</ol>
+<ul>
+<li>只有兩種狀態:
+<ul>
+<li>true</li>
+<li>false</li>
+</ul>
+</li>
+<li>Ex: <code>bool flag;</code></li>
+</ul>
+<ol start="2">
+<li>character (字元):</li>
+</ol>
+<ul>
+<li>利用 &quot;ASCII&quot; 來存放</li>
+<li>佔用 1 byte memory space</li>
+<li>常見字元編碼
+<ul>
+<li>'0' =&gt; (48)10</li>
+<li>'A' =&gt; (65)10</li>
+<li>'a' =&gt; (97)10</li>
+</ul>
+</li>
+<li>Ex: <code>char c1;</code></li>
+<li>Note:<br>
+|character|string|
+|--|--|
+|由一字母或數字組成|由 1~多個組成|
+|用單引號括住|用雙引號括住|
+|'a', 'B'(對), &quot;B&quot;(錯)|&quot;hello&quot;(對), 'hello'(錯)|</li>
+</ul>
+<ol start="3">
+<li>integer (整數):</li>
+</ol>
+<ul>
+<li>利用 4 bytes 表示</li>
+<li>Ex: <code>int x;</code></li>
+<li>除法:
+<ul>
+<li>&quot;/&quot; =&gt; 取商, <code>x = 6/4</code></li>
+<li>&quot;%&quot; =&gt; 取餘, <code>y = 6%4</code></li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li>浮點數:<br>
+|float|double|
+|--|--|
+|single precision|double precision|
+|32 bits, 佔用 4 bytes|使用 8 bytes|
+|float f;|double d;|</li>
+</ol>
+<ul>
+<li>ex:
+<ol>
+<li><code>float f1 = 3.2/4;</code> =&gt; 0.8</li>
+<li><code>float f2 = 5/4;</code> =&gt; 1.0</li>
+<li><code>float f3 = 5.0/4;</code> =&gt; 1.25</li>
+<li><code>float f4 = (float)5/4;</code> =&gt; 1.25 =&gt; 強制將 5 視為浮點數, <strong>強制轉型 casting</strong></li>
+</ol>
+</li>
+<li>Note:
+<ol>
+<li>在 c, c++中, 運算是會以最大型別來求得結果
+<ul>
+<li>ex: int * double + float = ? =&gt; output <strong>double</strong></li>
+</ul>
+</li>
+<li>浮點數, 預設為 <strong>double</strong> 之型態 (因為失真少, 結尾誤差少)
+<ul>
+<li>ex: 3.14 * 2.56 + 3.2 =&gt; double</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>NOTE: type range =&gt; byte &lt; short &lt; int &lt; long &lt; float &lt; double</p>
+</blockquote>
+<h2>變數種類</h2>
+<table>
+<thead>
+<tr>
+<th>local variable</th>
+<th>global variable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>於 block 或 函式之中宣告</td>
+<td>於 block 或 函式之外宣告</td>
+</tr>
+<tr>
+<td>僅能在所屬的 block 之內使用</td>
+<td>全部block都可用</td>
+</tr>
+<tr>
+<td>於 block 一結束, 即清除</td>
+<td>整個程式結束才清除</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>static variable</li>
+</ul>
+<h2>變數的存取順序</h2>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">全域變數</span><br><span class="line">3.&#123;</span><br><span class="line">    2.&#123;</span><br><span class="line">        1.&#123;</span><br><span class="line">            print(x)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>先找自身區塊</li>
+<li>若 1 無, 往外層找</li>
+<li>若 2 無, 往 global 找</li>
+</ol>
+<ul>
+<li>
+<p>Note: dynamic scoping =&gt; 依程式執行時的呼叫順序 (runtime) 來決定找尋順序, <code>main() -&gt; A() -&gt; B()</code> =&gt; 找B找不到, 找A, 在找不到找 main</p>
+</li>
+<li>
+<p>Ex1:<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int x &#x3D; 10; &#x2F;&#x2F;global</span><br><span class="line">int main() </span><br><span class="line">&#123;</span><br><span class="line">    int y &#x3D; 5;</span><br><span class="line">    &#123;</span><br><span class="line">        int x &#x3D; 20;</span><br><span class="line">        int z &#x3D; 8;</span><br><span class="line">        printf(&quot;%d&quot;, x); &#x2F;&#x2F; x&#x3D;20, 用完即清除</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;%d&quot;, x); &#x2F;&#x2F; x&#x3D;10</span><br><span class="line">    printf(&quot;%d&quot;, z); &#x2F;&#x2F; compile error</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Ex2:<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int x &#x3D; 20;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int y &#x3D; 10;</span><br><span class="line">    fun(y);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line">-------------------</span><br><span class="line">void fun(int a)</span><br><span class="line">&#123;</span><br><span class="line">    int y &#x3D; 30;</span><br><span class="line">    printf(&quot;%d, %d&quot;, x, y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+Ans: (20, 30)</p>
+</li>
+<li>
+<p>Note: 在 C 語言裡, 只要不是指標, 就是 call by-value</p>
+</li>
+<li>
+<p>local variable =&gt; 與 function 一樣, 用 stack 放 =&gt; 後進先出</p>
+</li>
+</ul>
+<h2>Standard I/O library 標準輸出/輸入函式庫</h2>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">5.2 C 語言重點</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">C Language</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">變數 vs 常數</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">變數宣告</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">Compare Static typed and Dynamic typed</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">常見的 data type 介紹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">變數種類</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.7.</span> <span class="toc-text">變數的存取順序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.8.</span> <span class="toc-text">Standard I&#x2F;O library 標準輸出&#x2F;輸入函式庫</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/&text=Chapter5-程式介紹-C語言重點" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/&title=Chapter5-程式介紹-C語言重點" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/&is_video=false&description=Chapter5-程式介紹-C語言重點" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter5-程式介紹-C語言重點&body=Check out this article: https://pingjing0628.github.io/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/&title=Chapter5-程式介紹-C語言重點" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/&title=Chapter5-程式介紹-C語言重點" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/&title=Chapter5-程式介紹-C語言重點" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/&title=Chapter5-程式介紹-C語言重點" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/&name=Chapter5-程式介紹-C語言重點&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/&t=Chapter5-程式介紹-C語言重點" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

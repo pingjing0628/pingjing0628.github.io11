@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="5.1 基本介紹  Programming Language 程式語言    年代 特徵1 特徵2 特徵3 特徵4 特徵5     1GL (Machine Language)低階語言 由 0, 1 組成 為機器能直接執行的語言 user 不易理解     2GL (Assembly Language)低階語言 提供簡易的符號供 user 使用 用 &quot;assembler&quot; 將之">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter5-程式介紹-基本介紹">
+<meta property="og:url" content="https://pingjing0628.github.io/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="5.1 基本介紹  Programming Language 程式語言    年代 特徵1 特徵2 特徵3 特徵4 特徵5     1GL (Machine Language)低階語言 由 0, 1 組成 為機器能直接執行的語言 user 不易理解     2GL (Assembly Language)低階語言 提供簡易的符號供 user 使用 用 &quot;assembler&quot; 將之">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-07-05T09:30:35.000Z">
+<meta property="article:modified_time" content="2022-04-20T15:02:42.696Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="Structure Programming Language">
+<meta property="article:tag" content="OOP">
+<meta property="article:tag" content="Call by value">
+<meta property="article:tag" content="Call by address">
+<meta property="article:tag" content="Call by name">
+<meta property="article:tag" content="Call by value result">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Chapter5-程式介紹-基本介紹</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/&text=Chapter5-程式介紹-基本介紹" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/&title=Chapter5-程式介紹-基本介紹" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/&is_video=false&description=Chapter5-程式介紹-基本介紹" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter5-程式介紹-基本介紹&body=Check out this article: https://pingjing0628.github.io/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/&title=Chapter5-程式介紹-基本介紹" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/&title=Chapter5-程式介紹-基本介紹" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/&title=Chapter5-程式介紹-基本介紹" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/&title=Chapter5-程式介紹-基本介紹" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/&name=Chapter5-程式介紹-基本介紹&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/&t=Chapter5-程式介紹-基本介紹" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">5.1 基本介紹</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">Programming Language 程式語言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.1.</span> <span class="toc-text">種類</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">funtion (函式) &#x3D;&gt; C, C++, Java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">funtion calling (呼叫)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">參數傳遞種類</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">結構化程式三要求 Structure Programming Language SPL</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Chapter5-程式介紹-基本介紹
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-07-05T09:30:35.000Z" itemprop="datePublished">2021-07-05</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/">計算機概論</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Call-by-address/" rel="tag">Call by address</a>, <a class="tag-link" href="/tags/Call-by-name/" rel="tag">Call by name</a>, <a class="tag-link" href="/tags/Call-by-value/" rel="tag">Call by value</a>, <a class="tag-link" href="/tags/Call-by-value-result/" rel="tag">Call by value result</a>, <a class="tag-link" href="/tags/OOP/" rel="tag">OOP</a>, <a class="tag-link" href="/tags/Structure-Programming-Language/" rel="tag">Structure Programming Language</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1>5.1 基本介紹</h1>
+<hr>
+<h2>Programming Language 程式語言</h2>
+<table>
+<thead>
+<tr>
+<th>年代</th>
+<th>特徵1</th>
+<th>特徵2</th>
+<th>特徵3</th>
+<th>特徵4</th>
+<th>特徵5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1GL (Machine Language)<strong>低階語言</strong></td>
+<td>由 0, 1 組成</td>
+<td>為機器能直接執行的語言</td>
+<td>user 不易理解</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2GL (Assembly Language)<strong>低階語言</strong></td>
+<td>提供簡易的符號供 user 使用</td>
+<td>用 &quot;assembler&quot; 將之轉成 object code</td>
+<td>Ex: ADD R1 3 <strong>=&gt; 將 3 加到 Register R1 中</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>3GL (High-Level Language)<strong>高階語言</strong></td>
+<td>提供更多貼近 user 的指令</td>
+<td>多為程序導向的程式語言 (procedural language -&gt; tell &quot;how&quot; to do)</td>
+<td>Ex: <code>int i = 3 + 5;</code></td>
+<td>代表：C (具 self-compile), PASCAL, FURTRAN, COBOL, BASIC, C++, JAVA, .NET</td>
+<td>C 語言：  1. compile 完的 object code, 不能跨平台  2. 此邊是語法, 故可跨平台</td>
+</tr>
+<tr>
+<td>4GL (Non-procedural Language) 非程序導向<strong>高階語言</strong></td>
+<td>又稱為<strong>宣告式語言 (Declaractive Language)</strong> -&gt; tell &quot;what&quot; to do</td>
+<td>代表：SQL, report generator</td>
+<td>Ex: <code>Select height From student where height &gt;= 180</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>5GL (Natural Language) 自然語言<strong>高階語言</strong></td>
+<td>使用到人工智慧的技術</td>
+<td>為機器能直接執行的語言</td>
+<td>代表：LISP, PROLOG</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>種類</h3>
+<table>
+<thead>
+<tr>
+<th>種類</th>
+<th>代表性程式語言</th>
+<th>備註</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Interpreter language 直譯</td>
+<td>Basic, Java, Javascript, ASP, PHP, JSP, ruby, groovy, python</td>
+<td></td>
+</tr>
+<tr>
+<td>Compile language 編譯</td>
+<td>C, C++, FURTRAN, PASCAL, COBAL -&gt; 先編譯成 object code</td>
+<td>java, javascript 沒有關係</td>
+</tr>
+<tr>
+<td>先 compile, 後 interpreter -&gt; p-code, java</td>
+<td>跨平台 (cross-platform)</td>
+<td></td>
+</tr>
+<tr>
+<td>Object Oriented Programming (OOP)</td>
+<td>java, C++, C#, .NET, javascript, ruby, python, groovy, VB, smalltalk, Ada</td>
+<td></td>
+</tr>
+<tr>
+<td>Functional Programming Language (函式編程語言) FPL</td>
+<td>LISP, ML, F#</td>
+<td>適用於平行運算, 以 function 為 first class, 各 function 間 No side effect</td>
+</tr>
+</tbody>
+</table>
+<h2>funtion (函式) =&gt; C, C++, Java</h2>
+<ul>
+<li>格式：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">return type   function name  parameter list</span><br><span class="line">&#123;</span><br><span class="line">    function code (body)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol>
+<li><code>return type</code> : 回傳型態 <strong>output</strong></li>
+<li><code>function name</code>: in c, c++ 中 main 代表主程式</li>
+<li><code>parameter List</code>: 參數串列, 接收外界呼叫時須引入的參數 <strong>input</strong></li>
+<li><code>function code</code> <strong>process</strong></li>
+</ol>
+<h2>funtion calling (呼叫)</h2>
+<ul>
+<li>格式：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">funA()</span><br><span class="line">&#123;</span><br><span class="line">    int a, b;</span><br><span class="line">    ...</span><br><span class="line">    funcB(a, b) &#x2F;&#x2F; (a, b 為 actual parameter 實際參數 AP)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">funB(x, y) &#x2F;&#x2F; (x, y 為 foraml parameter 型式參數 FP)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol>
+<li>參數傳遞 (funcB in funcA)</li>
+<li>funcB execute</li>
+<li>funcB return</li>
+</ol>
+<h2>參數傳遞種類</h2>
+<table>
+<thead>
+<tr>
+<th>Call by value</th>
+<th>Call by address</th>
+<th>Call by name</th>
+<th>Call by value-result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AP 跟 FP 佔用不同的 memory space</td>
+<td>操作相同 Memory space</td>
+<td>AP 會直接取代 FP 之所在</td>
+<td>在 function 最後結束時, 將 FP 寫回對應 AP 之內容</td>
+</tr>
+<tr>
+<td>No side effect</td>
+<td>有</td>
+<td>有</td>
+<td>有</td>
+</tr>
+<tr>
+<td>binding 速度慢 (最慢)</td>
+<td>最快</td>
+<td>居中</td>
+<td></td>
+</tr>
+<tr>
+<td>不適合用於結構型資料的參數傳遞</td>
+<td>適合</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Ex1:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a &#x3D; 10, b &#x3D; 20;</span><br><span class="line">    fun(a, b);</span><br><span class="line">    print(a, b);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void fun(int x, int y)</span><br><span class="line">&#123;</span><br><span class="line">    x &#x3D; 3;</span><br><span class="line">    y &#x3D; 6;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>問分別採 1. call by value 2. call by address 3. call by value result, output = ? a = ? b = ?<br>
+<strong>Sol:</strong></p>
+<ol>
+<li>a=10, b=20</li>
+<li>x, y 為記錄 a, b 的位址, 並指回原變數。Ans: a=3, b=6</li>
+<li><strong>最後結束時會將 FP 寫回對應 AP 之內容</strong>, 具 side effect(砍掉前，將最後的值抓回)。Ans: a=3, b=6</li>
+</ol>
+<ul>
+<li>Ex2:<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a &#x3D; 4, b &#x3D; 6;</span><br><span class="line">    fun(a, b, a+b);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void fun(int x, int y, int z)</span><br><span class="line">&#123;</span><br><span class="line">    x &#x3D; 7;</span><br><span class="line">    y &#x3D; 10;</span><br><span class="line">    int t &#x3D; z * z;</span><br><span class="line">    printf(t)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>問採 1. call by name? 2. call by address?<br>
+<strong>Sol:</strong></p>
+<ol>
+<li>87, 需注意 <code>a+b*a+b</code>先乘除後加減</li>
+<li>100</li>
+</ol>
+<ul>
+<li>Note:<br>
+採 <code>call by-address</code> 時, 若有運算式, 則此採 <strong>call by-value</strong> 來接收<br>
+<code>call by-reference</code> 一般而言相同, 但在 c++ 中, 2 者完全不同<br>
+<code>call by-name</code> 多做一件事, 所以居中</li>
+</ul>
+<h2>結構化程式三要求 Structure Programming Language SPL</h2>
+<p>三要素：</p>
+<ol>
+<li>循序 sequential<br>
+指令會依序一一往下執行</li>
+<li>選擇 selective/conditional<br>
+利用 &quot;判別式&quot; 來決定接下來的執行步驟為何<br>
+<code>if...else...</code><br>
+<code>switch...case...</code></li>
+<li>重複 repeat/iteractive<br>
+利用 &quot;loop&quot; 來反覆執行部分的 step<br>
+<code>for loop</code><br>
+<code>while</code><br>
+<code>do...while</code></li>
+</ol>
+<ul>
+<li>SPL 中避免使用 &quot;跳躍&quot; 指令或動作<br>
+<code>jump</code>, <code>goto</code></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">5.1 基本介紹</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">Programming Language 程式語言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.1.</span> <span class="toc-text">種類</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">funtion (函式) &#x3D;&gt; C, C++, Java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">funtion calling (呼叫)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">參數傳遞種類</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">結構化程式三要求 Structure Programming Language SPL</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/&text=Chapter5-程式介紹-基本介紹" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/&title=Chapter5-程式介紹-基本介紹" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/&is_video=false&description=Chapter5-程式介紹-基本介紹" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter5-程式介紹-基本介紹&body=Check out this article: https://pingjing0628.github.io/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/&title=Chapter5-程式介紹-基本介紹" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/&title=Chapter5-程式介紹-基本介紹" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/&title=Chapter5-程式介紹-基本介紹" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/&title=Chapter5-程式介紹-基本介紹" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/&name=Chapter5-程式介紹-基本介紹&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/&t=Chapter5-程式介紹-基本介紹" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

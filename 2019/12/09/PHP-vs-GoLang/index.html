@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="PHP vs GoLang &lt;!--more--&gt; 定義變數－Variables PHP 12$a &#x3D; &quot;foo&quot;;$b &#x3D; &quot;bar&quot;; GoLang 區分為「新定義」、「預先定義」、「自動新定義」、「覆蓋」。 1234567891011&#x2F;&#x2F; 新定義：定義新的 a 變數為字串型別，且值是「foo」var a string &#x3D; &quot;foo&quot;&#x2F;&#x2F; 預先定義：先定義一個新的 b 變數為字串型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP vs GoLang">
+<meta property="og:url" content="https://pingjing0628.github.io/2019/12/09/PHP-vs-GoLang/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="PHP vs GoLang &lt;!--more--&gt; 定義變數－Variables PHP 12$a &#x3D; &quot;foo&quot;;$b &#x3D; &quot;bar&quot;; GoLang 區分為「新定義」、「預先定義」、「自動新定義」、「覆蓋」。 1234567891011&#x2F;&#x2F; 新定義：定義新的 a 變數為字串型別，且值是「foo」var a string &#x3D; &quot;foo&quot;&#x2F;&#x2F; 預先定義：先定義一個新的 b 變數為字串型">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2019-12-09T15:10:51.000Z">
+<meta property="article:modified_time" content="2020-12-15T15:15:38.132Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="GoLang">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="Defer">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>PHP vs GoLang</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2019/12/15/GoLang-%E8%AA%9E%E6%B3%95%E7%AD%86%E8%A8%98%E6%95%B4%E7%90%86/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2019/12/09/GoLang-%E7%B7%B4%E7%BF%92%E5%A7%93%E5%90%8D%E7%94%A2%E7%94%9F%E5%99%A8-dep/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2019/12/09/PHP-vs-GoLang/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2019/12/09/PHP-vs-GoLang/&text=PHP vs GoLang" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2019/12/09/PHP-vs-GoLang/&title=PHP vs GoLang" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2019/12/09/PHP-vs-GoLang/&is_video=false&description=PHP vs GoLang" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=PHP vs GoLang&body=Check out this article: https://pingjing0628.github.io/2019/12/09/PHP-vs-GoLang/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2019/12/09/PHP-vs-GoLang/&title=PHP vs GoLang" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2019/12/09/PHP-vs-GoLang/&title=PHP vs GoLang" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2019/12/09/PHP-vs-GoLang/&title=PHP vs GoLang" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2019/12/09/PHP-vs-GoLang/&title=PHP vs GoLang" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2019/12/09/PHP-vs-GoLang/&name=PHP vs GoLang&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2019/12/09/PHP-vs-GoLang/&t=PHP vs GoLang" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">PHP vs GoLang</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">2.</span> <span class="toc-text">&lt;!--more--&gt;</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.1.</span> <span class="toc-text">定義變數－Variables</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.2.</span> <span class="toc-text">輸出－Echo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.3.</span> <span class="toc-text">函式－Function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.4.</span> <span class="toc-text">多值回傳－Multiple Value</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.5.</span> <span class="toc-text">匿名函式－Anonymous Function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.6.</span> <span class="toc-text">多資料儲存型態－Stores</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">2.6.1.</span> <span class="toc-text">1. 陣列－Array</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">2.6.2.</span> <span class="toc-text">2. 切片－Slice</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">2.6.3.</span> <span class="toc-text">3. 映照－Map</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">2.6.4.</span> <span class="toc-text">4. 接口－Interface</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.7.</span> <span class="toc-text">不定值－Mixed Type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.8.</span> <span class="toc-text">逆向處理－Defer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.9.</span> <span class="toc-text">迴圈－Loops</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.10.</span> <span class="toc-text">每個－Foreach</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.11.</span> <span class="toc-text">重複－While</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.12.</span> <span class="toc-text">做 .. 重複－Do While</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.13.</span> <span class="toc-text">日期－Date</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.14.</span> <span class="toc-text">切割字串－Split</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.15.</span> <span class="toc-text">關聯陣列－Associative Array</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.16.</span> <span class="toc-text">是否存在－Isset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.17.</span> <span class="toc-text">指針－Pointer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.18.</span> <span class="toc-text">錯誤處理－Error Exception</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.19.</span> <span class="toc-text">拋出和捕捉異常－Try &amp; Catch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.20.</span> <span class="toc-text">套件／匯入／匯出－Package &#x2F; Import &#x2F; Export</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">2.20.1.</span> <span class="toc-text">1. 套件－Package</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">2.20.2.</span> <span class="toc-text">2. 匯入－Import</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">2.20.3.</span> <span class="toc-text">3. 匯出－Export</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.21.</span> <span class="toc-text">類別－Class</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">2.21.1.</span> <span class="toc-text">1. 建構子－Constructor</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">2.21.2.</span> <span class="toc-text">2. 嵌入－Embed</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">2.21.3.</span> <span class="toc-text">3. 遮蔽－Shadowing</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">2.21.4.</span> <span class="toc-text">4. 多形－Polymorphism</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        PHP vs GoLang
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-12-09T15:10:51.000Z" itemprop="datePublished">2019-12-09</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/GoLang/">GoLang</a> › <a class="category-link" href="/categories/GoLang/PHP/">PHP</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Defer/" rel="tag">Defer</a>, <a class="tag-link" href="/tags/GoLang/" rel="tag">GoLang</a>, <a class="tag-link" href="/tags/PHP/" rel="tag">PHP</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2>PHP vs GoLang</h2>
+<h2>&lt;!--more--&gt;</h2>
+<h3>定義變數－Variables</h3>
+<p><strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$a = <span class="string">"foo"</span>;</span><br><span class="line">$b = <span class="string">"bar"</span>;</span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+區分為「新定義」、「預先定義」、「自動新定義」、「覆蓋」。
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 新定義：定義新的 a 變數為字串型別，且值是「foo」</span></span><br><span class="line"><span class="keyword">var</span> a <span class="keyword">string</span> = <span class="string">"foo"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 預先定義：先定義一個新的 b 變數為字串型別但不賦予值</span></span><br><span class="line"><span class="keyword">var</span> b <span class="keyword">string</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 自動新定義：讓 Golang 依照值的內容自己定義新變數的資料型態</span></span><br><span class="line">c := <span class="string">"bar"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 覆蓋：先前已定義過 a ，可以直接覆蓋其值</span></span><br><span class="line">a = <span class="string">"fooooooo"</span></span><br></pre></td></tr></table></figure></p>
+<h3>輸出－Echo</h3>
+<p>在 PHP 中常用到 <code>echo</code> 來顯示文字。
+<strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">"Foo"</span>; <span class="comment">// 輸出：Foo</span></span><br><span class="line"></span><br><span class="line">$A = <span class="string">"Bar"</span></span><br><span class="line"><span class="keyword">echo</span> $A; <span class="comment">// 輸出：Bar</span></span><br><span class="line"></span><br><span class="line">$B = <span class="string">"Hello"</span></span><br><span class="line"><span class="keyword">echo</span> $B . <span class="string">", world!"</span>; <span class="comment">// 輸出：Hello, world!</span></span><br><span class="line"></span><br><span class="line">$C = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">echo</span> var_dump($C); <span class="comment">// 輸出：array(3) &#123;[0]=&gt;int(1) [1]=&gt;int(2) [2]=&gt;int(3)&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+在 Golang 中需要 <code>fmt</code> 套件。
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println(<span class="string">"Foo"</span>) <span class="comment">// 輸出：Foo</span></span><br><span class="line"></span><br><span class="line">A := <span class="string">"Bar"</span>  </span><br><span class="line">fmt.Println(A) <span class="comment">// 輸出：Bar</span></span><br><span class="line"></span><br><span class="line">B := <span class="string">"Hello"</span>  </span><br><span class="line">fmt.Printf(<span class="string">"%s, world!"</span>, B) <span class="comment">// 輸出：Hello, world!</span></span><br><span class="line"></span><br><span class="line">C := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;  </span><br><span class="line">fmt.Println(C) <span class="comment">// 輸出：[1 2 3]</span></span><br></pre></td></tr></table></figure></p>
+<h3>函式－Function</h3>
+<p>相差較少
+<strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Hello, world!"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> test(); <span class="comment">// 輸出：Hello, world!</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+Golang 須在函式後面宣告會回傳的資料型別。</p>
+<p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span> <span class="title">string</span></span> &#123;  </span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Hello, world!"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fmt.Println(test()) <span class="comment">// 輸出：Hello, world!</span></span><br></pre></td></tr></table></figure></p>
+<h3>多值回傳－Multiple Value</h3>
+<p><strong>PHP</strong>
+在 PHP 中，回傳多個資料需使用陣列，將資料放入陣列裡。
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> [</span><br><span class="line">        <span class="string">'username'</span> =&gt; <span class="string">'yu0628'</span>, </span><br><span class="line">        <span class="string">'time'</span>     =&gt; <span class="number">123456</span></span><br><span class="line">    ];</span><br><span class="line">&#125;</span><br><span class="line">$data = test();</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> $data[<span class="string">'username'</span>], $data[<span class="string">'time'</span>]; <span class="comment">// 輸出：yu0628 123456</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+在 Golang 中不必用到一個陣列，函式可以一次回傳多個值：
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span> <span class="params">(<span class="keyword">string</span>, <span class="keyword">int</span>)</span></span> &#123;  </span><br><span class="line">    <span class="keyword">return</span> <span class="string">"yu0628"</span>, <span class="number">123456</span></span><br><span class="line">&#125;</span><br><span class="line">username, time := test()</span><br><span class="line"></span><br><span class="line">fmt.Println(username, time) <span class="comment">// 輸出：yu0628 123456</span></span><br></pre></td></tr></table></figure></p>
+<h3>匿名函式－Anonymous Function</h3>
+<p><strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$a = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"Hello, world!"</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">$a(); <span class="comment">// 輸出：Hello, world!</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a := <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    fmt.Println(<span class="string">"Hello, world!"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a() <span class="comment">// 輸出：Hello, world!</span></span><br></pre></td></tr></table></figure></p>
+<h3>多資料儲存型態－Stores</h3>
+<p><strong>PHP</strong>
+PHP 儲存皆用陣列即可。
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$array  = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line">$array2 = [<span class="string">'username'</span> =&gt; <span class="string">'yu0628'</span>, </span><br><span class="line">           <span class="string">'password'</span> =&gt; <span class="string">'2019 Dec'</span>];</span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+Golang 中有這些型態：<code>array</code>, <code>slice</code>, <code>map</code>, <code>interface</code>
+Golang 是個<strong>強型別語言</strong>，意思是陣列中只能有一種型態，means當決定此陣列是擺放字串資料時，就只能放字串。沒有數值、沒有布林值。</p>
+<h4>1. 陣列－Array</h4>
+<blockquote>
+<p>一個存放固定長度的陣列。</p>
+</blockquote>
+<p>Golang 定義陣列時，須給一個長度及其內容存放的資料型態，陣列內容不一定要填滿其長度，但陣列內容不能超過當初定義的長度。</p>
+<p><strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$a = [<span class="string">"foo"</span>, <span class="string">"bar"</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> $a[<span class="number">0</span>]; <span class="comment">// 輸出：foo</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a [<span class="number">2</span>]<span class="keyword">string</span></span><br><span class="line"></span><br><span class="line">a[<span class="number">0</span>] = <span class="string">"foo"</span>  </span><br><span class="line">a[<span class="number">1</span>] = <span class="string">"bar"</span></span><br><span class="line"></span><br><span class="line">fmt.Println(a[<span class="number">0</span>]) <span class="comment">// 輸出：foo</span></span><br></pre></td></tr></table></figure></p>
+<h4>2. 切片－Slice</h4>
+<blockquote>
+<p>可供「裁切」而且供自由擴展的陣列。</p>
+</blockquote>
+<p>相較於陣列的好處：「不用定義其最大長度，而且你可以直接賦予值」。</p>
+<p><strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$a = [<span class="string">"foo"</span>, <span class="string">"bar"</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> $a[<span class="number">0</span>]; <span class="comment">// 輸出：foo</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a := []<span class="keyword">string</span>&#123;<span class="string">"foo"</span>, <span class="string">"bar"</span>&#125;</span><br><span class="line"></span><br><span class="line">fmt.Println(a[<span class="number">0</span>]) <span class="comment">// 輸出：foo</span></span><br></pre></td></tr></table></figure></p>
+<p>像是 PHP 中的 <code>array_slice()</code>，但 Golang 直接讓 <code>Slice</code>「內建」了，其用法是：<code>slice[開始:結束]</code>。</p>
+<p><strong>GoLang</strong>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">p := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;</span><br><span class="line"></span><br><span class="line">fmt.Println(p[<span class="number">0</span>:<span class="number">1</span>]) <span class="comment">// 輸出：[1]  </span></span><br><span class="line">fmt.Println(p[<span class="number">1</span>:<span class="number">1</span>]) <span class="comment">// 輸出：[]  （！注意跟 PHP 不一樣！）  </span></span><br><span class="line">fmt.Println(p[<span class="number">1</span>:])  <span class="comment">// 輸出：[2, 3, 4, 5, 6]  </span></span><br><span class="line">fmt.Println(p[:<span class="number">1</span>])  <span class="comment">// 輸出：[1]</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$p = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> array_slice($p, <span class="number">0</span>, <span class="number">1</span>); <span class="comment">// 輸出：[1]  </span></span><br><span class="line"><span class="keyword">echo</span> array_slice($p, <span class="number">1</span>, <span class="number">1</span>); <span class="comment">// 輸出：[2]  </span></span><br><span class="line"><span class="keyword">echo</span> array_slice($p, <span class="number">1</span>);    <span class="comment">// 輸出：[2, 3, 4, 5, 6]  </span></span><br><span class="line"><span class="keyword">echo</span> array_slice($p, <span class="number">0</span>, <span class="number">1</span>); <span class="comment">// 輸出：[1]</span></span><br></pre></td></tr></table></figure></p>
+<h4>3. 映照－Map</h4>
+<blockquote>
+<p>有鍵名和鍵值的陣列。</p>
+</blockquote>
+<p>「需要事先定義其鍵名、鍵值的資料型態」，仍限制無法在映照中存放多種不同型態的資料。</p>
+<p><strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$data[<span class="string">"username"</span>] = <span class="string">"yu0628"</span>;</span><br><span class="line">$data[<span class="string">"password"</span>] = <span class="string">"2019 Dec"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> $data[<span class="string">"username"</span>]; <span class="comment">// yu0628</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+在 Golang 需要先用 <code>make()</code> 宣告 <code>map</code>。</p>
+<p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">data := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>)</span><br><span class="line"></span><br><span class="line">data[<span class="string">"username"</span>] = <span class="string">"yu0628"</span>  </span><br><span class="line">data[<span class="string">"password"</span>] = <span class="string">"2019 Dec"</span></span><br><span class="line"></span><br><span class="line">fmt.Println(data[<span class="string">"username"</span>]) <span class="comment">// yu0628</span></span><br></pre></td></tr></table></figure></p>
+<h4>4. 接口－Interface</h4>
+<blockquote>
+<p>一個可存放多種資料型態的陣列。</p>
+</blockquote>
+<p><strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$mixedData  = [<span class="string">"foobar"</span>, <span class="number">123456</span>];</span><br><span class="line">$mixedData2 = [<span class="string">'username'</span> =&gt; <span class="string">'yu0628'</span>, </span><br><span class="line">               <span class="string">'time'</span>     =&gt; <span class="number">123456</span>];</span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+Golang 的 <code>interface{}</code> 可以接受任何內容，可以存放任何型態的資料
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mixedData := []<span class="keyword">interface</span>&#123;&#125;&#123;<span class="string">"foobar"</span>, <span class="number">123456</span>&#125;</span><br><span class="line"></span><br><span class="line">mixedData2 := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;)  </span><br><span class="line">mixedData2[<span class="string">"username"</span>] = <span class="string">"yu0628"</span>  </span><br><span class="line">mixedData2[<span class="string">"time"</span>]     = <span class="number">123456</span></span><br></pre></td></tr></table></figure></p>
+<h3>不定值－Mixed Type</h3>
+<p>有個不定值的變數，在 PHP 可以直接將一個變數定義成字串、數值、空值。</p>
+<p><strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$mixed = <span class="number">123</span>;</span><br><span class="line"><span class="keyword">echo</span> $mixed; <span class="comment">// 輸出：123</span></span><br><span class="line"></span><br><span class="line">$mixed = <span class="string">'Moon, Dalan!'</span>;</span><br><span class="line"><span class="keyword">echo</span> $mixed; <span class="comment">// 輸出：Moon, Dalan!</span></span><br><span class="line"></span><br><span class="line">$mixed = [<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>];</span><br><span class="line"><span class="keyword">echo</span> $mixed; <span class="comment">// 輸出：['A', 'B', 'C']</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+在 Golang 中給予變數一個指定的資料型別
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mixed <span class="keyword">interface</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">mixed = <span class="number">123</span>  </span><br><span class="line">fmt.Println(mixed) <span class="comment">// 輸出：123</span></span><br><span class="line"></span><br><span class="line">mixed = <span class="string">"Moon, Dalan!"</span>  </span><br><span class="line">fmt.Println(mixed) <span class="comment">// 輸出：Moon, Dalan!</span></span><br><span class="line"></span><br><span class="line">mixed = []<span class="keyword">string</span>&#123;<span class="string">"A"</span>, <span class="string">"B"</span>, <span class="string">"C"</span>&#125;  </span><br><span class="line">fmt.Println(mixed) <span class="comment">// 輸出：["A", "B", "C"]</span></span><br></pre></td></tr></table></figure></p>
+<h3>逆向處理－Defer</h3>
+<p>當程式中不需要繼續使用到某個資源或是發生錯誤時，會將其關閉或是拋棄來節省資源開銷，如 PHP 裡的讀取檔案：
+<strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$handle = fopen(<span class="string">'example.txt'</span>, <span class="string">'r'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>($errorA)  </span><br><span class="line">    errorHandlerA();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>($errorB)  </span><br><span class="line">    errorHandlerB();</span><br><span class="line"></span><br><span class="line">fclose($handle); <span class="comment">// 關閉檔案</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+在 Golang 中，使用 <code>defer</code> 來在函式結束的時候自動執行某些程式(其執行方向為反向)。就不需要在函式最後面結束最前面的資源。
+<code>defer</code> 可被稱為「推遲執行」，實際上就是在函式結束後會「反序」執行的東西
+例如按照了這樣的順序定義 defer： A-&gt;B-&gt;C-&gt;D，那麼執行的順序其實會是 D-&gt;C-&gt;B-&gt;A，這用在程式結束時還蠻有用的
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">handle := file.Open(<span class="string">"example.txt"</span>)  </span><br><span class="line"><span class="keyword">defer</span> file.Close() <span class="comment">// 關閉檔案但「推遲執行」，所有程式結束後才會執行這裡</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> errorA &#123;  </span><br><span class="line">    errorHandlerA()</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> errorB &#123;  </span><br><span class="line">    errorHandlerB()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>迴圈－Loops</h3>
+<p>Golang 中僅有 <code>for</code> 一種迴圈但卻能夠達成 <code>foreach</code>、<code>while</code>、<code>for</code> 多種用法。</p>
+<p><strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>($i = <span class="number">0</span>; $i &lt; <span class="number">3</span>; $i++)  </span><br><span class="line">    <span class="keyword">echo</span> $i; <span class="comment">// 輸出：012</span></span><br><span class="line"></span><br><span class="line">$j = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>($j; $j &lt; <span class="number">5</span>; $j++)  </span><br><span class="line">    <span class="keyword">echo</span> $j; <span class="comment">// 輸出：01234</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+在 Golang 請記得：若 <code>i</code> 先前並不存在，就需要定義它，所以下面這個範例會 <code>i := 0</code>。</p>
+<p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">3</span>; i++ &#123;  </span><br><span class="line">    fmt.Println(i) <span class="comment">// 輸出 012</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">j := <span class="number">0</span>  </span><br><span class="line"><span class="keyword">for</span> ; j &lt; <span class="number">5</span> ; j++ &#123;  </span><br><span class="line">    fmt.Println(j) <span class="comment">// 輸出：01234</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>每個－Foreach</h3>
+<p><strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$data = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span>($data <span class="keyword">as</span> $index =&gt; $value)  </span><br><span class="line">    <span class="keyword">echo</span> $index . $value . <span class="string">'|'</span> ; <span class="comment">// 輸出：0a|1b|2c|</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span>($data <span class="keyword">as</span> $index =&gt; $value)  </span><br><span class="line">    <span class="keyword">echo</span> $index . <span class="string">'|'</span> ; <span class="comment">// 輸出：0|1|2|</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span>($data <span class="keyword">as</span> $value)  </span><br><span class="line">    <span class="keyword">echo</span> $value . <span class="string">'|'</span> ; <span class="comment">// 輸出：a|b|c|</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">data := []<span class="keyword">string</span>&#123;<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> index, value := <span class="keyword">range</span> data &#123;  </span><br><span class="line">    fmt.Printf(<span class="string">"%d%s|"</span>, index, value)  <span class="comment">// 輸出：0a|1b|2c|</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> index := <span class="keyword">range</span> data &#123;  </span><br><span class="line">    fmt.Printf(<span class="string">"%d|"</span>, index)  <span class="comment">// 輸出：0|1|2|</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _, value := <span class="keyword">range</span> data &#123;  </span><br><span class="line">    fmt.Printf(<span class="string">"%s|"</span>, value)  <span class="comment">// 輸出：a|b|c|</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>重複－While</h3>
+<p><code>while(條件)</code> 迴圈在 PHP 裡面可以不斷地執行區塊中的程式，直到 條件 為 <code>false</code> 為止。</p>
+<p><strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>( $i &lt; <span class="number">3</span> ) &#123;  </span><br><span class="line">    $i++;</span><br><span class="line">    <span class="keyword">echo</span> $i; <span class="comment">// 輸出：123</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(<span class="keyword">true</span>)  </span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"WOW"</span> <span class="comment">// 輸出：WOWWOWWOW...</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+在 Golang 裡也有相同的做法，但仍是透過 <code>for</code> 迴圈，此 <code>for</code> 迴圈並沒有任何的分號（;），而且一個沒有條件的 <code>for</code> 迴圈會一直被執行。
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">i := <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i &lt; <span class="number">3</span> &#123;  </span><br><span class="line">    i++</span><br><span class="line">    fmt.Println(i) <span class="comment">// 輸出：123</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> &#123;  </span><br><span class="line">    fmt.Println(<span class="string">"WOW"</span>) <span class="comment">// 輸出：WOWWOWWOWWOWWOW...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>做 .. 重複－Do While</h3>
+<p><strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">do</span> &#123;  </span><br><span class="line">    $i++;</span><br><span class="line">    <span class="keyword">echo</span> $i; <span class="comment">// 輸出：123</span></span><br><span class="line">&#125; <span class="keyword">while</span>($i &lt; <span class="number">3</span>);</span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+在 Golang 中則沒有相關函式，但可以透過一個無止盡的 <code>for</code> 迴圈加上條件式使其結束迴圈。
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">i := <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> &#123;  </span><br><span class="line">    i++</span><br><span class="line">    fmt.Println(i) <span class="comment">// 輸出：123</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注意這個條件式和 PHP 有所不同</span></span><br><span class="line">    <span class="keyword">if</span> i &gt; <span class="number">2</span> &#123;</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>日期－Date</h3>
+<p><strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> date(<span class="string">"Y-m-d H:i:s"</span>); <span class="comment">// 輸出：2016-07-13 12:59:59</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+Golang 並不是以 <code>Y-m-d</code> 此格式做為定義，而是 <code>1、2、3</code>，這令人需要去翻閱文件，才能夠知道 1 的定義是代表什麼。
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println(time.Now().Format(<span class="string">"2006-2-1 03:04:00"</span>))          <span class="comment">// 輸出：2016-07-13 12:59:59  </span></span><br><span class="line">fmt.Println(time.Now().Format(<span class="string">"Mon, Jan 2, 2006 at 3:04pm"</span>)) <span class="comment">// 輸出： Mon, Jul 13, 2016 at 12:59pm</span></span><br></pre></td></tr></table></figure></p>
+<h3>切割字串－Split</h3>
+<p><strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$data  = <span class="string">'a, b, c, d'</span>;</span><br><span class="line">$array = explode(<span class="string">', '</span>, $data);</span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data  := <span class="string">"a, b, c, d"</span>  </span><br><span class="line">array := strings.Split(data, <span class="string">", "</span>)</span><br></pre></td></tr></table></figure>
+記得引用 <code>strings</code> 套件。</p>
+<h3>關聯陣列－Associative Array</h3>
+<p><strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$data = [<span class="string">'username'</span> =&gt; <span class="string">'yu0628'</span>,</span><br><span class="line">         <span class="string">'password'</span> =&gt; <span class="string">'2019 Dec'</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> $data[<span class="string">"username"</span>]; <span class="comment">// 輸出：yu0628</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data := <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>&#123;  </span><br><span class="line">           <span class="string">"username"</span>: <span class="string">"yu0628"</span>, </span><br><span class="line">           <span class="string">"password"</span>: <span class="string">"2019 Dec"</span>&#125;</span><br><span class="line"></span><br><span class="line">fmt.Println(data[<span class="string">"username"</span>]) <span class="comment">// 輸出：yu0628</span></span><br></pre></td></tr></table></figure></p>
+<h3>是否存在－Isset</h3>
+<p><strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果 $data['username'] 存在</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($data[<span class="string">'username'</span>])) &#123;  </span><br><span class="line">    $username = $data[<span class="string">'username'</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+在 Golang 裡面很簡單的能夠這樣辦到（僅適用於 <code>map</code>）。
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">username, exists := data[<span class="string">"username"</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> !exists &#123;  </span><br><span class="line">    fmt.Printf(<span class="string">"你要找的資料不存在。"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>指針－Pointer</h3>
+<p>指針（參照）是一個像是「變數別名」的方法，此方法讓人不用整天覆蓋舊的變數
+假設 A = 1; B = A; 此時 B 會複製一份 A 且兩者不相干，倘若希望修改 B 的時候實際上也會修改到 A 的值，就會需要指針。</p>
+<p>指針比起複製一個變數，會建立一個指向到某個變數的記憶體位置，這就是為什麼改變指針，實際上是在改變某個變數。</p>
+<p><strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">zero</span><span class="params">(&amp;$number)</span> </span>&#123; <span class="comment">// &amp; 即是指針  </span></span><br><span class="line">    $number = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$A = <span class="number">5</span>;</span><br><span class="line">zero($A);</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> $A; <span class="comment">// 輸出：0</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+在 Golang 需要用上 <code>*</code> 還有 <code>&amp;</code> 符號。
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">zero</span><span class="params">(number *<span class="keyword">int</span>)</span></span> &#123;  </span><br><span class="line">    number = <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    A := <span class="number">5</span>;</span><br><span class="line">    zero(&amp;A)</span><br><span class="line"></span><br><span class="line">    fmt.Printf(<span class="string">"%d"</span>, A) <span class="comment">// 輸出：0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>錯誤處理－Error Exception</h3>
+<p>有時回傳的陣列裡可能有資料還有錯誤代號，且會用條件式判斷錯誤代號是否非空值。</p>
+<p><strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">($number)</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">if</span>($number !== <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> [<span class="string">'number'</span> =&gt; <span class="number">-1</span>, </span><br><span class="line">                <span class="string">'error'</span>  =&gt; <span class="string">'$number is not 1'</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> [<span class="string">'number'</span> =&gt; $number, </span><br><span class="line">            <span class="string">'error'</span>  =&gt; <span class="keyword">null</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$bar = foo(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>($bar[<span class="string">'error'</span>])  </span><br><span class="line">    <span class="keyword">echo</span> $bar[<span class="string">'number'</span>], $bar[<span class="string">'error'</span>]; <span class="comment">// 輸出：-1</span></span><br><span class="line">                                        <span class="comment">//      $number is not 1</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+在 Golang 中函式可以一次回傳多個值。不需要真的回傳一個陣列，不過要注意的是將會回傳一個屬於 <code>error</code> 資料型態的錯誤，所以需引用 <code>errors</code> 套件幫助。
+Golang 沒有 try .. catch，因為 <strong>Golang 推薦</strong>，應在每一次執行可能會發生錯誤的程式時就處理錯誤，而非後來用 try 到處包覆程式。
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"errors"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">(number <span class="keyword">int</span>)</span> <span class="params">(<span class="keyword">int</span>, error)</span></span> &#123;  </span><br><span class="line">    <span class="keyword">if</span> number != <span class="number">1</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>, errors.New(<span class="string">"$number is not 1"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> number, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> bar, err := foo(<span class="number">0</span>); err != <span class="literal">nil</span> &#123;  </span><br><span class="line">    fmt.Println(bar, err) <span class="comment">// 輸出：-1</span></span><br><span class="line">                          <span class="comment">//      $number is not 1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<code>if</code> 條件式裡宣告變數會只能在 <code>if</code> 內部使用這個變數，而不會污染到全域範圍。</p>
+<h3>拋出和捕捉異常－Try &amp; Catch</h3>
+<p><strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">($number)</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">if</span>($number &lt; <span class="number">10</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">'$number is less than 10'</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>($number &gt; <span class="number">10</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">'$number is greater than 10'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;  </span><br><span class="line">    foo(<span class="number">9</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span>(<span class="keyword">Exception</span> $e) &#123;</span><br><span class="line">    <span class="keyword">echo</span> $e-&gt;getMessage(); <span class="comment">// 輸出：$number is less than 10</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;  </span><br><span class="line">    foo(<span class="number">11</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span>(<span class="keyword">Exception</span> $e) &#123;</span><br><span class="line">    <span class="keyword">echo</span> $e-&gt;getMessage(); <span class="comment">// 輸出：$number is greater than 10</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+可以使用 Golang 中另類處理錯誤的方式（可以的話盡量避免使用這種方式）：<code>panic(), recover(), defer</code>。
+可把 <code>panic()</code> 當作是 <code>throw</code>（丟出錯誤），一但你執行了 <code>panic()</code> 程式就會宣告而終，程式結束的時候會呼叫 <code>defer</code>，所以接下來要在 <code>defer</code> 停止 <code>panic()</code>。接著要在 <code>defer</code> 內使用 <code>recover()</code> 讓程式不再繼續進行結束動作，這就像是捕捉異常。
+<code>recover()</code> 可以看作 <code>catch</code>（捕捉），在 <code>defer</code> 裡面用 <code>recover()</code> 解決 <code>panic()</code>，如此程式就會回歸正常而不會被結束。</p>
+<p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 建立一個模仿 try&amp;catch 的函式供稍後使用</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">try</span><span class="params">(fn <span class="keyword">func</span>()</span>, <span class="title">handler</span> <span class="title">func</span><span class="params">(<span class="keyword">interface</span>&#123;&#125;)</span>)</span> &#123;  </span><br><span class="line">    <span class="comment">// 這不會馬上被執行，但當 panic 被執行就會結束程式，結束程式就必定會呼叫 defer</span></span><br><span class="line">    <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123; </span><br><span class="line">        <span class="comment">// 透過 recover 來從 panic 狀態中恢復，並呼叫捕捉函式</span></span><br><span class="line">        <span class="keyword">if</span> err := <span class="built_in">recover</span>(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">            handler(err)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="comment">// 執行可能帶有 panic 的程式</span></span><br><span class="line">    fn()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">(number <span class="keyword">int</span>)</span></span> &#123;  </span><br><span class="line">    <span class="keyword">if</span> number &lt; <span class="number">10</span> &#123;</span><br><span class="line">        <span class="built_in">panic</span>(<span class="string">"number is less than 10"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> number &gt; <span class="number">10</span> &#123;</span><br><span class="line">        <span class="built_in">panic</span>(<span class="string">"number is greater than 10"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    try(<span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        foo(<span class="number">9</span>)</span><br><span class="line">    &#125;, <span class="function"><span class="keyword">func</span><span class="params">(e <span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</span><br><span class="line">        fmt.Println(e) <span class="comment">// 輸出：number is less than 10</span></span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    try(<span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        foo(<span class="number">11</span>)</span><br><span class="line">    &#125;, <span class="function"><span class="keyword">func</span><span class="params">(e <span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</span><br><span class="line">        fmt.Println(e) <span class="comment">// 輸出：number is greater than 10</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>套件／匯入／匯出－Package / Import / Export</h3>
+<p><strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.php</span></span><br><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line">    $foo = <span class="string">"bar"</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.php</span></span><br><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line">    <span class="keyword">include</span> <span class="string">"a.php"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">echo</span> $foo; <span class="comment">// 輸出：bar</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+Golang 怎麼透過「套件」解決這個問題
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.go</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo <span class="keyword">string</span> = <span class="string">"bar"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.go</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    fmt.Println(foo) <span class="comment">// 輸出：bar</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>main.go</code> 中除了引用 <code>fmt</code> 套件（為了要輸出結果用的套件）之外完全沒有引用到 <code>a.go</code>。
+<strong>因為兩者都是屬於 <code>main</code> 套件，因此共享同一個區域</strong>。</p>
+<h4>1. 套件－Package</h4>
+<p>套件是每一個 <code>.go</code> 檔案都必須聲明在 Golang 原始碼中最開端的東西:
+<code>package main</code></p>
+<p>意味著目前的檔案是屬於 <code>main</code> 套件，那麼要如何讓同個套件之間的函式溝通呢？</p>
+<p><strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.php</span></span><br><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.php</span></span><br><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line">    <span class="keyword">include</span> <span class="string">"a.php"</span>;</span><br><span class="line"></span><br><span class="line">    foo();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.go</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.go</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    foo()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4>2. 匯入－Import</h4>
+<p>在 Golang 中沒有引用單獨檔案的方式，必須匯入一整個套件，且記住：「一旦匯入，就一定要使用它」。
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">    <span class="string">"fmt"</span>                           <span class="comment">// 引用底層套件</span></span><br><span class="line">    <span class="string">"time"</span>                          <span class="comment">// 這也是底層套件</span></span><br><span class="line">    <span class="string">"github.com/yamiodymel/teameow"</span> <span class="comment">// 來自 Github 的 "teameow" 套件</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    <span class="comment">// 下面使用剛匯入的套件</span></span><br><span class="line">    fmt.XXX()</span><br><span class="line">    time.XXX()</span><br><span class="line">    teameow.XXX()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+假如不希望使用匯入的套件，只是為了要觸發那個套件的 <code>main()</code> 函式而引用，那麼可在前面加上一個底線（<code>_</code>）。
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">    _ <span class="string">"fmt"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<p>如果套件出現了名稱衝突，可以在套件來源前面給一個新的名稱。
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">    <span class="string">"github.com/karisu/teameow"</span></span><br><span class="line">    neko <span class="string">"github.com/yamiodymel/teameow"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    teameow.XXX()</span><br><span class="line">    neko.XXX()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4>3. 匯出－Export</h4>
+<p>同個套件內的函式還有共享變數確實可以直接用，但不表示可以給其他套件使用，其方法取決於<strong>函式／變數的「開頭大小寫」</strong>。
+<strong>Golang 依照一個函式／變數的開頭大小寫決定這個東西是否可供「匯出」</strong>。
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.go</span></span><br><span class="line"><span class="keyword">package</span> hello</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注意：這裡的 Foo 的開頭字母是大寫！</span></span><br><span class="line"><span class="keyword">var</span> Foo <span class="keyword">string</span> = <span class="string">"bar"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 注意：這個 World 函式的開頭字母是大寫！</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">World</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// b.go</span></span><br><span class="line"><span class="keyword">package</span> test</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">    <span class="string">"hello"</span></span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    fmt.Println(hello.Foo) <span class="comment">// 輸出：bar</span></span><br><span class="line"></span><br><span class="line">    hello.World()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+用在區別函式時格外有用，小寫開頭的任何事物都是不供匯出的，反之，大寫開頭的任何事物都是用來匯出供其他套件使用的。</p>
+<h3>類別－Class</h3>
+<p>Golang 中沒有類別，但有所謂的「建構體（Struct）」和「接口（Interface）」</p>
+<p><strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foobar</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">public</span> $a = <span class="string">"hello, world"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$b = <span class="keyword">new</span> Foobar();</span><br><span class="line">$b-&gt;test(); <span class="comment">// 輸出：hello, world!</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+首先知道在 Golang 中「類別」的成員還有方法都是在「類別」外面所定義的，與 PHP 在類別內定義的方式不同
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先定義一個 Foobar 建構體，有個 a 的字串成員</span></span><br><span class="line"><span class="keyword">type</span> Foobar <span class="keyword">struct</span> &#123;  </span><br><span class="line">    a <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定義一個屬於 Foobar 的 test 方法</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(f *Foobar)</span> <span class="title">test</span> <span class="params">()</span></span> &#123;  </span><br><span class="line">    <span class="comment">// 接收來自 Foobar 的 a（等同於 PHP 的 `$this-&gt;a`）</span></span><br><span class="line">    fmt.Println(f.a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">b := &amp;Foobar&#123;a: <span class="string">"hello, world!"</span>&#125;  </span><br><span class="line">b.test() <span class="comment">// 輸出：hello, world!</span></span><br></pre></td></tr></table></figure></p>
+<h4>1. 建構子－Constructor</h4>
+<p>在 PHP 中，當有一個類別被 <code>new</code> 的時候會自動執行該類別內的建構子（<code>__construct()</code>），通常會用這個來初始化一些類別內部的值。</p>
+<p><strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;  </span><br><span class="line">    <span class="keyword">public</span> $a;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;a = <span class="string">"foobar"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">show</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$b = <span class="keyword">new</span> Test();</span><br><span class="line">$b-&gt;show(); <span class="comment">// 輸出：foobar</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+但在 Golang 裡因為沒有類別，也就沒有建構子，不巧的是建構體本身也不帶有建構子的特性，此時只能自己在外部建立一個建構用函式。
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Test <span class="keyword">struct</span> &#123;  </span><br><span class="line">    a <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Test)</span> <span class="title">show</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    fmt.Println(t.a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用來建構 Test 的假建構子</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">newTest</span><span class="params">()</span> <span class="params">(test *Test)</span></span> &#123;  </span><br><span class="line">    test = &amp;Test&#123;a: <span class="string">"foobar"</span>&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 這裡會回傳一個型態是 *Test 建構體的 test 變數</span></span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">b := newTest()  </span><br><span class="line">b.show() <span class="comment">// 輸出：foobar</span></span><br></pre></td></tr></table></figure></p>
+<h4>2. 嵌入－Embed</h4>
+<p>假設有兩個類別，會把其中一個類別傳入到另一個類別裡面使用
+<strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">public</span> $msg = <span class="string">"Hello, world!"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bar</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">public</span> $foo;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($foo)</span></span>&#123; </span><br><span class="line">    	<span class="keyword">$this</span>-&gt;foo = $foo;    </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">show</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;foo-&gt;msg; </span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$a = <span class="keyword">new</span> Foo();</span><br><span class="line">$b = <span class="keyword">new</span> Bar($a);</span><br><span class="line">$b-&gt;show(); <span class="comment">// 輸出：Hello, world!</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+在 Golang 中也有相同的用法，但請記得：「<strong>任何東西都是在「類別」外完成建構的</strong>」。
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Foo <span class="keyword">struct</span> &#123;  </span><br><span class="line">    msg <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Bar <span class="keyword">struct</span> &#123;  </span><br><span class="line">    *Foo</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(b *Bar)</span> <span class="title">show</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    <span class="comment">// Foo 中的 msg 會直接暴露在 Bar 底下</span></span><br><span class="line">    <span class="comment">// 所以可以直接使用 b.msg</span></span><br><span class="line">    fmt.Println(b.msg)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a := &amp;Foo&#123;msg: <span class="string">"Hello, world!"</span>&#125;  </span><br><span class="line">b := &amp;Bar&#123;a&#125;  </span><br><span class="line">b.show() <span class="comment">// 輸出 Hello, world!</span></span><br></pre></td></tr></table></figure></p>
+<h4>3. 遮蔽－Shadowing</h4>
+<p>在 PHP 中沒有相關的範例
+Golang 在進行 <code>Foo</code> 嵌入 <code>Bar</code> 時，會自動將 <code>Foo</code> 的成員暴露在 <code>Bar</code> 底下，那麼假設「雙方之間有相同的成員名稱」呢？
+此時被嵌入的成員就會被「遮蔽」</p>
+<p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Foo <span class="keyword">struct</span> &#123;  </span><br><span class="line">    msg <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Bar <span class="keyword">struct</span> &#123;  </span><br><span class="line">    *Foo</span><br><span class="line">    msg <span class="keyword">string</span> <span class="comment">// 遮蔽了 Foo 的 msg</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a := &amp;Foo&#123;msg: <span class="string">"Hello, world!"</span>&#125;  </span><br><span class="line">b := &amp;Bar&#123;Foo: a, msg: <span class="string">"Moon, Dalan!"</span>&#125;</span><br><span class="line"></span><br><span class="line">fmt.Println(b.msg)     <span class="comment">// 輸出：Moon, Dalan!  </span></span><br><span class="line">fmt.Println(b.Foo.msg) <span class="comment">// 輸出：Hello, world!</span></span><br></pre></td></tr></table></figure></p>
+<h4>4. 多形－Polymorphism</h4>
+<p>雖然都是呼叫同一個函式，但這個函式可以針對不同的資料來源做出不同的舉動，這就是多形。
+也能夠把這看作是：「訊息的意義由接收者定義，而不是傳送者」。</p>
+<p>目前 PHP 中沒有真正的「多形」，不過仍可以做出同樣的東西。
+<strong>PHP</strong>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class"></span>&#123; </span><br><span class="line">	<span class="keyword">public</span> $msg = <span class="string">"hello"</span>;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bar</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> $msg = <span class="string">"world!"</span>; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Handler</span> </span></span><br><span class="line"><span class="class"></span>&#123;  </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">process</span><span class="params">($class)</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span>(get_class($class)) &#123;</span><br><span class="line">            <span class="comment">// 依照不同的資料類型做出不同的舉動</span></span><br><span class="line">            <span class="keyword">case</span> <span class="string">'Foo'</span>:</span><br><span class="line">                <span class="keyword">echo</span> <span class="string">'處理 Foo | '</span> . $class-&gt;msg . <span class="string">', world!'</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">case</span> <span class="string">'Bar'</span>:</span><br><span class="line">                <span class="keyword">echo</span> <span class="string">'處理 Bar | '</span> . <span class="string">'hello, '</span> . $class-&gt;msg;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$foo = <span class="keyword">new</span> Foo();</span><br><span class="line">$bar = <span class="keyword">new</span> Bar();</span><br><span class="line">$handler = <span class="keyword">new</span> Handler();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 雖然都是同個函式，但是可以處理不同資料</span></span><br><span class="line">$handler-&gt;process($foo); <span class="comment">// 輸出：處理 Foo | hello, world!</span></span><br><span class="line">$handler-&gt;process($bar); <span class="comment">// 輸出：處理 Bar | hello, world!</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>GoLang</strong>
+在 Golang 中有 interface 可以幫忙完成這個工作。
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Foo <span class="keyword">struct</span> &#123;  </span><br><span class="line">    msg <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Bar <span class="keyword">struct</span> &#123;  </span><br><span class="line">    msg <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 透過 Handler 實作 process</span></span><br><span class="line"><span class="keyword">type</span> Handler <span class="keyword">interface</span> &#123;  </span><br><span class="line">    process()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 處理 Foo 資料的 process</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(f Foo)</span> <span class="title">process</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    fmt.Printf(<span class="string">"處理 Foo | %s, world!"</span>, f.msg)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 處理 Bar 資料的 process</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(b Bar)</span> <span class="title">process</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    fmt.Printf(<span class="string">"處理 Bar | hello, %s"</span>, b.msg)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo := Foo&#123;msg: <span class="string">"hello"</span>&#125;  </span><br><span class="line">bar := Bar&#123;msg: <span class="string">"world!"</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 雖然都是同個函式，但是可以處理不同資料</span></span><br><span class="line">Handler.process(foo) <span class="comment">// 輸出：處理 Foo | hello, world!  </span></span><br><span class="line">Handler.process(bar) <span class="comment">// 輸出：處理 Bar | hello, world!</span></span><br></pre></td></tr></table></figure></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">PHP vs GoLang</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">2.</span> <span class="toc-text">&lt;!--more--&gt;</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.1.</span> <span class="toc-text">定義變數－Variables</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.2.</span> <span class="toc-text">輸出－Echo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.3.</span> <span class="toc-text">函式－Function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.4.</span> <span class="toc-text">多值回傳－Multiple Value</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.5.</span> <span class="toc-text">匿名函式－Anonymous Function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.6.</span> <span class="toc-text">多資料儲存型態－Stores</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">2.6.1.</span> <span class="toc-text">1. 陣列－Array</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">2.6.2.</span> <span class="toc-text">2. 切片－Slice</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">2.6.3.</span> <span class="toc-text">3. 映照－Map</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">2.6.4.</span> <span class="toc-text">4. 接口－Interface</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.7.</span> <span class="toc-text">不定值－Mixed Type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.8.</span> <span class="toc-text">逆向處理－Defer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.9.</span> <span class="toc-text">迴圈－Loops</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.10.</span> <span class="toc-text">每個－Foreach</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.11.</span> <span class="toc-text">重複－While</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.12.</span> <span class="toc-text">做 .. 重複－Do While</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.13.</span> <span class="toc-text">日期－Date</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.14.</span> <span class="toc-text">切割字串－Split</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.15.</span> <span class="toc-text">關聯陣列－Associative Array</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.16.</span> <span class="toc-text">是否存在－Isset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.17.</span> <span class="toc-text">指針－Pointer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.18.</span> <span class="toc-text">錯誤處理－Error Exception</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.19.</span> <span class="toc-text">拋出和捕捉異常－Try &amp; Catch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.20.</span> <span class="toc-text">套件／匯入／匯出－Package &#x2F; Import &#x2F; Export</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">2.20.1.</span> <span class="toc-text">1. 套件－Package</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">2.20.2.</span> <span class="toc-text">2. 匯入－Import</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">2.20.3.</span> <span class="toc-text">3. 匯出－Export</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.21.</span> <span class="toc-text">類別－Class</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">2.21.1.</span> <span class="toc-text">1. 建構子－Constructor</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">2.21.2.</span> <span class="toc-text">2. 嵌入－Embed</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">2.21.3.</span> <span class="toc-text">3. 遮蔽－Shadowing</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">2.21.4.</span> <span class="toc-text">4. 多形－Polymorphism</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2019/12/09/PHP-vs-GoLang/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2019/12/09/PHP-vs-GoLang/&text=PHP vs GoLang" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2019/12/09/PHP-vs-GoLang/&title=PHP vs GoLang" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2019/12/09/PHP-vs-GoLang/&is_video=false&description=PHP vs GoLang" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=PHP vs GoLang&body=Check out this article: https://pingjing0628.github.io/2019/12/09/PHP-vs-GoLang/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2019/12/09/PHP-vs-GoLang/&title=PHP vs GoLang" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2019/12/09/PHP-vs-GoLang/&title=PHP vs GoLang" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2019/12/09/PHP-vs-GoLang/&title=PHP vs GoLang" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2019/12/09/PHP-vs-GoLang/&title=PHP vs GoLang" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2019/12/09/PHP-vs-GoLang/&name=PHP vs GoLang&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2019/12/09/PHP-vs-GoLang/&t=PHP vs GoLang" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

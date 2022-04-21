@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Python 命名空間與範圍 &lt;!--more--&gt;   一個名稱可以參考不同的東西，取決於在哪裡使用它 Python有各種的命名空間 要存取全域變數，而不是函式內的區域變數，必須明確的使用 global關鍵字 1234567891011&gt;&gt;&gt; animal &#x3D; &#39;bat&#39;&gt;&gt;&gt; def change_and_print_global():">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python 命名空間與範圍">
+<meta property="og:url" content="https://pingjing0628.github.io/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="Python 命名空間與範圍 &lt;!--more--&gt;   一個名稱可以參考不同的東西，取決於在哪裡使用它 Python有各種的命名空間 要存取全域變數，而不是函式內的區域變數，必須明確的使用 global關鍵字 1234567891011&gt;&gt;&gt; animal &#x3D; &#39;bat&#39;&gt;&gt;&gt; def change_and_print_global():">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2019-11-21T16:11:05.000Z">
+<meta property="article:modified_time" content="2020-12-15T15:15:38.138Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="命名空間">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>python 命名空間與範圍</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2019/11/24/Laravel-service-container/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2019/11/21/python-%E8%A3%9D%E9%A3%BE%E5%99%A8/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/&text=python 命名空間與範圍" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/&title=python 命名空間與範圍" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/&is_video=false&description=python 命名空間與範圍" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=python 命名空間與範圍&body=Check out this article: https://pingjing0628.github.io/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/&title=python 命名空間與範圍" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/&title=python 命名空間與範圍" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/&title=python 命名空間與範圍" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/&title=python 命名空間與範圍" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/&name=python 命名空間與範圍&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/&t=python 命名空間與範圍" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">Python 命名空間與範圍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.0.1.</span> <span class="toc-text">在名稱中使用_與__</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        python 命名空間與範圍
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-11-21T16:11:05.000Z" itemprop="datePublished">2019-11-22</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Python/">Python</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/python/" rel="tag">python</a>, <a class="tag-link" href="/tags/%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93/" rel="tag">命名空間</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2>Python 命名空間與範圍</h2>
+<p>&lt;!--more--&gt;</p>
+<hr>
+<ul>
+<li>一個名稱可以參考不同的東西，取決於在哪裡使用它</li>
+<li>Python有各種的<strong>命名空間</strong></li>
+<li>要存取全域變數，而不是函式內的區域變數，必須明確的使用 <code>global</code>關鍵字
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>animal = <span class="string">'bat'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">change_and_print_global</span><span class="params">()</span>:</span></span><br><span class="line">        <span class="keyword">global</span> animal</span><br><span class="line">        animal = <span class="string">'wombat'</span></span><br><span class="line">        print(<span class="string">'Inside change_and_print_global:'</span>, animal)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>animal</span><br><span class="line"><span class="string">'bat'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>change_and_print_global: wombat</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>animal</span><br><span class="line"><span class="string">'wombat'</span></span><br></pre></td></tr></table></figure></li>
+<li>若在函式內不使用 <code>global</code>，Python會使用區域的命名空間，會在函式結束時消失</li>
+<li>Python提供兩個函式來存取命名空間的內容：</li>
+</ul>
+<ol>
+<li><code>locals()</code> 會回傳區域命名空間的字典內容</li>
+<li><code>globals()</code> 會回傳全域命名空間的字典內容
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>animal = <span class="string">'bat'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">change_local</span><span class="params">()</span>:</span></span><br><span class="line">        <span class="keyword">global</span> animal</span><br><span class="line">        animal = <span class="string">'wombat'</span> <span class="comment"># local variable</span></span><br><span class="line">        print(<span class="string">'locals:'</span>, locals())</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>animal</span><br><span class="line"><span class="string">'bat'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>change_local()</span><br><span class="line">locals: &#123;<span class="string">'animal'</span>: <span class="string">'bat'</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">'globals:'</span>, globals())  <span class="comment"># reformatted a little for presentation</span></span><br><span class="line">globals: &#123;<span class="string">'animal'</span>: <span class="string">'bat'</span>&#125;...,</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>animal</span><br><span class="line"><span class="string">'bat'</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li><code>change_local()</code> 內的區域命名空間只有區域變數，全域命名空間裡有另一個全域變數與一些其他東西</li>
+</ul>
+<h4>在名稱中使用_與__</h4>
+<ul>
+<li>在Python中，名稱開頭與結尾使用兩個底線是被保留的做法，所以不能在自己的變數中使用他們</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">Python 命名空間與範圍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.0.1.</span> <span class="toc-text">在名稱中使用_與__</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/&text=python 命名空間與範圍" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/&title=python 命名空間與範圍" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/&is_video=false&description=python 命名空間與範圍" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=python 命名空間與範圍&body=Check out this article: https://pingjing0628.github.io/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/&title=python 命名空間與範圍" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/&title=python 命名空間與範圍" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/&title=python 命名空間與範圍" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/&title=python 命名空間與範圍" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/&name=python 命名空間與範圍&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/&t=python 命名空間與範圍" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

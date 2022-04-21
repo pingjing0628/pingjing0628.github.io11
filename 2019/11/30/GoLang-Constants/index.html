@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Constants &lt;!-- more --&gt;  Go 的常數類型  boolean constants ，布林常數。 rune constants ，表示字元的常數。 integer constants ，整數常數 floating-point constants ，浮點數常數 complex constants ，複數常數 string constants ，字串常數  這些常數都">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GoLang - Constants">
+<meta property="og:url" content="https://pingjing0628.github.io/2019/11/30/GoLang-Constants/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="Constants &lt;!-- more --&gt;  Go 的常數類型  boolean constants ，布林常數。 rune constants ，表示字元的常數。 integer constants ，整數常數 floating-point constants ，浮點數常數 complex constants ，複數常數 string constants ，字串常數  這些常數都">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2019-11-30T15:57:51.000Z">
+<meta property="article:modified_time" content="2020-12-15T15:15:38.112Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="GoLang">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>GoLang - Constants</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2019/12/01/About-GoLang/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2019/11/30/GoLang-Environment/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2019/11/30/GoLang-Constants/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2019/11/30/GoLang-Constants/&text=GoLang - Constants" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2019/11/30/GoLang-Constants/&title=GoLang - Constants" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2019/11/30/GoLang-Constants/&is_video=false&description=GoLang - Constants" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=GoLang - Constants&body=Check out this article: https://pingjing0628.github.io/2019/11/30/GoLang-Constants/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2019/11/30/GoLang-Constants/&title=GoLang - Constants" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2019/11/30/GoLang-Constants/&title=GoLang - Constants" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2019/11/30/GoLang-Constants/&title=GoLang - Constants" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2019/11/30/GoLang-Constants/&title=GoLang - Constants" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2019/11/30/GoLang-Constants/&name=GoLang - Constants&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2019/11/30/GoLang-Constants/&t=GoLang - Constants" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">Constants</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">Go 的常數類型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">Boolean constants</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">Rune constants</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">Integer constants</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">Floating-point constants</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">Complex constants</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.7.</span> <span class="toc-text">String constants</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        GoLang - Constants
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-11-30T15:57:51.000Z" itemprop="datePublished">2019-11-30</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/GoLang/">GoLang</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/GoLang/" rel="tag">GoLang</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2>Constants</h2>
+<p>&lt;!-- more --&gt;</p>
+<hr>
+<h3>Go 的常數類型</h3>
+<ul>
+<li>boolean constants ，布林常數。</li>
+<li>rune constants ，表示字元的常數。</li>
+<li>integer constants ，整數常數</li>
+<li>floating-point constants ，浮點數常數</li>
+<li>complex constants ，複數常數</li>
+<li>string constants ，字串常數</li>
+</ul>
+<p>這些常數都可以用實字（literal）表示，實字又分成下面幾種：</p>
+<ul>
+<li>
+<p>rune literal ， Rune 實字</p>
+</li>
+<li>
+<p>integer literal ，整數實字</p>
+</li>
+<li>
+<p>floating-point literal ，浮點數實字</p>
+</li>
+<li>
+<p>imaginary literal ，虛數實字</p>
+</li>
+<li>
+<p>string literal ，字串實字</p>
+</li>
+<li>
+<p>常數有可能是已定義型態（typed）或是未定型態（untyped），實字常數、 <code>true</code> 、 <code>false</code> 、 <code>iota</code> 都屬於未定型態。</p>
+</li>
+<li>
+<p>常數運算式裡的運算元都是未定型態時，運算完的結果也會是未定型態。example：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">10        &#x2F;&#x2F; 10, Untyped integer constant.</span><br><span class="line">10 + 20   &#x2F;&#x2F; 30, Untyped integer constant.</span><br><span class="line">10 &#x2F; 20   &#x2F;&#x2F; 0,  Untyped integer constant.</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>但如果有一個型態是確定的，那運算完的結果也會是確定的，如：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int32(10)           &#x2F;&#x2F; 10,  type int32</span><br><span class="line">int32(10) + 20      &#x2F;&#x2F; 30,  type int32</span><br><span class="line">float64(10) &#x2F; 20    &#x2F;&#x2F; 0.5, type float64</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<h3>Boolean constants</h3>
+<ul>
+<li>布林常數是內建的常數，就只有兩個： <code>true</code> 和 <code>false</code>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// true and false are the two untyped boolean values.</span></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	<span class="literal">true</span>  = <span class="number">0</span> == <span class="number">0</span> <span class="comment">// Untyped bool.</span></span><br><span class="line">	<span class="literal">false</span> = <span class="number">0</span> != <span class="number">0</span> <span class="comment">// Untyped bool.</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3>Rune constants</h3>
+<ul>
+<li>Rune 常數使用 Rune 實字（rune literal）來表示，它其實是代表一個 Unicode 的整數。可以使用單引號 <code>'</code> 括住 Unicode 字元，或是 byte 值來表示，如下面的範例是輸出 <code>a</code> 的三種方法，與輸出 <code>中</code> 的三種方法：
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(<span class="string">'a'</span>))</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(<span class="string">'\141'</span>))</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(<span class="string">'\x61'</span>))</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(<span class="string">'中'</span>))</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(<span class="string">'\u4e2d'</span>))</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(<span class="string">'\U00004e2d'</span>))</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(<span class="string">'\n'</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>string() 函式為強制轉型字串</p>
+</blockquote>
+<ul>
+<li>
+<p>Byte 值的表示方法：</p>
+<ul>
+<li>直接給字元 <code>a</code></li>
+<li><code>\</code> 開頭為八進制，後面必須是 3 個八進位的字元（<code>[0-9]{3}</code>）</li>
+<li><code>\x</code> 開頭為十六進制表示，後面必須是 2 個十六進位的字元（<code>[0-9a-f]{2}</code>）</li>
+</ul>
+</li>
+<li>
+<p>Unicode 表示方法：</p>
+<ul>
+<li>直接給字元 <code>中</code></li>
+<li><code>\u</code> 開頭，後面必須是 4 個十六進位的字元（<code>[0-9a-f]{4}</code>）</li>
+<li><code>\U</code> 開頭，後面必須是 8 個十六進位的字元（<code>[0-9a-f]{8}</code>）</li>
+<li>跳脫字元： <code>\</code> 後面接 <code>a</code> <code>b</code> <code>f</code> <code>n</code> <code>r</code> <code>t</code> <code>v</code> <code>\</code> <code>'</code> <code>&quot;</code> 。</li>
+</ul>
+</li>
+</ul>
+<h3>Integer constants</h3>
+<ul>
+<li>數字常數使用數字實字（integer literal）表示。數字實字有三種表示法：
+<ul>
+<li>十進位，跟大部分的程式碼一樣，為非 <code>0</code> 開頭的連續數字（<code>[1-9][0-9]+</code>）</li>
+<li>八進位， <code>0</code> 開頭，後面接八進位數字（<code>0[0-9]+</code>）</li>
+<li>十六進位， <code>0</code> 開頭，後面接八進位數字（<code>0[x|X][0-9a-fA-F]+</code>）</li>
+</ul>
+</li>
+</ul>
+<h3>Floating-point constants</h3>
+<ul>
+<li>浮點數常數使用浮點數實字（floating-point literal）表示，浮點數使用的兩種表示法：小數點與科學符號：
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 10.0</span></span><br><span class="line">	fmt.Println(<span class="number">10.</span>)</span><br><span class="line">	fmt.Println(<span class="number">10.0</span>)</span><br><span class="line">	fmt.Println(<span class="number">010.0</span>)</span><br><span class="line">	fmt.Println(<span class="number">10.e+0</span>)</span><br><span class="line">	fmt.Println(<span class="number">1E1</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 0.1</span></span><br><span class="line">	fmt.Println(<span class="number">.1e+0</span>)</span><br><span class="line">	fmt.Println(<span class="number">.1E0</span>)</span><br><span class="line">	fmt.Println(<span class="number">.1</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 10.1</span></span><br><span class="line">	fmt.Println(<span class="number">10.1</span>)</span><br><span class="line">	fmt.Println(<span class="number">1.01E1</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3>Complex constants</h3>
+<ul>
+<li>複數常數為數字實字加虛數實字（imaginary literal）組合而成。</li>
+<li>虛數實字的表示法為：
+<ul>
+<li>十進位 + 小寫 <code>i</code> ，如 <code>10i</code></li>
+<li>浮點數 + 小寫 <code>i</code> ，如 <code>1E1i</code>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="number">10</span> + <span class="number">10i</span>)</span><br><span class="line">	fmt.Println(<span class="number">1E1</span> + <span class="number">1E1i</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3>String constants</h3>
+<ul>
+<li>
+<p>字串常數使用字串實字（string literal）表示。如果是純字串，可以使用 ` 括要表示的字串，如：
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">`\n`</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>這樣就會輸出 <code>\n</code> 兩個字元</p>
+</li>
+<li>
+<p>如果需要轉譯 rune 常數為字元的話，可以用雙引號 <code>&quot;</code> 括要表示的字串，如：
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"這是\u4e2d\u6587"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>這樣就會輸出 <code>這是中文</code></p>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">Constants</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">Go 的常數類型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">Boolean constants</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">Rune constants</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">Integer constants</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">Floating-point constants</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">Complex constants</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.7.</span> <span class="toc-text">String constants</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2019/11/30/GoLang-Constants/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2019/11/30/GoLang-Constants/&text=GoLang - Constants" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2019/11/30/GoLang-Constants/&title=GoLang - Constants" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2019/11/30/GoLang-Constants/&is_video=false&description=GoLang - Constants" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=GoLang - Constants&body=Check out this article: https://pingjing0628.github.io/2019/11/30/GoLang-Constants/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2019/11/30/GoLang-Constants/&title=GoLang - Constants" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2019/11/30/GoLang-Constants/&title=GoLang - Constants" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2019/11/30/GoLang-Constants/&title=GoLang - Constants" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2019/11/30/GoLang-Constants/&title=GoLang - Constants" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2019/11/30/GoLang-Constants/&name=GoLang - Constants&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2019/11/30/GoLang-Constants/&t=GoLang - Constants" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

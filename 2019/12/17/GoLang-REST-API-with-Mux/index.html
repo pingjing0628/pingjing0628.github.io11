@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="REST API with Mux &lt;!--more--&gt; 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GoLang-REST API with Mux">
+<meta property="og:url" content="https://pingjing0628.github.io/2019/12/17/GoLang-REST-API-with-Mux/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="REST API with Mux &lt;!--more--&gt; 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2019-12-17T13:17:48.000Z">
+<meta property="article:modified_time" content="2020-12-15T15:15:38.126Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="GoLang">
+<meta property="article:tag" content="Mux">
+<meta property="article:tag" content="Rest API">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>GoLang-REST API with Mux</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2019/12/22/docker-create-dockerfile-1/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2019/12/15/GoLang-%E8%AA%9E%E6%B3%95%E7%AD%86%E8%A8%98%E6%95%B4%E7%90%86/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2019/12/17/GoLang-REST-API-with-Mux/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2019/12/17/GoLang-REST-API-with-Mux/&text=GoLang-REST API with Mux" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2019/12/17/GoLang-REST-API-with-Mux/&title=GoLang-REST API with Mux" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2019/12/17/GoLang-REST-API-with-Mux/&is_video=false&description=GoLang-REST API with Mux" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=GoLang-REST API with Mux&body=Check out this article: https://pingjing0628.github.io/2019/12/17/GoLang-REST-API-with-Mux/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2019/12/17/GoLang-REST-API-with-Mux/&title=GoLang-REST API with Mux" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2019/12/17/GoLang-REST-API-with-Mux/&title=GoLang-REST API with Mux" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2019/12/17/GoLang-REST-API-with-Mux/&title=GoLang-REST API with Mux" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2019/12/17/GoLang-REST-API-with-Mux/&title=GoLang-REST API with Mux" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2019/12/17/GoLang-REST-API-with-Mux/&name=GoLang-REST API with Mux&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2019/12/17/GoLang-REST-API-with-Mux/&t=GoLang-REST API with Mux" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">REST API with Mux</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">2.</span> <span class="toc-text">&lt;!--more--&gt;</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.1.</span> <span class="toc-text">In main()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.2.</span> <span class="toc-text">Reference</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        GoLang-REST API with Mux
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-12-17T13:17:48.000Z" itemprop="datePublished">2019-12-17</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/GoLang/">GoLang</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/GoLang/" rel="tag">GoLang</a>, <a class="tag-link" href="/tags/Mux/" rel="tag">Mux</a>, <a class="tag-link" href="/tags/Rest-API/" rel="tag">Rest API</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2>REST API with Mux</h2>
+<h2>&lt;!--more--&gt;</h2>
+<p><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span>(</span><br><span class="line">    <span class="string">"encoding/json"</span></span><br><span class="line">    <span class="string">"log"</span></span><br><span class="line">    <span class="string">"net/http"</span></span><br><span class="line">    <span class="string">"math/rand"</span></span><br><span class="line">    <span class="string">"strconv"</span></span><br><span class="line">    <span class="string">"github.com/gorilla/mux"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Book Struct (Model)</span></span><br><span class="line"><span class="comment">// Struct is kind of like a class, it's used for OOP in Golang</span></span><br><span class="line"><span class="keyword">type</span> Book <span class="keyword">struct</span> &#123;</span><br><span class="line">    ID      <span class="keyword">string</span>  <span class="string">`json:"id"`</span></span><br><span class="line">    Isbn    <span class="keyword">string</span>  <span class="string">`json:"isbn"`</span></span><br><span class="line">    Title   <span class="keyword">string</span>  <span class="string">`json:"title"`</span></span><br><span class="line">    Author  *Author <span class="string">`json:"author"`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Author Struct</span></span><br><span class="line"><span class="keyword">type</span> Author <span class="keyword">struct</span> &#123;</span><br><span class="line">    Firstname  <span class="keyword">string</span>  <span class="string">`json:"firstname"`</span></span><br><span class="line">    Lastname   <span class="keyword">string</span>  <span class="string">`json:"lastname"`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Init books var as a slice Book struct</span></span><br><span class="line"><span class="keyword">var</span> books []Book</span><br><span class="line"></span><br><span class="line"><span class="comment">// Get All Books</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getBooks</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    w.Header().Set(<span class="string">"Content-Type"</span>, <span class="string">"application/json"</span>)</span><br><span class="line">    json.NewEncoder(w).Encode(books)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Get Single Book</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getBook</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    w.Header().Set(<span class="string">"Content-Type"</span>, <span class="string">"application/json"</span>)</span><br><span class="line">    params := mux.Vars(r) <span class="comment">// Get params</span></span><br><span class="line">    <span class="comment">// Loop through books and find with id</span></span><br><span class="line">    <span class="keyword">for</span> _, item := <span class="keyword">range</span> books &#123;</span><br><span class="line">        <span class="keyword">if</span> item.ID == params[<span class="string">"id"</span>] &#123;</span><br><span class="line">            json.NewEncoder(w).Encode(item)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    json.NewEncoder(w).Encode(&amp;Book&#123;&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Create a New Book</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">createBook</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    w.Header().Set(<span class="string">"Content-Type"</span>, <span class="string">"application/json"</span>)</span><br><span class="line">    <span class="keyword">var</span> book Book</span><br><span class="line">    _ = json.NewDecoder(r.Body).Decode(&amp;book)</span><br><span class="line">    book.ID = strconv.Itoa(rand.Intn(<span class="number">10000000</span>)) <span class="comment">// Mock ID - not safe</span></span><br><span class="line">    books = <span class="built_in">append</span>(books, book)</span><br><span class="line">    json.NewEncoder(w).Encode(book)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Update a Book</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">updateBook</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    w.Header().Set(<span class="string">"Content-Type"</span>, <span class="string">"application/json"</span>)</span><br><span class="line">    params := mux.Vars(r)</span><br><span class="line">    <span class="keyword">for</span> index, item := <span class="keyword">range</span> books &#123;</span><br><span class="line">        <span class="keyword">if</span> item.ID == params[<span class="string">"id"</span>] &#123;</span><br><span class="line">            books = <span class="built_in">append</span>(books[:index], books[index+<span class="number">1</span>:]...)</span><br><span class="line">            <span class="keyword">var</span> book Book</span><br><span class="line">            _ = json.NewDecoder(r.Body).Decode(&amp;book)</span><br><span class="line">            book.ID = params[<span class="string">"id"</span>]</span><br><span class="line">            books = <span class="built_in">append</span>(books, book)</span><br><span class="line">            json.NewEncoder(w).Encode(book)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    json.NewEncoder(w).Encode(books)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Delete a Book</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">deleteBook</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    w.Header().Set(<span class="string">"Content-Type"</span>, <span class="string">"application/json"</span>)</span><br><span class="line">    params := mux.Vars(r)</span><br><span class="line">    <span class="keyword">for</span> index, item := <span class="keyword">range</span> books &#123;</span><br><span class="line">        <span class="keyword">if</span> item.ID == params[<span class="string">"id"</span>] &#123;</span><br><span class="line">            books = <span class="built_in">append</span>(books[:index], books[index+<span class="number">1</span>:]...)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    json.NewEncoder(w).Encode(books)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// Init Router</span></span><br><span class="line">    r := mux.NewRouter()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Mock Data - @todo - implemet DB</span></span><br><span class="line">    books = <span class="built_in">append</span>(books, Book&#123;ID: <span class="string">"1"</span>, Isbn: <span class="string">"443322"</span>, Title: <span class="string">"Section 1"</span>, Author: &amp;Author&#123;Firstname: <span class="string">"Yu"</span>, Lastname: <span class="string">"Wang"</span>&#125;&#125;)</span><br><span class="line">    books = <span class="built_in">append</span>(books, Book&#123;ID: <span class="string">"2"</span>, Isbn: <span class="string">"554433"</span>, Title: <span class="string">"Section 2"</span>, Author: &amp;Author&#123;Firstname: <span class="string">"Ping"</span>, Lastname: <span class="string">"Wang"</span>&#125;&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Route Handlers / Endpoints</span></span><br><span class="line">    r.HandleFunc(<span class="string">"/api/books"</span>, getBooks).Methods(<span class="string">"GET"</span>)</span><br><span class="line">    r.HandleFunc(<span class="string">"/api/books/&#123;id&#125;"</span>, getBook).Methods(<span class="string">"GET"</span>)</span><br><span class="line">    r.HandleFunc(<span class="string">"/api/books"</span>, createBook).Methods(<span class="string">"POST"</span>)</span><br><span class="line">    r.HandleFunc(<span class="string">"/api/books/&#123;id&#125;"</span>, updateBook).Methods(<span class="string">"PUT"</span>)</span><br><span class="line">    r.HandleFunc(<span class="string">"/api/books/&#123;id&#125;"</span>, deleteBook).Methods(<span class="string">"DELETE"</span>)</span><br><span class="line">    log.Fatal(http.ListenAndServe(<span class="string">":8090"</span>, r))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3>In main()</h3>
+<ol>
+<li>
+<p><code>r := mux.NewRouter()</code>
+<strong>Create a new Router</strong>
+Create a new request router.
+The router is the main router for web application and will later be passed as parameter to the server.
+It will receive all HTTP connections and pass it on to the request handlers.</p>
+</li>
+<li>
+<p>Registering a Request Handler
+Once have a new router you can register request handlers like usual. The only difference is, that instead of calling <code>http.HandleFunc(...)</code>, call HandleFunc on your router like this: <code>r.HandleFunc(...)</code>.</p>
+</li>
+<li>
+<p>URL Parameters
+To have a request handler match the URL mentioned above you replace the dynamic segments of with placeholders in your URL pattern like so:
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">r.HandleFunc(<span class="string">"/books/&#123;title&#125;/page/&#123;page&#125;"</span>, <span class="function"><span class="keyword">func</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    <span class="comment">// get the book</span></span><br><span class="line">    <span class="comment">// navigate to the page</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+The last thing is to get the data from these segments. The package comes with the function mux.Vars(r) which takes the http.Request as parameter and returns a map of the segments.
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    vars := mux.Vars(r)</span><br><span class="line">    vars[<span class="string">"title"</span>] <span class="comment">// the book title slug</span></span><br><span class="line">    vars[<span class="string">"page"</span>] <span class="comment">// the page</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>manipulate memory space
+create and update are manipulate memory space, so when you disconnect, then the data will go back to the default value</p>
+</li>
+</ol>
+<h3>Reference</h3>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=SonwZ6MF5BE" target="_blank" rel="noopener">Rest API With Mux</a></li>
+<li><a href="https://gowebexamples.com/routes-using-gorilla-mux/" target="_blank" rel="noopener">Go Web Examples</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">REST API with Mux</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">2.</span> <span class="toc-text">&lt;!--more--&gt;</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.1.</span> <span class="toc-text">In main()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.2.</span> <span class="toc-text">Reference</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2019/12/17/GoLang-REST-API-with-Mux/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2019/12/17/GoLang-REST-API-with-Mux/&text=GoLang-REST API with Mux" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2019/12/17/GoLang-REST-API-with-Mux/&title=GoLang-REST API with Mux" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2019/12/17/GoLang-REST-API-with-Mux/&is_video=false&description=GoLang-REST API with Mux" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=GoLang-REST API with Mux&body=Check out this article: https://pingjing0628.github.io/2019/12/17/GoLang-REST-API-with-Mux/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2019/12/17/GoLang-REST-API-with-Mux/&title=GoLang-REST API with Mux" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2019/12/17/GoLang-REST-API-with-Mux/&title=GoLang-REST API with Mux" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2019/12/17/GoLang-REST-API-with-Mux/&title=GoLang-REST API with Mux" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2019/12/17/GoLang-REST-API-with-Mux/&title=GoLang-REST API with Mux" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2019/12/17/GoLang-REST-API-with-Mux/&name=GoLang-REST API with Mux&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2019/12/17/GoLang-REST-API-with-Mux/&t=GoLang-REST API with Mux" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

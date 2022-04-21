@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="3.7 記憶體管理 (Memory Management) 圖：   Memory Allocation Strategy 記憶體配置策略    方法 定義 Time Space 使用率     First Fit 從頭找, 當 free block size &gt;&#x3D; n, 即可配置 佳 佳   Best Fit 從頭到尾, 找出所有符合 free block size &gt;&#x3D; n, 且差">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter3-作業系統-記憶體管理">
+<meta property="og:url" content="https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="3.7 記憶體管理 (Memory Management) 圖：   Memory Allocation Strategy 記憶體配置策略    方法 定義 Time Space 使用率     First Fit 從頭找, 當 free block size &gt;&#x3D; n, 即可配置 佳 佳   Best Fit 從頭到尾, 找出所有符合 free block size &gt;&#x3D; n, 且差">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/%E8%A8%98%E6%86%B6%E9%AB%94.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/allocation.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/baseLimit.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/compaction.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/paged.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/logical%E5%B0%8D%E6%87%89.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/ex%E8%A7%A3%E6%B3%951.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/ex%E8%A7%A3%E6%B3%952.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/%E5%AD%98%E6%94%BE2.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/segmentManagement.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/summary.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/%E5%88%86%E9%A0%81%E5%88%86%E6%AE%B5.png">
+<meta property="article:published_time" content="2021-06-22T12:44:03.000Z">
+<meta property="article:modified_time" content="2021-06-30T14:26:04.509Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="Memory Management">
+<meta property="article:tag" content="Page Memory Management">
+<meta property="article:tag" content="Segment Memory Management">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/%E8%A8%98%E6%86%B6%E9%AB%94.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Chapter3-作業系統-記憶體管理</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2021/06/24/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%99%9B%E6%93%AC%E8%A8%98%E6%86%B6%E9%AB%94-part1/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2021/06/20/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A8%8B%E5%BA%8F%E9%96%93%E7%9A%84%E6%BA%9D%E9%80%9A-part2/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/&text=Chapter3-作業系統-記憶體管理" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/&title=Chapter3-作業系統-記憶體管理" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/&is_video=false&description=Chapter3-作業系統-記憶體管理" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter3-作業系統-記憶體管理&body=Check out this article: https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/&title=Chapter3-作業系統-記憶體管理" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/&title=Chapter3-作業系統-記憶體管理" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/&title=Chapter3-作業系統-記憶體管理" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/&title=Chapter3-作業系統-記憶體管理" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/&name=Chapter3-作業系統-記憶體管理&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/&t=Chapter3-作業系統-記憶體管理" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">3.7 記憶體管理 (Memory Management)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">Memory Allocation Strategy 記憶體配置策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.1.</span> <span class="toc-text">First Fit 的小問題</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">Memory 中常發生的問題</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.2.1.</span> <span class="toc-text">Multiple Base&#x2F; Limit register set. 多重基底限制暫存器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.2.2.</span> <span class="toc-text">Compaction 壓縮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.2.3.</span> <span class="toc-text">Paged Memory Management 分頁式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">Logical address 對應 Physical address 的方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">Page table 的存放製作方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.2.4.</span> <span class="toc-text">Segment memory management 分段式記憶體管理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">Compare</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">Page segment memory management 分頁是分段記憶體管理</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Chapter3-作業系統-記憶體管理
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-06-22T12:44:03.000Z" itemprop="datePublished">2021-06-22</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/">計算機概論</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Memory-Management/" rel="tag">Memory Management</a>, <a class="tag-link" href="/tags/Page-Memory-Management/" rel="tag">Page Memory Management</a>, <a class="tag-link" href="/tags/Segment-Memory-Management/" rel="tag">Segment Memory Management</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1>3.7 記憶體管理 (Memory Management)</h1>
+<p>圖：
+<img src="%E8%A8%98%E6%86%B6%E9%AB%94.png" alt=""></p>
+<hr>
+<h2>Memory Allocation Strategy 記憶體配置策略</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">定義</th>
+<th style="text-align:center">Time</th>
+<th style="text-align:center">Space 使用率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">First Fit</td>
+<td style="text-align:left">從頭找, 當 free block size &gt;= n, 即可配置</td>
+<td style="text-align:center">佳</td>
+<td style="text-align:center">佳</td>
+</tr>
+<tr>
+<td style="text-align:left">Best Fit</td>
+<td style="text-align:left">從頭到尾, 找出所有符合 free block size &gt;= n, 且差異小者</td>
+<td style="text-align:center">差</td>
+<td style="text-align:center">佳</td>
+</tr>
+<tr>
+<td style="text-align:left">Worst Fit</td>
+<td style="text-align:left">從頭到尾, 找出所有符合 free block size &gt;= n, 且差異大者</td>
+<td style="text-align:center">差</td>
+<td style="text-align:center">差</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Ex:
+<img src="allocation.png" alt=""></li>
+</ul>
+<h3>First Fit 的小問題</h3>
+<p>經長期配置後, 前面的片段都會只剩下一小部分, 後續的 search 每次皆須經過<br>
+=&gt; Solution: 採用 &quot;<strong>Next Fit</strong>&quot;<br>
+Def: 利用 First Fit 概念, 但會從 <strong>上次配置的下一個節點開始 search</strong></p>
+<h2>Memory 中常發生的問題</h2>
+<ol>
+<li>外部碎裂：External Fragmentation<br>
+Def: 指 process 所需的 Memory 大小小於 memory 總可用空間, 但卻不能配置 (因為空間不連續, <strong>空間夠但不能給</strong>)<br>
+Solution:
+<ol>
+<li>Multiple Base/Limit 暫存器</li>
+<li>Compaction 壓縮</li>
+<li>Page Memory Management 分頁式</li>
+</ol>
+</li>
+<li>內部碎裂：Internal Fragmentation<br>
+Def: 給予的 Memory 大小較 process 所需空間大 (給太多, 你不用別人也不能用), 造成空間上的浪費<br>
+Solution:
+<ol>
+<li>Segment Memory Management 分段式</li>
+</ol>
+</li>
+</ol>
+<h3>Multiple Base/ Limit register set. 多重基底限制暫存器</h3>
+<p><img src="baseLimit.png" alt=""></p>
+<h3>Compaction 壓縮</h3>
+<ul>
+<li>
+<p>圖：<img src="compaction.png" alt=""></p>
+</li>
+<li>
+<p>困難：</p>
+<ol>
+<li>壓縮策略不易制定</li>
+<li>Process 皆需支援 <strong>Dynamic Binding</strong> (只要一 process 不支援, 則無法採用)</li>
+</ol>
+</li>
+</ul>
+<h3>Paged Memory Management 分頁式</h3>
+<ul>
+<li>
+<p>觀念：</p>
+<ol>
+<li>Physical memory 視為一組頁框 (frame) 之集合, <strong>各 frame 大小一致</strong></li>
+<li>Logical memory 視為一組頁面 (page) 之集合, <strong>&quot;page size = 一 frame size&quot;</strong></li>
+</ol>
+</li>
+<li>
+<p>圖：<img src="paged.png" alt=""></p>
+</li>
+<li>
+<p>配置策略：</p>
+<ol>
+<li>Page 間採 &quot;不連續&quot; 存放</li>
+<li>Process 為 n 個 page 時, 當 free frames &gt;= n 個即可配置 (No 外部碎裂, 夠就一定可以給)</li>
+<li>O.S. 替各 process 準備一 page table, 存放 <strong>page 跟 frame 之對應</strong></li>
+</ol>
+</li>
+<li>
+<p>例：一 program = 19k, frame size = 4k, 則</p>
+<ol>
+<li>需多少 page?</li>
+<li>內部碎裂 = ?</li>
+<li>Page Table 的 entry size = 4 bytes, 問 Page Table 大小 ?<br>
+Sol:
+<ol>
+<li>5 個, 需整數</li>
+<li>5 * 4k = 20k, 20k - 19k = 1k</li>
+<li><code>19k -&gt; page size = 4k</code>, <code>5 * 4 bytes = 20 bytes</code></li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<h4>Logical address 對應 Physical address 的方式</h4>
+<ul>
+<li>圖：<img src="logical%E5%B0%8D%E6%87%89.png" alt=""></li>
+<li>Ex: 8 frames, each frame size = 4, 一 process 的 Page Table 如下：問
+<ol>
+<li>logical address 7 跟 13 的 physical address = ?</li>
+<li>logical 跟 physical address 表示需幾 bits ?<br>
+Sol:</li>
+<li><img src="ex%E8%A7%A3%E6%B3%951.png" alt=""></li>
+<li><img src="ex%E8%A7%A3%E6%B3%952.png" alt=""></li>
+</ol>
+</li>
+</ul>
+<h4>Page table 的存放製作方式</h4>
+<ol>
+<li>存 register
+<ul>
+<li>優點：速度快</li>
+<li>缺點：容量大, 不適用 register 小</li>
+</ul>
+</li>
+<li>存 memory
+<ul>
+<li>優點：容量大, 適用</li>
+<li>缺點：每次需做 2 次的 memory 存取 (第一次抓 P.T, 第二次抓 data)</li>
+<li>作法： <img src="%E5%AD%98%E6%94%BE2.png" alt=""></li>
+</ul>
+</li>
+<li><strong>TLB 方式 Translation look-aside Buffer</strong>
+<ul>
+<li>由高速的關聯是暫存器組成</li>
+<li>其各個的內容為：
+<ul>
+<li>key: 存 page number (p)</li>
+<li>value: 存 frame number (f)</li>
+</ul>
+</li>
+<li>只存常用的 p, f 之對應 <strong>(目前執行中的 process 方可存入 TLB 之中)</strong> (當如果只要有 process 更換或做了 context switching, TLB 內容需全部 refresh)</li>
+<li><strong>採 TLB 之 effect memory access time 有效記憶體存取時間</strong>
+<ul>
+<li>公式：<code>h * (ta + ma) + (1 - h) * (ta + 2ma)</code>
+<ul>
+<li><code>h * (ta + ma)</code> 為<strong>命中所需時間</strong></li>
+<li><code>(1 - h) * (ta + 2ma)</code> 為 <strong>沒命中</strong></li>
+<li>h = hit ratio</li>
+<li>ta = TLB access time</li>
+<li>ma = Memory access time</li>
+</ul>
+</li>
+<li>Note: <code>h * (ta + ma) + (1 - h) * (ta + 2ma)</code> =&gt; <strong>4-level page table</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3>Segment memory management 分段式記憶體管理</h3>
+<ul>
+<li>觀念：
+<ol>
+<li>將 logical memory 視為一組 segment 之集合, <strong>各 segment 大小不一致</strong></li>
+<li>和 user 對 memory 的看法一致, segment 可能是 main, subroutine...等</li>
+</ol>
+</li>
+<li>圖：<img src="segmentManagement.png" alt=""></li>
+<li>配置策略：
+<ol>
+<li>Segment 之間採不連續性存放</li>
+<li>單一 Segment 採 &quot;連續性&quot;配置 (<strong>有外部碎裂</strong>)</li>
+<li>O.S. 會替各 process 準備一 Segment Table, 其中
+<ul>
+<li>Base: 存段的起始位址</li>
+<li>Limit: 段的大小</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h2>Summary</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">分析</th>
+<th style="text-align:center">Paged</th>
+<th style="text-align:center">Segment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">優點</td>
+<td style="text-align:center">No 外部碎裂</td>
+<td style="text-align:center">No 內部碎裂</td>
+</tr>
+<tr>
+<td style="text-align:left">缺點</td>
+<td style="text-align:center">有內部碎裂</td>
+<td style="text-align:center">有外部碎裂</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p><strong>相同點</strong>:</p>
+<ol>
+<li>支援 Memory 共享</li>
+<li>支援 Memory 保護</li>
+<li>支援 dynamic loading, linking, binding (動態繫結, 在執行期間可動態去翻轉記憶體位置)</li>
+<li>需額外的 hardware support</li>
+<li>執行較慢 (因為 logical -&gt; physical address)</li>
+</ol>
+</li>
+<li>
+<p>圖：<img src="summary.png" alt=""></p>
+</li>
+</ul>
+<h2>Compare</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Paged</th>
+<th style="text-align:center">Segment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">No 外部碎裂, 有內部碎裂</td>
+<td style="text-align:center">No 內部碎裂, 有外部碎裂</td>
+</tr>
+<tr>
+<td style="text-align:center">Page size 一致</td>
+<td style="text-align:center">Segment 大小不一致</td>
+</tr>
+<tr>
+<td style="text-align:center">和 user 看法不一致</td>
+<td style="text-align:center">較一致</td>
+</tr>
+<tr>
+<td style="text-align:center">需給單一量的 logical address</td>
+<td style="text-align:center">需給 s, d (2 個量)</td>
+</tr>
+<tr>
+<td style="text-align:center">不需做 d &lt; limit 之 check</td>
+<td style="text-align:center">需 check d &lt; limit</td>
+</tr>
+<tr>
+<td style="text-align:center">Memory 共享, 保護, 較不易</td>
+<td style="text-align:center">較容易</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Page segment memory management 分頁是分段記憶體管理</h2>
+<ul>
+<li>觀念： 先分段, 在分頁 -&gt; 最終存 page</li>
+<li>圖：<img src="%E5%88%86%E9%A0%81%E5%88%86%E6%AE%B5.png" alt=""></li>
+<li>優點：
+<ol>
+<li>No 外部碎裂</li>
+<li>單一段可以 &quot;不連續性存放&quot;</li>
+</ol>
+</li>
+<li>缺點：
+<ol>
+<li>有內部碎裂</li>
+<li>Table size 相當大 (因為 Segment Table 及 Page Table 皆需)</li>
+</ol>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">3.7 記憶體管理 (Memory Management)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">Memory Allocation Strategy 記憶體配置策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.1.</span> <span class="toc-text">First Fit 的小問題</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">Memory 中常發生的問題</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.2.1.</span> <span class="toc-text">Multiple Base&#x2F; Limit register set. 多重基底限制暫存器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.2.2.</span> <span class="toc-text">Compaction 壓縮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.2.3.</span> <span class="toc-text">Paged Memory Management 分頁式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">Logical address 對應 Physical address 的方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">Page table 的存放製作方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.2.4.</span> <span class="toc-text">Segment memory management 分段式記憶體管理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">Compare</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">Page segment memory management 分頁是分段記憶體管理</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/&text=Chapter3-作業系統-記憶體管理" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/&title=Chapter3-作業系統-記憶體管理" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/&is_video=false&description=Chapter3-作業系統-記憶體管理" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter3-作業系統-記憶體管理&body=Check out this article: https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/&title=Chapter3-作業系統-記憶體管理" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/&title=Chapter3-作業系統-記憶體管理" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/&title=Chapter3-作業系統-記憶體管理" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/&title=Chapter3-作業系統-記憶體管理" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/&name=Chapter3-作業系統-記憶體管理&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/&t=Chapter3-作業系統-記憶體管理" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

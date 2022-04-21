@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Restful &lt;!--more--&gt;   進行增刪改查 Route::resource(&#39;photo&#39;, &#39;PhotoController&#39;); 如下     動作 URI 行為 路由名稱     GET &#x2F;photos index photos.index   GET &#x2F;photos&#x2F;create create photos.create   POST &#x2F;photos store">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4. Laravel Restful">
+<meta property="og:url" content="https://pingjing0628.github.io/2019/10/27/4-Laravel-Restful/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="Restful &lt;!--more--&gt;   進行增刪改查 Route::resource(&#39;photo&#39;, &#39;PhotoController&#39;); 如下     動作 URI 行為 路由名稱     GET &#x2F;photos index photos.index   GET &#x2F;photos&#x2F;create create photos.create   POST &#x2F;photos store">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2019-10-27T07:48:11.000Z">
+<meta property="article:modified_time" content="2020-12-15T15:15:38.109Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="Laravel">
+<meta property="article:tag" content="Database">
+<meta property="article:tag" content="CRUD">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>4. Laravel Restful</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2019/10/27/3-%E6%90%AD%E5%BB%BALaravel%E5%BE%8C%E5%8F%B0/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2019/10/27/4-Laravel-Restful/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2019/10/27/4-Laravel-Restful/&text=4. Laravel Restful" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2019/10/27/4-Laravel-Restful/&title=4. Laravel Restful" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2019/10/27/4-Laravel-Restful/&is_video=false&description=4. Laravel Restful" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=4. Laravel Restful&body=Check out this article: https://pingjing0628.github.io/2019/10/27/4-Laravel-Restful/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2019/10/27/4-Laravel-Restful/&title=4. Laravel Restful" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2019/10/27/4-Laravel-Restful/&title=4. Laravel Restful" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2019/10/27/4-Laravel-Restful/&title=4. Laravel Restful" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2019/10/27/4-Laravel-Restful/&title=4. Laravel Restful" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2019/10/27/4-Laravel-Restful/&name=4. Laravel Restful&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2019/10/27/4-Laravel-Restful/&t=4. Laravel Restful" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">Restful</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        4. Laravel Restful
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-10-27T07:48:11.000Z" itemprop="datePublished">2019-10-27</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Laravel/">Laravel</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/CRUD/" rel="tag">CRUD</a>, <a class="tag-link" href="/tags/Database/" rel="tag">Database</a>, <a class="tag-link" href="/tags/Laravel/" rel="tag">Laravel</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2>Restful</h2>
+<p>&lt;!--more--&gt;</p>
+<hr>
+<ol>
+<li>進行增刪改查
+<code>Route::resource('photo', 'PhotoController');</code></li>
+<li>如下</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>動作</th>
+<th>URI</th>
+<th>行為</th>
+<th>路由名稱</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>/photos</td>
+<td>index</td>
+<td>photos.index</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/photos/create</td>
+<td>create</td>
+<td>photos.create</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/photos</td>
+<td>store</td>
+<td>photos.store</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/photos/{photo}</td>
+<td>show</td>
+<td>photos.show</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/photos/{photo}/edit</td>
+<td>edit</td>
+<td>photos.edit</td>
+</tr>
+<tr>
+<td>PUT / PATCH</td>
+<td>/photos/{photo}</td>
+<td>update</td>
+<td>photos.update</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>/photos/{photo}</td>
+<td>destory</td>
+<td>photos.destory</td>
+</tr>
+</tbody>
+</table>
+<ol start="3">
+<li>配置資源路由</li>
+</ol>
+<ul>
+<li>
+<p>將<code>Route::get('article', 'ArticleController@index');</code></p>
+</li>
+<li>
+<p>-&gt;改成 <code>Route::resource('articles', 'ArticleController');</code></p>
+</li>
+<li>
+<p>article 單數變成複數。</p>
+</li>
+<li>
+<p>修改之前的view
+<code>resources/views/admin/home.blade.php</code> 中的 <code>url('admin/article')</code></p>
+</li>
+<li>
+<p>-&gt;為 <code>url('admin/articles')</code></p>
+</li>
+<li>
+<p><code>resources/views/admin/article/index.blade.php</code> 中的 <code>url('admin/article/create')</code></p>
+</li>
+<li>
+<p>-&gt;為 <code>url('admin/articles/create') ；</code></p>
+</li>
+<li>
+<p>修改 <code>url('admin/article/'.$article-&gt;id.'/edit')</code></p>
+</li>
+<li>
+<p>-&gt;為 <code>url('admin/articles/'.$article-&gt;id.'/edit') ；</code></p>
+</li>
+<li>
+<p>修改 <code>url('admin/article/'.$article-&gt;id)</code></p>
+</li>
+<li>
+<p>-&gt;為 <code>url('admin/articles/'.$article-&gt;id)</code></p>
+</li>
+</ul>
+<ol start="4">
+<li>新增article</li>
+</ol>
+<ul>
+<li>
+<p>需要兩個動作，1. 新增article的頁面，2. 將資料送到後端</p>
+</li>
+<li>
+<p>新增Article 頁面</p>
+<ul>
+<li>使用<code>/admin/articles/create</code>建立新增article頁面，瀏覽器使用GET從server獲取，對應<code>ArticleController</code>的<code>create()</code>方法
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">create</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> view(<span class="string">'admin/article/create'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>新增view於<code>resources/views/admin/article/create.blade.php</code>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">@extends('layouts.app')</span><br><span class="line">@section('content')</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-md-10 col-md-offset-1"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel panel-default"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel-heading"</span>&gt;</span>新增一篇文章<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel-body"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                    @if (count($errors) &gt; 0)</span><br><span class="line">                        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"alert alert-danger"</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">strong</span>&gt;</span>新增失败<span class="tag">&lt;/<span class="name">strong</span>&gt;</span> 输入不符合要求<span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">                            &#123;!! implode('<span class="tag">&lt;<span class="name">br</span>&gt;</span>', $errors-&gt;all()) !!&#125;</span><br><span class="line">                        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                    @endif</span><br><span class="line"></span><br><span class="line">                    <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"&#123;&#123; url('admin/articles') &#125;&#125;"</span> <span class="attr">method</span>=<span class="string">"POST"</span>&gt;</span></span><br><span class="line">                        &#123;!! csrf_field() !!&#125;</span><br><span class="line">                        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"title"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">required</span>=<span class="string">"required"</span> <span class="attr">placeholder</span>=<span class="string">"请输入标题"</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">name</span>=<span class="string">"body"</span> <span class="attr">rows</span>=<span class="string">"10"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">required</span>=<span class="string">"required"</span> <span class="attr">placeholder</span>=<span class="string">"请输入内容"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn btn-lg btn-info"</span>&gt;</span>新增文章<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">@endsection</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>
+<p><code>view()</code> 方法是 Laravel 中一个全局的方法，用於調用view文件，接受一個字符串參數，並按照此參數去調取對應的路由。</p>
+</li>
+<li>
+<p><code>admin/article/create'</code> 跟 <code>'admin.article.create'</code> 是等於的</p>
+</li>
+<li>
+<p>提交資料到後端</p>
+<ul>
+<li>blade中表單，有csrf_field是laravel內建的應對csrf攻擊的防範措施，任何 POST PUT PATCH 請求都會被檢測是否提交了 CSRF 字段。對應的代碼為 <code>app/Http/Kernel.php</code> 裡的 <code>$middlewareGroups</code> 屬性裡的 <code>\App\Http\Middleware\VerifyCsrfToken::class</code> 值。</li>
+<li><code>{!! csrf_field() !!}</code> 實際上會生成一个隱藏的 input：<code>&lt;input type=&quot;hidden&quot; name=&quot;_token&quot; value=&quot;GYZ8OHDAbZICMcEvcTiS82qlZs2XrELklpEl159S&quot;&gt;</code></li>
+<li>如果你的系统有很多的 Ajax，而你又不想降低安全性，這裏的 <code>csrf_token()</code> 函數會给你很大的幫助。</li>
+<li>提交表單對應的是<code>store()</code>方法</li>
+<li>create store()方法
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">store</span><span class="params">(Request $request)</span> // <span class="title">Laravel</span> 的依賴注入系统會自動初始化我們需要的 <span class="title">Request</span> 類</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 數據驗證</span></span><br><span class="line">    <span class="keyword">$this</span>-&gt;validate($request, [</span><br><span class="line">        <span class="string">'title'</span> =&gt; <span class="string">'required|unique:articles|max:255'</span>, <span class="comment">// 必填、在 articles 表中唯一、最大長度 255</span></span><br><span class="line">        <span class="string">'body'</span> =&gt; <span class="string">'required'</span>, <span class="comment">// 必填</span></span><br><span class="line">    ]);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 通過 Article Model 插入一條數據進 articles 表</span></span><br><span class="line">    $article = <span class="keyword">new</span> Article; <span class="comment">// 初始化 Article 對象</span></span><br><span class="line">    $article-&gt;title = $request-&gt;get(<span class="string">'title'</span>); <span class="comment">// 將 POST 提交過了的 title 字段的值賦给 article 的 title 屬性</span></span><br><span class="line">    $article-&gt;body = $request-&gt;get(<span class="string">'body'</span>); <span class="comment">// 同上</span></span><br><span class="line">    $article-&gt;user_id = $request-&gt;user()-&gt;id; <span class="comment">// 獲取當前 Auth 系统中註冊的用户，並將其 id 賦给 article 的 user_id 屬性</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 將數據保存到數據庫，通過判斷保存结果，控制頁面進行不同跳轉</span></span><br><span class="line">    <span class="keyword">if</span> ($article-&gt;save()) &#123;</span><br><span class="line">        <span class="keyword">return</span> redirect(<span class="string">'admin/articles'</span>); <span class="comment">// 保存成功，跳轉到 文章管理頁</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 保存失敗，跳回来路頁面，保留用户的輸入，並给出提示</span></span><br><span class="line">        <span class="keyword">return</span> redirect()-&gt;back()-&gt;withInput()-&gt;withErrors(<span class="string">'保存失敗！'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<ol start="5">
+<li>編輯Article</li>
+</ol>
+<ul>
+<li>
+<p>需要兩個動作： 1. 顯示編輯頁面 2. 將編輯資料送至資料庫更新</p>
+</li>
+<li>
+<p>新增編輯頁面</p>
+<ul>
+<li>使用<code>/admin/article/edit</code> 建立編輯頁面，瀏覽器使用GET獲取，對應ArticleController 中的<code>edit()</code>方法
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">edit</span><span class="params">($id ,Request $request)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> view(<span class="string">'admin/article/edit'</span>)-&gt;withArticle(Article::find($id));</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>
+<p>新增view於<code>resources/views/admin/article/edit.blade.php</code>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">@extends('layouts.app')</span><br><span class="line">@section('content')</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-md-10 col-md-offset-1"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel panel-default"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel-heading"</span>&gt;</span>編輯 &#123;&#123;$article-&gt;title&#125;&#125; 文章<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel-body"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                    @if (count($errors) &gt; 0)</span><br><span class="line">                        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"alert alert-danger"</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">strong</span>&gt;</span>修改失敗<span class="tag">&lt;/<span class="name">strong</span>&gt;</span> 輸入不符合要求<span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">                            &#123;!! implode('<span class="tag">&lt;<span class="name">br</span>&gt;</span>', $errors-&gt;all()) !!&#125;</span><br><span class="line">                        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                    @endif</span><br><span class="line"></span><br><span class="line">                    <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"&#123;&#123; url('admin/articles/'.$article-&gt;id) &#125;&#125;"</span> <span class="attr">method</span>=<span class="string">"POST"</span>&gt;</span></span><br><span class="line">                        &#123;&#123; method_field('PATCH') &#125;&#125;</span><br><span class="line">                        &#123;&#123; csrf_field() &#125;&#125;</span><br><span class="line">                        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"title"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">required</span>=<span class="string">"required"</span> <span class="attr">value</span>=<span class="string">"&#123;&#123;$article-&gt;title&#125;&#125; "</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">name</span>=<span class="string">"body"</span> <span class="attr">rows</span>=<span class="string">"10"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">required</span>=<span class="string">"required"</span> &gt;</span>&#123;&#123;$article-&gt;body&#125;&#125; <span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn btn-lg btn-info"</span>&gt;</span>修改文章<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">@endsection</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>記得此處post！</p>
+</li>
+<li>
+<p>提交表單到資料庫使用的是<code>update()</code>方法</p>
+</li>
+</ul>
+<p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">update</span><span class="params">($id, Request $request)</span> // <span class="title">Laravel</span> 的依賴注入系统會自動初始化我們需要的 <span class="title">Request</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 數據驗證</span></span><br><span class="line">    <span class="keyword">$this</span>-&gt;validate($request, [</span><br><span class="line">        <span class="string">'title'</span> =&gt; <span class="string">'required|unique:articles|max:255'</span>, <span class="comment">// 必填、在 articles 表中唯一、最大長度 255</span></span><br><span class="line">        <span class="string">'body'</span> =&gt; <span class="string">'required'</span>, <span class="comment">// 必填</span></span><br><span class="line">    ]);</span><br><span class="line">    $article = Article::find($id);</span><br><span class="line">    $article-&gt;title = $request-&gt;get(<span class="string">'title'</span>); <span class="comment">// 將 POST 提交過了的 title 字段的值賦给 article 的 title 屬性</span></span><br><span class="line">    $article-&gt;body = $request-&gt;get(<span class="string">'body'</span>); <span class="comment">// 同上</span></span><br><span class="line">    $article-&gt;user_id = $request-&gt;user()-&gt;id; <span class="comment">// 獲取當前 Auth 系统中註冊的用户，並將其 id 賦给 article 的 user_id 屬性</span></span><br><span class="line">    $article-&gt;save();</span><br><span class="line">    <span class="comment">// 將數據保存到數據庫，通過判斷保存结果，控制頁面進行不同跳轉</span></span><br><span class="line">    <span class="keyword">if</span> ($article-&gt;save()) &#123;</span><br><span class="line">        <span class="keyword">return</span> redirect(<span class="string">'admin/articles'</span>); <span class="comment">// 保存成功，跳轉到文章管理頁</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 保存失敗，跳回来路頁面，保留用户的輸入，並给出提示</span></span><br><span class="line">        <span class="keyword">return</span> redirect()-&gt;back()-&gt;withInput()-&gt;withErrors(<span class="string">'保存失敗！'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ol start="6">
+<li>刪除Article</li>
+</ol>
+<ul>
+<li>刪除文章所對應的方法是<code>destory()</code>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">destroy</span><span class="params">($id)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Article::find($id)-&gt;delete();</span><br><span class="line">    <span class="keyword">return</span> redirect()-&gt;back()-&gt;withInput()-&gt;withErrors(<span class="string">'刪除成功！'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>新增view於resources/views/admin/article/delete.blade.php
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"&#123;&#123; url('admin/articles/'.$article-&gt;id) &#125;&#125;"</span> <span class="attr">method</span>=<span class="string">"POST"</span> <span class="attr">style</span>=<span class="string">"display: inline;"</span>&gt;</span></span><br><span class="line">    &#123;&#123; method_field('DELETE') &#125;&#125;</span><br><span class="line">    &#123;&#123; csrf_field() &#125;&#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">class</span>=<span class="string">"btn btn-danger"</span>&gt;</span>刪除<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">Restful</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2019/10/27/4-Laravel-Restful/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2019/10/27/4-Laravel-Restful/&text=4. Laravel Restful" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2019/10/27/4-Laravel-Restful/&title=4. Laravel Restful" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2019/10/27/4-Laravel-Restful/&is_video=false&description=4. Laravel Restful" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=4. Laravel Restful&body=Check out this article: https://pingjing0628.github.io/2019/10/27/4-Laravel-Restful/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2019/10/27/4-Laravel-Restful/&title=4. Laravel Restful" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2019/10/27/4-Laravel-Restful/&title=4. Laravel Restful" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2019/10/27/4-Laravel-Restful/&title=4. Laravel Restful" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2019/10/27/4-Laravel-Restful/&title=4. Laravel Restful" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2019/10/27/4-Laravel-Restful/&name=4. Laravel Restful&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2019/10/27/4-Laravel-Restful/&t=4. Laravel Restful" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

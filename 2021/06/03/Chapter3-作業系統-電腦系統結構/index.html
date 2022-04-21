@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="3.2 電腦系統結構 I&#x2F;O process 方式 Polling I&#x2F;O (詢問式) 又稱 busy wait 或 &quot;programmed I&#x2F;O&quot; Def:  當一 process 需 wait I&#x2F;O, 過程中 CPU 需不斷反覆詢問 I&#x2F;O 是否完成 若過程中將 CPU 切換給其他 process, 可能造成資料遺失的現象  Interrupt I&#x2F;O (中斷式) De">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter3-作業系統-電腦系統結構">
+<meta property="og:url" content="https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/">
+<meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="3.2 電腦系統結構 I&#x2F;O process 方式 Polling I&#x2F;O (詢問式) 又稱 busy wait 或 &quot;programmed I&#x2F;O&quot; Def:  當一 process 需 wait I&#x2F;O, 過程中 CPU 需不斷反覆詢問 I&#x2F;O 是否完成 若過程中將 CPU 切換給其他 process, 可能造成資料遺失的現象  Interrupt I&#x2F;O (中斷式) De">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/interrupt_IO.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/interrupt_IO_ISR.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/interrupt_vs_dma.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/cycle_stealing.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/summary.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/%E4%B8%AD%E6%96%B7%E7%A8%AE%E9%A1%9E.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/hardware_protection.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/dual_mode.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/memory_protection_pur.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/memory_protection_sol.png">
+<meta property="article:published_time" content="2021-06-03T09:50:24.000Z">
+<meta property="article:modified_time" content="2021-06-06T15:10:55.479Z">
+<meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="O.S">
+<meta property="article:tag" content="中斷">
+<meta property="article:tag" content="Hardware protection">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/interrupt_IO.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Chapter3-作業系統-電腦系統結構</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2021/06/06/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post " href="/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/&text=Chapter3-作業系統-電腦系統結構" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/&title=Chapter3-作業系統-電腦系統結構" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/&is_video=false&description=Chapter3-作業系統-電腦系統結構" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter3-作業系統-電腦系統結構&body=Check out this article: https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/&title=Chapter3-作業系統-電腦系統結構" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/&title=Chapter3-作業系統-電腦系統結構" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/&title=Chapter3-作業系統-電腦系統結構" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/&title=Chapter3-作業系統-電腦系統結構" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/&name=Chapter3-作業系統-電腦系統結構&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/&t=Chapter3-作業系統-電腦系統結構" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">3.2 電腦系統結構</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">I&#x2F;O process 方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.1.</span> <span class="toc-text">Polling I&#x2F;O (詢問式) 又稱 busy wait 或 &quot;programmed I&#x2F;O&quot;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.2.</span> <span class="toc-text">Interrupt I&#x2F;O (中斷式)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.3.</span> <span class="toc-text">DMA 會採用 &quot;Cycle stealing&quot; 的技術</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.4.</span> <span class="toc-text">Summary</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">中斷種類</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">Hardware Protection</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.1.</span> <span class="toc-text">I&#x2F;O protection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.2.</span> <span class="toc-text">CPU protection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.3.</span> <span class="toc-text">Memory protection</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">1. Monitor Area Protection</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">2. User Program Area Protection</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Chapter3-作業系統-電腦系統結構
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">PinJing Wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-06-03T09:50:24.000Z" itemprop="datePublished">2021-06-03</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/">計算機概論</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Hardware-protection/" rel="tag">Hardware protection</a>, <a class="tag-link" href="/tags/O-S/" rel="tag">O.S</a>, <a class="tag-link" href="/tags/%E4%B8%AD%E6%96%B7/" rel="tag">中斷</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1>3.2 電腦系統結構</h1>
+<h2>I/O process 方式</h2>
+<h3>Polling I/O (詢問式) 又稱 busy wait 或 &quot;programmed I/O&quot;</h3>
+<p>Def:</p>
+<ul>
+<li>當一 process 需 wait I/O, <strong>過程中 CPU 需不斷反覆詢問 I/O 是否完成</strong></li>
+<li>若過程中將 CPU 切換給其他 process, 可能造成<strong>資料遺失</strong>的現象</li>
+</ul>
+<h3>Interrupt I/O (中斷式)</h3>
+<p>Def: 當 process 需 wait I/O 由 <strong>Device Controller 負責監督 I/O 是否完成</strong>, 若完成則通知 O.S. 接手處理 5 ~ 8<br>
+<img src="interrupt_IO.png" alt="">
+Note: 過程中 CPU 不需介入故可切給另一 process 專心處理之<br>
+Interrupt vector table
+<img src="interrupt_IO_ISR.png" alt="">
+<strong>ISR: Interrupt Service Routine(中斷服務常式)</strong></p>
+<p><img src="interrupt_vs_dma.png" alt=""></p>
+<p>說明：</p>
+<ul>
+<li>採 interrupt 時, &quot;I/O 和 Mem 傳輸&quot;, CPU 需參與監督, 改良後 next</li>
+<li>採 DMA (Direct Memory Access 直接記憶體存取)
+Def: 由 DMA Controller 負責 I/O 和 Mem. 傳輸 <strong>(CPU 不需介入)</strong></li>
+</ul>
+<h3>DMA 會採用 &quot;Cycle stealing&quot; 的技術</h3>
+<ul>
+<li>週期竊取: 偷取 FO 和 WM 此 2 週期
+說明：
+<img src="cycle_stealing.png" alt=""><br>
+Note: DMA 適用於高速的 I/O Device (ex: disk)</li>
+</ul>
+<h3>Summary</h3>
+<p><img src="summary.png" alt=""></p>
+<h2>中斷種類</h2>
+<p><img src="%E4%B8%AD%E6%96%B7%E7%A8%AE%E9%A1%9E.png" alt=""><br>
+Note: (Non-maskable interrupt) =&gt; NMI 不可遮蔽式中斷</p>
+<ul>
+<li>為 Priority 最高的 interrupt</li>
+<li>O.S. 需無條件接收, 且立即執行之 (Hardware error)</li>
+</ul>
+<h2>Hardware Protection</h2>
+<h3>I/O protection</h3>
+<ul>
+<li>
+<p>目的：避免 user program 直接存取 I/O resource</p>
+</li>
+<li>
+<p>圖示：<img src="hardware_protection.png" alt=""></p>
+</li>
+<li>
+<p>作法：</p>
+<ol>
+<li>採用 <strong>&quot;Dual Mode&quot;</strong>, 將 I/O 相關的指令, 設為特權指令</li>
+<li>避免 user program 去改變中斷向量表或 ISR</li>
+</ol>
+</li>
+<li>
+<p>Dual Mode (雙重模式)
+<img src="dual_mode.png" alt=""></p>
+</li>
+<li>
+<p>Ex: 下列哪些為特權指令(O.S.)？</p>
+<ol>
+<li>setup timer</li>
+<li>read clock</li>
+<li>clear mem,</li>
+<li>close interrupt</li>
+<li>mode switch<br>
+Sol: 1, 3, 4, 5</li>
+</ol>
+</li>
+</ul>
+<h3>CPU protection</h3>
+<ul>
+<li>目的：避免 CPU 長期被某個 process 持有</li>
+<li>作法：設定一個 Timer (計時器), 一旦 process 取得 CPU 就開始倒數, 當時間為 0 , 則換其他 process 執行</li>
+</ul>
+<h3>Memory protection</h3>
+<ul>
+<li>目的：避免 user program 之執行影響到其他的 user program 或 monitor program (O.S.) 之執行</li>
+<li>圖：<img src="memory_protection_pur.png" alt=""></li>
+<li>分成：
+<ol>
+<li>Monitor Area Protection</li>
+<li>User Area Protection</li>
+</ol>
+</li>
+</ul>
+<h4>1. Monitor Area Protection</h4>
+<ul>
+<li>作法：採用 **&quot;Fence Register&quot;**紀錄 M.A.大小</li>
+<li>Problem: M.A. 的大小會更動(因為 error routine 是動態載入), 故所有的 user program 需動態更新位址, 需有 Dynamic Binding (只要沒有就不行,程式不會動)</li>
+<li>Solution:
+<img src="memory_protection_sol.png" alt=""></li>
+</ul>
+<h4>2. User Program Area Protection</h4>
+<ul>
+<li>作法：採用 <strong>&quot;base/limit&quot; register</strong>來記錄各 user program 的起始位址跟 U.P. 的大小</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">3.2 電腦系統結構</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">I&#x2F;O process 方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.1.</span> <span class="toc-text">Polling I&#x2F;O (詢問式) 又稱 busy wait 或 &quot;programmed I&#x2F;O&quot;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.2.</span> <span class="toc-text">Interrupt I&#x2F;O (中斷式)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.3.</span> <span class="toc-text">DMA 會採用 &quot;Cycle stealing&quot; 的技術</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.4.</span> <span class="toc-text">Summary</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">中斷種類</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">Hardware Protection</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.1.</span> <span class="toc-text">I&#x2F;O protection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.2.</span> <span class="toc-text">CPU protection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.3.</span> <span class="toc-text">Memory protection</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">1. Monitor Area Protection</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">2. User Program Area Protection</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/&text=Chapter3-作業系統-電腦系統結構" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/&title=Chapter3-作業系統-電腦系統結構" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/&is_video=false&description=Chapter3-作業系統-電腦系統結構" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Chapter3-作業系統-電腦系統結構&body=Check out this article: https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/&title=Chapter3-作業系統-電腦系統結構" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/&title=Chapter3-作業系統-電腦系統結構" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/&title=Chapter3-作業系統-電腦系統結構" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/&title=Chapter3-作業系統-電腦系統結構" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/&name=Chapter3-作業系統-電腦系統結構&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/&t=Chapter3-作業系統-電腦系統結構" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2022
+    PinJing Wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/categories">Categories</a></li>
+         
+          <li><a href="/tags">Tags</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
