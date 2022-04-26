@@ -248,9 +248,10 @@ Ans: (20, 30)</p>
 <h3>程式欲使用須引入： <code>#include &lt;stdio.h&gt;</code></h3>
 <h3>常用函式：</h3>
 <ol>
-<li><code>printf</code> =&gt; 標準輸出<br>
+<li>
+<p><code>printf</code> =&gt; 標準輸出<br>
 格式： <code>printf(&quot;格式字串&quot;, var1, var2...);</code><br>
-Note:
+Note:</p>
 <ol>
 <li>var 可省略</li>
 <li>若有 var, 需在格式字串中, 有對應的 <strong>格式碼</strong></li>
@@ -260,41 +261,105 @@ Note:
 %d 整數<br>
 %f 浮點數<br>
 %c 字元<br>
-%s 字串<br>
+%s 字串</p>
+</blockquote>
+<p>EX:<br>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">printf(&quot;hello&quot;);</span><br><span class="line">int x;</span><br><span class="line">printf(&quot;x is %d&quot;, x);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; x is 100</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p><code>scanf</code> =&gt; 標準輸入<br>
+從外界 key in 值, 接收到程式<br>
+格式： <code>scanf(&quot;格式字串&quot;, &amp;var1, &amp;var2...); // &amp;位址</code><br>
+Note: 格式碼與 <code>printf</code> 相同<br>
 EX:<br>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    printf(&quot;hello&quot;);</span><br><span class="line">    int x;</span><br><span class="line">    printf(&quot;x is %d&quot;, x);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; x is 100</span><br><span class="line">    &#96;&#96;&#96;  </span><br><span class="line"></span><br><span class="line">2. &#96;scanf&#96; &#x3D;&gt; 標準輸入  </span><br><span class="line">    從外界 key in 值, 接收到程式  </span><br><span class="line">    格式： &#96;scanf(&quot;格式字串&quot;, &amp;var1, &amp;var2...); &#x2F;&#x2F; &amp;位址&#96;  </span><br><span class="line">    Note: 格式碼與 &#96;printf&#96; 相同  </span><br><span class="line">    EX:</span><br></pre></td></tr></table></figure>
-int x;
-scanf(&quot;input: %d&quot;, &amp;x);
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">EX:  </span><br><span class="line">&#96;Sum &#x3D; 1+2+3+4...+N&#96;, N 為輸入值</span><br></pre></td></tr></table></figure>
-#inculde &lt;stdio.h&gt;
-int main()
-{
-int N, sum = 0, i;
-scanf(&quot;input: %d&quot;, &amp;N);
-for(i = 1; i &lt;= N; i++)
-{
-sum = sum + i;
-}
-printf(&quot;total:%d&quot;, sum);
-return 0;
-}
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">## 運算子</span><br><span class="line">|Operator|Priority|Associative|</span><br><span class="line">|--|--|--|</span><br><span class="line">|(), []|**高**|右結合|</span><br><span class="line">|!, ~, -(負), ++, --||左結合|</span><br><span class="line">|*, &#x2F;, +, - (**算數1**)||左結合|</span><br><span class="line">|&lt;&lt;, &gt;&gt;||左結合|</span><br><span class="line">|&lt;, &gt;,&lt;&#x3D;, &gt;&#x3D; (**關係2**)||左結合|</span><br><span class="line">|位元 (**3**)||左結合|</span><br><span class="line">|logical (**4**)||左結合|</span><br><span class="line">|&#x3D; (assign)|**低**|右結合|</span><br><span class="line"></span><br><span class="line">* Note:  </span><br><span class="line">    1. 1&gt;2&gt;3&gt;4  </span><br><span class="line">    2. 多個 operator 之運算, 先看 priority, 若相同在看 associate  </span><br><span class="line">    3. Associative 分為：  </span><br><span class="line">        * 左結合 ((3+5)+8)  </span><br><span class="line">        * 右結合 (3+(5+8))  </span><br><span class="line">    4. operator 分為：  </span><br><span class="line">        1. unary operator (單元)  </span><br><span class="line">            ex: -5, !flag  </span><br><span class="line">        2. binary operator (二元)  </span><br><span class="line">            ex: 3+5, 6-4, 7*8  </span><br><span class="line">        3. trinary operator (三元)  </span><br><span class="line">            &#96;條件式 ? x : y&#96;</span><br></pre></td></tr></table></figure>
-if (條件式)
-{
-x
-} else
-{
-y
-}
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    5. **&#x3D;**: assign , **&#x3D;&#x3D;**: equals  </span><br><span class="line"></span><br><span class="line">## ++, --</span><br><span class="line">|前置式|後置式|</span><br><span class="line">|--|--|</span><br><span class="line">|先做++, --, 再取值|先取值, 再做++, --|</span><br><span class="line">|++x, --x|x++, x--|</span><br><span class="line"></span><br><span class="line">* Ex1:</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int x;</span><br><span class="line">scanf(&quot;input: %d&quot;, &amp;x);</span><br></pre></td></tr></table></figure></p>
+<p>EX:<br>
+<code>Sum = 1+2+3+4...+N</code>, N 為輸入值<br>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int main() </span><br><span class="line">&#123;</span><br><span class="line">    int N, sum &#x3D; 0, i;</span><br><span class="line">    scanf(&quot;input: %d&quot;, &amp;N);</span><br><span class="line">    for(i &#x3D; 1; i &lt;&#x3D; N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        sum &#x3D; sum + i;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;total:%d&quot;, sum);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+</ol>
+<h2>運算子</h2>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Priority</th>
+<th>Associative</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(), []</td>
+<td><strong>高</strong></td>
+<td>右結合</td>
+</tr>
+<tr>
+<td>!, ~, -(負), ++, --</td>
+<td></td>
+<td>左結合</td>
+</tr>
+<tr>
+<td>*, /, +, - (<strong>算數1</strong>)</td>
+<td></td>
+<td>左結合</td>
+</tr>
+<tr>
+<td>&lt;&lt;, &gt;&gt;</td>
+<td></td>
+<td>左結合</td>
+</tr>
+<tr>
+<td>&lt;, &gt;,&lt;=, &gt;= (<strong>關係2</strong>)</td>
+<td></td>
+<td>左結合</td>
+</tr>
+<tr>
+<td>位元 (<strong>3</strong>)</td>
+<td></td>
+<td>左結合</td>
+</tr>
+<tr>
+<td>logical (<strong>4</strong>)</td>
+<td></td>
+<td>左結合</td>
+</tr>
+<tr>
+<td>= (assign)</td>
+<td><strong>低</strong></td>
+<td>右結合</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Note:
+<ol>
+<li>1&gt;2&gt;3&gt;4</li>
+<li>多個 operator 之運算, 先看 priority, 若相同在看 associate</li>
+<li>Associative 分為：
+<ul>
+<li>左結合 ((3+5)+8)</li>
+<li>右結合 (3+(5+8))</li>
+</ul>
+</li>
+<li>operator 分為：
+<ol>
+<li>unary operator (單元)<br>
+ex: -5, !flag</li>
+<li>binary operator (二元)<br>
+ex: 3+5, 6-4, 7*8</li>
+<li>trinary operator (三元)<br>
+<code>條件式 ? x : y</code><br>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">            if (條件式)</span><br><span class="line">            &#123;</span><br><span class="line">                x</span><br><span class="line">            &#125; else </span><br><span class="line">            &#123;</span><br><span class="line">                y</span><br><span class="line">            &#125;</span><br><span class="line">            &#96;&#96;&#96;  </span><br><span class="line">    5. **&#x3D;**: assign , **&#x3D;&#x3D;**: equals  </span><br><span class="line"></span><br><span class="line">## ++, --</span><br><span class="line">|前置式|後置式|</span><br><span class="line">|--|--|</span><br><span class="line">|先做++, --, 再取值|先取值, 再做++, --|</span><br><span class="line">|++x, --x|x++, x--|</span><br><span class="line"></span><br><span class="line">* Ex1:</span><br></pre></td></tr></table></figure>
 int x = 5, y=5;
 int A, B;
 A = x++;
 B = ++y;
-print(A, B, x, y);</p>
-</blockquote>
+print(A, B, x, y);</li>
+</ol>
 </li>
 </ol>
+</li>
+</ul>
 <p>// 5, 6, 6, 6</p>
 <pre><code>
 * Ex2:  
