@@ -102,13 +102,30 @@ ex: int x;</p>
 </ul>
 </li>
 <li>Ex: <code>char c1;</code></li>
-<li>Note:<br>
-|character|string|
-|--|--|
-|由一字母或數字組成|由 1~多個組成|
-|用單引號括住|用雙引號括住|
-|'a', 'B'(對), &quot;B&quot;(錯)|&quot;hello&quot;(對), 'hello'(錯)|</li>
+<li>Note:</li>
 </ul>
+<table>
+<thead>
+<tr>
+<th>character</th>
+<th>string</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>由一字母或數字組成</td>
+<td>由 1~多個組成</td>
+</tr>
+<tr>
+<td>用單引號括住</td>
+<td>用雙引號括住</td>
+</tr>
+<tr>
+<td>'a', 'B'(對), &quot;B&quot;(錯)</td>
+<td>&quot;hello&quot;(對), 'hello'(錯)</td>
+</tr>
+</tbody>
+</table>
 <ol start="3">
 <li>integer (整數):</li>
 </ol>
@@ -123,13 +140,30 @@ ex: int x;</p>
 </li>
 </ul>
 <ol start="4">
-<li>浮點數:<br>
-|float|double|
-|--|--|
-|single precision|double precision|
-|32 bits, 佔用 4 bytes|使用 8 bytes|
-|float f;|double d;|</li>
+<li>浮點數:</li>
 </ol>
+<table>
+<thead>
+<tr>
+<th>float</th>
+<th>double</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>single precision</td>
+<td>double precision</td>
+</tr>
+<tr>
+<td>32 bits, 佔用 4 bytes</td>
+<td>使用 8 bytes</td>
+</tr>
+<tr>
+<td>float f;</td>
+<td>double d;</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li>ex:
 <ol>
