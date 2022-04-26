@@ -14,7 +14,7 @@
 <meta property="og:description" content="5.2 C 語言重點  C Language  結構  xxx.c header: 表頭 body: object code   Ex: # include &lt;stdio.h&gt; &#x3D;&gt; stdio.h 為 linker, 外部函式庫之 header file  變數 vs 常數    Variable Constant     會隨著執行而更動的數值 不變   佔用 memory">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2021-07-08T09:10:18.000Z">
-<meta property="article:modified_time" content="2022-04-26T15:06:56.491Z">
+<meta property="article:modified_time" content="2022-04-26T15:24:31.330Z">
 <meta property="article:author" content="PinJing Wang">
 <meta property="article:tag" content="C">
 <meta property="article:tag" content="運算子">
@@ -444,10 +444,32 @@ sum = sum + i;
 printf(&quot;total:%d&quot;, sum);
 return 0;
 }
-```</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 運算子</span><br><span class="line">|Operator|Priority|Associative|</span><br><span class="line">|--|--|--|</span><br><span class="line">|(), []|**高**|右結合|</span><br><span class="line">|!, ~, -(負), ++, --||左結合|</span><br><span class="line">|*, &#x2F;, +, - (**算數1**)||左結合|</span><br><span class="line">|&lt;&lt;, &gt;&gt;||左結合|</span><br><span class="line">|&lt;, &gt;,&lt;&#x3D;, &gt;&#x3D; (**關係2**)||左結合|</span><br><span class="line">|位元 (**3**)||左結合|</span><br><span class="line">|logical (**4**)||左結合|</span><br><span class="line">|&#x3D; (assign)|**低**|右結合|</span><br><span class="line"></span><br><span class="line">* Note:  </span><br><span class="line">    1. 1&gt;2&gt;3&gt;4  </span><br><span class="line">    2. 多個 operator 之運算, 先看 priority, 若相同在看 associate  </span><br><span class="line">    3. Associative 分為：  </span><br><span class="line">        * 左結合 ((3+5)+8)  </span><br><span class="line">        * 右結合 (3+(5+8))  </span><br><span class="line">    4. operator 分為：  </span><br><span class="line">        1. unary operator (單元)  </span><br><span class="line">            ex: -5, !flag  </span><br><span class="line">        2. binary operator (二元)  </span><br><span class="line">            ex: 3+5, 6-4, 7*8  </span><br><span class="line">        3. trinary operator (三元)  </span><br><span class="line">            &#96;條件式 ? x : y&#96;</span><br></pre></td></tr></table></figure>
+if (條件式)
+{
+x
+} else
+{
+y
+}
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    5. **&#x3D;**: assign , **&#x3D;&#x3D;**: equals  </span><br><span class="line"></span><br><span class="line">## ++, --</span><br><span class="line">|前置式|後置式|</span><br><span class="line">|--|--|</span><br><span class="line">|先做++, --, 再取值|先取值, 再做++, --|</span><br><span class="line">|++x, --x|x++, x--|</span><br><span class="line"></span><br><span class="line">* Ex1:</span><br></pre></td></tr></table></figure>
+int x = 5, y=5;
+int A, B;
+A = x++;
+B = ++y;
+print(A, B, x, y);</p>
 </blockquote>
 </li>
 </ol>
+<p>// 5, 6, 6, 6</p>
+<pre><code>
+* Ex2:  
+`a = 3, b = 6`, 則 `39/-++a+-20%b--`  
+Sol:  
+`39/(-4)+(-29)%6` = `-9 + (-5)` = `-14`  
+
+## 位元運算
+</code></pre>
 
   </div>
 </article>
