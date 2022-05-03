@@ -333,15 +333,21 @@ EX:<br>
 <ul>
 <li>Note:
 <ol>
-<li>1&gt;2&gt;3&gt;4</li>
-<li>多個 operator 之運算, 先看 priority, 若相同在看 associate</li>
-<li>Associative 分為：
+<li>
+<p>1&gt;2&gt;3&gt;4</p>
+</li>
+<li>
+<p>多個 operator 之運算, 先看 priority, 若相同在看 associate</p>
+</li>
+<li>
+<p>Associative 分為：</p>
 <ul>
 <li>左結合 ((3+5)+8)</li>
 <li>右結合 (3+(5+8))</li>
 </ul>
 </li>
-<li>operator 分為：
+<li>
+<p>operator 分為：</p>
 <ol>
 <li>unary operator (單元)<br>
 ex: -5, !flag</li>
@@ -352,7 +358,9 @@ ex: 3+5, 6-4, 7*8</li>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if (條件式)</span><br><span class="line">&#123;</span><br><span class="line">    x</span><br><span class="line">&#125; else </span><br><span class="line">&#123;</span><br><span class="line">    y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
 </li>
-<li><strong>=</strong>: assign , <strong>==</strong>: equals</li>
+<li>
+<p><strong>=</strong>: assign , <strong>==</strong>: equals</p>
+</li>
 </ol>
 </li>
 </ul>
@@ -396,14 +404,65 @@ Sol:<br>
 <li>OR (|)</li>
 <li>XOR (^)</li>
 <li>&lt;&lt;</li>
-<li>
-<blockquote>
-<blockquote></blockquote>
-</blockquote>
-</li>
+<li>&quot;&gt;&gt;&quot;</li>
 </ol>
 <ul>
-<li>EX:</li>
+<li>EX1:  <code>int x = 8 &amp; 6;</code>, <code>(0 0 0 0)2 = 0</code>, 同時為 1 才成立, <strong>像 (．)</strong></li>
+<li>EX2: <code>int x = 8 | 6;</code>, <code>(1 1 1 0)2 = 14</code>, <strong>像 (+)</strong></li>
+<li>EX3: <code>int x = 8 ^ 6;</code>, <code>(1 1 1 0 )2 = 14</code>, <strong>相同為 0, 相異為 1</strong></li>
+<li>EX4: &lt;&lt; 左移, <code>x &lt;&lt; n</code> =&gt; 將 x 左移 n 個 bits,<br>
+作法：在右邊加上 n 個 0 (具備 <strong>乘法</strong> 效果)<br>
+例如：<code>int x = 8 &lt;&lt; 2;</code>, (1000<strong>00</strong>)2 = 32</li>
+<li>EX5: &gt;&gt; 右移, <code>x &gt;&gt; n</code> =&gt; 將 x 右移 n 個 bits,<br>
+作法：
+<ul>
+<li>step1 =&gt; 將右邊<strong>砍掉</strong> n 個 bits <strong>維持 sign bit</strong></li>
+<li>step2 =&gt; 在左邊補上
+<ol>
+<li>正 =&gt; 0 (n 個)</li>
+<li>負 =&gt; 1 (n 個)<br>
+（具備 <strong>除法</strong> 效果)
+例如：<code>int x = 8 &gt;&gt; 2;</code>, (<strong>00</strong>1000)2 = 2</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h2>Logical</h2>
+<h3>NOT (!)</h3>
+<ul>
+<li>false -&gt; true</li>
+<li>true -&gt; false<br>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bool flag &#x3D; true;</span><br><span class="line">&#x3D;&gt; !flag &#x3D;&gt; false</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3>AND (&amp;&amp;) and OR (||)</h3>
+<ul>
+<li><strong>布林運算式最佳化</strong>  =&gt; <strong>短路現象</strong> =&gt; <strong>shortcut 捷徑運算</strong></li>
+<li>A, B 均為 conditional (條件式)<br>
+<code>if(A &amp;&amp; B)</code>, A = false, B 不做, 結果必為 false<br>
+<code>if(A || B)</code>, A = true, B 不做, 結果必為 true</li>
+</ul>
+<h2>if - else</h2>
+<ul>
+<li>
+<p>格式一：<br>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if (cond 1) &#123;</span><br><span class="line">    true (2)</span><br><span class="line">&#125;else &#123;</span><br><span class="line">    false (3)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+1 ? 2 : 3</p>
+</li>
+<li>
+<p>格式二：
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if (cond) &#123;</span><br><span class="line">    true 1</span><br><span class="line">&#125;else &#123;</span><br><span class="line">    if (cond) &#123;</span><br><span class="line">        true 2</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        false 3</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">------------</span><br><span class="line">if (cond) &#123;</span><br><span class="line">    1</span><br><span class="line">&#125;else if (cond) &#123;</span><br><span class="line">    2</span><br><span class="line">&#125;else &#123;</span><br><span class="line">    3</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Note: 當 if ... else 沒有 block 時, 則只會影響到下一個 statement (敘述)</p>
+</li>
+<li>
+<p>ex1:<br>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int x &#x3D; 1;</span><br><span class="line">if (x &lt; 5) &#123;</span><br><span class="line">    x--;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    x++;</span><br><span class="line">&#125;</span><br><span class="line">x++;</span><br><span class="line">printf(&quot;%d&quot;, x);</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>ex2:</p>
+</li>
 </ul>
 ]]></content>
       <categories>
