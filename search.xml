@@ -349,33 +349,62 @@ ex: -5, !flag</li>
 ex: 3+5, 6-4, 7*8</li>
 <li>trinary operator (三元)<br>
 <code>條件式 ? x : y</code><br>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">            if (條件式)</span><br><span class="line">            &#123;</span><br><span class="line">                x</span><br><span class="line">            &#125; else </span><br><span class="line">            &#123;</span><br><span class="line">                y</span><br><span class="line">            &#125;</span><br><span class="line">            &#96;&#96;&#96;  </span><br><span class="line">    5. **&#x3D;**: assign , **&#x3D;&#x3D;**: equals  </span><br><span class="line"></span><br><span class="line">## ++, --</span><br><span class="line">|前置式|後置式|</span><br><span class="line">|--|--|</span><br><span class="line">|先做++, --, 再取值|先取值, 再做++, --|</span><br><span class="line">|++x, --x|x++, x--|</span><br><span class="line"></span><br><span class="line">* Ex1:</span><br></pre></td></tr></table></figure>
-int x = 5, y=5;
-int A, B;
-A = x++;
-B = ++y;
-print(A, B, x, y);</li>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if (條件式)</span><br><span class="line">&#123;</span><br><span class="line">    x</span><br><span class="line">&#125; else </span><br><span class="line">&#123;</span><br><span class="line">    y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
 </li>
+<li><strong>=</strong>: assign , <strong>==</strong>: equals</li>
 </ol>
 </li>
 </ul>
-<p>// 5, 6, 6, 6</p>
-<pre><code>
-* Ex2:  
-`a = 3, b = 6`, 則 `39/-++a+-20%b--`  
-Sol:  
-`39/(-4)+(-29)%6` = `-9 + (-5)` = `-14`  
-
-## 位元運算
-* 概念：先將資料化成 2 進制, 再開始進行運算  
-1. AND (&amp;)  
-2. OR (|)  
-3. XOR (^)  
-4. &lt;&lt;  
-5. &gt;&gt;  
-* EX:  
-</code></pre>
+<h2>++, --</h2>
+<table>
+<thead>
+<tr>
+<th>前置式</th>
+<th>後置式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>先做++, --, 再取值</td>
+<td>先取值, 再做++, --</td>
+</tr>
+<tr>
+<td>++x, --x</td>
+<td>x++, x--</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>Ex1:<br>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int x &#x3D; 5, y&#x3D;5;</span><br><span class="line">int A, B;</span><br><span class="line">A &#x3D; x++;</span><br><span class="line">B &#x3D; ++y;</span><br><span class="line">print(A, B, x, y);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 5, 6, 6, 6</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Ex2:<br>
+<code>a = 3, b = 6</code>, 則 <code>39/-++a+-20%b--</code><br>
+Sol:<br>
+<code>39/(-4)+(-29)%6</code> = <code>-9 + (-5)</code> = <code>-14</code></p>
+</li>
+</ul>
+<h2>位元運算</h2>
+<ul>
+<li>概念：先將資料化成 2 進制, 再開始進行運算</li>
+</ul>
+<ol>
+<li>AND (&amp;)</li>
+<li>OR (|)</li>
+<li>XOR (^)</li>
+<li>&lt;&lt;</li>
+<li>
+<blockquote>
+<blockquote></blockquote>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>EX:</li>
+</ul>
 ]]></content>
       <categories>
         <category>計算機概論</category>

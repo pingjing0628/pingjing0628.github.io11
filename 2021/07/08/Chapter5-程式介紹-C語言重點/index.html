@@ -14,7 +14,7 @@
 <meta property="og:description" content="5.2 C 語言重點  C Language  結構  xxx.c header: 表頭 body: object code   Ex: # include &lt;stdio.h&gt; &#x3D;&gt; stdio.h 為 linker, 外部函式庫之 header file  變數 vs 常數    Variable Constant     會隨著執行而更動的數值 不變   佔用 memory">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2021-07-08T09:10:18.000Z">
-<meta property="article:modified_time" content="2022-04-26T15:30:42.522Z">
+<meta property="article:modified_time" content="2022-04-26T15:34:08.571Z">
 <meta property="article:author" content="PinJing Wang">
 <meta property="article:tag" content="C">
 <meta property="article:tag" content="運算子">
@@ -125,7 +125,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">5.2 C 語言重點</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">C Language</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">變數 vs 常數</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">變數宣告</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">Compare Static typed and Dynamic typed</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">常見的 data type 介紹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">變數種類</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.7.</span> <span class="toc-text">變數的存取順序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.8.</span> <span class="toc-text">Standard I&#x2F;O library 標準輸出&#x2F;輸入函式庫</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.8.1.</span> <span class="toc-text">程式欲使用須引入： #include &lt;stdio.h&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.8.2.</span> <span class="toc-text">常用函式：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.9.</span> <span class="toc-text">運算子</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">5.2 C 語言重點</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">C Language</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">變數 vs 常數</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">變數宣告</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">Compare Static typed and Dynamic typed</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">常見的 data type 介紹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">變數種類</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.7.</span> <span class="toc-text">變數的存取順序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.8.</span> <span class="toc-text">Standard I&#x2F;O library 標準輸出&#x2F;輸入函式庫</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.8.1.</span> <span class="toc-text">程式欲使用須引入： #include &lt;stdio.h&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.8.2.</span> <span class="toc-text">常用函式：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.9.</span> <span class="toc-text">運算子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.10.</span> <span class="toc-text">++, --</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.11.</span> <span class="toc-text">位元運算</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -515,33 +515,62 @@ ex: -5, !flag</li>
 ex: 3+5, 6-4, 7*8</li>
 <li>trinary operator (三元)<br>
 <code>條件式 ? x : y</code><br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">            if (條件式)</span><br><span class="line">            &#123;</span><br><span class="line">                x</span><br><span class="line">            &#125; else </span><br><span class="line">            &#123;</span><br><span class="line">                y</span><br><span class="line">            &#125;</span><br><span class="line">            &#96;&#96;&#96;  </span><br><span class="line">    5. **&#x3D;**: assign , **&#x3D;&#x3D;**: equals  </span><br><span class="line"></span><br><span class="line">## ++, --</span><br><span class="line">|前置式|後置式|</span><br><span class="line">|--|--|</span><br><span class="line">|先做++, --, 再取值|先取值, 再做++, --|</span><br><span class="line">|++x, --x|x++, x--|</span><br><span class="line"></span><br><span class="line">* Ex1:</span><br></pre></td></tr></table></figure>
-int x = 5, y=5;
-int A, B;
-A = x++;
-B = ++y;
-print(A, B, x, y);</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if (條件式)</span><br><span class="line">&#123;</span><br><span class="line">    x</span><br><span class="line">&#125; else </span><br><span class="line">&#123;</span><br><span class="line">    y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
 </li>
+<li><strong>=</strong>: assign , <strong>==</strong>: equals</li>
 </ol>
 </li>
 </ul>
-<p>// 5, 6, 6, 6</p>
-<pre><code>
-* Ex2:  
-`a = 3, b = 6`, 則 `39/-++a+-20%b--`  
-Sol:  
-`39/(-4)+(-29)%6` = `-9 + (-5)` = `-14`  
-
-## 位元運算
-* 概念：先將資料化成 2 進制, 再開始進行運算  
-1. AND (&amp;)  
-2. OR (|)  
-3. XOR (^)  
-4. &lt;&lt;  
-5. &gt;&gt;  
-* EX:  
-</code></pre>
+<h2>++, --</h2>
+<table>
+<thead>
+<tr>
+<th>前置式</th>
+<th>後置式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>先做++, --, 再取值</td>
+<td>先取值, 再做++, --</td>
+</tr>
+<tr>
+<td>++x, --x</td>
+<td>x++, x--</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>Ex1:<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int x &#x3D; 5, y&#x3D;5;</span><br><span class="line">int A, B;</span><br><span class="line">A &#x3D; x++;</span><br><span class="line">B &#x3D; ++y;</span><br><span class="line">print(A, B, x, y);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 5, 6, 6, 6</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Ex2:<br>
+<code>a = 3, b = 6</code>, 則 <code>39/-++a+-20%b--</code><br>
+Sol:<br>
+<code>39/(-4)+(-29)%6</code> = <code>-9 + (-5)</code> = <code>-14</code></p>
+</li>
+</ul>
+<h2>位元運算</h2>
+<ul>
+<li>概念：先將資料化成 2 進制, 再開始進行運算</li>
+</ul>
+<ol>
+<li>AND (&amp;)</li>
+<li>OR (|)</li>
+<li>XOR (^)</li>
+<li>&lt;&lt;</li>
+<li>
+<blockquote>
+<blockquote></blockquote>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>EX:</li>
+</ul>
 
   </div>
 </article>
@@ -571,7 +600,7 @@ Sol:
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">5.2 C 語言重點</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">C Language</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">變數 vs 常數</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">變數宣告</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">Compare Static typed and Dynamic typed</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">常見的 data type 介紹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">變數種類</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.7.</span> <span class="toc-text">變數的存取順序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.8.</span> <span class="toc-text">Standard I&#x2F;O library 標準輸出&#x2F;輸入函式庫</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.8.1.</span> <span class="toc-text">程式欲使用須引入： #include &lt;stdio.h&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.8.2.</span> <span class="toc-text">常用函式：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.9.</span> <span class="toc-text">運算子</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">5.2 C 語言重點</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">C Language</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">變數 vs 常數</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">變數宣告</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">Compare Static typed and Dynamic typed</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">常見的 data type 介紹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">變數種類</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.7.</span> <span class="toc-text">變數的存取順序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.8.</span> <span class="toc-text">Standard I&#x2F;O library 標準輸出&#x2F;輸入函式庫</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.8.1.</span> <span class="toc-text">程式欲使用須引入： #include &lt;stdio.h&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.8.2.</span> <span class="toc-text">常用函式：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.9.</span> <span class="toc-text">運算子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.10.</span> <span class="toc-text">++, --</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.11.</span> <span class="toc-text">位元運算</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
