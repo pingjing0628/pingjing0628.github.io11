@@ -598,6 +598,37 @@ Q: cond 為：</li>
 </li>
 </ul>
 <h2>Pointer (指標)</h2>
+<ul>
+<li>
+<p>說明：<br>
+|一般變數|指標變數|
+|--|--|
+|int x;|int *p;|</p>
+</li>
+<li>
+<p>Ex:
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int x &#x3D; 5;</span><br><span class="line">&#x2F;&#x2F; 下面兩行為 int *p &#x3D; &amp;x</span><br><span class="line">int *p;</span><br><span class="line">p &#x3D; &amp;x;</span><br><span class="line">*p &#x3D; *p + 1; &#x2F;&#x2F; 利用指標間接操作指向的內容</span><br><span class="line">printf(&quot;%d&quot;, x)</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Ex: 一學生採 C language coding 如下：
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a &#x3D; 10, b &#x3D; 20;</span><br><span class="line">    swap(a, b);</span><br><span class="line">    printf(&quot;%d, %d&quot;, a, b);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line">void swap(int x, int y)</span><br><span class="line">&#123;</span><br><span class="line">    int temp;</span><br><span class="line">    temp &#x3D; x;</span><br><span class="line">    x &#x3D; y;</span><br><span class="line">    y &#x3D; temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+Q:</p>
+</li>
+</ul>
+<ol>
+<li>為何呼叫 swap 後, a, b 沒變動？<br>
+由於此時 swap 的參數傳遞是採用 call by value, 而非 call by address, 故沒有 side effect, 因此 x, y 的變動, a, b 不受影響</li>
+<li>How to modify the program?<br>
+in C =&gt; 用 pointer 以改成 call by address<br>
+in C++ =&gt; 用 pointer or 用 call by reference<br>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a &#x3D; 10, b &#x3D; 20;</span><br><span class="line">    swap(&amp;a, &amp;b);</span><br><span class="line">    printf(&quot;%d, %d&quot;, a, b);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line">void swap(int *x, int *y)</span><br><span class="line">&#123;</span><br><span class="line">    int temp;</span><br><span class="line">    temp &#x3D; *x;</span><br><span class="line">    *x &#x3D; *y;</span><br><span class="line">    *y &#x3D; temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2>陣列(Array)</h2>
+<ul>
+<li>宣告方式：<br>
+type 變數 [size];<br>
+int  A  [5];</li>
+</ul>
 ]]></content>
       <categories>
         <category>計算機概論</category>
