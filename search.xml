@@ -514,8 +514,90 @@ Q: cond 為：</li>
 </li>
 </ul>
 <h3>while</h3>
+<ul>
+<li>格式：
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 承上題</span><br><span class="line">int sum &#x3D; 0, i;</span><br><span class="line">i &#x3D; 1;</span><br><span class="line">while (i &lt;&#x3D; 10)</span><br><span class="line">&#123;</span><br><span class="line">    sum &#x3D; sum + i;</span><br><span class="line">    i++;</span><br><span class="line">&#125;</span><br><span class="line">printf(&quot;sum&#x3D;%d&quot;, sum);</span><br></pre></td></tr></table></figure></li>
+</ul>
 <h3>do...while</h3>
-<h3>break &amp; continue</h3>
+<ul>
+<li>格式：
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">do(1)</span><br><span class="line">&#123;</span><br><span class="line">(3)</span><br><span class="line">(4)</span><br><span class="line">&#125;while(2);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3>Compare 前測式 VS 後測式</h3>
+<table>
+<thead>
+<tr>
+<th>前測式</th>
+<th>後測式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>先做測試，成立才做 statement =&gt; 最少做 0 次</td>
+<td>先做，再做測試 =&gt; 最少做 1 次</td>
+</tr>
+<tr>
+<td>while, for loop</td>
+<td>do-while</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Note: C語言和 C++ 中, 所有關鍵字都是小寫</li>
+</ul>
+<h3>Compare counted loop VS conditional loop</h3>
+<table>
+<thead>
+<tr>
+<th>counted loop (計數式)</th>
+<th>conditional loop(條件式)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>執行次數明確</td>
+<td>執行次數不明確，在一特定的條件，成立或不成立才終止</td>
+</tr>
+<tr>
+<td>ex: 1+2+....+100</td>
+<td>linked list 長度</td>
+</tr>
+<tr>
+<td>for loop</td>
+<td>while loop</td>
+</tr>
+</tbody>
+</table>
+<h3>continue &amp; break</h3>
+<table>
+<thead>
+<tr>
+<th>continue</th>
+<th>break</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>遇到時，則之後的敘述不做，直接進入 loop 的下一回合</td>
+<td>遇到時，直接跳出所屬的 loop</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>ex:
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int sum &#x3D; 0;</span><br><span class="line">for (int i &#x3D; 2; i &lt;&#x3D; 10; i+&#x3D;2)</span><br><span class="line">&#123;</span><br><span class="line">    if (i &#x3D;&#x3D; 6) continue;</span><br><span class="line">    sum +&#x3D; i;</span><br><span class="line">&#125;</span><br><span class="line">printf(&quot;%d&quot;, sum);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; i  2 4 6 8  10 12</span><br><span class="line">&#x2F;&#x2F;sum 2 6 X 14 24 stop</span><br><span class="line">&#x2F;&#x2F;sum &#x3D; 24</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>ex2: 承上題 若 continue 改為 break
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int sum &#x3D; 0;</span><br><span class="line">for (int i &#x3D; 2; i &lt;&#x3D; 10; i+&#x3D;2)</span><br><span class="line">&#123;</span><br><span class="line">    if (i &#x3D;&#x3D; 6) break;</span><br><span class="line">    sum +&#x3D; i;</span><br><span class="line">&#125;</span><br><span class="line">printf(&quot;%d&quot;, sum);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; i  2 4 6 </span><br><span class="line">&#x2F;&#x2F;sum 2 6 X </span><br><span class="line">&#x2F;&#x2F;sum &#x3D; 6</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>ex3: 呈例 2, 將 <strong>==</strong> 改為 <strong>=</strong>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int sum &#x3D; 0;</span><br><span class="line">for (int i &#x3D; 2; i &lt;&#x3D; 10; i+&#x3D;2)</span><br><span class="line">&#123;</span><br><span class="line">    if (i &#x3D; 6) break;</span><br><span class="line">    sum +&#x3D; i;</span><br><span class="line">&#125;</span><br><span class="line">printf(&quot;%d&quot;, sum);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;sum &#x3D; 0</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<h2>Pointer (指標)</h2>
 ]]></content>
       <categories>
         <category>計算機概論</category>
