@@ -461,9 +461,25 @@ Sol:<br>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int x &#x3D; 1;</span><br><span class="line">if (x &lt; 5) &#123;</span><br><span class="line">    x--;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    x++;</span><br><span class="line">&#125;</span><br><span class="line">x++;</span><br><span class="line">printf(&quot;%d&quot;, x);</span><br></pre></td></tr></table></figure></p>
 </li>
 <li>
-<p>ex2:</p>
+<p>ex2:<br>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int x &#x3D; 10;</span><br><span class="line">&#x2F;*</span><br><span class="line">    說明, 此程式在判別 x 是否大於 5 後, 再行動行</span><br><span class="line">*&#x2F;</span><br><span class="line">if (x &gt; 5) </span><br><span class="line">    x &#x3D; x + 5;</span><br><span class="line">else </span><br><span class="line">    x &#x3D; x - 5;</span><br><span class="line">printf(&quot;%d&quot;, x);</span><br></pre></td></tr></table></figure></p>
 </li>
 </ul>
+<blockquote>
+<p>Note: 註解可分, // =&gt; 單行, /<em>...</em>/ =&gt; 多行註解</p>
+</blockquote>
+<ul>
+<li>ex3:<br>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int i &#x3D; 3, j &#x3D; 5;</span><br><span class="line">if (cond) &#123;</span><br><span class="line">    printf(&quot;%d&quot;, i);</span><br><span class="line">    printf(&quot;%d&quot;, j);</span><br><span class="line">&#125;else &#123;</span><br><span class="line">    printf(&quot;false&quot;);</span><br><span class="line">    printf(&quot;%d, %d&quot;, i, j);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+Q: cond 為：</li>
+</ul>
+<ol>
+<li>(i = 0) &amp;&amp; (j = 4), false, 0, 5 =&gt; Ans</li>
+<li>i == 2 &amp;&amp; j == 4, false, 3, 5</li>
+<li>(i = 0) &amp; (j = 4), false, 0, 4</li>
+<li>(i = 2) || (j = 4), 2, 5</li>
+</ol>
+<h2>switch...case</h2>
 ]]></content>
       <categories>
         <category>計算機概論</category>
