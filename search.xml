@@ -480,6 +480,42 @@ Q: cond 為：</li>
 <li>(i = 2) || (j = 4), 2, 5</li>
 </ol>
 <h2>switch...case</h2>
+<ul>
+<li>
+<p>思考：
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if(c1)</span><br><span class="line">else if (c2)</span><br><span class="line">else if (c3)</span><br><span class="line">else</span><br><span class="line">&#x2F;&#x2F; 當 else if 太多時，採用 switch...case 較清楚</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>格式：
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">switch(變數 or 運算式)</span><br><span class="line">&#123;</span><br><span class="line">    case 符合文 or 數字：</span><br><span class="line">        statement;</span><br><span class="line">    case ...:</span><br><span class="line">        statement;</span><br><span class="line">    case ...:</span><br><span class="line">        ...;</span><br><span class="line">    default: &#x2F;&#x2F;當所有 case 皆不成立, 則於此</span><br><span class="line">        statement;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>執行方式：</p>
+<ul>
+<li>step1: 從 switch 的變數去比對哪個 case 符合條件</li>
+<li>step2: 從符合的 case 之 statement 往下做, 直到 break 或 block 結束才停止</li>
+</ul>
+</li>
+<li>
+<p>Ex:<br>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">switch(x) &#123;</span><br><span class="line">    default:</span><br><span class="line">        printf(&quot;No match&quot;);</span><br><span class="line">    case 1:</span><br><span class="line">        printf(&quot;1&quot;);</span><br><span class="line">    case 2:</span><br><span class="line">        printf(&quot;2&quot;);</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; 1. x &#x3D; 2 &#x3D;&gt; 印出 2</span><br><span class="line">&#x2F;&#x2F; 2. x &#x3D; 5 &#x3D;&gt; 印出 No match 1 2</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<h2>重複 =&gt; loop in C 常用 loop 語法</h2>
+<h3>for</h3>
+<ul>
+<li>
+<p>格式：
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for ( exp1(1); exp2(2); exp3(4)) </span><br><span class="line">&#123;</span><br><span class="line">    statement(3);</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; 1. initial: 只做一次，於進入時做</span><br><span class="line">&#x2F;&#x2F; 2. conditional: 成立，做 3, 接著 4, 再回到 2。不成立，跳出 for loop</span><br><span class="line">----------------------------------</span><br><span class="line">&#x2F;&#x2F; special case:</span><br><span class="line">for ( ; (true); ;)</span><br><span class="line">[</span><br><span class="line">    &#x2F;&#x2F; 無窮迴圈</span><br><span class="line">]</span><br><span class="line">&#x3D;&gt;</span><br><span class="line">while (true)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Ex: 1+2+3....+10, 用 for 寫
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int sum &#x3D; 0, i;</span><br><span class="line">for(i &#x3D; 1; i &lt;&#x3D; 10; i++) &#123;</span><br><span class="line">    sum &#x3D; sum + i;</span><br><span class="line">&#125;</span><br><span class="line">printf(&quot;sum&#x3D;%d&quot;, sum);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 55, i &#x3D; 11 最終跑到 11 不成立</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<h3>while</h3>
+<h3>do...while</h3>
+<h3>break &amp; continue</h3>
 ]]></content>
       <categories>
         <category>計算機概論</category>
