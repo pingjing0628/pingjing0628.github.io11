@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pingjing0628.github.io/"/>
-  <updated>2022-06-19T16:08:09.139Z</updated>
+  <updated>2022-06-19T16:16:31.499Z</updated>
   <id>https://pingjing0628.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Chapter5-程式介紹-JAVA</title>
+    <link href="https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/"/>
+    <id>https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/</id>
+    <published>2022-06-19T16:16:31.000Z</published>
+    <updated>2022-06-19T16:16:31.499Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Chapter5-程式介紹-C++程式語言介紹</title>
+    <link href="https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C-%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/"/>
+    <id>https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C-%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/</id>
+    <published>2022-06-19T16:15:34.000Z</published>
+    <updated>2022-06-19T16:15:34.846Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Chapter5-程式介紹-物件導向概論</title>
@@ -739,78 +769,6 @@ person P; (類別 物件)&lt;/p&gt;
       <category term="PCB" scheme="https://pingjing0628.github.io/tags/PCB/"/>
     
       <category term="context switching" scheme="https://pingjing0628.github.io/tags/context-switching/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Chapter3-作業系統-作業系統結構</title>
-    <link href="https://pingjing0628.github.io/2021/06/06/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/"/>
-    <id>https://pingjing0628.github.io/2021/06/06/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/</id>
-    <published>2021-06-06T15:12:32.000Z</published>
-    <updated>2021-06-12T15:12:47.469Z</updated>
-    
-    <content type="html"><![CDATA[<h1>3.3 作業系統結構</h1><p><img src="structure.png" alt=""></p><hr><h2>Command Interpreter 命令直譯器</h2><ul><li>Def: 接收 user 輸入命令, 加以判別：<ol><li>正確 =&gt; 呼叫對應的 <strong>&quot;Command procedure&quot;</strong></li><li>不正確 =&gt; Output error</li></ol></li><li>分為:</li></ul><ol><li><strong>Intergrated part of O.S.</strong> =&gt; command procedure 整合到 O.S. 之中<br>優點：速度快 (因為所有 command procedure 已於 O.S., 故在 Monitor Area (Memory) 之中)<br>缺點：可擴充性低 (彈性差)</li><li><strong>Isolated part of O.S.</strong> =&gt; 將 command procedure 獨立於 O.S. 之外<br>優點：可擴充性佳 (彈性好)<br>缺點：速度較慢 (因為可能需做 I/O &lt;-&gt; Memory 的傳輸)</li></ol><hr><h2>System Call 系統呼叫</h2><p>Def: 作為 user program 與 O.S. 溝通的介面</p><ul><li>類似 function 或 subroutine, 但為系統所擁有</li></ul><hr><h2>Kernel 核心程式</h2><ul><li>負責多個 process 運作上的協調, 管理等</li><li>負責底層 Hardware 資源的分配及管理<br>分為：巨核心 和 微核心<img src="kernel_compare.png" alt=""></li></ul><hr><h2>Virtual Machine 虛擬機器</h2><ul><li>Def: 藉由模擬技術, 創造一份與底層硬體完全一致的 copy (複製), 以達 Virtual Machine 之效</li><li>可利用資源共享的技術產生許多 Virtual Machine:<ol><li>CPU Scheduling =&gt; 共享 CPU</li><li>用 &quot;Virtual Memory&quot; =&gt; 共享 Memory Space</li><li>用 Spooling =&gt; 共用 I/O Device</li></ol></li><li>Virtual Machine 種類：<ul><li>type 1: 原生型 Virtual Machine =&gt; 概念同上, 各 Virtual Machine 直接面對底層的硬體<br>優點：Virtual Machine 可直接跟 Hardware 溝通 =&gt; 效率佳<br>缺點：Virtual Machine 間缺乏統一管理的機制, 故較不便<br>圖：<img src="%E5%8E%9F%E7%94%9F%E5%9E%8B.png" alt=""></li><li>type2: 寄生型 Virtual Machine =&gt; 各 Virtual Machine 會由一 O.S. 統一管理<br>優點：具統一管理各 Virtual Machine 機制, 所以較方便<br>缺點：Virtual Machine 須經中介者, 方可跟 hardware 溝通, 所以效率較差<br>圖：<img src="%E5%AF%84%E7%94%9F%E5%9E%8B.png" alt=""></li></ul></li><li>Note: 在 Cloud 的 Iaas 之下, 資源的 <strong>&quot;Virtualization&quot;</strong> 大為盛行, 一般會採用 Virtual Machine 的技術, 使得<strong>資源利用率</strong>發揮最大效益</li></ul><hr><h2>Bootstrap Loader 靴帶載入程式 (BIOS - Basic Input Output System)</h2><p>Def: 為一小程式, 於開機時執行, 一般放於 ROM 中 (space 小), 執行過程會帶出 O.S. Kernel 所在, 以便後續開機做來可順利運行</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1&gt;3.3 作業系統結構&lt;/h1&gt;
-&lt;p&gt;&lt;img src=&quot;structure.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2&gt;Command Interpreter 命令直譯器&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Def: 接收 user 輸入命令, 加以判別：
-&lt;ol&gt;
-&lt;
-      
-    
-    </summary>
-    
-    
-      <category term="計算機概論" scheme="https://pingjing0628.github.io/categories/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/"/>
-    
-    
-      <category term="O.S" scheme="https://pingjing0628.github.io/tags/O-S/"/>
-    
-      <category term="Kernel" scheme="https://pingjing0628.github.io/tags/Kernel/"/>
-    
-      <category term="Virtual Machine" scheme="https://pingjing0628.github.io/tags/Virtual-Machine/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Chapter3-作業系統-電腦系統結構</title>
-    <link href="https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/"/>
-    <id>https://pingjing0628.github.io/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/</id>
-    <published>2021-06-03T09:50:24.000Z</published>
-    <updated>2021-06-06T15:10:55.479Z</updated>
-    
-    <content type="html"><![CDATA[<h1>3.2 電腦系統結構</h1><h2>I/O process 方式</h2><h3>Polling I/O (詢問式) 又稱 busy wait 或 &quot;programmed I/O&quot;</h3><p>Def:</p><ul><li>當一 process 需 wait I/O, <strong>過程中 CPU 需不斷反覆詢問 I/O 是否完成</strong></li><li>若過程中將 CPU 切換給其他 process, 可能造成<strong>資料遺失</strong>的現象</li></ul><h3>Interrupt I/O (中斷式)</h3><p>Def: 當 process 需 wait I/O 由 <strong>Device Controller 負責監督 I/O 是否完成</strong>, 若完成則通知 O.S. 接手處理 5 ~ 8<br><img src="interrupt_IO.png" alt="">Note: 過程中 CPU 不需介入故可切給另一 process 專心處理之<br>Interrupt vector table<img src="interrupt_IO_ISR.png" alt=""><strong>ISR: Interrupt Service Routine(中斷服務常式)</strong></p><p><img src="interrupt_vs_dma.png" alt=""></p><p>說明：</p><ul><li>採 interrupt 時, &quot;I/O 和 Mem 傳輸&quot;, CPU 需參與監督, 改良後 next</li><li>採 DMA (Direct Memory Access 直接記憶體存取)Def: 由 DMA Controller 負責 I/O 和 Mem. 傳輸 <strong>(CPU 不需介入)</strong></li></ul><h3>DMA 會採用 &quot;Cycle stealing&quot; 的技術</h3><ul><li>週期竊取: 偷取 FO 和 WM 此 2 週期說明：<img src="cycle_stealing.png" alt=""><br>Note: DMA 適用於高速的 I/O Device (ex: disk)</li></ul><h3>Summary</h3><p><img src="summary.png" alt=""></p><h2>中斷種類</h2><p><img src="%E4%B8%AD%E6%96%B7%E7%A8%AE%E9%A1%9E.png" alt=""><br>Note: (Non-maskable interrupt) =&gt; NMI 不可遮蔽式中斷</p><ul><li>為 Priority 最高的 interrupt</li><li>O.S. 需無條件接收, 且立即執行之 (Hardware error)</li></ul><h2>Hardware Protection</h2><h3>I/O protection</h3><ul><li><p>目的：避免 user program 直接存取 I/O resource</p></li><li><p>圖示：<img src="hardware_protection.png" alt=""></p></li><li><p>作法：</p><ol><li>採用 <strong>&quot;Dual Mode&quot;</strong>, 將 I/O 相關的指令, 設為特權指令</li><li>避免 user program 去改變中斷向量表或 ISR</li></ol></li><li><p>Dual Mode (雙重模式)<img src="dual_mode.png" alt=""></p></li><li><p>Ex: 下列哪些為特權指令(O.S.)？</p><ol><li>setup timer</li><li>read clock</li><li>clear mem,</li><li>close interrupt</li><li>mode switch<br>Sol: 1, 3, 4, 5</li></ol></li></ul><h3>CPU protection</h3><ul><li>目的：避免 CPU 長期被某個 process 持有</li><li>作法：設定一個 Timer (計時器), 一旦 process 取得 CPU 就開始倒數, 當時間為 0 , 則換其他 process 執行</li></ul><h3>Memory protection</h3><ul><li>目的：避免 user program 之執行影響到其他的 user program 或 monitor program (O.S.) 之執行</li><li>圖：<img src="memory_protection_pur.png" alt=""></li><li>分成：<ol><li>Monitor Area Protection</li><li>User Area Protection</li></ol></li></ul><h4>1. Monitor Area Protection</h4><ul><li>作法：採用 **&quot;Fence Register&quot;**紀錄 M.A.大小</li><li>Problem: M.A. 的大小會更動(因為 error routine 是動態載入), 故所有的 user program 需動態更新位址, 需有 Dynamic Binding (只要沒有就不行,程式不會動)</li><li>Solution:<img src="memory_protection_sol.png" alt=""></li></ul><h4>2. User Program Area Protection</h4><ul><li>作法：採用 <strong>&quot;base/limit&quot; register</strong>來記錄各 user program 的起始位址跟 U.P. 的大小</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1&gt;3.2 電腦系統結構&lt;/h1&gt;
-&lt;h2&gt;I/O process 方式&lt;/h2&gt;
-&lt;h3&gt;Polling I/O (詢問式) 又稱 busy wait 或 &amp;quot;programmed I/O&amp;quot;&lt;/h3&gt;
-&lt;p&gt;Def:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;當一 pro
-      
-    
-    </summary>
-    
-    
-      <category term="計算機概論" scheme="https://pingjing0628.github.io/categories/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/"/>
-    
-    
-      <category term="O.S" scheme="https://pingjing0628.github.io/tags/O-S/"/>
-    
-      <category term="中斷" scheme="https://pingjing0628.github.io/tags/%E4%B8%AD%E6%96%B7/"/>
-    
-      <category term="Hardware protection" scheme="https://pingjing0628.github.io/tags/Hardware-protection/"/>
     
   </entry>
   
