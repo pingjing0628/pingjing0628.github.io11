@@ -628,7 +628,34 @@ in C++ =&gt; 用 pointer or 用 call by reference<br>
 <li>宣告方式：<br>
 type 變數 [size];<br>
 int  A  [5];</li>
+<li>Note: 在 C, C++ 中, 陣列名稱本身為 <strong>一固定(其內容不可更動)指標</strong>, 永遠指向第 [0]格</li>
+<li>Ex:</li>
 </ul>
+<ol>
+<li>A[0] =</li>
+<li>A =</li>
+<li>*A =</li>
+<li>&amp;A[0] =</li>
+<li>A[2] =</li>
+<li>&amp;A[2] =</li>
+<li>*(A+1) =</li>
+<li>*(A++) =</li>
+</ol>
+<ul>
+<li>Ex1:
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int A[5];</span><br><span class="line">int *p;</span><br><span class="line">for ( i &#x3D; 0; i&lt;&#x3D; 4; i++)</span><br><span class="line">&#123;</span><br><span class="line">    A[i] &#x3D; 5 - i;</span><br><span class="line">&#125;</span><br><span class="line">p &#x3D; A;</span><br></pre></td></tr></table></figure>
+Q:</li>
+</ul>
+<ol>
+<li>printf(*p);</li>
+<li>printf(*p++);</li>
+<li>printf(*++p);</li>
+<li>printf(++*p);</li>
+<li>printf((*p++));</li>
+<li>printf(*--p);</li>
+</ol>
+<h2>雙重指標</h2>
+<h2>字串的處理方式</h2>
 ]]></content>
       <categories>
         <category>計算機概論</category>
