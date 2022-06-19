@@ -14,7 +14,7 @@
 <meta property="og:description" content="5.3 物件導向概論  Object Oriented: int x; (type 變數) person P; (類別 物件)  Ex: 1234person p;p.h &#x3D; 180p.w &#x3D; 80;p.walk();  why O.O  可用以反應出真實世界的情況, 使程式的可讀性更佳, 日後的可維護性亦更好 彈性好, 但 performance 差  物件(object)">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-04-20T15:00:18.000Z">
-<meta property="article:modified_time" content="2022-06-19T16:03:18.235Z">
+<meta property="article:modified_time" content="2022-06-19T16:08:09.139Z">
 <meta property="article:author" content="PinJing Wang">
 <meta property="article:tag" content="運算子">
 <meta property="article:tag" content="位元運算">
@@ -248,13 +248,13 @@ person P; (類別 物件)</p>
 <li>優點：
 <ol>
 <li>確保私有 data 不受外界影響 =&gt; 可避免不當操作發生, 如 ....heart</li>
-<li>適時將製作的細節封裝, 如此可在改變時, 減少對外操作的影響 =&gt; ripple effect 低, 可維護性高(如程式碼2)<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Person                   外界</span><br><span class="line">setHeight(int h)         height &#x3D; -30; (Can&#39;t use)</span><br><span class="line">&#123;                        setHeight(-30);</span><br><span class="line">    if (h &lt; 0) error;</span><br><span class="line">    height &#x3D; n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>適時將製作的細節封裝, 如此可在改變時, 減少對外操作的影響 =&gt; ripple effect 低, 可維護性高(如程式碼2)</li>
 </ol>
 </li>
 </ul>
 </li>
 </ol>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Person                   外界</span><br><span class="line">setHeight(int h)         height &#x3D; -30; (Can&#39;t use)</span><br><span class="line">&#123;                        setHeight(-30);</span><br><span class="line">    if (h &lt; 0) error;</span><br><span class="line">    height &#x3D; n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;今日有一客戶需一排序程式</span><br><span class="line">BubbleSort(data) &#123;</span><br><span class="line">    ...             &#x2F;&#x2F;但由於資料愈來愈多嫌太慢</span><br><span class="line">&#125;</span><br><span class="line">QuickSort(data) &#123;</span><br><span class="line">    ...             &#x2F;&#x2F;卻發現舊系統中都是 bubble sort, 無法執行 quick sort</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 所以當初應</span><br><span class="line">Sort(data) &#123;</span><br><span class="line">    BubbleSort(data) &#x2F;&#x2F; 改成</span><br><span class="line">    QuickSort(data)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <ol start="3">
 <li>Inheritance 繼承
@@ -283,10 +283,8 @@ person P; (類別 物件)</p>
 </li>
 </ol>
 <blockquote>
-<p>補充 Encapsulation 存取權限：</p>
-<ul>
-<li>Note:</li>
-</ul>
+<p>補充 Encapsulation 存取權限：<br>
+Note:</p>
 <ol>
 <li>在 c++中額外提供 &quot;friendly&quot; 權限, 當 class A, B 2者設為 friend, 即可取用之</li>
 <li>在 java 中若沒宣稱權限, 則為 default 權限, <strong>此時只有 class 本身及同 package(類似目錄的概念) 下方可使用</strong></li>
