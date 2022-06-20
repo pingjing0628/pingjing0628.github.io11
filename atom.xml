@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pingjing0628.github.io/"/>
-  <updated>2022-06-19T16:16:31.499Z</updated>
+  <updated>2022-06-19T16:24:09.700Z</updated>
   <id>https://pingjing0628.github.io/</id>
   
   <author>
@@ -15,6 +15,21 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Chapter6-資料結構-Algorithm&#39;s Time Complexity and Recursive Program</title>
+    <link href="https://pingjing0628.github.io/2022/06/20/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Algorithm-s-Time-Complexity-and-Recursive-Program/"/>
+    <id>https://pingjing0628.github.io/2022/06/20/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Algorithm-s-Time-Complexity-and-Recursive-Program/</id>
+    <published>2022-06-19T16:24:09.000Z</published>
+    <updated>2022-06-19T16:24:09.700Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Chapter5-程式介紹-JAVA</title>
@@ -51,7 +66,7 @@
     <link href="https://pingjing0628.github.io/2022/04/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E6%A6%82%E8%AB%96/"/>
     <id>https://pingjing0628.github.io/2022/04/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E6%A6%82%E8%AB%96/</id>
     <published>2022-04-20T15:00:18.000Z</published>
-    <updated>2022-06-19T16:08:09.139Z</updated>
+    <updated>2022-06-19T16:22:35.984Z</updated>
     
     <content type="html"><![CDATA[<h1>5.3 物件導向概論</h1><hr><h2>Object Oriented:</h2><p>int x; (type 變數)<br>person P; (類別 物件)</p><ul><li>Ex:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">person p;</span><br><span class="line">p.h &#x3D; 180</span><br><span class="line">p.w &#x3D; 80;</span><br><span class="line">p.walk();</span><br></pre></td></tr></table></figure></li></ul><h3>why O.O</h3><ul><li>可用以反應出真實世界的情況, 使程式的可讀性更佳, 日後的可維護性亦更好</li><li><strong>彈性好, 但 performance 差</strong></li></ul><h2>物件(object)</h2><ul><li>Def:<ul><li>an object is an instance of a class =&gt; 指物件為類別的實體</li><li>each object 是獨立的, 滿足唯一性(unique)</li></ul></li><li>就程式而言物件是<ol><li>參與程式執行的單位</li><li>為一變數會佔用 Mem.space</li><li><strong>dynamic</strong>: 指會隨執行而更動其狀態</li></ol></li></ul><h2>類別(class)</h2><ul><li><p>Def:</p><ul><li>將具相同屬性及行為的 object 加以抽象化定義</li></ul></li><li><p>其中：</p><ul><li>attribute: 靜態描述(特徵值), height, weight, 單眼皮, 雙眼皮</li><li>behavior(operation in c++, method in java): 動態描述 =&gt; 作用在屬性上</li></ul></li><li><p>就程式而言類別是：</p><ul><li>ADT (Abstract Data Type)</li><li>為靜態單位, 只佔用一份 Mem. space</li><li>為物件的實施藍圖</li></ul></li><li><p>概念：</p><ul><li>Note: Object 之間溝通採用 <strong>&quot;Message Passing&quot;</strong> (因為物件間是獨立的, 無共享Mem.)</li></ul></li></ul><h2>Object Oriented 四大特色</h2><ol><li>Data Abstraction 資料抽象化<ul><li>將物件細節排除, 擷取共通的 attribute 及 operation, 加以抽象化定義</li><li>在定義(抽象化)過程, 會忽略和問題無關的部分</li></ul></li><li>Encapsulation 封裝<ul><li>Def:<ul><li>可將 class 中部分的 attribute 及 operation 隱藏, 避免外界直接取用</li><li>一般會用一公開的管道使外界可做間接存取, 以便管控正確性</li></ul></li><li>優點：<ol><li>確保私有 data 不受外界影響 =&gt; 可避免不當操作發生, 如 ....heart</li><li>適時將製作的細節封裝, 如此可在改變時, 減少對外操作的影響 =&gt; ripple effect 低, 可維護性高(如程式碼2)</li></ol></li></ul></li></ol><p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Person                   外界</span><br><span class="line">setHeight(int h)         height &#x3D; -30; (Can&#39;t use)</span><br><span class="line">&#123;                        setHeight(-30);</span><br><span class="line">    if (h &lt; 0) error;</span><br><span class="line">    height &#x3D; n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;今日有一客戶需一排序程式</span><br><span class="line">BubbleSort(data) &#123;</span><br><span class="line">    ...             &#x2F;&#x2F;但由於資料愈來愈多嫌太慢</span><br><span class="line">&#125;</span><br><span class="line">QuickSort(data) &#123;</span><br><span class="line">    ...             &#x2F;&#x2F;卻發現舊系統中都是 bubble sort, 無法執行 quick sort</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 所以當初應</span><br><span class="line">Sort(data) &#123;</span><br><span class="line">    BubbleSort(data) &#x2F;&#x2F; 改成</span><br><span class="line">    QuickSort(data)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><ol start="3"><li>Inheritance 繼承<ul><li>Def:<ul><li>子類別(Child class) 可以繼承 父類別 (parent class) 的屬性及運作, 亦可加入 child class 自訂的屬性及運作</li></ul></li><li>圖：</li><li>優點：<ol><li>支援 software reuse (軟體再利用) =&gt; <strong>省下重複開發成本</strong></li><li>支援 component base software developments (以元件為基礎的軟體開發方式) =&gt; VB , 品質好, 速度快</li></ol></li><li>缺點：<ol><li>當繼承深且複雜的時候, 會使 compiler 的 performance 下降, 耗費時間去找尋各 data 的來源</li><li>readable 及 maintainable 的程度下降, 因為太多層, 所以視窗太多, 要找時也困難</li><li>有 Naming Conflicting 的議題(命名衝突), 又稱 &quot;ambiguous calling&quot; (模糊呼叫)</li><li>重複繼承的問題</li></ol></li></ul></li></ol><blockquote><p>補充 Encapsulation 存取權限：<br>Note:</p><ol><li>在 c++中額外提供 &quot;friendly&quot; 權限, 當 class A, B 2者設為 friend, 即可取用之</li><li>在 java 中若沒宣稱權限, 則為 default 權限, <strong>此時只有 class 本身及同 package(類似目錄的概念) 下方可使用</strong></li></ol></blockquote><ol start="4"><li>Polymorphism 多型<ul><li>Def: O.O 程式於 &quot;執行期間&quot;, 不同型別之物件, 接收到同一訊息 <strong>(同名)</strong>, 會有不同的行為 <strong>(異式)</strong>, 反應謂之「多型」</li><li>Note:</li></ul></li></ol>]]></content>
     
@@ -75,11 +90,15 @@ person P; (類別 物件)&lt;/p&gt;
       <category term="計算機概論" scheme="https://pingjing0628.github.io/categories/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/"/>
     
     
-      <category term="運算子" scheme="https://pingjing0628.github.io/tags/%E9%81%8B%E7%AE%97%E5%AD%90/"/>
-    
-      <category term="位元運算" scheme="https://pingjing0628.github.io/tags/%E4%BD%8D%E5%85%83%E9%81%8B%E7%AE%97/"/>
-    
       <category term="物件導向" scheme="https://pingjing0628.github.io/tags/%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91/"/>
+    
+      <category term="繼承" scheme="https://pingjing0628.github.io/tags/%E7%B9%BC%E6%89%BF/"/>
+    
+      <category term="多型" scheme="https://pingjing0628.github.io/tags/%E5%A4%9A%E5%9E%8B/"/>
+    
+      <category term="封裝" scheme="https://pingjing0628.github.io/tags/%E5%B0%81%E8%A3%9D/"/>
+    
+      <category term="抽象" scheme="https://pingjing0628.github.io/tags/%E6%8A%BD%E8%B1%A1/"/>
     
   </entry>
   
@@ -728,47 +747,6 @@ person P; (類別 物件)&lt;/p&gt;
       <category term="CPU Scheduling" scheme="https://pingjing0628.github.io/tags/CPU-Scheduling/"/>
     
       <category term="algorithm" scheme="https://pingjing0628.github.io/tags/algorithm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Chapter3-作業系統-行程-part1</title>
-    <link href="https://pingjing0628.github.io/2021/06/12/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A1%8C%E7%A8%8B-part1/"/>
-    <id>https://pingjing0628.github.io/2021/06/12/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A1%8C%E7%A8%8B-part1/</id>
-    <published>2021-06-12T15:14:09.000Z</published>
-    <updated>2021-06-16T08:50:32.270Z</updated>
-    
-    <content type="html"><![CDATA[<h1>3.4 行程</h1><h2>目錄</h2><ul><li><strong>Process Definition</strong></li><li><strong>Program vs Process</strong></li><li><strong>Process STD</strong></li><li><strong>PCB, context switching</strong></li><li>CPU Scheduling algorithm</li><li>Thread 執行緒</li></ul><hr><h2>Process Definition</h2><p>執行中的程式 (即：程式碼 + 當前執行環境)</p><ul><li>執行環境為：<ul><li>CPU register 暫存器</li><li>Programming counter 程式計數器</li><li>Stack</li><li>Process state 狀態</li><li>Data section</li><li>Code section</li></ul></li></ul><hr><h3>Program and Process Compare</h3><table><thead><tr><th style="text-align:center">Program</th><th style="text-align:center">Process</th></tr></thead><tbody><tr><td style="text-align:center">Passive 被動</td><td style="text-align:center">Active 主動</td></tr><tr><td style="text-align:center">A field stored in the disk</td><td style="text-align:center">有 programming counter</td></tr></tbody></table><hr><h2>Process STD (State Transitive Diagram) 行程狀態轉換圖</h2><h2><img src="STD.png" alt=""></h2><h2>Scheduler 種類</h2><ol><li><strong>LTS (Long Term Scheduler)</strong><br>Def: 從 Job Queue 挑選 Job 進入 Memory 之中, 使其來到 Ready 的狀態<br>特色：<ol><li>執行頻率不高</li><li>可控制 Multiprogramming Degree (分支度) 大小</li><li>可挑 I/O 和 CPU bounded job 為一適當比例</li><li>批次常用, 分時, 即時少用</li></ol></li><li><strong>STS (Short Term Scheduler)</strong><br>Def: 從 Ready Queue 挑一 process, 使之獲得 CPU, 進入 Running 狀態<br>特色：<ol><li>執行頻率高</li><li>各系統皆使用 (因為每個系統皆有 CPU, 因此需要)</li></ol></li><li><strong>MTS (Medium Term Scheduler)</strong><br>Def: 當 Memory 不足時, 由 MTS 挑部分的 process 將之 swap out, 待日後 Memory 有空間時, 再將之 swap in<br>MTS 所挑選的部分為：1. priority 低的 process 2. waiting time 過長<br>圖：<img src="MTS.png" alt=""></li></ol><hr><h2>PCB (Process Control Block)</h2><p>Def: 為方便管理 process 的相關資訊, 故將之集合成一記錄區塊, 謂之 PCB<br>圖：<img src="PCB.png" alt=""></p><hr><h2>Context Switching (內文轉換)</h2><p>Def: 當 process P1 需 wait I/O 時, 則 CPU 將切換給 P2, 此時需將 P1 的 PCB 保存, P2 的 PCB 載入<br>影響 context switching 效能大多為硬體的層次如：</p><ul><li>CPU register 數量</li><li>Memory access speed</li><li>是否提供特殊指令<br>圖示：<img src="contextSwitching.png" alt=""></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1&gt;3.4 行程&lt;/h1&gt;
-&lt;h2&gt;目錄&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Process Definition&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Program vs Process&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Proce
-      
-    
-    </summary>
-    
-    
-      <category term="計算機概論" scheme="https://pingjing0628.github.io/categories/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/"/>
-    
-    
-      <category term="O.S" scheme="https://pingjing0628.github.io/tags/O-S/"/>
-    
-      <category term="Process" scheme="https://pingjing0628.github.io/tags/Process/"/>
-    
-      <category term="STD" scheme="https://pingjing0628.github.io/tags/STD/"/>
-    
-      <category term="Scheduler" scheme="https://pingjing0628.github.io/tags/Scheduler/"/>
-    
-      <category term="PCB" scheme="https://pingjing0628.github.io/tags/PCB/"/>
-    
-      <category term="context switching" scheme="https://pingjing0628.github.io/tags/context-switching/"/>
     
   </entry>
   
