@@ -13,7 +13,173 @@
   <entry>
     <title>Chapter5-程式介紹-C++程式語言介紹</title>
     <url>/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C-%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h1>5.4 C++ 程式語言介紹</h1>
+<hr>
+<h2>C++ Language</h2>
+<p>Class:
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">格式: class class_name</span><br><span class="line">&#123;</span><br><span class="line">    Constructor &#x2F;&#x2F; 建構子</span><br><span class="line">    Destructor &#x2F;&#x2F; 解構子</span><br><span class="line">    Attribute &#x2F;&#x2F; 變數宣告</span><br><span class="line">    Operation &#x2F;&#x2F; 函式定義</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h2>Object 宣告, 操作</h2>
+<p><code>class _ object;</code><br>
+操作：<br>
+object.att.<br>
+object.op.</p>
+<ul>
+<li>Ex:<br>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int main() &#123;</span><br><span class="line">    Person P;</span><br><span class="line">    p.height &#x3D; 180;</span><br><span class="line">    p.weight &#x3D; 80;</span><br><span class="line">    p.walk(); &#x2F;&#x2F; 印出 &quot;Person walk&quot;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2>建構子 (Construtor)</h2>
+<ul>
+<li>Def:
+<ul>
+<li>對 object 做 <strong>初始化</strong> 的動作</li>
+<li>於 object 產生時呼叫</li>
+<li>Constructor name 和 <strong>class name 相同, 且 No return type</strong></li>
+<li>Constructor 可有很多個</li>
+</ul>
+</li>
+<li>Ex:<br>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class A &#123;</span><br><span class="line">    public:</span><br><span class="line">    &#x2F;&#x2F;建構子</span><br><span class="line">    A() &#123;</span><br><span class="line">        cout &lt;&lt;&quot;con.A&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;解構子</span><br><span class="line">    ~A() &#123;</span><br><span class="line">        cout &lt;&lt;&quot;del.A&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2>解構子 (Destructor)</h2>
+<ul>
+<li>Def:
+<ul>
+<li>於 constructor 之前加上 <strong>&quot;~&quot;</strong></li>
+<li>Destructor <strong>不接收參數</strong> parameter list 為空</li>
+<li>class 中 destructor <strong>只會有一個</strong></li>
+<li>於 object 被回收時呼叫</li>
+</ul>
+</li>
+<li>Ex:<br>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Class A &#123;</span><br><span class="line">    public: </span><br><span class="line">    A() &#123;</span><br><span class="line">        cout &lt;&lt;&quot;con.A&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    ~A() &#123;</span><br><span class="line">        cout &lt;&lt;&quot;del.A&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    A a1; a1 屬於 A</span><br><span class="line">    A a2;</span><br><span class="line">    return 0;</span><br><span class="line">&#125; &#x2F;&#x2F; 結束前呼叫解構子 output?</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2>變數種類</h2>
+<p>格式：
+<code>static _ type _ variable;</code><br>
+<code>static int x;</code></p>
+<ul>
+<li>
+<p>Ex:<br>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int main() &#123;</span><br><span class="line">    fun();</span><br><span class="line">    fun();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line">void fun() &#123;</span><br><span class="line">    static int i &#x3D; 20;</span><br><span class="line">    i++;</span><br><span class="line">    cout &lt;&lt;i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Note:</p>
+<ul>
+<li>靜態變數存於靜態區塊中, <strong>&quot;不會隨著所屬 block 結束而回收&quot;</strong>, 於程式結束回收</li>
+<li>靜態變數之宣告只於第一次執行, 之後忽略之</li>
+</ul>
+</li>
+<li>
+<p>Ex:<br>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class A &#123;</span><br><span class="line">    public:</span><br><span class="line">    int oid; &#x2F;&#x2F; att</span><br><span class="line">    &#x2F;&#x2F; 建構子</span><br><span class="line">    A(int i) &#123;</span><br><span class="line">        oid &#x3D; i;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;解構子</span><br><span class="line">    ~A() &#123;</span><br><span class="line">        cout &lt;&lt;oid;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int main() &#123;</span><br><span class="line">        A a1(1); &#x2F;&#x2F; 給建構子的參數</span><br><span class="line">        fun();</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    void fun() &#123;</span><br><span class="line">        A a2(2);</span><br><span class="line">        static A a3(3);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<p>問 output is?</p>
+<h2>C++ 參考變數 Reference Variable</h2>
+<p>格式：<br>
+<code>type **&amp;**var = **被參考變數** (不可省略)</code><br>
+<code>int &amp;count = x;</code> -&gt; 替 x 取別名叫 count</p>
+<blockquote>
+<p>注意事項：</p>
+<ol>
+<li>int count; (X) 替某人取綽號叫 count, 但某人不存在</li>
+<li>int &amp;count = 3; (X) 常數(No mem space)</li>
+</ol>
+</blockquote>
+<h3>宣告時</h3>
+<p><code>int x;</code> <strong>=&gt; call by value</strong> (一般)<br>
+<code>int *x;</code> <strong>=&gt; call by address</strong> (指標)<br>
+<code>int &amp;x;</code> <strong>=&gt; call by reference</strong> (參數)</p>
+<h3>操作時</h3>
+<p><code>x</code><strong>=&gt; 取內容</strong><br>
+<code>*x</code><strong>=&gt; 取指標指向的值</strong><br>
+<code>&amp;x</code><strong>=&gt; 取所在 address</strong></p>
+<p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int main() &#123;</span><br><span class="line">    int a &#x3D; 10, b &#x3D; 20;</span><br><span class="line">    swap(a, b);</span><br><span class="line">    cout &lt;&lt;a&lt;&lt;b;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void swap(int x, int y) &#123;</span><br><span class="line">    int &amp;x &#x3D; a;</span><br><span class="line">    int temp;</span><br><span class="line">    temp &#x3D; x;</span><br><span class="line">    x &#x3D; y;</span><br><span class="line">    y &#x3D; temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+Q:<br>
+1. a, b 呼叫 swap 後為何 No change? (call - by value)<br>
+2. How to modifiy?</p>
+<h2>C++ 的 Inheritance</h2>
+<ul>
+<li>Ex:<br>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class A &#123;</span><br><span class="line">    public: &#x2F;&#x2F; 若改為 private, 此時 B會有 compile error</span><br><span class="line">    int x;</span><br><span class="line">    int y;</span><br><span class="line">&#125;;</span><br><span class="line">class B: Public A &#123; &#x2F;&#x2F;: 繼承</span><br><span class="line">    public:</span><br><span class="line">    B (inta, int b) &#123;</span><br><span class="line">        x &#x3D; a;</span><br><span class="line">        y &#x3D; b;</span><br><span class="line">    &#125;</span><br><span class="line">    void print() &#123;</span><br><span class="line">        cout &lt;&lt;x&lt;&lt;y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">int main() &#123;</span><br><span class="line">    B objB(2, 5);</span><br><span class="line">    objB.print();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>補充：繼承的存取權限</p>
+</blockquote>
+<h2>Overriding 覆載</h2>
+<ul>
+<li>子類別將父類別的<strong>函式重新定義</strong>以符合自身所需</li>
+</ul>
+<h2>Overloading 多載</h2>
+<p>分為：</p>
+<ol>
+<li>
+<p>function overloading</p>
+<ol>
+<li>藉由接收多數串列的<strong>數量</strong>或<strong>型別不同</strong>以達到共用相同的函式名稱
+<ul>
+<li>Ex1:
+<ul>
+<li>對 user 而言較方便, 不需記過多的 function name</li>
+<li>對 programmer 而言命名 function 亦可簡化其原則<br>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    print(2); -&gt; void print(int i)</span><br><span class="line">    print(3.5); -&gt; void print(double d)</span><br><span class="line">    print(&quot;abc&quot;); -&gt; void print(char *s)</span><br><span class="line">&#96;&#96;&#96;   </span><br><span class="line">* Ex2:</span><br></pre></td></tr></table></figure>
+class Person {
+public:
+Person() {...}            // 建構子
+Person(int h) {...}       // 建構子
+Person(inth, int w) {...} // 建構子  Overloading
+}</li>
+</ul>
+</li>
+</ul>
+<pre><code>
+
+</code></pre>
+</li>
+</ol>
+</li>
+<li>
+<p>operator overloading</p>
+<ul>
+<li>Def: 藉由接收的運算元型別不同, 以達<strong>共用相同的運算子(operator)符號</strong></li>
+<li>概念：
+<ul>
+<li>3 + 5 =&gt; int + int</li>
+<li>2.3 + 5.5 =&gt; double + double</li>
+<li>matrix + matrix</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2>this vs super</h2>
+<ul>
+<li>為 C++ 內建提供的物件指標</li>
+<li>其中：
+<ul>
+<li>this 會指向物件本身</li>
+<li>super 會指向物件的 parent class</li>
+</ul>
+</li>
+<li>說明：</li>
+</ul>
+<h2>物件指標</h2>
+<ol>
+<li>物件指標</li>
+</ol>
+<h2>Polymorphism 多型</h2>
+]]></content>
+      <categories>
+        <category>計算機概論</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>建構子</tag>
+        <tag>解構子</tag>
+        <tag>Overriding</tag>
+        <tag>Overloading</tag>
+        <tag>物件指標</tag>
+      </tags>
   </entry>
   <entry>
     <title>Chapter5-程式介紹-物件導向概論</title>
