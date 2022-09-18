@@ -6022,9 +6022,37 @@ Ex: <code>A = 3.14 * 2.56 / 3.2 + 8 - E</code><br>
   <entry>
     <title>Chapter5-程式介紹-JAVA</title>
     <url>/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h1>5.5 JAVA</h1>
+<hr>
+<h2>Java VS C++</h2>
+<blockquote>
+<p>Garbage Collection(垃圾回收):</p>
+</blockquote>
+<h2>Class 格式</h2>
+<h2>Constructor (建構子)</h2>
+<h2>主程式</h2>
+<h2>配置物件</h2>
+<h2>Inheritance 繼承</h2>
+<h2>Overriding</h2>
+<h2>this, super</h2>
+<h2>Constructor 的進一步介紹 (constructor 的延伸)</h2>
+<h2>Java 的例外處理 (Exception Handler)</h2>
+<h2>array 初始化</h2>
+<h2>Java 中的 array 宣告</h2>
+<h2>static keyword</h2>
+<h2>static 注意事項</h2>
+<h2>final keyword</h2>
+<h2>polymorphism in Java</h2>
+<h2>Abstract method</h2>
+<h2>Abstract class</h2>
+<h2>interface</h2>
+]]></content>
+      <categories>
+        <category>計算機概論</category>
+      </categories>
       <tags>
         <tag>建構子</tag>
+        <tag>Overriding</tag>
         <tag>繼承</tag>
         <tag>多型</tag>
         <tag>Interface</tag>
@@ -6033,6 +6061,8 @@ Ex: <code>A = 3.14 * 2.56 / 3.2 + 8 - E</code><br>
         <tag>Static</tag>
         <tag>Final</tag>
         <tag>Abstract</tag>
+        <tag>this</tag>
+        <tag>super</tag>
       </tags>
   </entry>
   <entry>

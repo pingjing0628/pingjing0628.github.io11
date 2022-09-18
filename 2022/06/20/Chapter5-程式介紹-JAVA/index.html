@@ -6,15 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta property="og:type" content="article">
+    <meta name="description" content="5.5 JAVA  Java VS C++  Garbage Collection(垃圾回收):  Class 格式 Constructor (建構子) 主程式 配置物件 Inheritance 繼承 Overriding this, super Constructor 的進一步介紹 (constructor 的延伸) Java 的例外處理 (Exception Handler) array 初始">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Chapter5-程式介紹-JAVA">
 <meta property="og:url" content="https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/">
 <meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="5.5 JAVA  Java VS C++  Garbage Collection(垃圾回收):  Class 格式 Constructor (建構子) 主程式 配置物件 Inheritance 繼承 Overriding this, super Constructor 的進一步介紹 (constructor 的延伸) Java 的例外處理 (Exception Handler) array 初始">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-06-19T16:16:31.000Z">
-<meta property="article:modified_time" content="2022-09-18T14:20:03.017Z">
+<meta property="article:modified_time" content="2022-09-18T14:26:22.636Z">
 <meta property="article:author" content="PinJing Wang">
 <meta property="article:tag" content="建構子">
+<meta property="article:tag" content="Overriding">
 <meta property="article:tag" content="繼承">
 <meta property="article:tag" content="多型">
 <meta property="article:tag" content="Interface">
@@ -23,6 +26,8 @@
 <meta property="article:tag" content="Static">
 <meta property="article:tag" content="Final">
 <meta property="article:tag" content="Abstract">
+<meta property="article:tag" content="this">
+<meta property="article:tag" content="super">
 <meta name="twitter:card" content="summary">
     
     
@@ -126,7 +131,7 @@
 
     </div>
     <div id="toc">
-      
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">5.5 JAVA</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">Java VS C++</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">Class 格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">Constructor (建構子)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">主程式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">配置物件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">Inheritance 繼承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.7.</span> <span class="toc-text">Overriding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.8.</span> <span class="toc-text">this, super</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.9.</span> <span class="toc-text">Constructor 的進一步介紹 (constructor 的延伸)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.10.</span> <span class="toc-text">Java 的例外處理 (Exception Handler)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.11.</span> <span class="toc-text">array 初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.12.</span> <span class="toc-text">Java 中的 array 宣告</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.13.</span> <span class="toc-text">static keyword</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.14.</span> <span class="toc-text">static 注意事項</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.15.</span> <span class="toc-text">final keyword</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.16.</span> <span class="toc-text">polymorphism in Java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.17.</span> <span class="toc-text">Abstract method</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.18.</span> <span class="toc-text">Abstract class</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.19.</span> <span class="toc-text">interface</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -157,11 +162,16 @@
 
 
       
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/">計算機概論</a>
+    </div>
+
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Abstract/" rel="tag">Abstract</a>, <a class="tag-link" href="/tags/Exception/" rel="tag">Exception</a>, <a class="tag-link" href="/tags/Final/" rel="tag">Final</a>, <a class="tag-link" href="/tags/Interface/" rel="tag">Interface</a>, <a class="tag-link" href="/tags/Java/" rel="tag">Java</a>, <a class="tag-link" href="/tags/Static/" rel="tag">Static</a>, <a class="tag-link" href="/tags/%E5%A4%9A%E5%9E%8B/" rel="tag">多型</a>, <a class="tag-link" href="/tags/%E5%BB%BA%E6%A7%8B%E5%AD%90/" rel="tag">建構子</a>, <a class="tag-link" href="/tags/%E7%B9%BC%E6%89%BF/" rel="tag">繼承</a>
+        <a class="tag-link" href="/tags/Abstract/" rel="tag">Abstract</a>, <a class="tag-link" href="/tags/Exception/" rel="tag">Exception</a>, <a class="tag-link" href="/tags/Final/" rel="tag">Final</a>, <a class="tag-link" href="/tags/Interface/" rel="tag">Interface</a>, <a class="tag-link" href="/tags/Java/" rel="tag">Java</a>, <a class="tag-link" href="/tags/Overriding/" rel="tag">Overriding</a>, <a class="tag-link" href="/tags/Static/" rel="tag">Static</a>, <a class="tag-link" href="/tags/super/" rel="tag">super</a>, <a class="tag-link" href="/tags/this/" rel="tag">this</a>, <a class="tag-link" href="/tags/%E5%A4%9A%E5%9E%8B/" rel="tag">多型</a>, <a class="tag-link" href="/tags/%E5%BB%BA%E6%A7%8B%E5%AD%90/" rel="tag">建構子</a>, <a class="tag-link" href="/tags/%E7%B9%BC%E6%89%BF/" rel="tag">繼承</a>
     </div>
 
 
@@ -170,7 +180,31 @@
   
 
   <div class="content" itemprop="articleBody">
-    
+    <h1>5.5 JAVA</h1>
+<hr>
+<h2>Java VS C++</h2>
+<blockquote>
+<p>Garbage Collection(垃圾回收):</p>
+</blockquote>
+<h2>Class 格式</h2>
+<h2>Constructor (建構子)</h2>
+<h2>主程式</h2>
+<h2>配置物件</h2>
+<h2>Inheritance 繼承</h2>
+<h2>Overriding</h2>
+<h2>this, super</h2>
+<h2>Constructor 的進一步介紹 (constructor 的延伸)</h2>
+<h2>Java 的例外處理 (Exception Handler)</h2>
+<h2>array 初始化</h2>
+<h2>Java 中的 array 宣告</h2>
+<h2>static keyword</h2>
+<h2>static 注意事項</h2>
+<h2>final keyword</h2>
+<h2>polymorphism in Java</h2>
+<h2>Abstract method</h2>
+<h2>Abstract class</h2>
+<h2>interface</h2>
+
   </div>
 </article>
 
@@ -199,7 +233,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">5.5 JAVA</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">Java VS C++</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">Class 格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">Constructor (建構子)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">主程式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">配置物件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">Inheritance 繼承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.7.</span> <span class="toc-text">Overriding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.8.</span> <span class="toc-text">this, super</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.9.</span> <span class="toc-text">Constructor 的進一步介紹 (constructor 的延伸)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.10.</span> <span class="toc-text">Java 的例外處理 (Exception Handler)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.11.</span> <span class="toc-text">array 初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.12.</span> <span class="toc-text">Java 中的 array 宣告</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.13.</span> <span class="toc-text">static keyword</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.14.</span> <span class="toc-text">static 注意事項</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.15.</span> <span class="toc-text">final keyword</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.16.</span> <span class="toc-text">polymorphism in Java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.17.</span> <span class="toc-text">Abstract method</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.18.</span> <span class="toc-text">Abstract class</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.19.</span> <span class="toc-text">interface</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

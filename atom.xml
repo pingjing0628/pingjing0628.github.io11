@@ -36,15 +36,33 @@
     <link href="https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/"/>
     <id>https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/</id>
     <published>2022-06-19T16:16:31.000Z</published>
-    <updated>2022-09-18T14:20:03.017Z</updated>
+    <updated>2022-09-18T14:26:22.636Z</updated>
+    
+    <content type="html"><![CDATA[<h1>5.5 JAVA</h1><hr><h2>Java VS C++</h2><blockquote><p>Garbage Collection(垃圾回收):</p></blockquote><h2>Class 格式</h2><h2>Constructor (建構子)</h2><h2>主程式</h2><h2>配置物件</h2><h2>Inheritance 繼承</h2><h2>Overriding</h2><h2>this, super</h2><h2>Constructor 的進一步介紹 (constructor 的延伸)</h2><h2>Java 的例外處理 (Exception Handler)</h2><h2>array 初始化</h2><h2>Java 中的 array 宣告</h2><h2>static keyword</h2><h2>static 注意事項</h2><h2>final keyword</h2><h2>polymorphism in Java</h2><h2>Abstract method</h2><h2>Abstract class</h2><h2>interface</h2>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;h1&gt;5.5 JAVA&lt;/h1&gt;
+&lt;hr&gt;
+&lt;h2&gt;Java VS C++&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Garbage Collection(垃圾回收):&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Class 格式&lt;/h2&gt;
+&lt;h2&gt;Constructor (建
+      
     
     </summary>
     
     
+      <category term="計算機概論" scheme="https://pingjing0628.github.io/categories/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/"/>
+    
     
       <category term="建構子" scheme="https://pingjing0628.github.io/tags/%E5%BB%BA%E6%A7%8B%E5%AD%90/"/>
+    
+      <category term="Overriding" scheme="https://pingjing0628.github.io/tags/Overriding/"/>
     
       <category term="繼承" scheme="https://pingjing0628.github.io/tags/%E7%B9%BC%E6%89%BF/"/>
     
@@ -61,6 +79,10 @@
       <category term="Final" scheme="https://pingjing0628.github.io/tags/Final/"/>
     
       <category term="Abstract" scheme="https://pingjing0628.github.io/tags/Abstract/"/>
+    
+      <category term="this" scheme="https://pingjing0628.github.io/tags/this/"/>
+    
+      <category term="super" scheme="https://pingjing0628.github.io/tags/super/"/>
     
   </entry>
   
