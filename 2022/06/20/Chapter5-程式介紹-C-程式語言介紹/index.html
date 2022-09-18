@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C-%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/%E7%89%A9%E4%BB%B6%E6%8C%87%E6%A8%99.png">
 <meta property="og:image" content="https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C-%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/%E7%89%A9%E4%BB%B6%E6%8C%87%E6%A8%99Ex1.png">
 <meta property="article:published_time" content="2022-06-19T16:15:34.000Z">
-<meta property="article:modified_time" content="2022-09-18T09:05:19.462Z">
+<meta property="article:modified_time" content="2022-09-18T09:21:08.753Z">
 <meta property="article:author" content="PinJing Wang">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="建構子">
@@ -288,33 +288,29 @@ Q:<br>
 <h2>Overloading 多載</h2>
 <p>分為：</p>
 <ol>
-<li>
-<p>function overloading</p>
+<li>function overloading
 <ol>
 <li>藉由接收多數串列的<strong>數量</strong>或<strong>型別不同</strong>以達到共用相同的函式名稱
 <ul>
-<li>Ex1:
+<li>
+<p>Ex1:</p>
 <ul>
 <li>對 user 而言較方便, 不需記過多的 function name</li>
 <li>對 programmer 而言命名 function 亦可簡化其原則<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    print(2); -&gt; void print(int i)</span><br><span class="line">    print(3.5); -&gt; void print(double d)</span><br><span class="line">    print(&quot;abc&quot;); -&gt; void print(char *s)</span><br><span class="line">&#96;&#96;&#96;   </span><br><span class="line">* Ex2:</span><br></pre></td></tr></table></figure>
-class Person {
-public:
-Person() {...}            // 建構子
-Person(int h) {...}       // 建構子
-Person(inth, int w) {...} // 建構子  Overloading
-}</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(2); -&gt; void print(int i)</span><br><span class="line">print(3.5); -&gt; void print(double d)</span><br><span class="line">print(&quot;abc&quot;); -&gt; void print(char *s)</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
+<li>
+<p>Ex2:<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Person &#123;</span><br><span class="line">    public:</span><br><span class="line">    Person() &#123;...&#125;            &#x2F;&#x2F; 建構子</span><br><span class="line">    Person(int h) &#123;...&#125;       &#x2F;&#x2F; 建構子</span><br><span class="line">    Person(inth, int w) &#123;...&#125; &#x2F;&#x2F; 建構子  Overloading</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
 </ul>
-<pre><code>
-
-</code></pre>
 </li>
 </ol>
 </li>
-<li>
-<p>operator overloading</p>
+</ol>
+<ol start="2">
+<li>operator overloading
 <ul>
 <li>Def: 藉由接收的運算元型別不同, 以達<strong>共用相同的運算子(operator)符號</strong></li>
 <li>概念：
@@ -341,10 +337,26 @@ Person(inth, int w) {...} // 建構子  Overloading
 </ul>
 <h2>物件指標</h2>
 <ol>
-<li>物件指標</li>
+<li>物件指標指向 attribute or operator<br>
+ex: this -&gt; i;</li>
+<li>(*物件指標).attribute or operator<br>
+ex: (<em>this).i;<br>
+Ex: this.i ... 錯誤 (成大)<br>
+因為 <strong>&quot;.&quot;</strong> priority &gt; <em><em>&quot;</em>&quot;</em></em><br>
+所以 括號不能拿掉<br>
+<code>(*(&amp;(*this))).i; = (*this).i</code>
+<ul>
+<li>為從 address 拿回值<br>
+&amp; 為拿出 address</li>
+</ul>
+</li>
 </ol>
-<p><img src="%E7%89%A9%E4%BB%B6%E6%8C%87%E6%A8%99.png" alt="">
-<img src="%E7%89%A9%E4%BB%B6%E6%8C%87%E6%A8%99Ex1.png" alt=""></p>
+<p><img src="%E7%89%A9%E4%BB%B6%E6%8C%87%E6%A8%99.png" alt=""></p>
+<ul>
+<li>EX:<br>
+<img src="%E7%89%A9%E4%BB%B6%E6%8C%87%E6%A8%99Ex1.png" alt=""></li>
+<li>EX2 (政大):</li>
+</ul>
 <h2>Polymorphism 多型</h2>
 
   </div>
