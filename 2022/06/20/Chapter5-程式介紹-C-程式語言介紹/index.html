@@ -13,8 +13,16 @@
 <meta property="og:site_name" content="PinJing&#39;s Blog">
 <meta property="og:description" content="5.4 C++ 程式語言介紹  C++ Language Class: 1234567格式: class class_name&amp;#123;    Constructor &#x2F;&#x2F; 建構子    Destructor &#x2F;&#x2F; 解構子    Attribute &#x2F;&#x2F; 變數宣告    Operation &#x2F;&#x2F; 函式定義&amp;#125;">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C-%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/%E8%A7%A3%E6%A7%8B%E5%AD%90.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C-%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/%E8%AE%8A%E6%95%B8%E7%A8%AE%E9%A1%9EEX1.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C-%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/%E7%B9%BC%E6%89%BF.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C-%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/%E8%A3%9C%E5%85%85%E7%B9%BC%E6%89%BF.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C-%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/%E8%A6%86%E8%BC%89.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C-%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/this&amp;super.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C-%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/%E7%89%A9%E4%BB%B6%E6%8C%87%E6%A8%99.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C-%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/%E7%89%A9%E4%BB%B6%E6%8C%87%E6%A8%99Ex1.png">
 <meta property="article:published_time" content="2022-06-19T16:15:34.000Z">
-<meta property="article:modified_time" content="2022-06-21T15:24:55.819Z">
+<meta property="article:modified_time" content="2022-09-18T09:05:19.462Z">
 <meta property="article:author" content="PinJing Wang">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="建構子">
@@ -23,6 +31,7 @@
 <meta property="article:tag" content="Overloading">
 <meta property="article:tag" content="物件指標">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C-%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/%E8%A7%A3%E6%A7%8B%E5%AD%90.png">
     
     
       
@@ -208,7 +217,8 @@ object.op.</p>
 <li>於 constructor 之前加上 <strong>&quot;~&quot;</strong></li>
 <li>Destructor <strong>不接收參數</strong> parameter list 為空</li>
 <li>class 中 destructor <strong>只會有一個</strong></li>
-<li>於 object 被回收時呼叫</li>
+<li>於 object 被回收時呼叫<br>
+<img src="%E8%A7%A3%E6%A7%8B%E5%AD%90.png" alt=""></li>
 </ul>
 </li>
 <li>Ex:<br>
@@ -235,7 +245,8 @@ object.op.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class A &#123;</span><br><span class="line">    public:</span><br><span class="line">    int oid; &#x2F;&#x2F; att</span><br><span class="line">    &#x2F;&#x2F; 建構子</span><br><span class="line">    A(int i) &#123;</span><br><span class="line">        oid &#x3D; i;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;解構子</span><br><span class="line">    ~A() &#123;</span><br><span class="line">        cout &lt;&lt;oid;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int main() &#123;</span><br><span class="line">        A a1(1); &#x2F;&#x2F; 給建構子的參數</span><br><span class="line">        fun();</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    void fun() &#123;</span><br><span class="line">        A a2(2);</span><br><span class="line">        static A a3(3);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 </li>
 </ul>
-<p>問 output is?</p>
+<p>問 output is?<br>
+<img src="%E8%AE%8A%E6%95%B8%E7%A8%AE%E9%A1%9EEX1.png" alt=""></p>
 <h2>C++ 參考變數 Reference Variable</h2>
 <p>格式：<br>
 <code>type **&amp;**var = **被參考變數** (不可省略)</code><br>
@@ -260,16 +271,19 @@ Q:<br>
 1. a, b 呼叫 swap 後為何 No change? (call - by value)<br>
 2. How to modifiy?</p>
 <h2>C++ 的 Inheritance</h2>
+<p><img src="%E7%B9%BC%E6%89%BF.png" alt=""></p>
 <ul>
 <li>Ex:<br>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class A &#123;</span><br><span class="line">    public: &#x2F;&#x2F; 若改為 private, 此時 B會有 compile error</span><br><span class="line">    int x;</span><br><span class="line">    int y;</span><br><span class="line">&#125;;</span><br><span class="line">class B: Public A &#123; &#x2F;&#x2F;: 繼承</span><br><span class="line">    public:</span><br><span class="line">    B (inta, int b) &#123;</span><br><span class="line">        x &#x3D; a;</span><br><span class="line">        y &#x3D; b;</span><br><span class="line">    &#125;</span><br><span class="line">    void print() &#123;</span><br><span class="line">        cout &lt;&lt;x&lt;&lt;y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">int main() &#123;</span><br><span class="line">    B objB(2, 5);</span><br><span class="line">    objB.print();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <blockquote>
-<p>補充：繼承的存取權限</p>
+<p>補充：繼承的存取權限
+<img src="%E8%A3%9C%E5%85%85%E7%B9%BC%E6%89%BF.png" alt=""></p>
 </blockquote>
 <h2>Overriding 覆載</h2>
 <ul>
-<li>子類別將父類別的<strong>函式重新定義</strong>以符合自身所需</li>
+<li>子類別將父類別的<strong>函式重新定義</strong>以符合自身所需<br>
+<img src="%E8%A6%86%E8%BC%89.png" alt=""></li>
 </ul>
 <h2>Overloading 多載</h2>
 <p>分為：</p>
@@ -322,12 +336,15 @@ Person(inth, int w) {...} // 建構子  Overloading
 <li>super 會指向物件的 parent class</li>
 </ul>
 </li>
-<li>說明：</li>
+<li>說明：<br>
+<img src="this&amp;super.png" alt=""></li>
 </ul>
 <h2>物件指標</h2>
 <ol>
 <li>物件指標</li>
 </ol>
+<p><img src="%E7%89%A9%E4%BB%B6%E6%8C%87%E6%A8%99.png" alt="">
+<img src="%E7%89%A9%E4%BB%B6%E6%8C%87%E6%A8%99Ex1.png" alt=""></p>
 <h2>Polymorphism 多型</h2>
 
   </div>
