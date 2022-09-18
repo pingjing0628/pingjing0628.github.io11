@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pingjing0628.github.io/"/>
-  <updated>2022-06-19T16:24:08.000Z</updated>
+  <updated>2022-09-18T14:34:17.912Z</updated>
   <id>https://pingjing0628.github.io/</id>
   
   <author>
@@ -17,17 +17,74 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Chapter6-資料結構-Algorithm&#39;s Time Complexity and Recursive Program</title>
-    <link href="https://pingjing0628.github.io/2022/06/20/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Algorithm-s-Time-Complexity-and-Recursive-Program/"/>
-    <id>https://pingjing0628.github.io/2022/06/20/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Algorithm-s-Time-Complexity-and-Recursive-Program/</id>
-    <published>2022-06-19T16:24:09.000Z</published>
-    <updated>2022-06-19T16:24:08.000Z</updated>
+    <title>Chapter6-資料結構-Array</title>
+    <link href="https://pingjing0628.github.io/2022/09/18/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Array/"/>
+    <id>https://pingjing0628.github.io/2022/09/18/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Array/</id>
+    <published>2022-09-18T14:33:38.000Z</published>
+    <updated>2022-09-18T14:34:17.912Z</updated>
+    
+    <content type="html"><![CDATA[<h1>6.1 Array</h1><hr>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;h1&gt;6.1 Array&lt;/h1&gt;
+&lt;hr&gt;
+
+      
     
     </summary>
     
     
+      <category term="計算機概論" scheme="https://pingjing0628.github.io/categories/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/"/>
+    
+    
+      <category term="array" scheme="https://pingjing0628.github.io/tags/array/"/>
+    
+      <category term="對稱矩陣" scheme="https://pingjing0628.github.io/tags/%E5%B0%8D%E7%A8%B1%E7%9F%A9%E9%99%A3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Chapter6-資料結構-Algorithm&#39;s Time Complexity and Recursive Program</title>
+    <link href="https://pingjing0628.github.io/2022/06/20/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Algorithm-s-Time-Complexity-and-Recursive-Program/"/>
+    <id>https://pingjing0628.github.io/2022/06/20/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Algorithm-s-Time-Complexity-and-Recursive-Program/</id>
+    <published>2022-06-19T16:24:09.000Z</published>
+    <updated>2022-09-18T14:32:36.882Z</updated>
+    
+    <content type="html"><![CDATA[<h1>6.1 Algorithm 的時間複雜度及遞迴程式</h1><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1&gt;6.1 Algorithm 的時間複雜度及遞迴程式&lt;/h1&gt;
+&lt;hr&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="計算機概論" scheme="https://pingjing0628.github.io/categories/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/"/>
+    
+    
+      <category term="algorithm" scheme="https://pingjing0628.github.io/tags/algorithm/"/>
+    
+      <category term="漸進式表示法" scheme="https://pingjing0628.github.io/tags/%E6%BC%B8%E9%80%B2%E5%BC%8F%E8%A1%A8%E7%A4%BA%E6%B3%95/"/>
+    
+      <category term="時間複雜度" scheme="https://pingjing0628.github.io/tags/%E6%99%82%E9%96%93%E8%A4%87%E9%9B%9C%E5%BA%A6/"/>
+    
+      <category term="遞迴" scheme="https://pingjing0628.github.io/tags/%E9%81%9E%E8%BF%B4/"/>
+    
+      <category term="費氏數列" scheme="https://pingjing0628.github.io/tags/%E8%B2%BB%E6%B0%8F%E6%95%B8%E5%88%97/"/>
+    
+      <category term="Ackermans" scheme="https://pingjing0628.github.io/tags/Ackermans/"/>
+    
+      <category term="河內塔" scheme="https://pingjing0628.github.io/tags/%E6%B2%B3%E5%85%A7%E5%A1%94/"/>
+    
+      <category term="排列組合" scheme="https://pingjing0628.github.io/tags/%E6%8E%92%E5%88%97%E7%B5%84%E5%90%88/"/>
     
   </entry>
   
@@ -776,44 +833,6 @@ person P; (類別 物件)&lt;/p&gt;
       <category term="Multitasking" scheme="https://pingjing0628.github.io/tags/Multitasking/"/>
     
       <category term="Multithreading" scheme="https://pingjing0628.github.io/tags/Multithreading/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Chapter3-作業系統-行程-part2</title>
-    <link href="https://pingjing0628.github.io/2021/06/12/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A1%8C%E7%A8%8B-part2/"/>
-    <id>https://pingjing0628.github.io/2021/06/12/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A1%8C%E7%A8%8B-part2/</id>
-    <published>2021-06-12T15:33:58.000Z</published>
-    <updated>2021-06-17T12:25:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1>3.4 行程</h1><h2>目錄</h2><ul><li>Process Definition</li><li>Program vs Process</li><li>Process STD</li><li>PCB, context switching</li><li><strong>CPU Scheduling algorithm</strong></li><li>Thread 執行緒</li></ul><hr><h2>CPU Scheduling algorithms</h2><p>=&gt; 針對 <strong>STS</strong> 從 <strong>Ready Queue</strong> 挑出一 process 獲得 CPU 之挑選策略方法</p><ul><li>FIFO</li><li>SJF</li><li>SRJF</li><li>Priority</li><li>RR</li><li>Multilevel Queue</li><li>Multilevel Feedback Queue</li></ul><hr><ol><li><strong>FIFO First-In First-Out</strong><br>Def: 愈先到達 Ready Queue 的 process, 先獲得 CPU</li></ol><ul><li><p>Non-preemptive (不可搶奪)<br>優點：</p><ul><li>公平性 (Fair)</li><li>easy to implement</li><li><strong>No starvation 飢餓</strong><br>Def: 指 low priority 之 process 長期或無限期無法取得 CPU 之服務</li></ul><p>缺點：</p><ul><li>效益不佳 (因為 A.W.T &amp; A.T.T 慢)</li><li>會有 <strong>convoy effect (護衛效應)</strong><br>指多個 process 在 wait 一個需長時間執行之 process =&gt; <strong>造成 A.W.T 大幅上升</strong></li><li>Note:<br>A.W.T: Average Waiting time<br>A.T.T: Average Turnaround time (結束時間)</li></ul></li><li><p>Example: CPU Scheduling algorithms 的衡量準則 (performance criteria 效能準則)<br>Sol:</p><ol><li>CPU utilization -&gt; 看 CPU 使用率</li><li>CPU throughput -&gt; 看 CPU 單位生產量</li><li><strong>Waiting time 等候時間</strong><br>Def: 自 process 交付系統到結束, 總共在 Ready Queue 等了多久</li><li><strong>Turnaround time 回覆時間</strong><br>Def: 自 process 交付系統到結束, 總共需多少時間</li><li>Response time (反應)<br>Def: 指 process 自交付系統到第一次獲得回應的時間 -&gt; <strong>interactive system care about this</strong><br>Note: <code>1. ~ 2.</code> 愈高愈好, <code>3. ~ 5.</code>時間愈短愈好</li></ol></li><li><p>Ex: 採 FIFO,</p><table><thead><tr><th style="text-align:center">Process</th><th style="text-align:center">CPU Burst time (CPU 花費時間)</th><th style="text-align:center">CPU arrive time</th></tr></thead><tbody><tr><td style="text-align:center">P1</td><td style="text-align:center">24</td><td style="text-align:center">0</td></tr><tr><td style="text-align:center">P2</td><td style="text-align:center">3</td><td style="text-align:center">0</td></tr><tr><td style="text-align:center">P3</td><td style="text-align:center">3</td><td style="text-align:center">0</td></tr></tbody></table><p>Sol:<br>A.W.T = <code>(0 + 24 + 27) / 3 = 17</code><br>A.T.T = <code>(24 + 27 + 30) / 3 = 27</code></p></li></ul><ol start="2"><li><strong>SJF (Shortest Job First) 最短工作先做</strong><br>Def: 指所需的 CPU 時間愈短, 愈先獲得 CPU 之服務</li></ol><ul><li><strong>Non-preemptive</strong><br>優點：<ul><li>效益最佳 (A.W.T &amp; A.T.T 短)</li><li>No convoy effect</li><li><strong>適用於 LTS</strong>缺點：</li><li>No fair</li><li>可能會有 <strong>starvation</strong></li><li>不適用於 STS (預測 process 時間耗時) -&gt; 一般拿來當理論依據值</li></ul></li></ul><ol start="3"><li><strong>SRJF (Shortest Remaining Time Job First) 最短剩餘時間工作先做</strong><br>Def: 同 2. , 但為 preemtpive, 且 Context Switching 較重</li></ol><ul><li><p>ex:</p><table><thead><tr><th style="text-align:center">Process</th><th style="text-align:center">CPU Burst time (CPU 花費時間)</th><th style="text-align:center">CPU arrive time</th></tr></thead><tbody><tr><td style="text-align:center">P1</td><td style="text-align:center">8</td><td style="text-align:center">0</td></tr><tr><td style="text-align:center">P2</td><td style="text-align:center">4</td><td style="text-align:center">1</td></tr><tr><td style="text-align:center">P3</td><td style="text-align:center">9</td><td style="text-align:center">2</td></tr><tr><td style="text-align:center">P4</td><td style="text-align:center">5</td><td style="text-align:center">3</td></tr></tbody></table><p>分別採 SJF &amp; SRJF, 求 A.W.T &amp; A.T.T = ?<br><img src="%E6%B5%81%E7%A8%8B.png" alt="">Sol:</p><ol><li>SJF<br><img src="exSJF.png" alt=""><br>A.W.T = <code>(0 - 0 + 8 - 1 + 17 - 2 + 12 - 3) / 4 = 7.75</code><br>A.T.T = <code>(8 - 0 + 12 - 1 + 26 - 2 + 17 - 3) / 4 = 14.25</code></li><li>SRJF<img src="exSRJF.png" alt=""><br>A.W.T = <code>(0 - 0 + 10 - 1 + 1 - 1 + 17 - 2 + 5 - 3) / 4 = 6.5</code><br>A.T.T = <code>(17 - 0 + 5 - 1 + 26 - 2 + 10 - 3) / 4 = 13</code></li></ol></li><li><p>Compare</p><table><thead><tr><th style="text-align:center">Preemptive (SRJF)</th><th style="text-align:center">Non-preemptive scheduling (SJF)</th></tr></thead><tbody><tr><td style="text-align:center">Process 取得 CPU 後, 過程可能被其他 process 將 CPU 搶走</td><td style="text-align:center">一旦 process 取得 CPU, 除非自願放棄, 否則其他process 不能搶</td></tr><tr><td style="text-align:center"><strong>適用於即時, 交談式</strong></td><td style="text-align:center"><strong>對 job 較公平</strong>, <strong>Reponse time 較可預期</strong></td></tr><tr><td style="text-align:center"><strong>Context switching 重 (缺點)</strong></td><td style="text-align:center"><strong>Context switching 輕 (優點)</strong></td></tr><tr><td style="text-align:center"><strong>A.W.T &amp; A.T.T 短 (優點)</strong></td><td style="text-align:center"><strong>A.W.T &amp; A.T.T 長 (缺點)</strong></td></tr></tbody></table></li></ul><ol start="4"><li><strong>Priority Scheduling (優先權排列法則)</strong><br>Def: priority 愈高者, 愈先取得 CPU 之服務</li></ol><ul><li>Special case:<ol><li>Arrive time 越短, Priority 越高 =&gt; FIFO</li><li>CPU Burst time 越短, Priority 越高 =&gt; SJF</li></ol></li><li>又可分為：<ul><li>Preemptive =&gt; 易造成 starvation<ul><li><strong>Solution: 採 &quot;Aging Technique&quot; (老化技術)</strong><br>Def: 指每隔一段時間逐步將 low priority 之 process 的 優先權提高</li></ul></li><li>Non-preemptive =&gt; 當 priority 相同 =&gt; 採 FIFO</li></ul></li><li>Ex: 採 priority 求 A.W.T &amp; A.T.T ?<table><thead><tr><th style="text-align:center">Process</th><th style="text-align:center">CPU Burst time (CPU 花費時間)</th><th style="text-align:center">Priority (編號小, priority 高)</th></tr></thead><tbody><tr><td style="text-align:center">P1</td><td style="text-align:center">10</td><td style="text-align:center">3 No.3</td></tr><tr><td style="text-align:center">P2</td><td style="text-align:center">1</td><td style="text-align:center">1 No.2</td></tr><tr><td style="text-align:center">P3</td><td style="text-align:center">2</td><td style="text-align:center">3 No.4</td></tr><tr><td style="text-align:center">P4</td><td style="text-align:center">1</td><td style="text-align:center">4 No.5</td></tr><tr><td style="text-align:center">P5</td><td style="text-align:center">5</td><td style="text-align:center">2 No.2</td></tr></tbody></table>Sol:<br><img src="expriority.png" alt=""><br>A.W.T = <code>(6 + 0 + 16 + 18 + 1) / 5 = 8.2</code><br>A.T.T = <code>(16 + 1 + 18 + 19 + 6) / 5 = 12</code></li></ul><ol start="5"><li><strong>Round-Robin (R.R)</strong></li></ol><ul><li><p>Def: 指輪流給各 process 一固定時間</p><ul><li>時間到就得將 CPU 交由下一個 process 執行</li><li>具下列特色：<ol><li>Fair</li><li>preemptive</li><li>Non-starvation</li></ol></li></ul></li><li><p>Special Case:</p><ol><li>CPU time slice (時間週期) 約等於無限 =&gt; <strong>FIFO</strong></li><li>CPU time slice 極小 =&gt; <strong>CPU Sharing</strong>, <strong>But Context Switching 非常重</strong></li></ol></li><li><p>Ex: 採 R.R time slice = 5, 求 A.W.T &amp; A.T.T ?</p><table><thead><tr><th style="text-align:center">Process</th><th style="text-align:center">CPU Burst time (CPU 花費時間)</th><th style="text-align:center">CPU arrive time</th></tr></thead><tbody><tr><td style="text-align:center">P1</td><td style="text-align:center">8</td><td style="text-align:center">0</td></tr><tr><td style="text-align:center">P2</td><td style="text-align:center">2</td><td style="text-align:center">3</td></tr><tr><td style="text-align:center">P3</td><td style="text-align:center">7</td><td style="text-align:center">6</td></tr></tbody></table><p>Sol:<br><img src="exRR.png" alt="">A.W.T = <code>(0 - 0 + 7 - 5 + 5 - 3 + 10 - 6) / 3 = 8/3</code><br>A.T.T = <code>(10 + 7 - 3 + 17 - 6) / 3 = 25/3</code></p></li></ul><ol start="6"><li><strong>Multilevel Queue (多重佇列)</strong></li></ol><ul><li>Def:<ul><li>將 Ready Queue 拆成多個 Queue</li><li>Queue 之間採 preemptive priority scheduling</li><li>各 Queue 可採用自己的排班法則</li></ul></li><li>優點：可依 process 屬性將之放置到適當的位置</li><li>缺點：此方法下, process 無法於 Queue 之間移動, 故會有 <strong>starvation</strong> 之問題</li><li>圖：<img src="multilevelQueue.png" alt=""></li></ul><ol start="7"><li><strong>Multilevel Feedback Queue (多層回饋佇列)</strong><br>Def: 同 6. , 但 <strong>process 可於 Queue 之間挪動</strong><br>策略：<ol><li>於下層的 process 每隔一段時間往上一層移動</li><li>於上層的 process 不需 CPU 時逐步往下層移動</li></ol></li></ol><hr><ul><li>Summary<img src="summary.png" alt=""></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1&gt;3.4 行程&lt;/h1&gt;
-&lt;h2&gt;目錄&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Process Definition&lt;/li&gt;
-&lt;li&gt;Program vs Process&lt;/li&gt;
-&lt;li&gt;Process STD&lt;/li&gt;
-&lt;li&gt;PCB, context switching&lt;/li
-      
-    
-    </summary>
-    
-    
-      <category term="計算機概論" scheme="https://pingjing0628.github.io/categories/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/"/>
-    
-    
-      <category term="O.S" scheme="https://pingjing0628.github.io/tags/O-S/"/>
-    
-      <category term="Process" scheme="https://pingjing0628.github.io/tags/Process/"/>
-    
-      <category term="CPU Scheduling" scheme="https://pingjing0628.github.io/tags/CPU-Scheduling/"/>
-    
-      <category term="algorithm" scheme="https://pingjing0628.github.io/tags/algorithm/"/>
     
   </entry>
   

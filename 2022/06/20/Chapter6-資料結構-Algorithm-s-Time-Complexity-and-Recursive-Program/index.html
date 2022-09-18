@@ -6,14 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta property="og:type" content="article">
+    <meta name="description" content="6.1 Algorithm 的時間複雜度及遞迴程式">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Chapter6-資料結構-Algorithm&#39;s Time Complexity and Recursive Program">
 <meta property="og:url" content="https://pingjing0628.github.io/2022/06/20/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Algorithm-s-Time-Complexity-and-Recursive-Program/">
 <meta property="og:site_name" content="PinJing&#39;s Blog">
+<meta property="og:description" content="6.1 Algorithm 的時間複雜度及遞迴程式">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-06-19T16:24:09.000Z">
-<meta property="article:modified_time" content="2022-06-19T16:24:08.000Z">
+<meta property="article:modified_time" content="2022-09-18T14:32:36.882Z">
 <meta property="article:author" content="PinJing Wang">
+<meta property="article:tag" content="algorithm">
+<meta property="article:tag" content="漸進式表示法">
+<meta property="article:tag" content="時間複雜度">
+<meta property="article:tag" content="遞迴">
+<meta property="article:tag" content="費氏數列">
+<meta property="article:tag" content="Ackermans">
+<meta property="article:tag" content="河內塔">
+<meta property="article:tag" content="排列組合">
 <meta name="twitter:card" content="summary">
     
     
@@ -86,6 +96,8 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" aria-label="Previous post " href="/2022/09/18/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Array/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
         
         <li><a class="icon" aria-label="Next post " href="/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
@@ -115,7 +127,7 @@
 
     </div>
     <div id="toc">
-      
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">6.1 Algorithm 的時間複雜度及遞迴程式</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -146,15 +158,27 @@
 
 
       
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/">計算機概論</a>
+    </div>
+
 
       
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Ackermans/" rel="tag">Ackermans</a>, <a class="tag-link" href="/tags/algorithm/" rel="tag">algorithm</a>, <a class="tag-link" href="/tags/%E6%8E%92%E5%88%97%E7%B5%84%E5%90%88/" rel="tag">排列組合</a>, <a class="tag-link" href="/tags/%E6%99%82%E9%96%93%E8%A4%87%E9%9B%9C%E5%BA%A6/" rel="tag">時間複雜度</a>, <a class="tag-link" href="/tags/%E6%B2%B3%E5%85%A7%E5%A1%94/" rel="tag">河內塔</a>, <a class="tag-link" href="/tags/%E6%BC%B8%E9%80%B2%E5%BC%8F%E8%A1%A8%E7%A4%BA%E6%B3%95/" rel="tag">漸進式表示法</a>, <a class="tag-link" href="/tags/%E8%B2%BB%E6%B0%8F%E6%95%B8%E5%88%97/" rel="tag">費氏數列</a>, <a class="tag-link" href="/tags/%E9%81%9E%E8%BF%B4/" rel="tag">遞迴</a>
+    </div>
+
 
     </div>
   </header>
   
 
   <div class="content" itemprop="articleBody">
-    
+    <h1>6.1 Algorithm 的時間複雜度及遞迴程式</h1>
+<hr>
+
   </div>
 </article>
 
@@ -183,7 +207,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">6.1 Algorithm 的時間複雜度及遞迴程式</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
