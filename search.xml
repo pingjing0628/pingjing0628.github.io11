@@ -6084,11 +6084,63 @@ Ex: <code>A = 3.14 * 2.56 / 3.2 + 8 - E</code><br>
     <content><![CDATA[<h1>5.5 JAVA</h1>
 <hr>
 <h2>Java VS C++</h2>
+<table>
+<thead>
+<tr>
+<th>Java</th>
+<th>C++</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pure O.O language, 因為主程式都在 class 中</td>
+<td>較不 pure</td>
+</tr>
+<tr>
+<td>No pointer</td>
+<td>有 pointer</td>
+</tr>
+<tr>
+<td>Single Inheritance</td>
+<td>Multiple Inheritance</td>
+</tr>
+<tr>
+<td><strong>利用 garbage collection</strong>, 不需有destructor</td>
+<td><strong>沒有 garbage collection</strong>, 需有destructor</td>
+</tr>
+<tr>
+<td>interpret language, speed 較慢</td>
+<td>compile language, speed 較快</td>
+</tr>
+<tr>
+<td>Cross platform</td>
+<td>沒有跨平台</td>
+</tr>
+<tr>
+<td>安全性佳, 因為JVM (有類別驗證器)</td>
+<td>安全性較差</td>
+</tr>
+<tr>
+<td>support open source 較多</td>
+<td>較少</td>
+</tr>
+</tbody>
+</table>
 <blockquote>
-<p>Garbage Collection(垃圾回收):</p>
+<p>Garbage Collection(垃圾回收): 指不要的 Mem. 會由系統來進行自動回收的機制 =&gt; 回收 programmer 不需介入, 所以不須 destructor
+Note: java 中的 thread 的環境有較妥善的機制和方便 api 供 user 使用</p>
 </blockquote>
 <h2>Class 格式</h2>
+<p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class class_name</span><br><span class="line">&#123;</span><br><span class="line">  constructor -&gt; object initial</span><br><span class="line">  att -&gt; 變數宣告</span><br><span class="line">  method -&gt; function define</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>Ex:</li>
+</ul>
 <h2>Constructor (建構子)</h2>
+<ul>
+<li>和 C++ 概念相似</li>
+<li>O.O 中所有物件皆需 <strong>&quot;初始化&quot;</strong> =&gt; 一定要呼叫 constructor</li>
+<li>當 class 無 constructor, 系統會補上 <strong>預設建構子</strong></li>
+</ul>
 <h2>主程式</h2>
 <h2>配置物件</h2>
 <h2>Inheritance 繼承</h2>
