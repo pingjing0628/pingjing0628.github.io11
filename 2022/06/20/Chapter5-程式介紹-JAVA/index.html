@@ -14,7 +14,7 @@
 <meta property="og:description" content="5.5 JAVA  Java VS C++    Java C++     Pure O.O language, 因為主程式都在 class 中 較不 pure   No pointer 有 pointer   Single Inheritance Multiple Inheritance   利用 garbage collection, 不需有destructor 沒有 garbage coll">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-06-19T16:16:31.000Z">
-<meta property="article:modified_time" content="2022-09-19T13:20:20.715Z">
+<meta property="article:modified_time" content="2022-09-19T14:13:49.299Z">
 <meta property="article:author" content="PinJing Wang">
 <meta property="article:tag" content="建構子">
 <meta property="article:tag" content="Overriding">
@@ -261,9 +261,94 @@ Note: java 中的 thread 的環境有較妥善的機制和方便 api 供 user �
 <li>Note: 物件操作方式同 C++, <code>object.att</code> or <code>object.op</code></li>
 </ul>
 <h2>Inheritance 繼承</h2>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class A </span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class B extends A</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>downcasting 向下轉型</th>
+<th>upcasting 向上轉型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>將父類別物件視為子類別型態</td>
+<td>相反</td>
+</tr>
+<tr>
+<td>有 risk, compiler 擋掉</td>
+<td>沒有 risk</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>圖：</li>
+<li>EX:<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Person p &#x3D; new Superman(); &#x2F;&#x2F; superman upcasting</span><br><span class="line">Superman s &#x3D; new Person(); &#x2F;&#x2F; person downcasting</span><br><span class="line">Superman s &#x3D; new Xman(); &#x2F;&#x2F; X</span><br></pre></td></tr></table></figure></li>
+</ul>
 <h2>Overriding</h2>
+<ul>
+<li>
+<p>子類別把父類別的函式重新定義<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Person</span><br><span class="line">&#123;</span><br><span class="line">  public void iam()</span><br><span class="line">  &#123;</span><br><span class="line">    System.out.println(&quot;I am a Person&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">class Superman extends Person</span><br><span class="line">&#123;</span><br><span class="line">  public void iam()</span><br><span class="line">  &#123;</span><br><span class="line">    System.out.println(&quot;I am a Superman&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>注意：</p>
+<ol>
+<li><strong>method signature 方法簽章</strong> 要一樣</li>
+</ol>
+<ul>
+<li>return type + method name + (parameter list)</li>
+<li>Ex:
+<ul>
+<li>superclass: double getValue()... <code>// compile error 多型會錯</code></li>
+<li>subclass: string getValue()...</li>
+</ul>
+</li>
+<li>Ex2:
+<ul>
+<li>superclass: void print(int i)... <code>沒有 overriding 為 overloading, compile OK</code></li>
+<li>subclass void print()...</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>Subclass 的存取權限要 <strong>&gt;=</strong> superclass 的存取權限, 為避免多型有誤</li>
+</ol>
+<ul>
+<li>Note: <code>public &gt; protected &gt; private</code></li>
+</ul>
+</li>
+</ul>
 <h2>this, super</h2>
+<ul>
+<li>概念同 C++, 但 <strong>Java 中 this, super 非 pointer</strong>, 其用法同一般物件, <code>this/super.att/method</code></li>
+<li>圖：</li>
+<li>Ex:</li>
+</ul>
 <h2>Constructor 的進一步介紹 (constructor 的延伸)</h2>
+<ul>
+<li>
+<p>constructor 不會被繼承</p>
+</li>
+<li>
+<p>在 inheritance之下, subclass 的 constructor 第一行需呼叫 &quot;super(...)&quot; (若無, 系統會自動加上&quot;super()&quot; 呼叫 parent, 不帶任何參數的 constructor) =&gt; 呼叫父類別的建構子產生 parent object</p>
+</li>
+<li>
+<p>處理的順序(初始化時)<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class A</span><br><span class="line">&#123;</span><br><span class="line">  public A() &#123;...&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class B extends A</span><br><span class="line">&#123;</span><br><span class="line">  public B() &#123;</span><br><span class="line">    super();</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>常見陷阱題：<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class A</span><br><span class="line">&#123;</span><br><span class="line">  public A(int a)&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">public class B extends A</span><br><span class="line">&#123;</span><br><span class="line">  public B() &#x2F;&#x2F; default constructor</span><br><span class="line">  &#123;</span><br><span class="line">    super(); &#x2F;&#x2F; 系統補上的, 找不到不帶參數的建構子</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Result: compile error</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Summary:</p>
+</li>
+</ul>
+<ol>
+<li>No constructor =&gt; 補上 default constructor</li>
+<li>若為 subclass 之 constructor 第一行無 &quot;super(...)&quot;, 自動補上 &quot;super(...)&quot; (不帶任何參數的)</li>
+</ol>
 <h2>Java 的例外處理 (Exception Handler)</h2>
 <h2>array 初始化</h2>
 <h2>Java 中的 array 宣告</h2>
