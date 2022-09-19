@@ -14,7 +14,7 @@
 <meta property="og:description" content="Using net&#x2F;http to serve &lt;!-- more --&gt;  承上篇文章，針對wiki 檔案進行http的操作 增加view 功能   增加一個function，將request URL中的&#x2F;view&#x2F; 過濾，取其後面的值作為文章title   呼叫 loadPage function 12345func viewHandler(w http.ResponseWrite">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2020-01-08T15:45:15.000Z">
-<meta property="article:modified_time" content="2020-12-15T15:15:38.000Z">
+<meta property="article:modified_time" content="2022-09-19T12:53:52.634Z">
 <meta property="article:author" content="PinJing Wang">
 <meta property="article:tag" content="GoLang">
 <meta property="article:tag" content="pointer">
@@ -67,8 +67,7 @@
 <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
 </head>
 
-<body class="max-width mx-auto px3 ltr">
-    
+<body class="max-width mx-auto px3 ltr">    
       <div id="header-post">
   <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
   <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
@@ -159,7 +158,7 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/GoLang/">GoLang</a>
+        <a class="category-link" href="/categories/Programming/">Programming</a> › <a class="category-link" href="/categories/Programming/GoLang/">GoLang</a>
     </div>
 
 
@@ -434,5 +433,20 @@
 <!-- Disqus Comments -->
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
