@@ -13,6 +13,8 @@
       
       <categories>
           
+          <category> Note </category>
+          
           <category> 計算機概論 </category>
           
       </categories>
@@ -39,6 +41,8 @@
       
       
       <categories>
+          
+          <category> Note </category>
           
           <category> 計算機概論 </category>
           
@@ -78,6 +82,8 @@
       
       
       <categories>
+          
+          <category> Note </category>
           
           <category> 計算機概論 </category>
           
@@ -126,6 +132,8 @@
       
       <categories>
           
+          <category> Note </category>
+          
           <category> 計算機概論 </category>
           
       </categories>
@@ -160,6 +168,8 @@
       
       
       <categories>
+          
+          <category> Note </category>
           
           <category> 計算機概論 </category>
           
@@ -196,6 +206,8 @@
       
       <categories>
           
+          <category> Note </category>
+          
           <category> 計算機概論 </category>
           
       </categories>
@@ -230,6 +242,8 @@
       
       
       <categories>
+          
+          <category> Note </category>
           
           <category> 計算機概論 </category>
           
@@ -266,6 +280,8 @@
       
       <categories>
           
+          <category> Note </category>
+          
           <category> 計算機概論 </category>
           
       </categories>
@@ -300,6 +316,8 @@
       
       
       <categories>
+          
+          <category> Note </category>
           
           <category> 計算機概論 </category>
           
@@ -340,6 +358,8 @@
       
       <categories>
           
+          <category> Note </category>
+          
           <category> 計算機概論 </category>
           
       </categories>
@@ -366,6 +386,8 @@
       
       
       <categories>
+          
+          <category> Note </category>
           
           <category> 計算機概論 </category>
           
@@ -395,6 +417,8 @@
       
       
       <categories>
+          
+          <category> Note </category>
           
           <category> 計算機概論 </category>
           
@@ -437,6 +461,8 @@
       
       <categories>
           
+          <category> Note </category>
+          
           <category> 計算機概論 </category>
           
       </categories>
@@ -476,6 +502,8 @@
       
       <categories>
           
+          <category> Note </category>
+          
           <category> 計算機概論 </category>
           
       </categories>
@@ -502,6 +530,8 @@
       
       
       <categories>
+          
+          <category> Note </category>
           
           <category> 計算機概論 </category>
           
@@ -532,6 +562,8 @@
       
       <categories>
           
+          <category> Note </category>
+          
           <category> 計算機概論 </category>
           
       </categories>
@@ -558,6 +590,8 @@
       
       
       <categories>
+          
+          <category> Note </category>
           
           <category> 計算機概論 </category>
           
@@ -591,6 +625,8 @@
       
       
       <categories>
+          
+          <category> Note </category>
           
           <category> 計算機概論 </category>
           
@@ -629,6 +665,8 @@
       
       <categories>
           
+          <category> Note </category>
+          
           <category> 計算機概論 </category>
           
       </categories>
@@ -666,6 +704,8 @@
       
       <categories>
           
+          <category> Note </category>
+          
           <category> 計算機概論 </category>
           
       </categories>
@@ -699,6 +739,8 @@
       
       <categories>
           
+          <category> Note </category>
+          
           <category> 計算機概論 </category>
           
       </categories>
@@ -729,6 +771,8 @@
       
       
       <categories>
+          
+          <category> Note </category>
           
           <category> 計算機概論 </category>
           
@@ -765,6 +809,8 @@
       
       <categories>
           
+          <category> Note </category>
+          
           <category> 計算機概論 </category>
           
       </categories>
@@ -793,6 +839,8 @@
       
       
       <categories>
+          
+          <category> Note </category>
           
           <category> 計算機概論 </category>
           
@@ -823,6 +871,8 @@
       
       <categories>
           
+          <category> Note </category>
+          
           <category> 計算機概論 </category>
           
       </categories>
@@ -849,6 +899,8 @@
       
       
       <categories>
+          
+          <category> Note </category>
           
           <category> 計算機概論 </category>
           
@@ -889,6 +941,8 @@
       
       <categories>
           
+          <category> Note </category>
+          
           <category> 計算機概論 </category>
           
       </categories>
@@ -924,6 +978,8 @@
       
       <categories>
           
+          <category> Note </category>
+          
           <category> 計算機概論 </category>
           
       </categories>
@@ -950,6 +1006,8 @@
       
       
       <categories>
+          
+          <category> Note </category>
           
           <category> 計算機概論 </category>
           
@@ -978,6 +1036,8 @@
       
       <categories>
           
+          <category> Note </category>
+          
           <category> 計算機概論 </category>
           
       </categories>
@@ -1004,6 +1064,8 @@
       
       
       <categories>
+          
+          <category> Note </category>
           
           <category> 計算機概論 </category>
           
@@ -1036,6 +1098,8 @@
       
       <categories>
           
+          <category> 靜態網頁生成器 </category>
+          
           <category> Hexo </category>
           
       </categories>
@@ -1062,6 +1126,8 @@
       
       
       <categories>
+          
+          <category> Environment </category>
           
           <category> Kubernetes </category>
           
@@ -1092,7 +1158,9 @@
       
       <categories>
           
-          <category> docker </category>
+          <category> Environment </category>
+          
+          <category> Docker </category>
           
       </categories>
       
@@ -1118,6 +1186,8 @@
       
       
       <categories>
+          
+          <category> Programming </category>
           
           <category> GoLang </category>
           
@@ -1149,6 +1219,8 @@
       
       
       <categories>
+          
+          <category> Programming </category>
           
           <category> GoLang </category>
           
@@ -1183,6 +1255,8 @@
       
       <categories>
           
+          <category> Programming </category>
+          
           <category> GoLang </category>
           
       </categories>
@@ -1210,6 +1284,8 @@
       
       <categories>
           
+          <category> Programming </category>
+          
           <category> GoLang </category>
           
       </categories>
@@ -1236,6 +1312,8 @@
       
       
       <categories>
+          
+          <category> Programming </category>
           
           <category> GoLang </category>
           
@@ -1265,6 +1343,8 @@
       
       
       <categories>
+          
+          <category> Programming </category>
           
           <category> GoLang </category>
           
@@ -1296,6 +1376,8 @@
       
       
       <categories>
+          
+          <category> Programming </category>
           
           <category> GoLang </category>
           
@@ -1363,6 +1445,8 @@
       
       <categories>
           
+          <category> Programming </category>
+          
           <category> GoLang </category>
           
       </categories>
@@ -1392,6 +1476,8 @@
       
       <categories>
           
+          <category> Programming </category>
+          
           <category> GoLang </category>
           
       </categories>
@@ -1420,6 +1506,8 @@
       
       
       <categories>
+          
+          <category> Programming </category>
           
           <category> GoLang </category>
           
@@ -1454,7 +1542,9 @@
       
       <categories>
           
-          <category> docker </category>
+          <category> Environment </category>
+          
+          <category> Docker </category>
           
       </categories>
       
@@ -1483,7 +1573,9 @@
       
       <categories>
           
-          <category> docker </category>
+          <category> Environment </category>
+          
+          <category> Docker </category>
           
       </categories>
       
@@ -1518,7 +1610,9 @@
       
       <categories>
           
-          <category> docker </category>
+          <category> Environment </category>
+          
+          <category> Docker </category>
           
       </categories>
       
@@ -1546,6 +1640,8 @@
       
       
       <categories>
+          
+          <category> Programming </category>
           
           <category> GoLang </category>
           
@@ -1576,6 +1672,8 @@
       
       <categories>
           
+          <category> Programming </category>
+          
           <category> GoLang </category>
           
       </categories>
@@ -1601,9 +1699,9 @@
       
       <categories>
           
-          <category> GoLang </category>
+          <category> Programming </category>
           
-          <category> PHP </category>
+          <category> GoLang </category>
           
       </categories>
       
@@ -1632,6 +1730,8 @@
       
       <categories>
           
+          <category> Programming </category>
+          
           <category> GoLang </category>
           
       </categories>
@@ -1656,6 +1756,8 @@
       
       
       <categories>
+          
+          <category> Programming </category>
           
           <category> GoLang </category>
           
@@ -1684,6 +1786,8 @@
       
       <categories>
           
+          <category> Programming </category>
+          
           <category> GoLang </category>
           
       </categories>
@@ -1708,6 +1812,8 @@
       
       
       <categories>
+          
+          <category> Programming </category>
           
           <category> GoLang </category>
           
@@ -1740,6 +1846,8 @@
       
       <categories>
           
+          <category> Programming </category>
+          
           <category> GoLang </category>
           
       </categories>
@@ -1769,6 +1877,8 @@
       
       <categories>
           
+          <category> Programming </category>
+          
           <category> GoLang </category>
           
       </categories>
@@ -1795,6 +1905,8 @@
       
       
       <categories>
+          
+          <category> Programming </category>
           
           <category> GoLang </category>
           
@@ -1823,6 +1935,8 @@
       
       <categories>
           
+          <category> Programming </category>
+          
           <category> GoLang </category>
           
       </categories>
@@ -1849,6 +1963,8 @@
       
       
       <categories>
+          
+          <category> Programming </category>
           
           <category> GoLang </category>
           
@@ -1877,6 +1993,8 @@
       
       <categories>
           
+          <category> Programming </category>
+          
           <category> GoLang </category>
           
       </categories>
@@ -1904,6 +2022,8 @@
       
       <categories>
           
+          <category> Programming </category>
+          
           <category> GoLang </category>
           
       </categories>
@@ -1928,6 +2048,8 @@
       
       
       <categories>
+          
+          <category> Programming </category>
           
           <category> GoLang </category>
           
@@ -1954,6 +2076,8 @@
       
       <categories>
           
+          <category> Programming </category>
+          
           <category> GoLang </category>
           
       </categories>
@@ -1978,6 +2102,8 @@
       
       
       <categories>
+          
+          <category> Programming </category>
           
           <category> GoLang </category>
           
@@ -2004,6 +2130,8 @@
       
       <categories>
           
+          <category> Programming </category>
+          
           <category> GoLang </category>
           
       </categories>
@@ -2029,7 +2157,11 @@
       
       <categories>
           
-          <category> Database </category>
+          <category> DataBase </category>
+          
+          <category> Other </category>
+          
+          <category> ERModel </category>
           
       </categories>
       
@@ -2069,6 +2201,8 @@
       
       <categories>
           
+          <category> Programming </category>
+          
           <category> Python </category>
           
       </categories>
@@ -2095,6 +2229,8 @@
       
       
       <categories>
+          
+          <category> Programming </category>
           
           <category> Python </category>
           
@@ -2123,6 +2259,8 @@
       
       <categories>
           
+          <category> Programming </category>
+          
           <category> Python </category>
           
       </categories>
@@ -2149,6 +2287,8 @@
       
       
       <categories>
+          
+          <category> Programming </category>
           
           <category> Python </category>
           
@@ -2177,6 +2317,8 @@
       
       <categories>
           
+          <category> Programming </category>
+          
           <category> Python </category>
           
       </categories>
@@ -2203,6 +2345,8 @@
       
       
       <categories>
+          
+          <category> Programming </category>
           
           <category> Python </category>
           
@@ -2231,6 +2375,8 @@
       
       <categories>
           
+          <category> Programming </category>
+          
           <category> Python </category>
           
       </categories>
@@ -2257,6 +2403,8 @@
       
       
       <categories>
+          
+          <category> Programming </category>
           
           <category> Python </category>
           
@@ -2285,6 +2433,8 @@
       
       <categories>
           
+          <category> Programming </category>
+          
           <category> Python </category>
           
       </categories>
@@ -2312,9 +2462,9 @@
       
       <categories>
           
-          <category> Kubernetes </category>
+          <category> Environment </category>
           
-          <category> deploy </category>
+          <category> Kubernetes </category>
           
       </categories>
       
@@ -2339,7 +2489,11 @@
       
       <categories>
           
+          <category> Programming </category>
+          
           <category> PHP </category>
+          
+          <category> Laravel </category>
           
       </categories>
       
@@ -2368,6 +2522,8 @@
       
       <categories>
           
+          <category> Programming </category>
+          
           <category> PHP </category>
           
       </categories>
@@ -2395,6 +2551,8 @@
       
       <categories>
           
+          <category> Programming </category>
+          
           <category> PHP </category>
           
       </categories>
@@ -2419,6 +2577,8 @@
       
       
       <categories>
+          
+          <category> Programming </category>
           
           <category> PHP </category>
           
@@ -2447,6 +2607,8 @@
       
       <categories>
           
+          <category> Programming </category>
+          
           <category> PHP </category>
           
       </categories>
@@ -2473,6 +2635,8 @@
       
       
       <categories>
+          
+          <category> Programming </category>
           
           <category> PHP </category>
           
@@ -2503,6 +2667,10 @@
       
       <categories>
           
+          <category> DataBase </category>
+          
+          <category> Other </category>
+          
           <category> Eloquent </category>
           
       </categories>
@@ -2530,6 +2698,8 @@
       
       <categories>
           
+          <category> Programming </category>
+          
           <category> PHP </category>
           
       </categories>
@@ -2554,6 +2724,8 @@
       
       
       <categories>
+          
+          <category> Programming </category>
           
           <category> PHP </category>
           
@@ -2580,7 +2752,9 @@
       
       <categories>
           
-          <category> Laravel </category>
+          <category> Programming </category>
+          
+          <category> PHP - Laravel </category>
           
       </categories>
       
@@ -2607,7 +2781,9 @@
       
       <categories>
           
-          <category> Laravel </category>
+          <category> Programming </category>
+          
+          <category> PHP - Laravel </category>
           
       </categories>
       
@@ -2634,7 +2810,9 @@
       
       <categories>
           
-          <category> Laravel </category>
+          <category> Programming </category>
+          
+          <category> PHP - Laravel </category>
           
       </categories>
       
@@ -2663,6 +2841,10 @@
       
       <categories>
           
+          <category> Programming </category>
+          
+          <category> PHP </category>
+          
           <category> Laravel </category>
           
       </categories>
@@ -2689,6 +2871,10 @@
       
       
       <categories>
+          
+          <category> Programming </category>
+          
+          <category> PHP </category>
           
           <category> Laravel </category>
           
@@ -2719,6 +2905,10 @@
       
       <categories>
           
+          <category> Programming </category>
+          
+          <category> PHP </category>
+          
           <category> Laravel </category>
           
       </categories>
@@ -2743,6 +2933,10 @@
       
       
       <categories>
+          
+          <category> Programming </category>
+          
+          <category> PHP </category>
           
           <category> Laravel </category>
           
@@ -2771,7 +2965,9 @@
       
       <categories>
           
-          <category> Programming - Laravel </category>
+          <category> Programming </category>
+          
+          <category> Laravel </category>
           
       </categories>
       
