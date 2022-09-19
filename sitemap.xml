@@ -2,6 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://pingjing0628.github.io/2019/10/27/Laravel-Database/</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://pingjing0628.github.io/2019/10/27/Laravel-CSRF/</loc>
+    
+    <lastmod>2022-09-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/</loc>
     
     <lastmod>2022-09-19</lastmod>
@@ -462,33 +489,6 @@
   
   <url>
     <loc>https://pingjing0628.github.io/2019/11/03/PHP-%E8%89%AF%E5%A5%BD%E7%BF%92%E6%85%A3-%E8%B3%87%E6%96%99%E5%BA%AB/</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://pingjing0628.github.io/2019/10/27/Laravel-Middleware/</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://pingjing0628.github.io/2019/10/27/Laravel-Database/</loc>
-    
-    <lastmod>2022-09-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://pingjing0628.github.io/2019/10/27/Laravel-CSRF/</loc>
     
     <lastmod>2022-09-19</lastmod>
     
@@ -2368,13 +2368,6 @@
   
   <url>
     <loc>https://pingjing0628.github.io/categories/%E9%9D%9C%E6%85%8B%E7%B6%B2%E9%A0%81%E7%94%9F%E6%88%90%E5%99%A8/Hexo/</loc>
-    <lastmod>2022-09-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://pingjing0628.github.io/categories/Programming/PHP-Laravel/</loc>
     <lastmod>2022-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
