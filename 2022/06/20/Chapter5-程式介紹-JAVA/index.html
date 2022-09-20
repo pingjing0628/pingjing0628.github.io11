@@ -14,7 +14,7 @@
 <meta property="og:description" content="5.5 JAVA  Java VS C++    Java C++     Pure O.O language, 因為主程式都在 class 中 較不 pure   No pointer 有 pointer   Single Inheritance Multiple Inheritance   利用 garbage collection, 不需有destructor 沒有 garbage coll">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-06-19T16:16:31.000Z">
-<meta property="article:modified_time" content="2022-09-19T15:29:32.675Z">
+<meta property="article:modified_time" content="2022-09-20T14:24:38.751Z">
 <meta property="article:author" content="PinJing Wang">
 <meta property="article:tag" content="建構子">
 <meta property="article:tag" content="Overriding">
@@ -73,7 +73,8 @@
 <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
 </head>
 
-<body class="max-width mx-auto px3 ltr">    
+<body class="max-width mx-auto px3 ltr">
+    
       <div id="header-post">
   <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
   <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
@@ -131,7 +132,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">5.5 JAVA</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">Java VS C++</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">Class 格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">Constructor (建構子)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">主程式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">配置物件 Mem.space &#x3D;&gt; &quot;new&quot;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">Inheritance 繼承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.7.</span> <span class="toc-text">Overriding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.8.</span> <span class="toc-text">this, super</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.9.</span> <span class="toc-text">Constructor 的進一步介紹 (constructor 的延伸)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.10.</span> <span class="toc-text">Java 的例外處理 (Exception Handler)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.11.</span> <span class="toc-text">array 初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.12.</span> <span class="toc-text">Java 中的 array 宣告</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.13.</span> <span class="toc-text">static keyword</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.14.</span> <span class="toc-text">static 注意事項</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.15.</span> <span class="toc-text">final keyword</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.16.</span> <span class="toc-text">polymorphism in Java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.17.</span> <span class="toc-text">Abstract method</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.18.</span> <span class="toc-text">Abstract class</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.19.</span> <span class="toc-text">interface</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">5.5 JAVA</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">Java VS C++</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">Class 格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">Constructor (建構子)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">主程式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">配置物件 Mem.space &#x3D;&gt; &quot;new&quot;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">Inheritance 繼承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.7.</span> <span class="toc-text">Overriding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.8.</span> <span class="toc-text">this, super</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.9.</span> <span class="toc-text">Constructor 的進一步介紹 (constructor 的延伸)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.10.</span> <span class="toc-text">Java 的例外處理 (Exception Handler)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.11.</span> <span class="toc-text">array 初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.12.</span> <span class="toc-text">Java 中的 array 宣告</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.13.</span> <span class="toc-text">static keyword</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.14.</span> <span class="toc-text">static 注意事項</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.15.</span> <span class="toc-text">final keyword</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.16.</span> <span class="toc-text">polymorphism in Java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.17.</span> <span class="toc-text">Abstract method</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.18.</span> <span class="toc-text">Abstract class</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.19.</span> <span class="toc-text">interface</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.19.1.</span> <span class="toc-text">Why interface?</span></a></li></ol></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -510,20 +511,55 @@ Note: java 中的 thread 的環境有較妥善的機制和方便 api 供 user �
 </ul>
 <h2>Abstract class</h2>
 <ul>
-<li>Def:
+<li>
+<p>Def:</p>
 <ol>
 <li>當 class 中具 &gt;= 1 個 abstract method, 即需定義為 abstract class</li>
 <li>abstract class 不能產生出實體(即無法 &quot;new&quot; 出 instance)</li>
 <li>繼承 abstract class, 並將其 abstract method override 掉的謂之 concrete class</li>
 </ol>
 </li>
-<li>Ex1:</li>
-<li>Ex2:</li>
-<li>Ex3:</li>
+<li>
+<p>Ex1:</p>
+</li>
+<li>
+<p>Ex2:<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Animal a &#x3D; new Animal(); &#x2F;&#x2F; X 抽象類別不能 new</span><br><span class="line">Person p &#x3D; new Person(); &#x2F;&#x2F; O</span><br><span class="line">Animal a &#x3D; new Person(); &#x2F;&#x2F; O 實際上產生具象, Person 做 upcasting -&gt; 準備做多型</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Ex3:<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">abstract class Animal</span><br><span class="line">&#123;</span><br><span class="line">  public abstract void walk();</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; compile error</span><br><span class="line">class Person extends Animal &#x2F;&#x2F; Solution1: 前方加上 abstract </span><br><span class="line">&#123;</span><br><span class="line">  &#x2F;&#x2F; solution 2</span><br><span class="line">  public void walk() </span><br><span class="line">  &#123;</span><br><span class="line">    System.out.println(&quot;Person walk&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Note: 1, 2 擇一, 皆無時, 會有 compile error</p>
+</li>
+<li>
+<p>用 1 不用 2 時, 代表 Person 為 abstract, 代表此層不會是最後一層</p>
+</li>
+<li>
+<p>Sol: 既然不知道它該怎麼寫幹嘛定義? (第一個 abstract)</p>
+</li>
+<li>
+<p>ANS: 拿掉就好, 但它如果定義出來, 他會具備規範的效果, 若定義走路是抽象, 若以後繼承我, 一定要把走路做完, 否則 compile 會提醒, 程式少漏洞</p>
+</li>
 </ul>
 <h2>interface</h2>
 <ul>
-<li>格式:</li>
+<li>通常是規格規範的動作 (根本不會產生物件, 所以也陪有 non-static 的問題)</li>
+<li>格式:<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">interface name</span><br><span class="line">&#123;</span><br><span class="line">  public static final attribute_name;</span><br><span class="line"></span><br><span class="line">  public abstract method signature;</span><br><span class="line">  &#x2F;&#x2F; public static or public abstract 可省略, 但系統會自動加上</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>方法全部都是抽象的, 就代表根本沒辦法實體化, 沒辦法產生物件, 幹嘛產生建構子, 建構子是用來做初始化的動作, 不會產生物件, 所以就不用有建構子了</p>
+</blockquote>
+<h3>Why interface?</h3>
+<ul>
+<li>利用 interface 讓 Java 模擬出 Multiple Inheritance</li>
+<li>圖：</li>
+</ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Person </span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface Flyer</span><br><span class="line">&#123;</span><br><span class="line">  public static void fly(); &#x2F;&#x2F; 若只寫這樣也會過, 括號內連寫都沒寫, implement 是把它補起來, override 是重新定義</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Superman extends Person implements Flyer &#x2F;&#x2F; 介面可以實作很多個</span><br><span class="line">&#123;</span><br><span class="line">  public void fly()</span><br><span class="line">  &#123;</span><br><span class="line">    System.out.println(&quot;flying&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>抽象類別只要有一個是抽象就是, 介面就是全部</li>
 </ul>
 
   </div>
@@ -554,7 +590,7 @@ Note: java 中的 thread 的環境有較妥善的機制和方便 api 供 user �
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">5.5 JAVA</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">Java VS C++</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">Class 格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">Constructor (建構子)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">主程式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">配置物件 Mem.space &#x3D;&gt; &quot;new&quot;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">Inheritance 繼承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.7.</span> <span class="toc-text">Overriding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.8.</span> <span class="toc-text">this, super</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.9.</span> <span class="toc-text">Constructor 的進一步介紹 (constructor 的延伸)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.10.</span> <span class="toc-text">Java 的例外處理 (Exception Handler)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.11.</span> <span class="toc-text">array 初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.12.</span> <span class="toc-text">Java 中的 array 宣告</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.13.</span> <span class="toc-text">static keyword</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.14.</span> <span class="toc-text">static 注意事項</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.15.</span> <span class="toc-text">final keyword</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.16.</span> <span class="toc-text">polymorphism in Java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.17.</span> <span class="toc-text">Abstract method</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.18.</span> <span class="toc-text">Abstract class</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.19.</span> <span class="toc-text">interface</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">5.5 JAVA</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">Java VS C++</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">Class 格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">Constructor (建構子)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">主程式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">配置物件 Mem.space &#x3D;&gt; &quot;new&quot;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">Inheritance 繼承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.7.</span> <span class="toc-text">Overriding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.8.</span> <span class="toc-text">this, super</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.9.</span> <span class="toc-text">Constructor 的進一步介紹 (constructor 的延伸)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.10.</span> <span class="toc-text">Java 的例外處理 (Exception Handler)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.11.</span> <span class="toc-text">array 初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.12.</span> <span class="toc-text">Java 中的 array 宣告</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.13.</span> <span class="toc-text">static keyword</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.14.</span> <span class="toc-text">static 注意事項</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.15.</span> <span class="toc-text">final keyword</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.16.</span> <span class="toc-text">polymorphism in Java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.17.</span> <span class="toc-text">Abstract method</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.18.</span> <span class="toc-text">Abstract class</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.19.</span> <span class="toc-text">interface</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.19.1.</span> <span class="toc-text">Why interface?</span></a></li></ol></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -670,20 +706,5 @@ Note: java 中的 thread 的環境有較妥善的機制和方便 api 供 user �
 <!-- Disqus Comments -->
 
 
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
