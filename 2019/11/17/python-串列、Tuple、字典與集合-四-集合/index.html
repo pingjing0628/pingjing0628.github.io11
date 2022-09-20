@@ -14,7 +14,7 @@
 <meta property="og:description" content="Python 集合 &lt;!--more--&gt;  集合(Set)  集合就像是被移除值，只留下鍵的字典，與字典一樣，每個鍵都是獨一無二的 當只想要知道某個東西是否存在，其他都無所謂時，就是使用集合的時機 若是想要將某些資訊指派給鍵作為它的值，就使用字典  以set()來建立 123456789&gt;&gt;&gt; empty_set &#x3D; set()&gt;&gt;&gt; empty_">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2019-11-17T08:32:16.000Z">
-<meta property="article:modified_time" content="2022-09-19T12:52:35.915Z">
+<meta property="article:modified_time" content="2022-09-20T14:44:33.275Z">
 <meta property="article:author" content="PinJing Wang">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="集合">
@@ -63,8 +63,7 @@
 <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
 </head>
 
-<body class="max-width mx-auto px3 ltr">
-    
+<body class="max-width mx-auto px3 ltr">    
       <div id="header-post">
   <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
   <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
@@ -265,8 +264,8 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a ^ b</span><br><span class="line">&#123;<span class="number">1</span>, <span class="number">3</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.symmetric_difference(b)</span><br><span class="line">&#123;<span class="number">1</span>, <span class="number">3</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bruss ^ wruss</span><br><span class="line">&#123;<span class="string">'cream'</span>&#125;</span><br></pre></td></tr></table></figure></p>
 </li>
 <li>
-<p><code>&lt;=</code>或 <code>issubset()</code>檢查某個集合是否為另一個集合的<strong>子集合</strong>(第一個集合的所有成員都屬於第二個集合)：
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a &lt;= b</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.issubset(b)</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bruss &lt;= wruss</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a &lt;= a</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.issubset(a)</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure></p>
+<p><code>≤</code>或 <code>issubset()</code>檢查某個集合是否為另一個集合的<strong>子集合</strong>(第一個集合的所有成員都屬於第二個集合)：
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a ≤ b</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.issubset(b)</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bruss ≤ wruss</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a ≤ a</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.issubset(a)</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure></p>
 </li>
 <li>
 <p>要讓**真子集(proper subset)**成立，第二個集合必須擁有第一個集合的所有成員，此外還要有其他的成員
@@ -274,11 +273,11 @@
 </li>
 <li>
 <p>**超集合(superset)**是子集合的相反(第二個集合的所有成員都是第一個集合的成員)
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a &gt;= b</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.issuperset(b)</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>wruss &gt;= bruss</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a ≥ b</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.issuperset(b)</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>wruss ≥ bruss</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure></p>
 </li>
 <li>
 <p>所有集合都是自己的集合
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a &gt;= a</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.issuperset(a)</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a ≥ a</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.issuperset(a)</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure></p>
 </li>
 <li>
 <p>使用 <code>&gt;</code> 來找出<strong>真超集合(proper superset)</strong>
@@ -466,5 +465,20 @@
 <!-- Disqus Comments -->
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

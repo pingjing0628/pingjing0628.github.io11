@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/desc.png">
 <meta property="og:image" content="https://pingjing0628.github.io/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/deadlockDetection.png">
 <meta property="article:published_time" content="2021-06-19T03:16:05.000Z">
-<meta property="article:modified_time" content="2022-09-19T12:54:50.152Z">
+<meta property="article:modified_time" content="2022-09-20T14:43:39.609Z">
 <meta property="article:author" content="PinJing Wang">
 <meta property="article:tag" content="O.S">
 <meta property="article:tag" content="Deadlock">
@@ -83,8 +83,7 @@
 <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
 </head>
 
-<body class="max-width mx-auto px3 ltr">
-    
+<body class="max-width mx-auto px3 ltr">    
       <div id="header-post">
   <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
   <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
@@ -249,7 +248,7 @@
 <li>Note:
 <ul>
 <li>Safe state (安全狀態):<br>
-指可以找到 &gt;= 1 組執行順序, 確保所有的 process 皆可執行完畢<br>
+指可以找到 ≥ 1 組執行順序, 確保所有的 process 皆可執行完畢<br>
 Ex: 5 process (P0 ~ P4) =&gt; <code>P2-&gt;P4-&gt;P1-&gt;P0-&gt;P3</code></li>
 <li>Unsafe state:<br>
 指找不到上述一組執行的順序謂之<br>
@@ -320,8 +319,8 @@ Sol:
 </li>
 <li>
 <p>Step 2:<br>
-Request i (1, 0, 2) &lt;= Need i (1, 2, 2)<br>
-Request i (1, 0, 2) &lt;= Available i (3, 3, 2)</p>
+Request i (1, 0, 2) ≤ Need i (1, 2, 2)<br>
+Request i (1, 0, 2) ≤ Available i (3, 3, 2)</p>
 </li>
 <li>
 <p>Step 3: 暫時性配置<br>
@@ -373,7 +372,7 @@ Request i (1, 0, 2) &lt;= Available i (3, 3, 2)</p>
 <h2>deadlock free</h2>
 <p>Def: 在此條件下, 系統沒有 deadlock 問題, 故不需對其做處理, <strong>欲滿足 deadlock free</strong>, 則：</p>
 <ol>
-<li>1 &lt;= Max i &lt;= m (資源數量)</li>
+<li>1 ≤ Max i ≤ m (資源數量)</li>
 <li>總和(i=1至n) Max i &lt; m + n (n 為 process 數), <strong>process i 完成工作最多所需的資源數</strong></li>
 </ol>
 <p>Ex:</p>
@@ -383,8 +382,8 @@ Request i (1, 0, 2) &lt;= Available i (3, 3, 2)</p>
 Sol:</li>
 </ul>
 <ol>
-<li>1 &lt;= Max i &lt;= m =&gt; 1 &lt; <strong>2</strong> &lt;= 6</li>
-<li>總和(i=1至n) Max i &lt; m + n =&gt; 2n &lt; 6 + n, 所以 n &lt; 6, 故 n 最大為 5</li>
+<li>1 ≤ Max i ≤ m ≥ 1 &lt; <strong>2</strong> ≤ 6</li>
+<li>總和(i=1至n) Max i &lt; m + n ≥ 2n &lt; 6 + n, 所以 n &lt; 6, 故 n 最大為 5</li>
 </ol>
 
   </div>
@@ -531,5 +530,20 @@ Sol:</li>
 <!-- Disqus Comments -->
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

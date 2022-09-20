@@ -14,7 +14,7 @@
 <meta property="og:description" content="5.5 JAVA  Java VS C++    Java C++     Pure O.O language, 因為主程式都在 class 中 較不 pure   No pointer 有 pointer   Single Inheritance Multiple Inheritance   利用 garbage collection, 不需有destructor 沒有 garbage coll">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-06-19T16:16:31.000Z">
-<meta property="article:modified_time" content="2022-09-20T14:24:38.751Z">
+<meta property="article:modified_time" content="2022-09-20T14:42:05.793Z">
 <meta property="article:author" content="PinJing Wang">
 <meta property="article:tag" content="建構子">
 <meta property="article:tag" content="Overriding">
@@ -73,8 +73,7 @@
 <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
 </head>
 
-<body class="max-width mx-auto px3 ltr">
-    
+<body class="max-width mx-auto px3 ltr">    
       <div id="header-post">
   <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
   <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
@@ -313,7 +312,7 @@ Note: java 中的 thread 的環境有較妥善的機制和方便 api 供 user �
 </li>
 </ul>
 <ol start="2">
-<li>Subclass 的存取權限要 <strong>&gt;=</strong> superclass 的存取權限, 為避免多型有誤</li>
+<li>Subclass 的存取權限要 <strong>≥</strong> superclass 的存取權限, 為避免多型有誤</li>
 </ol>
 <ul>
 <li>Note: <code>public &gt; protected &gt; private</code></li>
@@ -514,7 +513,7 @@ Note: java 中的 thread 的環境有較妥善的機制和方便 api 供 user �
 <li>
 <p>Def:</p>
 <ol>
-<li>當 class 中具 &gt;= 1 個 abstract method, 即需定義為 abstract class</li>
+<li>當 class 中具 ≥ 1 個 abstract method, 即需定義為 abstract class</li>
 <li>abstract class 不能產生出實體(即無法 &quot;new&quot; 出 instance)</li>
 <li>繼承 abstract class, 並將其 abstract method override 掉的謂之 concrete class</li>
 </ol>
@@ -706,5 +705,20 @@ Note: java 中的 thread 的環境有較妥善的機制和方便 api 供 user �
 <!-- Disqus Comments -->
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

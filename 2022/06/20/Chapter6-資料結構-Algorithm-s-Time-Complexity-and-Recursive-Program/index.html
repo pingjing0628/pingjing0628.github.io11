@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="6.1 Algorithm 的時間複雜度及遞迴程式">
+    <meta name="description" content="6.1 Algorithm 的時間複雜度及遞迴程式  algorithm 演算法  為指令之集合, 用以達到某一特定之任務 需滿足:  input ≥ 0 個 output ≥ 1 個 definiteness 明確性: 指令皆是清楚且不模糊的 finiteness 有限性: 在有限的指令數之後會求得結果 effectiveness 有效性: 只可利用紙,筆即可追蹤   Note: Program">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Chapter6-資料結構-Algorithm&#39;s Time Complexity and Recursive Program">
 <meta property="og:url" content="https://pingjing0628.github.io/2022/06/20/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Algorithm-s-Time-Complexity-and-Recursive-Program/">
 <meta property="og:site_name" content="PinJing&#39;s Blog">
-<meta property="og:description" content="6.1 Algorithm 的時間複雜度及遞迴程式">
+<meta property="og:description" content="6.1 Algorithm 的時間複雜度及遞迴程式  algorithm 演算法  為指令之集合, 用以達到某一特定之任務 需滿足:  input ≥ 0 個 output ≥ 1 個 definiteness 明確性: 指令皆是清楚且不模糊的 finiteness 有限性: 在有限的指令數之後會求得結果 effectiveness 有效性: 只可利用紙,筆即可追蹤   Note: Program">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-06-19T16:24:09.000Z">
-<meta property="article:modified_time" content="2022-09-19T12:56:33.371Z">
+<meta property="article:modified_time" content="2022-09-20T15:06:39.242Z">
 <meta property="article:author" content="PinJing Wang">
 <meta property="article:tag" content="algorithm">
 <meta property="article:tag" content="漸進式表示法">
@@ -69,8 +69,7 @@
 <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
 </head>
 
-<body class="max-width mx-auto px3 ltr">
-    
+<body class="max-width mx-auto px3 ltr">    
       <div id="header-post">
   <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
   <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
@@ -128,7 +127,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">6.1 Algorithm 的時間複雜度及遞迴程式</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">6.1 Algorithm 的時間複雜度及遞迴程式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">algorithm 演算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">Time Complexity 時間複雜度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">漸進式表示法 asymptotic notation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.1.</span> <span class="toc-text">Big Oh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.2.</span> <span class="toc-text">Omega</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">常見的 Time complexity 求算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">Recursive 遞迴</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.5.1.</span> <span class="toc-text">Recursive vs Non-Recursive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.5.2.</span> <span class="toc-text">常見的 Recursive</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">Example1: N!</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">Example2: Sum(n) &#x3D; 1+2+...+n 寫出其 Recursive algo.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.3.</span> <span class="toc-text">Example3: 費氏數列 (Fibonacci Number)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.4.</span> <span class="toc-text">Example4: G.C.D (Greatest Common Divison) 最大公因數</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.5.</span> <span class="toc-text">Example5: Binomial coefficient 二項式係數</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.6.</span> <span class="toc-text">Example6: Ackerman&#39;s</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.7.</span> <span class="toc-text">Example7: Tower of Hanoi (河內塔)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.8.</span> <span class="toc-text">Example8: Permutation (排列組合)</span></a></li></ol></li></ol></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -179,6 +178,121 @@
   <div class="content" itemprop="articleBody">
     <h1>6.1 Algorithm 的時間複雜度及遞迴程式</h1>
 <hr>
+<h2>algorithm 演算法</h2>
+<ul>
+<li>為指令之集合, 用以達到某一特定之任務</li>
+<li>需滿足:
+<ol>
+<li>input ≥ 0 個</li>
+<li>output ≥ 1 個</li>
+<li>definiteness 明確性: 指令皆是清楚且不模糊的</li>
+<li>finiteness 有限性: 在有限的指令數之後會求得結果</li>
+<li>effectiveness 有效性: 只可利用紙,筆即可追蹤</li>
+</ol>
+</li>
+<li>Note:<br>
+Program vs Algorothm =&gt; 差別在於4, Program 可以有無窮迴圈</li>
+</ul>
+<h2>Time Complexity 時間複雜度</h2>
+<ul>
+<li>
+<p>Def:</p>
+<ul>
+<li>用來衡量 algorithm 執行時間</li>
+<li>利用時間函數: <code>T(n)</code> 表示 <strong>隨著資料量的成長, 所需的執行次數之變動</strong></li>
+</ul>
+</li>
+<li>
+<p>Ex1: 時間函數計算<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">i &#x3D; 1;</span><br><span class="line">while (i &lt;&#x3D; n)</span><br><span class="line">&#123;</span><br><span class="line">  x &#x3D; x+1;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; 問 line 4 執行次數?</span><br><span class="line">&#x2F;&#x2F; Sol: T(n) &#x3D; n</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Ex2:<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">for(i &#x3D; 1; i &lt;&#x3D; n; i++)</span><br><span class="line">&#123;</span><br><span class="line">  for(j &#x3D; i+1; j &lt;&#x3D; n; j++)</span><br><span class="line">  &#123;</span><br><span class="line">    x &#x3D; x+1;</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; 問 line5 的執行次數?</span><br><span class="line">&#x2F;&#x2F; Sol: T(n) &#x3D; n(n-1) &#x2F; 2</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>i</th>
+<th>1</th>
+<th>2...</th>
+<th>n</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>j</td>
+<td>2~n</td>
+<td>3~n</td>
+<td>n+1~n</td>
+</tr>
+<tr>
+<td>x=x+1</td>
+<td>n-1</td>
+<td>n-2</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>思考:<br>
+2n+1<br>
+2n-1<br>
+n+2<br>
+n+100<br>
+<code>n大到一定程度, +1 -1....不重要</code></li>
+</ul>
+<h2>漸進式表示法 asymptotic notation</h2>
+<ul>
+<li>於 Time Complexity 中, 常用漸進式來表示一 algo 的時間的成長漸進曲線, 以便快速了解 algo 之複雜程度</li>
+<li>衡量方式:
+<ol>
+<li>Big Oh: upper bound of <code>ƒ(n)</code></li>
+<li>Omega: lower bound of <code>ƒ(n)</code></li>
+<li>Theta: more precision than Big Oh and Omega</li>
+</ol>
+</li>
+<li>概念:</li>
+</ul>
+<h3>Big Oh</h3>
+<ul>
+<li>Def: 若 <code>ƒ(n)</code> 為一時間函數, 則 <code>ƒ(n) = O(g(n))</code> , if and only if 存在兩正數 c 和 n0, 使得 <code>ƒ(n) ≤ c * g(n)</code> , for all n ≥ n0</li>
+<li>Ex1: <code>ƒ(n) = 3n + 2</code>  =&gt; <strong>O(n)</strong> , 因為存在 2 正數, <code>c = 4, n0 = 2</code>, 此時, <code>3n+2 ≤ 4*n</code>, for all n ≥ 2</li>
+</ul>
+<blockquote>
+<p>定理： <code>ƒ(n) = am*n^m + am-1*n^m-1 +...+ a1*n^1 + a0*n^0</code>, 其中 m 為最高指數項, 則 <code>ƒ(n) = O(n^m)</code></p>
+</blockquote>
+<ul>
+<li>
+<p>Ex2:</p>
+</li>
+<li>
+<p>常見的 Big Oh: 由小 -&gt; 大排序
+O(1) &lt; O(log n) &lt; O(n) &lt; O(nlog n) &lt; O(n^2) &lt; O(n^3) &lt;...&lt; O(n^c) &lt; O(2^n) &lt; O(n!) &lt; O(n^n)<br>
+越大越複雜</p>
+</li>
+<li>
+<p>Proof: <code>ƒ(n) = am*n^m + ...+ a1*n^1 + a0*n^0 = O(n^m)</code></p>
+</li>
+</ul>
+<h3>Omega</h3>
+<h2>常見的 Time complexity 求算</h2>
+<h2>Recursive 遞迴</h2>
+<h3>Recursive vs Non-Recursive</h3>
+<h3>常見的 Recursive</h3>
+<h4>Example1: N!</h4>
+<h4>Example2: Sum(n) = 1+2+...+n 寫出其 Recursive algo.</h4>
+<h4>Example3: 費氏數列 (Fibonacci Number)</h4>
+<ul>
+<li>提示:</li>
+<li>Note: 變形</li>
+</ul>
+<h4>Example4: G.C.D (Greatest Common Divison) 最大公因數</h4>
+<h4>Example5: Binomial coefficient 二項式係數</h4>
+<h4>Example6: Ackerman's</h4>
+<h4>Example7: Tower of Hanoi (河內塔)</h4>
+<h4>Example8: Permutation (排列組合)</h4>
 
   </div>
 </article>
@@ -208,7 +322,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">6.1 Algorithm 的時間複雜度及遞迴程式</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">6.1 Algorithm 的時間複雜度及遞迴程式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">algorithm 演算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">Time Complexity 時間複雜度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">漸進式表示法 asymptotic notation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.1.</span> <span class="toc-text">Big Oh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.2.</span> <span class="toc-text">Omega</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">常見的 Time complexity 求算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">Recursive 遞迴</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.5.1.</span> <span class="toc-text">Recursive vs Non-Recursive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.5.2.</span> <span class="toc-text">常見的 Recursive</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">Example1: N!</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">Example2: Sum(n) &#x3D; 1+2+...+n 寫出其 Recursive algo.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.3.</span> <span class="toc-text">Example3: 費氏數列 (Fibonacci Number)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.4.</span> <span class="toc-text">Example4: G.C.D (Greatest Common Divison) 最大公因數</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.5.</span> <span class="toc-text">Example5: Binomial coefficient 二項式係數</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.6.</span> <span class="toc-text">Example6: Ackerman&#39;s</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.7.</span> <span class="toc-text">Example7: Tower of Hanoi (河內塔)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.8.</span> <span class="toc-text">Example8: Permutation (排列組合)</span></a></li></ol></li></ol></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -324,5 +438,20 @@
 <!-- Disqus Comments -->
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://pingjing0628.github.io/2021/02/21/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E8%A3%9C%E6%95%B8-Complement/Ex4.png">
 <meta property="og:image" content="https://pingjing0628.github.io/2021/02/21/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E8%A3%9C%E6%95%B8-Complement/%E6%BA%A2%E4%BD%8D.png">
 <meta property="article:published_time" content="2021-02-21T15:04:57.000Z">
-<meta property="article:modified_time" content="2022-09-19T12:54:17.000Z">
+<meta property="article:modified_time" content="2022-09-20T14:43:04.026Z">
 <meta property="article:author" content="PinJing Wang">
 <meta property="article:tag" content="補數">
 <meta property="article:tag" content="溢位">
@@ -71,8 +71,7 @@
 <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
 </head>
 
-<body class="max-width mx-auto px3 ltr">
-    
+<body class="max-width mx-auto px3 ltr">    
       <div id="header-post">
   <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
   <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
@@ -222,7 +221,7 @@ Sol:<br>
 2's: 0.010|10 =&gt; 0.10110</p>
 <h2>整數的表示方法</h2>
 <ol>
-<li>Unsigned (無號數)：無負數，無正負號，若有 N 個 bits，可表示範圍： 0 &lt;= x &lt;= 2^N -1</li>
+<li>Unsigned (無號數)：無負數，無正負號，若有 N 個 bits，可表示範圍： 0 ≤ x ≤ 2^N -1</li>
 <li>Signed(有號數)：指令以最左邊之 bits 表示正負號，如下：<br>
 <img src="%E6%95%B4%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95.png" alt="">
 表示方法：<br>
@@ -484,5 +483,20 @@ range 為 -2^8-1 ~ +(2^8-1 -1)<br>
 <!-- Disqus Comments -->
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

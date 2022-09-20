@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part3/RAID3&amp;4.png">
 <meta property="og:image" content="https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part3/parityData.png">
 <meta property="article:published_time" content="2021-07-01T16:10:14.000Z">
-<meta property="article:modified_time" content="2022-09-19T12:55:34.649Z">
+<meta property="article:modified_time" content="2022-09-20T14:41:37.885Z">
 <meta property="article:author" content="PinJing Wang">
 <meta property="article:tag" content="Disk Management">
 <meta property="article:tag" content="RAID">
@@ -70,8 +70,7 @@
 <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
 </head>
 
-<body class="max-width mx-auto px3 ltr">
-    
+<body class="max-width mx-auto px3 ltr">    
       <div id="header-post">
   <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
   <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
@@ -266,7 +265,7 @@
 <li><strong>RAID 1 (mirror RAID)</strong></li>
 </ol>
 <ul>
-<li>至少有 &gt;= 2 顆 disk 存相同的 data</li>
+<li>至少有 ≥ 2 顆 disk 存相同的 data</li>
 <li>具 <strong>fault tolerant</strong> 特色</li>
 <li>Cost 高 (浪費一半 space)</li>
 <li>Read 效益不佳, write 較差</li>
@@ -550,5 +549,20 @@
 <!-- Disqus Comments -->
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
