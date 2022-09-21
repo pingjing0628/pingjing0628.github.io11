@@ -14,7 +14,7 @@
 <meta property="og:description" content="6.1 Algorithm 的時間複雜度及遞迴程式  algorithm 演算法  為指令之集合, 用以達到某一特定之任務 需滿足:  input ≥ 0 個 output ≥ 1 個 definiteness 明確性: 指令皆是清楚且不模糊的 finiteness 有限性: 在有限的指令數之後會求得結果 effectiveness 有效性: 只可利用紙,筆即可追蹤   Note: Program">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-06-19T16:24:09.000Z">
-<meta property="article:modified_time" content="2022-09-20T15:06:39.242Z">
+<meta property="article:modified_time" content="2022-09-21T16:19:59.636Z">
 <meta property="article:author" content="PinJing Wang">
 <meta property="article:tag" content="algorithm">
 <meta property="article:tag" content="漸進式表示法">
@@ -127,7 +127,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">6.1 Algorithm 的時間複雜度及遞迴程式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">algorithm 演算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">Time Complexity 時間複雜度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">漸進式表示法 asymptotic notation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.1.</span> <span class="toc-text">Big Oh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.2.</span> <span class="toc-text">Omega</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">常見的 Time complexity 求算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">Recursive 遞迴</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.5.1.</span> <span class="toc-text">Recursive vs Non-Recursive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.5.2.</span> <span class="toc-text">常見的 Recursive</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">Example1: N!</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">Example2: Sum(n) &#x3D; 1+2+...+n 寫出其 Recursive algo.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.3.</span> <span class="toc-text">Example3: 費氏數列 (Fibonacci Number)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.4.</span> <span class="toc-text">Example4: G.C.D (Greatest Common Divison) 最大公因數</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.5.</span> <span class="toc-text">Example5: Binomial coefficient 二項式係數</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.6.</span> <span class="toc-text">Example6: Ackerman&#39;s</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.7.</span> <span class="toc-text">Example7: Tower of Hanoi (河內塔)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.8.</span> <span class="toc-text">Example8: Permutation (排列組合)</span></a></li></ol></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">6.1 Algorithm 的時間複雜度及遞迴程式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">algorithm 演算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">Time Complexity 時間複雜度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">漸進式表示法 asymptotic notation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.1.</span> <span class="toc-text">Big Oh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.2.</span> <span class="toc-text">Omega</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">常見的 Time complexity 求算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">Recursive 遞迴</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.5.1.</span> <span class="toc-text">Recursive vs Non-Recursive (iterative&#x2F;loop)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.5.2.</span> <span class="toc-text">常見的 Recursive</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">Example1: N!</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">Example2: Sum(n) &#x3D; 1+2+...+n 寫出其 Recursive algo.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.3.</span> <span class="toc-text">Example3: 費氏數列 (Fibonacci Number)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.4.</span> <span class="toc-text">Example4: G.C.D (Greatest Common Divison) 最大公因數</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.5.</span> <span class="toc-text">Example5: Binomial coefficient 二項式係數</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.6.</span> <span class="toc-text">Example6: Ackerman&#39;s</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.7.</span> <span class="toc-text">Example7: Tower of Hanoi (河內塔)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.8.</span> <span class="toc-text">Example8: Permutation (排列組合)</span></a></li></ol></li></ol></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -265,30 +265,302 @@ n+100<br>
 </blockquote>
 <ul>
 <li>
-<p>Ex2:</p>
+<p>Ex2:<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ƒ(n) &#x3D; 3n^5 + 2n^3 + 1000 &#x3D;&gt; O(n^5)</span><br><span class="line">ƒ(n) &#x3D; 2^n + 1000 &#x3D;&gt; O(2^n)</span><br><span class="line">ƒ(n) &#x3D; 100 &#x3D;&gt; O(1) 常數</span><br></pre></td></tr></table></figure></p>
 </li>
+<li>
+<p>Ex3: O(logn^2) vs O(n) 誰大?<br>
+<code>= 2log n &lt; O(n)</code><br>
+2 常數不看</p>
+</li>
+</ul>
+<ul>
 <li>
 <p>常見的 Big Oh: 由小 -&gt; 大排序
 O(1) &lt; O(log n) &lt; O(n) &lt; O(nlog n) &lt; O(n^2) &lt; O(n^3) &lt;...&lt; O(n^c) &lt; O(2^n) &lt; O(n!) &lt; O(n^n)<br>
 越大越複雜</p>
 </li>
 <li>
-<p>Proof: <code>ƒ(n) = am*n^m + ...+ a1*n^1 + a0*n^0 = O(n^m)</code></p>
+<p>Proof: <code>ƒ(n) = am*n^m + ...+ a1*n^1 + a0*n^0 = O(n^m)</code><br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x3D; ∑ai*n^i ≤ ∑|ai|n^i</span><br><span class="line">          ≤ n^m * ∑|ai|n^i-m</span><br><span class="line">          ≤ n^m * ∑|ai|1</span><br><span class="line">          , for all n ≥ 1</span><br><span class="line">所以故為 O(n^m)</span><br></pre></td></tr></table></figure></p>
 </li>
 </ul>
 <h3>Omega</h3>
+<ul>
+<li>Def: 若 ƒ(n) 為一時間函數, 則 <code>ƒ(n) = O(g(n))</code>, if and only if 存在兩正數 C 和 n0, 使得 <code>ƒ(n) ≥ c * g(n)</code>, for all n ≥ n0</li>
+</ul>
 <h2>常見的 Time complexity 求算</h2>
+<ul>
+<li>
+<p>Ex1: <code>T(n) = T(n-1) + n</code> -&gt; 快速排序的 worst case<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">T(n) &#x3D; T(n-1) + n</span><br><span class="line">     &#x3D; [T(n-2) + n-1] + n</span><br><span class="line">     &#x3D; [T(n-3) + n-2] + n-1 + n</span><br><span class="line">     &#x3D; [T(n-4) + n-3] + n-2 + n-1 + n</span><br><span class="line">     ....</span><br><span class="line">     &#x3D; T(n-n) +1+2+...+n</span><br><span class="line">     &#x3D; (n(n+1))&#x2F;2</span><br><span class="line">     &#x3D; (n^2+n)&#x2F;2</span><br><span class="line">     &#x3D;&gt; O(n^2)</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Ex2: <code>T(n) = 2T(n/2)+n</code>, 求 O(?) -&gt; 快速排序的 Best case<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">T(n) &#x3D; 2T(n&#x2F;2) + n</span><br><span class="line">     &#x3D; 2[2T(n&#x2F;4) + n&#x2F;2] + n</span><br><span class="line">     &#x3D; 4T(n&#x2F;4) + 2n</span><br><span class="line">     &#x3D; 4[2T(n&#x2F;8) + n&#x2F;4] + 2n</span><br><span class="line">     &#x3D; 8T(n&#x2F;8) + 3n</span><br><span class="line">     ....</span><br><span class="line">     &#x3D; nT(n&#x2F;n) + logn*n</span><br><span class="line">     &#x3D; n + nlogn</span><br><span class="line">     &#x3D;&gt; O(nlogn)</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Ex3: <code>T(n) = T(n/2) + 1</code>, 求 O(?)<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">T(n) &#x3D; T(n&#x2F;2) + 1 &#x2F;&#x2F; Binary Search</span><br><span class="line">     &#x3D; [T(n&#x2F;4) + 1] + 1</span><br><span class="line">     &#x3D; T(n&#x2F;4) + 2</span><br><span class="line">     &#x3D; [T(n&#x2F;8) + 1] + 2</span><br><span class="line">     &#x3D; T(n&#x2F;8) + 3</span><br><span class="line">     ...</span><br><span class="line">     &#x3D; T(n&#x2F;n) + log2 n</span><br><span class="line">     &#x3D;&gt; O(log n)</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
 <h2>Recursive 遞迴</h2>
-<h3>Recursive vs Non-Recursive</h3>
+<ul>
+<li>
+<p>Def: 指函式執行過程反覆呼叫自身函式 =&gt; <strong>self-calling</strong></p>
+</li>
+<li>
+<p>種類:</p>
+<ol>
+<li>
+<p><strong>直接 recursive</strong>: 在程式中直接呼叫自身<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fun()</span><br><span class="line">&#123;</span><br><span class="line">  ...</span><br><span class="line">  fun() &#x2F;&#x2F; self-calling</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p><strong>間接 recursive</strong>: 在程式中先呼叫其他函式, 再由他呼叫到原本的程式</p>
+</li>
+</ol>
+<ul>
+<li>Note: 不建議採用, 易發生後續維護上的不易性<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">funA()</span><br><span class="line">&#123;</span><br><span class="line">  ...</span><br><span class="line">  funB()</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">funB()</span><br><span class="line">&#123;</span><br><span class="line">  ...</span><br><span class="line">  funA()</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; calling cycle</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="3">
+<li><strong>尾端 recursive</strong>: 函式會在最後再次呼叫自身</li>
+</ol>
+<ul>
+<li>建議改採用 &quot;iterative&quot;(non-recursive) 方式撰寫, 以提高效能 -&gt; 做 loop 快, 比做 context-switching 快, 節省時間和空間</li>
+<li>Note:
+<ul>
+<li>recursive 會採用到系統的「stack」 後進先出</li>
+<li>recursive &amp; non-recursive 適用性, 沒有誰好誰壞<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fun()</span><br><span class="line">&#123;</span><br><span class="line">  ...</span><br><span class="line">  fun();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Recursive vs Non-Recursive (iterative/loop)</h3>
+<ul>
+<li>Recursive
+<ul>
+<li>優點:
+<ul>
+<li>特性:
+<ul>
+<li>程式精簡 -&gt; 程式較省 space</li>
+<li>易理解</li>
+<li>表達力更佳</li>
+</ul>
+</li>
+<li>Space
+<ul>
+<li>暫存變數需求少 (int, temp...)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>缺點:
+<ul>
+<li>Space
+<ul>
+<li>執行時需耗用 &quot;stack&quot; 空間 -&gt; 需系統 stack 支援(會一直追加 Mem.)</li>
+</ul>
+</li>
+<li>Time
+<ul>
+<li>執行時間較久 -&gt; 效率較差(因為需做 function calling)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Non-recursive
+<ul>
+<li>優點:
+<ul>
+<li>Space
+<ul>
+<li>執行時不需耗用 &quot;stack&quot; 空間</li>
+</ul>
+</li>
+<li>Time
+<ul>
+<li>執行時間較快 -&gt; 效率較好</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>缺點:
+<ul>
+<li>特性:
+<ul>
+<li>程式冗長</li>
+<li>不易理解</li>
+<li>表達力較差</li>
+</ul>
+</li>
+<li>Space
+<ul>
+<li>暫存變數需求多</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3>常見的 Recursive</h3>
 <h4>Example1: N!</h4>
+<ul>
+<li>提示:
+<ul>
+<li>N! = 1, if N = 0</li>
+<li>N! = N * (N-1)!. if N ≥ 1<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int F(int N) </span><br><span class="line">&#123;</span><br><span class="line">  if (N &#x3D;&#x3D; 0)</span><br><span class="line">    return 1;</span><br><span class="line">  else</span><br><span class="line">    return N * F(N-1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>呈上例: 問 <code>F(3)</code> = ? 又呼叫 <code>F()</code> 幾次?</li>
+<li>Sol: <code>F(3) -&gt; 3*F(2) -&gt; 2*F(1) -&gt; 1 * F(0)</code>, <code>F(3) = 6</code>, 呼叫 <code>F()</code> 4次</li>
+<li>iterative:<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int sum(int n)</span><br><span class="line">int sum &#x3D; 1, i;</span><br><span class="line">&#123;</span><br><span class="line">  for (i&#x3D;1; i ≤ n; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    sum &#x3D; sum * i;</span><br><span class="line">  &#125;</span><br><span class="line">  return sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
 <h4>Example2: Sum(n) = 1+2+...+n 寫出其 Recursive algo.</h4>
+<ul>
+<li>提示:
+<ul>
+<li>sum(n) = 0, if n = 0</li>
+<li>sum(n-1) + n, if n = 1, otherwise<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">int sum(n)</span><br><span class="line">&#123;</span><br><span class="line">  if (n &#x3D;&#x3D; 0)</span><br><span class="line">    return 0;</span><br><span class="line">  else</span><br><span class="line">    return sum(n-1) + n;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; iterative</span><br><span class="line">int sum(int n)</span><br><span class="line">int sum &#x3D; 0, i;</span><br><span class="line">&#123;</span><br><span class="line">  for (i&#x3D;1; i ≤ n; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    sum &#x3D; sum + i;</span><br><span class="line">  &#125;</span><br><span class="line">  return sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
 <h4>Example3: 費氏數列 (Fibonacci Number)</h4>
 <ul>
-<li>提示:</li>
-<li>Note: 變形</li>
+<li>提示:
+<ul>
+<li>Fn = 0, if n = 0</li>
+<li>Fn = 1, if n = 1</li>
+<li>Fn = Fn-1 + Fn-2, otherwise<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int F(int n)</span><br><span class="line">&#123;</span><br><span class="line">  if (n &#x3D;&#x3D; 0)</span><br><span class="line">    return 0;</span><br><span class="line">  else if (n &#x3D;&#x3D; 1)</span><br><span class="line">    return 1;</span><br><span class="line">  else</span><br><span class="line">    return F(n-1) + F(n-2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fn</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>5</td>
+<td>8</td>
+<td>13</td>
+<td>21</td>
+<td>34</td>
+<td>55</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>呈上例, 問 <code>F(5)</code> = ? 又呼叫 <code>F()</code> 幾次?</p>
+</li>
+<li>
+<p>Sol:<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">F(5) &#x3D; F(4) + F(3)</span><br><span class="line">     &#x3D; F(3) + F(2) + F(2) + F(1)</span><br><span class="line">     &#x3D; F(2) + F(1) + F(1) + F(0) + F(1) + F(0)</span><br><span class="line">     &#x3D; F(1) + F(0) + F(1) + F(1) + F(0) + F(1) + F(0)</span><br><span class="line">&#x2F;&#x2F; F(5) &#x3D; 5, 含 F(5) 本身共呼叫 15 次</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Note: 變形<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">if (n &#x3D;&#x3D; 0 || n &#x3D;&#x3D; 1)</span><br><span class="line"> return 1;</span><br><span class="line">else</span><br><span class="line">  return F(n-1) + F(n-2);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Non-recursive algo</span><br><span class="line">int F(int n)</span><br><span class="line">&#123;</span><br><span class="line">  if (n &#x3D;&#x3D; 0)</span><br><span class="line">    return 0;</span><br><span class="line">  else if (n &#x3D;&#x3D; 1)</span><br><span class="line">    return 1;</span><br><span class="line">  else</span><br><span class="line">  &#123;</span><br><span class="line">    int a &#x3D; 0, b &#x3D; 1, c, i;</span><br><span class="line">    for (i&#x3D;2; i ≤ n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">      c &#x3D; a + b;</span><br><span class="line">      a &#x3D; b;</span><br><span class="line">      b &#x3D; c;</span><br><span class="line">      &#x2F;&#x2F; O(n)</span><br><span class="line">    &#125;</span><br><span class="line">    return c;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fn</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>5</td>
+<td>8</td>
+<td>13</td>
+<td>21</td>
+<td>34</td>
+<td>55</td>
+<td>89</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>若 n 輸入 -3, 問結果?
+<ul>
+<li>因為 recursive 會耗用 stack, 而 -3 無法收斂, 故 stack 會耗盡 -&gt; stack out of memory</li>
+</ul>
+</li>
 </ul>
 <h4>Example4: G.C.D (Greatest Common Divison) 最大公因數</h4>
+<ul>
+<li>
+<p>提示:</p>
+<ul>
+<li>G.C.D(A, B) = B, if (A mod B) = 0</li>
+<li>G.C.D(A, B) = GCD(B, A mod B), if (A mod B) 不等於 0<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int GCD(int A, int B)</span><br><span class="line">&#123;</span><br><span class="line">  if (A % B &#x3D;&#x3D; 0)</span><br><span class="line">    return B;</span><br><span class="line">  else</span><br><span class="line">    return GCD(B, A % B);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>
+<p>呈上例, GCD(12, 9) = ?</p>
+</li>
+<li>
+<p>Sol: GCD(12, 9) -&gt; GCD(9, 3) -&gt; 3</p>
+</li>
+<li>
+<p>又 GCD(9, 12) = ?</p>
+</li>
+<li>
+<p>Sol: GCD(9, 12) -&gt; GCD(12, 9) -&gt; GCD(9, 3) -&gt; 3</p>
+</li>
+<li>
+<p>iterative<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">int GCD (int A, int B)</span><br><span class="line">&#123;</span><br><span class="line">  while (A !&#x3D; 0 &amp;&amp; B !&#x3D; 0)</span><br><span class="line">  &#123;</span><br><span class="line">    if (A &gt; B)</span><br><span class="line">      A &#x3D; A % B; &#x2F;&#x2F; 把餘數給 A, 一直到有一數為 0</span><br><span class="line">    else</span><br><span class="line">      B &#x3D; B % A</span><br><span class="line">  &#125;</span><br><span class="line">  if (A &#x3D;&#x3D; 0)</span><br><span class="line">    return B;</span><br><span class="line">  else</span><br><span class="line">    return A;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
 <h4>Example5: Binomial coefficient 二項式係數</h4>
 <h4>Example6: Ackerman's</h4>
 <h4>Example7: Tower of Hanoi (河內塔)</h4>
@@ -322,7 +594,7 @@ O(1) &lt; O(log n) &lt; O(n) &lt; O(nlog n) &lt; O(n^2) &lt; O(n^3) &lt;...&lt; 
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">6.1 Algorithm 的時間複雜度及遞迴程式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">algorithm 演算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">Time Complexity 時間複雜度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">漸進式表示法 asymptotic notation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.1.</span> <span class="toc-text">Big Oh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.2.</span> <span class="toc-text">Omega</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">常見的 Time complexity 求算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">Recursive 遞迴</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.5.1.</span> <span class="toc-text">Recursive vs Non-Recursive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.5.2.</span> <span class="toc-text">常見的 Recursive</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">Example1: N!</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">Example2: Sum(n) &#x3D; 1+2+...+n 寫出其 Recursive algo.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.3.</span> <span class="toc-text">Example3: 費氏數列 (Fibonacci Number)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.4.</span> <span class="toc-text">Example4: G.C.D (Greatest Common Divison) 最大公因數</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.5.</span> <span class="toc-text">Example5: Binomial coefficient 二項式係數</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.6.</span> <span class="toc-text">Example6: Ackerman&#39;s</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.7.</span> <span class="toc-text">Example7: Tower of Hanoi (河內塔)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.8.</span> <span class="toc-text">Example8: Permutation (排列組合)</span></a></li></ol></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">6.1 Algorithm 的時間複雜度及遞迴程式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">algorithm 演算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">Time Complexity 時間複雜度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">漸進式表示法 asymptotic notation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.1.</span> <span class="toc-text">Big Oh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.2.</span> <span class="toc-text">Omega</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">常見的 Time complexity 求算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">Recursive 遞迴</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.5.1.</span> <span class="toc-text">Recursive vs Non-Recursive (iterative&#x2F;loop)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.5.2.</span> <span class="toc-text">常見的 Recursive</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">Example1: N!</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">Example2: Sum(n) &#x3D; 1+2+...+n 寫出其 Recursive algo.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.3.</span> <span class="toc-text">Example3: 費氏數列 (Fibonacci Number)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.4.</span> <span class="toc-text">Example4: G.C.D (Greatest Common Divison) 最大公因數</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.5.</span> <span class="toc-text">Example5: Binomial coefficient 二項式係數</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.6.</span> <span class="toc-text">Example6: Ackerman&#39;s</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.7.</span> <span class="toc-text">Example7: Tower of Hanoi (河內塔)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">1.5.2.8.</span> <span class="toc-text">Example8: Permutation (排列組合)</span></a></li></ol></li></ol></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
