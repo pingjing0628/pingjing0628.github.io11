@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pingjing0628.github.io/"/>
-  <updated>2022-09-20T14:44:41.597Z</updated>
+  <updated>2022-09-22T15:49:06.515Z</updated>
   <id>https://pingjing0628.github.io/</id>
   
   <author>
@@ -17,13 +17,28 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Chapter6-資料結構-Stack and Queue 堆疊與佇列</title>
+    <link href="https://pingjing0628.github.io/2022/09/22/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Stack-and-Queue-%E5%A0%86%E7%96%8A%E8%88%87%E4%BD%87%E5%88%97/"/>
+    <id>https://pingjing0628.github.io/2022/09/22/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Stack-and-Queue-%E5%A0%86%E7%96%8A%E8%88%87%E4%BD%87%E5%88%97/</id>
+    <published>2022-09-22T15:49:06.000Z</published>
+    <updated>2022-09-22T15:49:06.515Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>Chapter6-資料結構-Array</title>
     <link href="https://pingjing0628.github.io/2022/09/18/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Array/"/>
     <id>https://pingjing0628.github.io/2022/09/18/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Array/</id>
     <published>2022-09-18T14:33:38.000Z</published>
-    <updated>2022-09-20T14:44:41.597Z</updated>
+    <updated>2022-09-22T15:49:17.578Z</updated>
     
-    <content type="html"><![CDATA[<h1>6.1 Array</h1><hr><h2>陣列 Array</h2><h2>陣列儲存位址計算</h2><ul><li>一維陣列</li><li>二維陣列</li><li>常見題型</li><li>三維陣列</li></ul><h2>多項式的資料結構</h2><h2>特殊矩陣</h2><h3>稀疏矩陣</h3><h3>上三角, 下三角矩陣</h3><h3>對稱矩陣</h3>]]></content>
+    <content type="html"><![CDATA[<h1>6.1 Array</h1><hr><h2>陣列 Array</h2><ul><li>Def: array 用來表示 orderlist 的一種資料結構, 又可稱為 dense list 或 sequential list</li><li>概念: 將 data 的第 i 格元素存到第 i 格子之中</li><li>圖:</li><li>特色: (選擇居多)<ol><li>佔用連續的 mem. space</li><li>array 中放置相同型態的元素, 沒有彈性</li><li>需事先宣告 array 大小, 沒有彈性</li><li>同時支援 random access (O(1)) 及 sequential access (O(n))</li></ol></li></ul><h2>陣列儲存位址計算</h2><ul><li>一維陣列<ol><li>宣告方式1:</li><li>宣告方式2:</li><li>Ex: array: <code>A(-3...9), l0 = 100, d = 4</code>, 問 <code>A[5]</code> 之 location</li></ol><ul><li>Sol: <code>l0 + (i - l) * d = 100 + ( 5-(-3)) * 4 = 132</code></li></ul></li><li>二維陣列</li><li>常見題型</li><li>三維陣列</li></ul><h2>多項式的資料結構</h2><h2>特殊矩陣</h2><h3>稀疏矩陣</h3><h3>上三角, 下三角矩陣</h3><h3>對稱矩陣</h3>]]></content>
     
     <summary type="html">
     
@@ -32,14 +47,9 @@
         &lt;h1&gt;6.1 Array&lt;/h1&gt;
 &lt;hr&gt;
 &lt;h2&gt;陣列 Array&lt;/h2&gt;
-&lt;h2&gt;陣列儲存位址計算&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;一維陣列&lt;/li&gt;
-&lt;li&gt;二維陣列&lt;/li&gt;
-&lt;li&gt;常見題型&lt;/li&gt;
-&lt;li&gt;三維陣列&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;多項式的資料結構&lt;
+&lt;li&gt;Def: array 用來表示 orderlist 的一種資料結構, 又可稱為 dense list 或 sequential list&lt;/li&gt;
+&lt;li&gt;概念: 將 data 
       
     
     </summary>
@@ -888,50 +898,6 @@ person P; (類別 物件)&lt;/p&gt;
       <category term="Avoidance" scheme="https://pingjing0628.github.io/tags/Avoidance/"/>
     
       <category term="Detection" scheme="https://pingjing0628.github.io/tags/Detection/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Chapter3-作業系統-行程-part3</title>
-    <link href="https://pingjing0628.github.io/2021/06/12/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A1%8C%E7%A8%8B-part3/"/>
-    <id>https://pingjing0628.github.io/2021/06/12/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A1%8C%E7%A8%8B-part3/</id>
-    <published>2021-06-12T15:43:16.000Z</published>
-    <updated>2022-09-19T12:54:59.531Z</updated>
-    
-    <content type="html"><![CDATA[<h1>3.4 行程</h1><h2>目錄</h2><ul><li>Process Definition</li><li>Program vs Process</li><li>Process STD</li><li>PCB, context switching</li><li>CPU Scheduling algorithm</li><li><strong>Thread 執行緒</strong></li></ul><hr><h2>Thread (執行緒) (為執行的最小單位)</h2><p><img src="processvsthread.png" alt=""></p><h2>Compare process and thread</h2><table><thead><tr><th style="text-align:left">Process</th><th style="text-align:left">Thread</th></tr></thead><tbody><tr><td style="text-align:left">Heavy weight process</td><td style="text-align:left">Light weight process</td></tr><tr><td style="text-align:left">各 process 無法共享：Memory space, O.S. Resource, Files</td><td style="text-align:left">同一 Task 中的 Threads 可共用</td></tr><tr><td style="text-align:left"><strong>Context Switching 重</strong></td><td style="text-align:left"><strong>Context Switching 輕</strong></td></tr><tr><td style="text-align:left">相當於一 Task 中, 只有 single thread</td><td style="text-align:left">有 <strong>multithread</strong> 多執行緒系統</td></tr><tr><td style="text-align:left">較不易發揮</td><td style="text-align:left">在 <strong>Multiprocessor 的架構</strong>, 可充分發揮其效能</td></tr><tr><td style="text-align:left">因為無共享 Memory, 故不需處理 Race condition</td><td style="text-align:left">會共享 Memory, 故須針對 <strong>Race Condition 競爭情況</strong> 作處理</td></tr></tbody></table><hr><h2>Thread (執行緒) 製作方式</h2><ul><li>User level: 由 user-level 自行處理, 藉由執行緒程式庫來對 thread 之運作加以管理, kernel 不需介入</li><li>Kernel level: 由 kernel-level 著手處理 thread 的相關運作<br><img src="thread%E8%A3%BD%E4%BD%9C%E6%96%B9%E5%BC%8F.png" alt=""></li></ul><hr><h2>Compare multitasking and multithreading</h2><p><img src="multitaskingvsmultithreading.png" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1&gt;3.4 行程&lt;/h1&gt;
-&lt;h2&gt;目錄&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Process Definition&lt;/li&gt;
-&lt;li&gt;Program vs Process&lt;/li&gt;
-&lt;li&gt;Process STD&lt;/li&gt;
-&lt;li&gt;PCB, context switching&lt;/li
-      
-    
-    </summary>
-    
-    
-      <category term="Note" scheme="https://pingjing0628.github.io/categories/Note/"/>
-    
-      <category term="計算機概論" scheme="https://pingjing0628.github.io/categories/Note/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/"/>
-    
-      <category term="作業系統" scheme="https://pingjing0628.github.io/categories/Note/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/"/>
-    
-    
-      <category term="O.S" scheme="https://pingjing0628.github.io/tags/O-S/"/>
-    
-      <category term="Process" scheme="https://pingjing0628.github.io/tags/Process/"/>
-    
-      <category term="Thread" scheme="https://pingjing0628.github.io/tags/Thread/"/>
-    
-      <category term="Multitasking" scheme="https://pingjing0628.github.io/tags/Multitasking/"/>
-    
-      <category term="Multithreading" scheme="https://pingjing0628.github.io/tags/Multithreading/"/>
     
   </entry>
   

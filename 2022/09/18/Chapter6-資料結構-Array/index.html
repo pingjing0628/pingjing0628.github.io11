@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="6.1 Array  陣列 Array 陣列儲存位址計算  一維陣列 二維陣列 常見題型 三維陣列  多項式的資料結構 特殊矩陣 稀疏矩陣 上三角, 下三角矩陣 對稱矩陣">
+    <meta name="description" content="6.1 Array  陣列 Array  Def: array 用來表示 orderlist 的一種資料結構, 又可稱為 dense list 或 sequential list 概念: 將 data 的第 i 格元素存到第 i 格子之中 圖: 特色: (選擇居多)  佔用連續的 mem. space array 中放置相同型態的元素, 沒有彈性 需事先宣告 array 大小, 沒有彈性 同時支援">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Chapter6-資料結構-Array">
 <meta property="og:url" content="https://pingjing0628.github.io/2022/09/18/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Array/">
 <meta property="og:site_name" content="PinJing&#39;s Blog">
-<meta property="og:description" content="6.1 Array  陣列 Array 陣列儲存位址計算  一維陣列 二維陣列 常見題型 三維陣列  多項式的資料結構 特殊矩陣 稀疏矩陣 上三角, 下三角矩陣 對稱矩陣">
+<meta property="og:description" content="6.1 Array  陣列 Array  Def: array 用來表示 orderlist 的一種資料結構, 又可稱為 dense list 或 sequential list 概念: 將 data 的第 i 格元素存到第 i 格子之中 圖: 特色: (選擇居多)  佔用連續的 mem. space array 中放置相同型態的元素, 沒有彈性 需事先宣告 array 大小, 沒有彈性 同時支援">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-09-18T14:33:38.000Z">
-<meta property="article:modified_time" content="2022-09-20T14:44:41.597Z">
+<meta property="article:modified_time" content="2022-09-22T15:49:17.578Z">
 <meta property="article:author" content="PinJing Wang">
 <meta property="article:tag" content="array">
 <meta property="article:tag" content="對稱矩陣">
@@ -89,6 +89,8 @@
     <br/>
     <span id="actions">
       <ul>
+        
+        <li><a class="icon" aria-label="Previous post " href="/2022/09/22/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Stack-and-Queue-%E5%A0%86%E7%96%8A%E8%88%87%E4%BD%87%E5%88%97/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" aria-label="Next post " href="/2022/06/20/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Algorithm-s-Time-Complexity-and-Recursive-Program/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -171,9 +173,31 @@
     <h1>6.1 Array</h1>
 <hr>
 <h2>陣列 Array</h2>
+<ul>
+<li>Def: array 用來表示 orderlist 的一種資料結構, 又可稱為 dense list 或 sequential list</li>
+<li>概念: 將 data 的第 i 格元素存到第 i 格子之中</li>
+<li>圖:</li>
+<li>特色: (選擇居多)
+<ol>
+<li>佔用連續的 mem. space</li>
+<li>array 中放置相同型態的元素, 沒有彈性</li>
+<li>需事先宣告 array 大小, 沒有彈性</li>
+<li>同時支援 random access (O(1)) 及 sequential access (O(n))</li>
+</ol>
+</li>
+</ul>
 <h2>陣列儲存位址計算</h2>
 <ul>
-<li>一維陣列</li>
+<li>一維陣列
+<ol>
+<li>宣告方式1:</li>
+<li>宣告方式2:</li>
+<li>Ex: array: <code>A(-3...9), l0 = 100, d = 4</code>, 問 <code>A[5]</code> 之 location</li>
+</ol>
+<ul>
+<li>Sol: <code>l0 + (i - l) * d = 100 + ( 5-(-3)) * 4 = 132</code></li>
+</ul>
+</li>
 <li>二維陣列</li>
 <li>常見題型</li>
 <li>三維陣列</li>
