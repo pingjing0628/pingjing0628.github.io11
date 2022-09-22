@@ -13,8 +13,11 @@
 <meta property="og:site_name" content="PinJing&#39;s Blog">
 <meta property="og:description" content="6.1 Algorithm 的時間複雜度及遞迴程式  algorithm 演算法  為指令之集合, 用以達到某一特定之任務 需滿足:  input ≥ 0 個 output ≥ 1 個 definiteness 明確性: 指令皆是清楚且不模糊的 finiteness 有限性: 在有限的指令數之後會求得結果 effectiveness 有效性: 只可利用紙,筆即可追蹤   Note: Program">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://pingjing0628.github.io/2022/06/20/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Algorithm-s-Time-Complexity-and-Recursive-Program/Binomial1.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2022/06/20/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Algorithm-s-Time-Complexity-and-Recursive-Program/Binomial2.png">
+<meta property="og:image" content="https://pingjing0628.github.io/2022/06/20/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Algorithm-s-Time-Complexity-and-Recursive-Program/Binomial3.png">
 <meta property="article:published_time" content="2022-06-19T16:24:09.000Z">
-<meta property="article:modified_time" content="2022-09-21T16:19:59.636Z">
+<meta property="article:modified_time" content="2022-09-22T15:40:45.792Z">
 <meta property="article:author" content="PinJing Wang">
 <meta property="article:tag" content="algorithm">
 <meta property="article:tag" content="漸進式表示法">
@@ -25,6 +28,7 @@
 <meta property="article:tag" content="河內塔">
 <meta property="article:tag" content="排列組合">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pingjing0628.github.io/2022/06/20/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Algorithm-s-Time-Complexity-and-Recursive-Program/Binomial1.png">
     
     
       
@@ -562,9 +566,98 @@ O(1) &lt; O(log n) &lt; O(n) &lt; O(nlog n) &lt; O(n^2) &lt; O(n^3) &lt;...&lt; 
 </li>
 </ul>
 <h4>Example5: Binomial coefficient 二項式係數</h4>
+<ul>
+<li>
+<p>說明:<br>
+<img src="Binomial1.png" alt=""></p>
+</li>
+<li>
+<p>提示:<br>
+<img src="Binomial2.png" alt="">
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int B(int n, int m)</span><br><span class="line">&#123;</span><br><span class="line">  if (m &#x3D;&#x3D; 0 || n &#x3D;&#x3D; m)</span><br><span class="line">    return 1;</span><br><span class="line">  else</span><br><span class="line">    return B(n-1, m) + B(n-1, m-1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Ex1:<br>
+<img src="Binomial3.png" alt=""></p>
+</li>
+<li>
+<p>Sol:<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">B(5, 2) &#x3D; B(4, 2) + B(4, 1)</span><br><span class="line">        &#x3D; B(3, 2) + B(3, 1) + B(3, 1) + B(3, 0)</span><br><span class="line">        &#x3D; B(2, 2) + B(2, 1) + B(2, 1) + B(2, 0) + B(2, 1) + B(2, 0)</span><br><span class="line">        &#x3D; B(1, 1) + B(1, 0) + B(1, 1) + B(1, 0) + B(1, 1) + B(1, 0)</span><br><span class="line">&#x2F;&#x2F; B(5, 2) &#x3D; 10</span><br><span class="line">&#x2F;&#x2F; 含 B(5, 2) 本身就呼叫 19 次</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>思考: 請用更有效率的方法 iterative<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">int B(int n, int m)</span><br><span class="line">&#123;</span><br><span class="line">  int a &#x3D; 1, b &#x3D; 1, c &#x3D; 1;</span><br><span class="line">  for (int i &#x3D; 1; i ≤ n; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    a &#x3D; a * i; &#x2F;&#x2F;n!</span><br><span class="line">  &#125;</span><br><span class="line">  for (int i &#x3D; 1; i ≤ m; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    b &#x3D; b * i; &#x2F;&#x2F; m!</span><br><span class="line">  &#125;</span><br><span class="line">  for (int i &#x3D; 1; i ≤ n-m; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    c &#x3D; c * i; &#x2F;&#x2F; (n-m)!</span><br><span class="line">  &#125;</span><br><span class="line">  return a&#x2F;(b*c);</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; 易有 overflow</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Solution:</span><br><span class="line">&#x2F;&#x2F; k &#x3D; max(n-m, m)</span><br><span class="line">for (int i &#x3D; n; i &gt; k; i--)</span><br><span class="line">&#123;</span><br><span class="line">  a &#x3D; a * i;</span><br><span class="line">&#125;</span><br><span class="line">for (int i &#x3D; 1; i ≤ n-k; i++)</span><br><span class="line">&#123;</span><br><span class="line">  b &#x3D; b * i;</span><br><span class="line">&#125;</span><br><span class="line">return a &#x2F; b;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 將後面剔除可減少, 但不知哪個數值較大, 因此需要找出較大值, 將其除掉</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
 <h4>Example6: Ackerman's</h4>
+<ul>
+<li>
+<p>背: <code>A(1, 2) = 4, A(2, 1) = 5, A(2, 2) = 7</code></p>
+</li>
+<li>
+<p>提示:</p>
+<ul>
+<li><code>A(m, n) = n+1, if m = 0</code></li>
+<li><code>A(m-1, 1), if n = 0</code></li>
+<li><code>A(m-1, A(m, n-1)), otherwise</code><br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int A(int m, int n)</span><br><span class="line">&#123;</span><br><span class="line">  if (m &#x3D;&#x3D; 0)</span><br><span class="line">    return n+1;</span><br><span class="line">  else if</span><br><span class="line">    return A(m-1, 1);</span><br><span class="line">  else</span><br><span class="line">    return A(m-1, A(m, n-1));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>
+<p>呈上例: <code>A(2, 2)</code> = ?, 又 <code>A()</code> 呼叫幾次?</p>
+</li>
+<li>
+<p>Sol: 7, 呼叫27次</p>
+</li>
+</ul>
 <h4>Example7: Tower of Hanoi (河內塔)</h4>
+<ul>
+<li>
+<p>說明: 3 pegs(柱子) problem</p>
+</li>
+<li>
+<p>Recursive algorithm<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">void Hanoi (n:disc, A, B, C:pegs)</span><br><span class="line">&#123;</span><br><span class="line">  &#x2F;&#x2F; A 來源, B 中繼, C 目的</span><br><span class="line">  if (n &#x3D;&#x3D; 1)</span><br><span class="line">    move disc from A to C;</span><br><span class="line">  else</span><br><span class="line">  &#123;</span><br><span class="line">    Hanoi(n-1, A, C, B); &#x2F;&#x2F; 1</span><br><span class="line">    move the disc n from A to C; &#x2F;&#x2F; 2</span><br><span class="line">    Hanoi(n-1, B, A, C); &#x2F;&#x2F; 3</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Ex1: 試列出 n = 3 的移動順序</p>
+</li>
+<li>
+<p>Sol:</p>
+<ol>
+<li>move 1 from A to C</li>
+<li>move 2 from A to B</li>
+<li>move 1 from C to B</li>
+<li>move 3 from A to C</li>
+<li>move 1 from B to A</li>
+<li>move 2 from B to C</li>
+<li>move 1 from A to C</li>
+</ol>
+</li>
+<li>
+<p>Ex2: 令<code>T(n)</code>為搬動 n 個 disc, 所需的次數, 則 <code>T(n) = T(n-1) + 1 + T(n-1)</code><br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">T(n) &#x3D; T(n-1) + 1 + T(n-1)</span><br><span class="line">     &#x3D; 2T(n-1) + 1</span><br><span class="line">     &#x3D; 2[2T(n-2) + 1] + 1</span><br><span class="line">     &#x3D; 4T(n-2) + 3</span><br><span class="line">     &#x3D; 4[2T(n-3) + 1] + 3</span><br><span class="line">     &#x3D; 8T(n-3) + 7</span><br><span class="line">     ...</span><br><span class="line">     &#x3D; 2^n * T(n-n) + 2^n - 1</span><br><span class="line">     &#x3D; 2^n - 1</span><br><span class="line">&#x2F;&#x2F; 時間複雜度為 O(2^n)</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
 <h4>Example8: Permutation (排列組合)</h4>
+<ul>
+<li>
+<p>概念:</p>
+<ul>
+<li>n個 data 會有 n! 種組合</li>
+<li>Ex: data a, b, c 之 permutation, 若有 3 筆data =&gt; 3! = 3 * 2 * 1 = 6</li>
+<li>abc, acb, bac, bca, cab, cba</li>
+</ul>
+</li>
+<li>
+<p>思考: <code>Perm(a, b, c)</code><br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a + perm(b, c)</span><br><span class="line">b + perm(a, c)</span><br><span class="line">c + perm(b, a)</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>Recursive (in C)<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">void perm (char list[], int i , int n)</span><br><span class="line">&#123;</span><br><span class="line">  if (i &#x3D;&#x3D; n)</span><br><span class="line">  &#123;</span><br><span class="line">    for (int j &#x3D; 1; j ≤ n; j++)</span><br><span class="line">    &#123;</span><br><span class="line">      printf(&quot;%c&quot;, list[j]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  else</span><br><span class="line">  &#123;</span><br><span class="line">    for (int j &#x3D; i; j ≤ n; j++)</span><br><span class="line">    &#123;</span><br><span class="line">      swap(list[i], list[j]);</span><br><span class="line">      perm(list, i+1, n);</span><br><span class="line">      swap(list[i], list[j]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
 
   </div>
 </article>
