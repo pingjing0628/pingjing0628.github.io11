@@ -12889,7 +12889,19 @@ Sol:<br>
 </li>
 </ul>
 <h3>上三角, 下三角矩陣</h3>
+<ul>
+<li>說明:
+<ul>
+<li>上三角: 即對角線以下的元素皆0, aij = 0, if i &gt; j</li>
+<li>下三角: 即對角線以上的元素皆0, aij = 0, if i &lt; j</li>
+</ul>
+</li>
+<li>特色: 一 n * n 的上或下三角矩陣其元素共有:</li>
+</ul>
 <h3>對稱矩陣</h3>
+<ul>
+<li>定義:</li>
+</ul>
 ]]></content>
       <categories>
         <category>Note</category>
