@@ -12863,7 +12863,7 @@ Sol:<br>
 </ol>
 <ul>
 <li>Ex: 當多項式的最高係數為 n 時, 需準備 n+2 格<br>
--&gt; 缺點: 若非0項極少時不適用, <code>f(x) = 2^1000 +9</code></li>
+-&gt; 缺點: 若非0項極少時不適用, <code>f(x) = 2^1000 +9 =&gt; k=2</code> =&gt; 準備 <code>A[1...5]</code></li>
 </ul>
 <ol start="2">
 <li>只存放非零項次的係數與指數</li>
@@ -12896,11 +12896,28 @@ Sol:<br>
 <li>下三角: 即對角線以上的元素皆0, aij = 0, if i &lt; j</li>
 </ul>
 </li>
-<li>特色: 一 n * n 的上或下三角矩陣其元素共有:</li>
+<li>特色: 一 n * n 的上或下三角矩陣其元素共有:
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1+2+...+n &#x3D; n(n+1) &#x2F; 2</span><br><span class="line">&#x3D;&gt; 若採用 &quot;二維陣列&quot;, 則</span><br><span class="line">&#x3D;&gt; 浪費 space n^2-n(n+1)&#x2F;2</span><br><span class="line"></span><br><span class="line">Solution:</span><br><span class="line">利用一維陣列 B[1....n(n+1)&#x2F;2]</span><br><span class="line">來將上 下三角之資料一一對應</span><br></pre></td></tr></table></figure></li>
+<li>上三角
+<ul>
+<li>Row Major</li>
+<li>Column Major</li>
+</ul>
+</li>
+<li>下三角
+<ul>
+<li>Row Major</li>
+<li>Column Major</li>
+</ul>
+</li>
 </ul>
 <h3>對稱矩陣</h3>
 <ul>
-<li>定義:</li>
+<li>定義: 一矩陣 An*n: 若 Aij = Aji謂之, 有效率地存放方式, 只存上 or 下三角即可</li>
+<li>上三角: <code>aij : k = j(j-1)/2 +i</code></li>
+<li>下三角: <code>k = i()i-1/2 + i</code></li>
+<li>合併為單一公式: <code>max(i, j) * (max(i, j)-1)/2 + min(i, j)</code></li>
+<li>Ex:</li>
 </ul>
 ]]></content>
       <categories>
