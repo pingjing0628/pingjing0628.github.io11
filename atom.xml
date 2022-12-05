@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pingjing0628.github.io/"/>
-  <updated>2022-12-05T15:29:22.596Z</updated>
+  <updated>2022-12-05T15:32:50.246Z</updated>
   <id>https://pingjing0628.github.io/</id>
   
   <author>
@@ -15,6 +15,45 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Chapter6-資料結構-Linked List 鏈結串列</title>
+    <link href="https://pingjing0628.github.io/2022/12/05/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Linked-List-%E9%8F%88%E7%B5%90%E4%B8%B2%E5%88%97/"/>
+    <id>https://pingjing0628.github.io/2022/12/05/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Linked-List-%E9%8F%88%E7%B5%90%E4%B8%B2%E5%88%97/</id>
+    <published>2022-12-05T15:30:28.000Z</published>
+    <updated>2022-12-05T15:32:50.246Z</updated>
+    
+    <content type="html"><![CDATA[<h1>6.4 Linked List 鏈結串列</h1><h2>Linked List</h2><ul><li>Def:</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1&gt;6.4 Linked List 鏈結串列&lt;/h1&gt;
+&lt;h2&gt;Linked List&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Def:&lt;/li&gt;
+&lt;/ul&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="Note" scheme="https://pingjing0628.github.io/categories/Note/"/>
+    
+      <category term="計算機概論" scheme="https://pingjing0628.github.io/categories/Note/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/"/>
+    
+      <category term="資料結構" scheme="https://pingjing0628.github.io/categories/Note/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B/"/>
+    
+    
+      <category term="array" scheme="https://pingjing0628.github.io/tags/array/"/>
+    
+      <category term="陣列" scheme="https://pingjing0628.github.io/tags/%E9%99%A3%E5%88%97/"/>
+    
+      <category term="Linked List" scheme="https://pingjing0628.github.io/tags/Linked-List/"/>
+    
+  </entry>
   
   <entry>
     <title>Chapter6-資料結構-Stack and Queue 堆疊與佇列</title>
@@ -850,56 +889,6 @@ person P; (類別 物件)&lt;/p&gt;
 &lt;li&gt;&lt;strong&gt;Deadlock 處理方式&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Deadlock Free&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
-      
-    
-    </summary>
-    
-    
-      <category term="Note" scheme="https://pingjing0628.github.io/categories/Note/"/>
-    
-      <category term="計算機概論" scheme="https://pingjing0628.github.io/categories/Note/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/"/>
-    
-      <category term="作業系統" scheme="https://pingjing0628.github.io/categories/Note/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/"/>
-    
-    
-      <category term="O.S" scheme="https://pingjing0628.github.io/tags/O-S/"/>
-    
-      <category term="Deadlock" scheme="https://pingjing0628.github.io/tags/Deadlock/"/>
-    
-      <category term="Deadlock free" scheme="https://pingjing0628.github.io/tags/Deadlock-free/"/>
-    
-      <category term="Starvation" scheme="https://pingjing0628.github.io/tags/Starvation/"/>
-    
-      <category term="Preventation" scheme="https://pingjing0628.github.io/tags/Preventation/"/>
-    
-      <category term="Avoidance" scheme="https://pingjing0628.github.io/tags/Avoidance/"/>
-    
-      <category term="Detection" scheme="https://pingjing0628.github.io/tags/Detection/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Chapter3-作業系統-死結deadlock-part1</title>
-    <link href="https://pingjing0628.github.io/2021/06/18/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part1/"/>
-    <id>https://pingjing0628.github.io/2021/06/18/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part1/</id>
-    <published>2021-06-18T09:00:22.000Z</published>
-    <updated>2022-09-19T12:54:46.364Z</updated>
-    
-    <content type="html"><![CDATA[<h1>3.5 死結 Deadlock</h1><h2>目錄</h2><ul><li><strong>四要件</strong></li><li>Deadlock 處理方式</li><li>Deadlock Free</li></ul><hr><h2>四要件</h2><ol><li><strong>Mutual Exclusion 互斥</strong><br>Def: 指資源同時只允許一個 process 使用之, ex: printer, card reader</li><li><strong>Hold &amp; Wait 持有並等待</strong><br>Def: 指一 process 取得部分資源, 又在等其他資源<br>圖：<img src="Hold&amp;wait.png" alt=""></li><li><strong>No preemptive</strong><br>Def: 指一旦 process 取得某資源, 則其他的 process 無法搶奪, 除非其自願放棄</li><li><strong>Circular waiting 循環式等待</strong><br>Def: 只存在一組 process, 形成如下的 waiting cycle:<br><img src="circularWaiting.png" alt="">Note: Pi -&gt; Pj =&gt; Process i 在等 Process j 手中的資源</li></ol><ul><li>Ex: 令資源具 Mutual Exclusiion 跟 No preemptive, 則<br><img src="deadlock.png" alt=""></li></ul><hr><h2>Compare</h2><table><thead><tr><th style="text-align:left">Description</th><th style="text-align:left">Deadlock</th><th style="text-align:left">Starvation</th></tr></thead><tbody><tr><td style="text-align:left">定義</td><td style="text-align:left">存在一組 process, 形成 wait cycle, 使 cycle 內之 process 皆不可使用 CPU (因為皆 wait)</td><td style="text-align:left">low priority 的 process 長期或無限期無法取得 CPU</td></tr><tr><td style="text-align:left">影響</td><td style="text-align:left">CPU utilization 跟 throughput 大幅下降</td><td style="text-align:left">不見得</td></tr><tr><td style="text-align:left">起因</td><td style="text-align:left">資源分配不當</td><td style="text-align:left">當有 priority 之分</td></tr><tr><td style="text-align:left">解決</td><td style="text-align:left">deadlock 預防, 避免, 偵測與恢復</td><td style="text-align:left">Aging Tech 老化現象</td></tr></tbody></table>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1&gt;3.5 死結 Deadlock&lt;/h1&gt;
-&lt;h2&gt;目錄&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;四要件&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;Deadlock 處理方式&lt;/li&gt;
-&lt;li&gt;Deadlock Free&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2&gt;四要件&lt;/h2
       
     
     </summary>
