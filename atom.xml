@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pingjing0628.github.io/"/>
-  <updated>2022-12-11T13:15:55.388Z</updated>
+  <updated>2022-12-11T14:12:05.091Z</updated>
   <id>https://pingjing0628.github.io/</id>
   
   <author>
@@ -15,6 +15,42 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Caddy - Installation </title>
+    <link href="https://pingjing0628.github.io/2022/12/11/Caddy-Installation/"/>
+    <id>https://pingjing0628.github.io/2022/12/11/Caddy-Installation/</id>
+    <published>2022-12-11T13:27:27.000Z</published>
+    <updated>2022-12-11T14:12:05.091Z</updated>
+    
+    <content type="html"><![CDATA[<h1>Caddy Installation</h1><h2>Build Caddy</h2><ol><li><p>Download the &lt;a href = 'https://github.com/caddyserver/caddy/releases'&gt;lastest version &lt;/a&gt; of Caddy.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;github.com&#x2F;caddyserver&#x2F;caddy&#x2F;releases&#x2F;download&#x2F;v2.0.0-rc.3&#x2F;caddy_2.0.0-rc.3_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure></p></li><li><p>Unzip<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf caddy_2.0.0-rc.3_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure></p></li><li><p>Move execution file to <code>/usr/bin/</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv caddy &#x2F;usr&#x2F;bin&#x2F;</span><br></pre></td></tr></table></figure></p></li></ol><h2>Install Caddy</h2><ol><li><p>Create the group<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo groupadd --system caddy</span><br></pre></td></tr></table></figure></p></li><li><p>Create a new user<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo useradd --system \</span><br><span class="line">    --gid caddy \</span><br><span class="line">    --create-home \</span><br><span class="line">    --home-dir &#x2F;var&#x2F;lib&#x2F;caddy \</span><br><span class="line">    --shell &#x2F;usr&#x2F;sbin&#x2F;nologin \</span><br><span class="line">    --comment &quot;Caddy web server&quot; \</span><br><span class="line">    caddy</span><br></pre></td></tr></table></figure></p></li></ol><h2>Log</h2><ol><li><p>Create folder to save logs<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir &#x2F;var&#x2F;log&#x2F;caddy</span><br></pre></td></tr></table></figure></p></li><li><p>Modified folder authority<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R caddy:caddy &#x2F;var&#x2F;log&#x2F;caddy</span><br></pre></td></tr></table></figure></p></li></ol><h2>Create caddyfile</h2><p>Caddy reads its configuration from a file called Caddyfile, stored under /etc/caddy.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">your_domain &#123;</span><br><span class="line">    root * &#x2F;var&#x2F;www</span><br><span class="line">    encode gzip</span><br><span class="line">    file_server</span><br><span class="line">    </span><br><span class="line">    log &#123;</span><br><span class="line">        output file &#x2F;var&#x2F;log&#x2F;caddy&#x2F;service_access.log</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><h2>Service</h2><ol><li><code>/etc/systemd/system</code> create a folder file <code>caddy.service</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description&#x3D;Caddy</span><br><span class="line">Documentation&#x3D;https:&#x2F;&#x2F;caddyserver.com&#x2F;docs&#x2F;</span><br><span class="line">After&#x3D;network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">User&#x3D;caddy</span><br><span class="line">Group&#x3D;caddy</span><br><span class="line">ExecStart&#x3D;&#x2F;usr&#x2F;bin&#x2F;caddy run --environ --config &#x2F;etc&#x2F;caddy&#x2F;Caddyfile</span><br><span class="line">ExecReload&#x3D;&#x2F;usr&#x2F;bin&#x2F;caddy reload --config &#x2F;etc&#x2F;caddy&#x2F;Caddyfile</span><br><span class="line">TimeoutStopSec&#x3D;5s</span><br><span class="line">LimitNOFILE&#x3D;1048576</span><br><span class="line">LimitNPROC&#x3D;512</span><br><span class="line">PrivateTmp&#x3D;true</span><br><span class="line">ProtectSystem&#x3D;full</span><br><span class="line">AmbientCapabilities&#x3D;CAP_NET_BIND_SERVICE</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy&#x3D;multi-user.target</span><br></pre></td></tr></table></figure></li></ol><h2>Caddy system command</h2><ol><li><p>Reload the systemd daemon<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br></pre></td></tr></table></figure></p></li><li><p>Automatic start caddy<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl enable caddy</span><br></pre></td></tr></table></figure></p></li><li><p>Active caddy<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start caddy</span><br></pre></td></tr></table></figure></p></li><li><p>Caddy status<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl status caddy</span><br></pre></td></tr></table></figure></p></li><li><p>Reload caddy<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl reload caddy</span><br></pre></td></tr></table></figure></p></li><li><p>Stop caddy<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl stop caddy</span><br></pre></td></tr></table></figure></p></li></ol><h2>Functions</h2><h3>Log</h3><p>Enables access logging; the log directive can still be used in v2, but all logs are structured, encoded as JSON, by default.</p><ul><li><p>v1<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">log access.log</span><br></pre></td></tr></table></figure></p></li><li><p>v2<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">log &#123;</span><br><span class="line">output file         access.log</span><br><span class="line">format single_field common_log</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li></ul><h3>Reverse_proxy</h3><ul><li><p>v1<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxy &#x2F; localhost:9005</span><br></pre></td></tr></table></figure></p></li><li><p>v2<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reverse_proxy localhost:9005</span><br></pre></td></tr></table></figure></p></li></ul><h2>SSL certificate</h2><p>Caddy root content is <code>/var/lib/caddy/</code>, where SSL certificate is at<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;var&#x2F;lib&#x2F;caddy&#x2F;.local&#x2F;share&#x2F;caddy&#x2F;certificates</span><br></pre></td></tr></table></figure></p><p>Force update SSL certificate, need delete SSL certificate, and restart Caddy<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;var&#x2F;lib&#x2F;caddy&#x2F;.local&#x2F;share&#x2F;caddy&#x2F;certificates&#x2F;acme-v02.api.letsencrypt.org-directory</span><br><span class="line">rm -rf example.com</span><br><span class="line">systemctl restart caddy</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1&gt;Caddy Installation&lt;/h1&gt;
+&lt;h2&gt;Build Caddy&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Download the &amp;lt;a href = &#39;https://github.com/caddyserver/caddy/releases&#39;&amp;gt;l
+      
+    
+    </summary>
+    
+    
+      <category term="Server" scheme="https://pingjing0628.github.io/categories/Server/"/>
+    
+      <category term="Caddy" scheme="https://pingjing0628.github.io/categories/Server/Caddy/"/>
+    
+    
+      <category term="Caddy" scheme="https://pingjing0628.github.io/tags/Caddy/"/>
+    
+      <category term="Ubuntu" scheme="https://pingjing0628.github.io/tags/Ubuntu/"/>
+    
+      <category term="Web server" scheme="https://pingjing0628.github.io/tags/Web-server/"/>
+    
+  </entry>
   
   <entry>
     <title>Chapter6-資料結構-Advance Tree 高等樹</title>
@@ -743,53 +779,6 @@ person P; (類別 物件)&lt;/p&gt;
       <category term="FAT" scheme="https://pingjing0628.github.io/tags/FAT/"/>
     
       <category term="i-node" scheme="https://pingjing0628.github.io/tags/i-node/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Chapter3-作業系統-虛擬記憶體-part2</title>
-    <link href="https://pingjing0628.github.io/2021/06/24/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%99%9B%E6%93%AC%E8%A8%98%E6%86%B6%E9%AB%94-part2/"/>
-    <id>https://pingjing0628.github.io/2021/06/24/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%99%9B%E6%93%AC%E8%A8%98%E6%86%B6%E9%AB%94-part2/</id>
-    <published>2021-06-24T14:43:52.000Z</published>
-    <updated>2022-09-20T14:43:46.364Z</updated>
-    
-    <content type="html"><![CDATA[<h1>3.8 虛擬記憶體 (Virtual Memory)</h1><ul><li>目的：允許 program size &gt; physical memory size, 而程式仍能執行</li><li>作法：(部分載入) =&gt; <strong>有需要才載入</strong><br>方法：<br>1. Dynamic Loading =&gt; 為 <strong>programmer</strong> 的負擔<br>2. Virtual Memory =&gt; 為 <strong>O.S.</strong> 的負擔</li></ul><h2>目錄</h2><ul><li>Dynamic Loading 動態載入</li><li>Virtual Memory</li><li>Virtual Memory Definition</li><li><strong>Virtual Memory實施方式</strong><ul><li><strong>Demand Paging</strong></li><li><strong>Demand Segment</strong></li><li><strong>Page Fault 處理</strong></li><li><strong>Virtual Memory Performance 評估</strong><ul><li><strong>P 的影響因素</strong><ol><li><strong>frame 數量</strong></li><li><strong>page size 大小</strong></li><li><strong>Program Structure</strong></li><li><strong>Page Replacement algorithm</strong><ol><li><strong>FIFO</strong></li><li><strong>OPT</strong></li><li><strong>LRU</strong></li><li><strong>LRU 近似法則</strong></li><li><strong>Frequency of reference</strong></li></ol></li></ol></li></ul></li><li><strong>Demand Paging 的問題：「Thrashing」猛移/輾轉</strong><ul><li><strong>防止 Thrashing 作法</strong></li></ul></li></ul></li></ul><hr><h2>Virtual Memory 實施方式</h2><ol><li>Demand Paging<ul><li>Def:<ul><li>執行初期只載入部分的 page (有需要, 才載入)</li><li>當遇到 &quot;所需 page 不在 memory 之中&quot;, 則通知 O.S. 做 **page fault (頁面缺失)**處理, <strong>將 lose page 載入 memory 之中</strong></li></ul></li><li>作法：<ul><li>在 P.T. 上加入 V/I Bit , 使 memory 可達部分載入之效</li><li><strong>V: Valid (存在 Memory)</strong></li><li><strong>I: Invalid (不存在)</strong></li></ul></li><li>圖：  <img src="demandPaging.png" alt=""></li></ul></li><li>Demand Segment</li></ol><h3>Page Fault 處理</h3><ol><li>產生 page fault interrupt 訊號給系統</li><li>find: 找一 free frame</li><li>swap in: 將 lose page 載入 memory 中</li><li>updates: 改 page table 內容</li><li>將控制權交還 user</li></ol><hr><h2>Virtual Memory Performance 評估</h2><p>=&gt; 由 Memory 存取時間來決定 (effect memory access time)<br>=&gt; <strong><code>(1 - P) x ma + P x PFPT</code></strong></p><ul><li><code>(1 - P) x ma</code> 命中所需<ul><li>1 - P 小較好</li><li>ma 短</li></ul></li><li><code>P x PFPT</code> 沒命中<ul><li>PFPT 長</li><li><strong>結論 P 越低越好</strong></li></ul></li><li>P: page fault ratio</li><li>ma: memory access time (硬體不能改)</li><li>PFPT: page fault processing time (不能改)</li></ul><h3>P 的影響因素為</h3><ol><li>frame 數量<br><img src="P1.png" alt=""></li><li>page size 大小<ul><li>當 page size 越小, 則：</li><li>缺點：<ol><li>Page Table 大小上升</li><li>I/O 次數 上升</li><li>Page fault ratio 上升</li></ol></li><li>優點：<ol><li>內部碎裂下降</li><li>單一 I/O 量 下降</li></ol></li></ul></li><li>Program Structure:<br>=&gt; 說明：program 的設計跟撰寫的 logical 結構亦會影響 P 的大小</li><li><strong>Page Replacement (頁面置換)</strong> algorithm<ul><li>Def: 當 page fault 時, 又系統的 free frame 已無, 則需：<ol><li><strong>挑出一 victim page (V.P)</strong></li><li><strong>將 Victim Page swap out</strong></li><li><strong>將 Lose Page swap in</strong></li></ol></li><li>挑選策略分為：<ol><li><strong>FIFO</strong></li><li><strong>OPT</strong></li><li><strong>LRU</strong></li><li><strong>LRU 近似法則</strong></li><li><strong>Frequency of reference</strong></li></ol></li></ul></li></ol><h4>1. FIFO - First In First Out</h4><ul><li>先到達, 先被置換</li><li>特色：<ul><li>easy to implement</li><li>效益不佳 (page fault ratio 太高, I/O 就多, 效益一定不好)</li><li>有 <strong>Belady's 異常</strong><ul><li>一般：frame 數給越多 =&gt; page fault ratio 下降</li><li>在 Belady's 之下：frame 數給越多 =&gt; page fault ratio 上升</li></ul></li></ul></li><li>Ex: 採 FIFO, 且用 pure demand paging, page fault 幾次？<br><img src="exFIFO.png" alt=""></li></ul><h4>2. OPT (Optimal) 最佳法則</h4><ul><li>Def: 替換掉 <strong>未來長期不用</strong>的</li><li>特質：<ol><li>效益最佳 (因為 page fault ratio 最小)</li><li>No Belady's 異常</li><li>要預測未來不易 (實作困難)</li><li>拿來當作理論的依據</li></ol></li><li>Note: demand paging 載入方式<ul><li>pure =&gt; 不先載入, 一開始會有 page fault</li><li>prepaging =&gt; 做預先載入</li></ul></li><li>Ex: 呈上例才 OPT<br><img src="OPT.png" alt=""></li></ul><h4>3. LRU (Least Recently Used) =&gt; 看過去的歷史 (Stack)</h4><ul><li>Def: 替換<strong>過去</strong>長期不用的 page</li><li>特色：<ol><li>效果不錯</li><li>No Belady's 異常</li><li>需 Hardware Support (大量硬體)</li></ol></li><li>作法：<ol><li>Counting (計數法)<br>紀錄 page 的參考時間, 替換掉最久的 page</li><li><strong>Stack (堆疊法)</strong><br>採 stack 方式, 最近用的於 top 端, 最底層為下次 swap 之 page</li></ol></li><li>Ex: LRU<br><img src="LRU.png" alt=""></li></ul><h4>4. LRU 近似法則</h4><ul><li>Def: 由於 LRU 近 <strong>花費大量的 Hardware</strong>, 故採用 LRU 近似法來模擬 LRU 之效</li><li>作法：<ol><li>Second Chance<ul><li>Def: FIFO + 1 個 Reference Bit (0 =&gt; 沒被參考, 1 =&gt; 有被參考)</li><li>挑選策略：<ul><li><strong>先用 FIFO 找出 page: P</strong></li><li><strong>check page: P</strong><ul><li><strong>若 R.B = 1 =&gt; 改為 0, 往下找</strong></li><li><strong>若 R.B = 0 =&gt; 此為 victim page</strong></li></ul></li></ul></li><li>Ex: <img src="secondChance.png" alt=""></li><li>Special Case:<ul><li>當 R.B 全為 0, 或 R.B 全為 1, 代表 =&gt; 退化成 FIFO (可能有 Belady's)</li></ul></li></ul></li><li>Enhanced Second Chance<ul><li>Def: 將 Second Chance + 1 個 Modification Bit (M.B)(想要讓效能變更快)</li><li>Note: M.B<ul><li>=0, 代表 page 沒有更動過</li><li>=1, 代表 page 有更動過</li></ul></li><li>當 Victim page 之 M.B = 0, 代表內容沒變, 故不需 swap out =&gt; <strong>performance 上升</strong></li><li>圖：<img src="enhanceChance1.png" alt=""></li><li>挑選策略：<img src="enhanceChance2.png" alt=""></li><li>Ex: 問 victim page, 採 second chance 挑, enhanced second chance 挑？<br><img src="LRU%E8%BF%91%E4%BC%BCex.png" alt=""><br>採 second chance 挑 2<br>enhanced second chance 挑 4</li></ul></li></ol></li></ul><h4>5. Frequency of reference</h4><ul><li>紀錄各 page 被參考的次數</li><li>方式：<ol><li>LFU =&gt; 挑參考值最小的當 victim page</li><li>MFU =&gt; 挑參考值最大的當 victim page</li></ol></li></ul><hr><h2>Demand Paging 的問題：「Thrashing」猛移/輾轉</h2><ul><li>Def: 於 demand paging 下, 當 <strong>process frame 不足</strong>產生 page fault 又 <strong>memory 的 frame</strong>亦不足, 此時需搶奪其他 process 的 frame, 導致：<ul><li><strong>CPU utilization 下降</strong></li><li><strong>O.S. 引入更多 process</strong></li><li><strong>Page fault 更嚴重</strong></li><li>圖：<img src="thrashing1.png" alt=""></li></ul></li><li>問：<ol><li>CPU 使用率 10%, How to do ?</li><li>呈上得知 page fault ratio 90%, How to do ?<br>Sol:<ol><li><strong>Multiprogramming Degree 上升 (引入更多 process)</strong></li><li><strong>Multiprogramming Degree 下降 (收回一些 process)</strong></li></ol></li></ol></li></ul><h3>防止 Thrashing 作法</h3><ol><li>控制 page fault ratio <strong>合理 range</strong><ul><li>圖：<img src="thrashing2.png" alt=""></li></ul></li><li>採 <strong>Working Set Model</strong>(工作集模式)<ul><li>Def: 利用程式執行時有 **&quot;局部性&quot;**之特性, 將各 process 於此 working set 所需之 frame 加以配置, 避免 Thrashing<ul><li><strong>Locality: 指程式於一特定時間會集中執行部分的區塊, 而不是 uniform 的執行</strong></li></ul></li><li>分：<ul><li>Temporal (時間)<ul><li>ex: loop, subroutine, stack, counter</li><li>用到的不久後還會被用到</li></ul></li><li>Spatial (空間)<ul><li>ex: array, 范紐曼, sequential code</li><li>我被用了, 鄰近的空間很容易也被用到</li></ul></li></ul></li><li>Note:<ul><li>O(某符號): Working Set Window<br>Working set (W.S.) =&gt; 指 O 中不同的 page 之集合<br>Working set size (W.S.S) =&gt; 為 W.S 之大小</li></ul></li><li><strong>判別：令</strong> <img src="thrashing3.png" alt=""><ul><li>n: process 數</li><li>M: physical free frame 的數量</li></ul><ol><li>若 <code>D ≤ M</code> =&gt; 依各 process 的 W.S.S 配置 frames 數量</li><li><code>D &gt; M</code> =&gt; stop 部分 process, go to 1.</li></ol></li><li>Ex:<br>P1: 1 2 2 1 | 3 4 2 2 | 3 4 1 5<br>P2: 2 2 1 3 | 3 3 3 3 | 4 2 4 2<br>P3: 1 2 3 4 | 4 3 3 3 | 3 2 2 1<br>O(某符號) = 4<br>Sol:<br>P1:<br>W.S. = {1, 2}<br>W.S.S = 2<br>P2:<br>W.S. = {1, 2, 3}<br>W.S.S = 3<br>P3:<br>W.S. = {1, 2, 3, 4}<br>W.S.S = 4<br>Total: 9</li><li>優點：<ol><li>防止 Thrashing</li><li>對 Prepaging 很有幫助</li></ol></li><li>缺點：<ol><li>Working set 的追蹤不易</li><li>Working set 之間的 Transfer time 拉長</li></ol></li></ul></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1&gt;3.8 虛擬記憶體 (Virtual Memory)&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;目的：允許 program size &amp;gt; physical memory size, 而程式仍能執行&lt;/li&gt;
-&lt;li&gt;作法：(部分載入) =&amp;gt; &lt;strong&gt;有需要才載入&lt;/
-      
-    
-    </summary>
-    
-    
-      <category term="Note" scheme="https://pingjing0628.github.io/categories/Note/"/>
-    
-      <category term="計算機概論" scheme="https://pingjing0628.github.io/categories/Note/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/"/>
-    
-      <category term="作業系統" scheme="https://pingjing0628.github.io/categories/Note/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/"/>
-    
-    
-      <category term="Virtual Memory" scheme="https://pingjing0628.github.io/tags/Virtual-Memory/"/>
-    
-      <category term="Demand Paging" scheme="https://pingjing0628.github.io/tags/Demand-Paging/"/>
-    
-      <category term="Page Fault" scheme="https://pingjing0628.github.io/tags/Page-Fault/"/>
-    
-      <category term="Virtual Memory Performance" scheme="https://pingjing0628.github.io/tags/Virtual-Memory-Performance/"/>
-    
-      <category term="FIFO" scheme="https://pingjing0628.github.io/tags/FIFO/"/>
-    
-      <category term="LRU" scheme="https://pingjing0628.github.io/tags/LRU/"/>
-    
-      <category term="OPT" scheme="https://pingjing0628.github.io/tags/OPT/"/>
-    
-      <category term="Thrashing" scheme="https://pingjing0628.github.io/tags/Thrashing/"/>
     
   </entry>
   
