@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pingjing0628.github.io/"/>
-  <updated>2022-12-11T14:12:05.091Z</updated>
+  <updated>2022-12-11T14:20:24.851Z</updated>
   <id>https://pingjing0628.github.io/</id>
   
   <author>
@@ -17,11 +17,47 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>PSM-Learning</title>
+    <link href="https://pingjing0628.github.io/2022/12/11/PSM-Learning/"/>
+    <id>https://pingjing0628.github.io/2022/12/11/PSM-Learning/</id>
+    <published>2022-12-11T14:17:57.000Z</published>
+    <updated>2022-12-11T14:20:24.851Z</updated>
+    
+    <content type="html"><![CDATA[<h1>PSM Learning</h1><h2>Role</h2><h2>Step</h2><h2>Noun</h2>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1&gt;PSM Learning&lt;/h1&gt;
+&lt;h2&gt;Role&lt;/h2&gt;
+&lt;h2&gt;Step&lt;/h2&gt;
+&lt;h2&gt;Noun&lt;/h2&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="Learning" scheme="https://pingjing0628.github.io/categories/Learning/"/>
+    
+      <category term="PSM" scheme="https://pingjing0628.github.io/categories/Learning/PSM/"/>
+    
+    
+      <category term="PSM" scheme="https://pingjing0628.github.io/tags/PSM/"/>
+    
+      <category term="Scrum" scheme="https://pingjing0628.github.io/tags/Scrum/"/>
+    
+      <category term="Sprint" scheme="https://pingjing0628.github.io/tags/Sprint/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Caddy - Installation </title>
     <link href="https://pingjing0628.github.io/2022/12/11/Caddy-Installation/"/>
     <id>https://pingjing0628.github.io/2022/12/11/Caddy-Installation/</id>
     <published>2022-12-11T13:27:27.000Z</published>
-    <updated>2022-12-11T14:12:05.091Z</updated>
+    <updated>2022-12-11T14:19:15.478Z</updated>
     
     <content type="html"><![CDATA[<h1>Caddy Installation</h1><h2>Build Caddy</h2><ol><li><p>Download the &lt;a href = 'https://github.com/caddyserver/caddy/releases'&gt;lastest version &lt;/a&gt; of Caddy.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;github.com&#x2F;caddyserver&#x2F;caddy&#x2F;releases&#x2F;download&#x2F;v2.0.0-rc.3&#x2F;caddy_2.0.0-rc.3_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure></p></li><li><p>Unzip<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf caddy_2.0.0-rc.3_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure></p></li><li><p>Move execution file to <code>/usr/bin/</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv caddy &#x2F;usr&#x2F;bin&#x2F;</span><br></pre></td></tr></table></figure></p></li></ol><h2>Install Caddy</h2><ol><li><p>Create the group<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo groupadd --system caddy</span><br></pre></td></tr></table></figure></p></li><li><p>Create a new user<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo useradd --system \</span><br><span class="line">    --gid caddy \</span><br><span class="line">    --create-home \</span><br><span class="line">    --home-dir &#x2F;var&#x2F;lib&#x2F;caddy \</span><br><span class="line">    --shell &#x2F;usr&#x2F;sbin&#x2F;nologin \</span><br><span class="line">    --comment &quot;Caddy web server&quot; \</span><br><span class="line">    caddy</span><br></pre></td></tr></table></figure></p></li></ol><h2>Log</h2><ol><li><p>Create folder to save logs<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir &#x2F;var&#x2F;log&#x2F;caddy</span><br></pre></td></tr></table></figure></p></li><li><p>Modified folder authority<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R caddy:caddy &#x2F;var&#x2F;log&#x2F;caddy</span><br></pre></td></tr></table></figure></p></li></ol><h2>Create caddyfile</h2><p>Caddy reads its configuration from a file called Caddyfile, stored under /etc/caddy.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">your_domain &#123;</span><br><span class="line">    root * &#x2F;var&#x2F;www</span><br><span class="line">    encode gzip</span><br><span class="line">    file_server</span><br><span class="line">    </span><br><span class="line">    log &#123;</span><br><span class="line">        output file &#x2F;var&#x2F;log&#x2F;caddy&#x2F;service_access.log</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><h2>Service</h2><ol><li><code>/etc/systemd/system</code> create a folder file <code>caddy.service</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description&#x3D;Caddy</span><br><span class="line">Documentation&#x3D;https:&#x2F;&#x2F;caddyserver.com&#x2F;docs&#x2F;</span><br><span class="line">After&#x3D;network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">User&#x3D;caddy</span><br><span class="line">Group&#x3D;caddy</span><br><span class="line">ExecStart&#x3D;&#x2F;usr&#x2F;bin&#x2F;caddy run --environ --config &#x2F;etc&#x2F;caddy&#x2F;Caddyfile</span><br><span class="line">ExecReload&#x3D;&#x2F;usr&#x2F;bin&#x2F;caddy reload --config &#x2F;etc&#x2F;caddy&#x2F;Caddyfile</span><br><span class="line">TimeoutStopSec&#x3D;5s</span><br><span class="line">LimitNOFILE&#x3D;1048576</span><br><span class="line">LimitNPROC&#x3D;512</span><br><span class="line">PrivateTmp&#x3D;true</span><br><span class="line">ProtectSystem&#x3D;full</span><br><span class="line">AmbientCapabilities&#x3D;CAP_NET_BIND_SERVICE</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy&#x3D;multi-user.target</span><br></pre></td></tr></table></figure></li></ol><h2>Caddy system command</h2><ol><li><p>Reload the systemd daemon<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br></pre></td></tr></table></figure></p></li><li><p>Automatic start caddy<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl enable caddy</span><br></pre></td></tr></table></figure></p></li><li><p>Active caddy<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start caddy</span><br></pre></td></tr></table></figure></p></li><li><p>Caddy status<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl status caddy</span><br></pre></td></tr></table></figure></p></li><li><p>Reload caddy<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl reload caddy</span><br></pre></td></tr></table></figure></p></li><li><p>Stop caddy<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl stop caddy</span><br></pre></td></tr></table></figure></p></li></ol><h2>Functions</h2><h3>Log</h3><p>Enables access logging; the log directive can still be used in v2, but all logs are structured, encoded as JSON, by default.</p><ul><li><p>v1<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">log access.log</span><br></pre></td></tr></table></figure></p></li><li><p>v2<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">log &#123;</span><br><span class="line">output file         access.log</span><br><span class="line">format single_field common_log</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li></ul><h3>Reverse_proxy</h3><ul><li><p>v1<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxy &#x2F; localhost:9005</span><br></pre></td></tr></table></figure></p></li><li><p>v2<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reverse_proxy localhost:9005</span><br></pre></td></tr></table></figure></p></li></ul><h2>SSL certificate</h2><p>Caddy root content is <code>/var/lib/caddy/</code>, where SSL certificate is at<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;var&#x2F;lib&#x2F;caddy&#x2F;.local&#x2F;share&#x2F;caddy&#x2F;certificates</span><br></pre></td></tr></table></figure></p><p>Force update SSL certificate, need delete SSL certificate, and restart Caddy<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;var&#x2F;lib&#x2F;caddy&#x2F;.local&#x2F;share&#x2F;caddy&#x2F;certificates&#x2F;acme-v02.api.letsencrypt.org-directory</span><br><span class="line">rm -rf example.com</span><br><span class="line">systemctl restart caddy</span><br></pre></td></tr></table></figure></p>]]></content>
     
@@ -39,9 +75,9 @@
     </summary>
     
     
-      <category term="Server" scheme="https://pingjing0628.github.io/categories/Server/"/>
+      <category term="Environment" scheme="https://pingjing0628.github.io/categories/Environment/"/>
     
-      <category term="Caddy" scheme="https://pingjing0628.github.io/categories/Server/Caddy/"/>
+      <category term="Caddy" scheme="https://pingjing0628.github.io/categories/Environment/Caddy/"/>
     
     
       <category term="Caddy" scheme="https://pingjing0628.github.io/tags/Caddy/"/>
@@ -727,58 +763,6 @@ person P; (類別 物件)&lt;/p&gt;
       <category term="Disk structure" scheme="https://pingjing0628.github.io/tags/Disk-structure/"/>
     
       <category term="Disk scheduling" scheme="https://pingjing0628.github.io/tags/Disk-scheduling/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Chapter3-作業系統-磁碟管理-part1</title>
-    <link href="https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/"/>
-    <id>https://pingjing0628.github.io/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/</id>
-    <published>2021-07-01T16:08:39.000Z</published>
-    <updated>2022-09-20T14:41:27.394Z</updated>
-    
-    <content type="html"><![CDATA[<h1>3.9 磁碟管理 (Disk Management)</h1><h2>目錄</h2><ul><li><strong>Free space management</strong><ul><li><strong>Link list</strong></li><li><strong>Combination</strong></li><li><strong>Counting</strong></li></ul></li><li><strong>Allocation Method (配置方法)</strong><ul><li><strong>連續性配置 (contiguous allocation)</strong></li><li><strong>鏈結式配置 (linked allocation)</strong><ul><li><strong>FAT (file allocation table)</strong></li></ul></li><li><strong>索引配置 (index allocation)</strong><ul><li><strong>i-node</strong></li></ul></li></ul></li><li>Disk structure</li><li>Disk access time</li><li>Disk scheduling<ul><li>FCFS</li><li>SSTF</li><li>SCAN</li><li>C-SCAN</li><li>LOOK</li><li>C-LOOK</li></ul></li><li>補充</li><li>RAID</li><li>RAID 的種類<ul><li>RAID1</li><li>RAID0+1</li><li>RAID2</li><li>RAID3 vs RAID4</li><li>RAID5</li><li>RAID6</li></ul></li><li>Summary</li></ul><hr><h2>Free Space Management</h2><ol><li><strong>Bit Vector (位元向量)</strong></li></ol><ul><li>圖：<img src="bitVector.png" alt=""></li><li>Def: 給各 block 一個 bit, 當 bit<ul><li>bit = 0, 則 free block</li><li>bit = 1, 則 use</li></ul></li><li>Ex: <code>011001110001</code></li><li>優點：<ol><li>easy to implement</li><li>找連續可用的 block 容易</li></ol></li><li>缺點：當 block 太多, 則 bit vector 不適用</li></ul><ol start="2"><li><strong>Link list (鏈結串列)</strong></li></ol><ul><li>Def: 將 free block 以 link 方式串接</li><li>Ex: <img src="linkList.png" alt=""></li><li>優點：insert / delete free block 容易</li><li>缺點：<ol><li>檔案配置不便</li><li>link broken, data lose</li></ol></li></ul><ol start="3"><li><strong>Combination (組合)</strong></li></ol><ul><li>Def: 將一 Node 給予多個格子合併而成</li><li><img src="combination.png" alt=""></li><li>Ex: <img src="combinationEx.png" alt=""></li></ul><ol start="4"><li><strong>Counting (計數法)</strong></li></ol><ul><li>Def: 在 linked list 中 Node 加入一空間, 放連續 free block 之數量 (<strong>連續的 free block 越多, 串列越短</strong>)</li><li>Ex: <img src="countingEx.png" alt=""></li></ul><hr><h2>Allocation Method (配置方法)</h2><ol><li><strong>連續性配置 (contiguous allocation)</strong></li></ol><ul><li>Def: 檔案大小 = n blocks 時, O.S. 需找到連續 free block ≥ n, 方可配置</li><li>優點：<ol><li>search time 短 =&gt; 因為 data 鄰近度</li><li>support sequential 及 random access =&gt; 處理快</li></ol></li><li>缺點：<ol><li>有 external 碎裂</li><li>檔案大小無法任意擴充</li><li>file size 需事先宣告<br>(2, 3 會導致沒有彈性)</li></ol></li><li><strong>Solution:</strong><ol><li><strong>Repack (壓縮), 但極度耗時</strong></li><li><strong>disk defragmentation 磁碟重組: 將 file 的分配重組, 以求能達:</strong><ul><li>access time 下降 =&gt; 速度快</li><li>連續空間變多 =&gt; 外部碎裂下降</li></ul></li></ol></li><li>圖：<img src="contiguous.png" alt=""></li></ul><ol start="2"><li><strong>鏈結式配置 (linked allocation)</strong></li></ol><ul><li>Def: 檔案大小 = n blocks 時, O.S. 需找到 free block ≥ n, 即可配置</li><li>優點：<ol><li>No external 碎裂</li><li>檔案可以擴充</li><li>file size 不需事先宣告<br>(2, 3 有彈性)</li></ol></li><li>缺點：<ol><li>search time 長 (因為 data 不見得於鄰近處)</li><li>support sequential 較慢, 不支援 random access</li></ol></li><li>圖：<img src="linked.png" alt=""></li><li><strong>FAT (file allocation table)</strong><ul><li>Def:<ul><li>用於 Dos, OS/2 之中</li><li>FAT Stored in the disk, 紀錄各 file block 的 link 關係</li></ul></li><li>Ex: <img src="FATEx.png" alt=""></li><li>Note: windows PC 版用 &quot;NTFS&quot; 格式</li><li>圖：<img src="FAT.png" alt=""></li></ul></li></ul><ol start="3"><li><strong>索引配置 (index allocation)</strong></li></ol><ul><li>Def: 各 file 皆有自己的 index block, 用以指向其 block 對應到 disk block 的編號為何</li><li>Ex: <img src="indexEx.png" alt=""></li><li>優點：結合 Contiguous Allocation &amp; Linked Allocation 的優點 =&gt; speed up 又有彈性</li><li>缺點：<ol><li>index block 需佔用額外空間</li><li>index block 大小不易決定</li></ol></li><li><strong>i-node (unix-like 常用)</strong><ul><li>概念：<img src="i-node.png" alt=""></li><li>說明：<br>1 ~ 12: direct index block (最重要的)<br>13: single indirect index block<br>14: double indirect index block<br>15: triple indirect index block</li><li>Ex:<br>1~10: direct block<br>11: single indirect block<br>12: double indirect block<br>13: triple indirect block<hr>each data block = 4 bytes<br>each index block = 4 k<br>each index size = 4<br>total data size = ?<br><strong>Sol:</strong><br><code>10 * 4 bytes</code> + <code>4k/4 * 4 bytes</code> +<br><code>k * k * 4 bytes</code> + <code>k * k * k * 4 bytes</code><br>= <code>40 bytes + 4kB + 4k^2B + 4k^3B</code></li></ul></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1&gt;3.9 磁碟管理 (Disk Management)&lt;/h1&gt;
-&lt;h2&gt;目錄&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Free space management&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Link list&lt;/strong&gt;&lt;/li&gt;
-&lt;li
-      
-    
-    </summary>
-    
-    
-      <category term="Note" scheme="https://pingjing0628.github.io/categories/Note/"/>
-    
-      <category term="計算機概論" scheme="https://pingjing0628.github.io/categories/Note/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/"/>
-    
-      <category term="作業系統" scheme="https://pingjing0628.github.io/categories/Note/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/"/>
-    
-    
-      <category term="Disk Management" scheme="https://pingjing0628.github.io/tags/Disk-Management/"/>
-    
-      <category term="Free space management" scheme="https://pingjing0628.github.io/tags/Free-space-management/"/>
-    
-      <category term="Bit vector" scheme="https://pingjing0628.github.io/tags/Bit-vector/"/>
-    
-      <category term="Linked list" scheme="https://pingjing0628.github.io/tags/Linked-list/"/>
-    
-      <category term="Combination" scheme="https://pingjing0628.github.io/tags/Combination/"/>
-    
-      <category term="Counting" scheme="https://pingjing0628.github.io/tags/Counting/"/>
-    
-      <category term="Allocation Method" scheme="https://pingjing0628.github.io/tags/Allocation-Method/"/>
-    
-      <category term="FAT" scheme="https://pingjing0628.github.io/tags/FAT/"/>
-    
-      <category term="i-node" scheme="https://pingjing0628.github.io/tags/i-node/"/>
     
   </entry>
   

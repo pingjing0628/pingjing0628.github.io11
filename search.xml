@@ -13230,13 +13230,31 @@ Sol:<br>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd &#x2F;var&#x2F;lib&#x2F;caddy&#x2F;.local&#x2F;share&#x2F;caddy&#x2F;certificates&#x2F;acme-v02.api.letsencrypt.org-directory</span><br><span class="line">rm -rf example.com</span><br><span class="line">systemctl restart caddy</span><br></pre></td></tr></table></figure></p>
 ]]></content>
       <categories>
-        <category>Server</category>
+        <category>Environment</category>
         <category>Caddy</category>
       </categories>
       <tags>
         <tag>Caddy</tag>
         <tag>Ubuntu</tag>
         <tag>Web server</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PSM-Learning</title>
+    <url>/2022/12/11/PSM-Learning/</url>
+    <content><![CDATA[<h1>PSM Learning</h1>
+<h2>Role</h2>
+<h2>Step</h2>
+<h2>Noun</h2>
+]]></content>
+      <categories>
+        <category>Learning</category>
+        <category>PSM</category>
+      </categories>
+      <tags>
+        <tag>PSM</tag>
+        <tag>Scrum</tag>
+        <tag>Sprint</tag>
       </tags>
   </entry>
 </search>
