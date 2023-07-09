@@ -3266,17 +3266,6 @@
     
     
     <entry>
-      <title>Search</title>
-      <link href="/repository/search/index.html"/>
-      <url>/repository/search/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>categories</title>
       <link href="/repository/categories/index.html"/>
       <url>/repository/categories/index.html</url>
@@ -3291,6 +3280,17 @@
       <title>tag</title>
       <link href="/repository/tag/index.html"/>
       <url>/repository/tag/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Search</title>
+      <link href="/repository/search/index.html"/>
+      <url>/repository/search/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
