@@ -2,7 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/</loc>
+    <loc>https://pingjing0628.github.io/about/</loc>
+    
+    <lastmod>2023-07-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://pingjing0628.github.io/tag/</loc>
     
     <lastmod>2023-07-09</lastmod>
     
@@ -13,7 +22,16 @@
   <url>
     <loc>https://pingjing0628.github.io/2022/12/11/PSM-Learning/</loc>
     
-    <lastmod>2022-12-11</lastmod>
+    <lastmod>2023-07-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://pingjing0628.github.io/2020/01/08/GoLang-web-application-The-net-http-package/</loc>
+    
+    <lastmod>2023-07-09</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -947,25 +965,7 @@
   </url>
   
   <url>
-    <loc>https://pingjing0628.github.io/about/</loc>
-    
-    <lastmod>2020-12-15</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://pingjing0628.github.io/categories/</loc>
-    
-    <lastmod>2020-12-15</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://pingjing0628.github.io/tags/</loc>
     
     <lastmod>2020-12-15</lastmod>
     

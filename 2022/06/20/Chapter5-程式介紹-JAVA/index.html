@@ -1,185 +1,220 @@
 <!DOCTYPE html>
-<html lang=zh>
-<head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="5.5 JAVA  Java VS C++    Java C++     Pure O.O language, 因為主程式都在 class 中 較不 pure   No pointer 有 pointer   Single Inheritance Multiple Inheritance   利用 garbage collection, 不需有destructor 沒有 garbage coll">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Chapter5-程式介紹-JAVA">
-<meta property="og:url" content="https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/">
-<meta property="og:site_name" content="PinJing&#39;s Blog">
-<meta property="og:description" content="5.5 JAVA  Java VS C++    Java C++     Pure O.O language, 因為主程式都在 class 中 較不 pure   No pointer 有 pointer   Single Inheritance Multiple Inheritance   利用 garbage collection, 不需有destructor 沒有 garbage coll">
-<meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2022-06-19T16:16:31.000Z">
-<meta property="article:modified_time" content="2022-09-20T14:42:05.793Z">
-<meta property="article:author" content="PinJing Wang">
-<meta property="article:tag" content="建構子">
-<meta property="article:tag" content="Overriding">
-<meta property="article:tag" content="繼承">
-<meta property="article:tag" content="多型">
-<meta property="article:tag" content="Interface">
-<meta property="article:tag" content="Java">
-<meta property="article:tag" content="Exception">
-<meta property="article:tag" content="Static">
-<meta property="article:tag" content="Final">
-<meta property="article:tag" content="Abstract">
-<meta property="article:tag" content="this">
-<meta property="article:tag" content="super">
-<meta name="twitter:card" content="summary">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-        
-      
-    
-    <!-- title -->
-    <title>Chapter5-程式介紹-JAVA</title>
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
+<html lang="zh-tw">
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <!-- persian styles -->
+    <meta name="author" content="PinJing Wang">
+
+
+
+
+
+
+
+<title>Chapter5-程式介紹-JAVA | PinJin&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Roboto+Mono&display=swap');
+</style>
+
+
+
+    <!-- stylesheets list from _config.yml -->
     
-    <!-- rss -->
+    <link rel="stylesheet" href="/css/style.css">
     
+
+
+
+
+    <!-- scripts list from _config.yml -->
     
-	<!-- mathjax -->
-	
-		<script type="text/x-mathjax-config">
-		  MathJax.Hub.Config({
-			tex2jax: {
-			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-			  inlineMath: [['$','$']]
-			}
-		  });
-		</script>
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
-	
-<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+    <script src="/js/frame.js"></script>
+    
+
+
+
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+
+
+
+
+
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJin's Blog" type="application/atom+xml">
 </head>
-
-<body class="max-width mx-auto px3 ltr">    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/about/">About</a></li>
-         
-          <li><a href="/archives/">Articles</a></li>
-         
-          <li><a href="/categories">Categories</a></li>
-         
-          <li><a href="/tags">Tags</a></li>
-         
-          <li><a href="/search/">Search</a></li>
-        
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="Previous post " href="/2022/06/20/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Algorithm-s-Time-Complexity-and-Recursive-Program/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="Next post " href="/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C-%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/&text=Chapter5-程式介紹-JAVA" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/&title=Chapter5-程式介紹-JAVA" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/&is_video=false&description=Chapter5-程式介紹-JAVA" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Chapter5-程式介紹-JAVA&body=Check out this article: https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/&title=Chapter5-程式介紹-JAVA" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/&title=Chapter5-程式介紹-JAVA" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/&title=Chapter5-程式介紹-JAVA" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/&title=Chapter5-程式介紹-JAVA" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/&name=Chapter5-程式介紹-JAVA&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/&t=Chapter5-程式介紹-JAVA" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
-
+  <body>
+    <div class="mask-border">
     </div>
-    <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">5.5 JAVA</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">Java VS C++</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">Class 格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">Constructor (建構子)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">主程式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">配置物件 Mem.space &#x3D;&gt; &quot;new&quot;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">Inheritance 繼承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.7.</span> <span class="toc-text">Overriding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.8.</span> <span class="toc-text">this, super</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.9.</span> <span class="toc-text">Constructor 的進一步介紹 (constructor 的延伸)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.10.</span> <span class="toc-text">Java 的例外處理 (Exception Handler)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.11.</span> <span class="toc-text">array 初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.12.</span> <span class="toc-text">Java 中的 array 宣告</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.13.</span> <span class="toc-text">static keyword</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.14.</span> <span class="toc-text">static 注意事項</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.15.</span> <span class="toc-text">final keyword</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.16.</span> <span class="toc-text">polymorphism in Java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.17.</span> <span class="toc-text">Abstract method</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.18.</span> <span class="toc-text">Abstract class</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.19.</span> <span class="toc-text">interface</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.19.1.</span> <span class="toc-text">Why interface?</span></a></li></ol></li></ol></li></ol>
+
+    <div class="wrapper">
+
+      <div class="header">
+  <div class="flex-container">
+    <div class="header-inner">
+      <div class="site-brand-container">
+        <a href="/">
+          
+            PinJin&#39;s Blog
+          
+        </a>
+      </div>
+      <div id="menu-btn" class="menu-btn" onclick="toggleMenu()">
+        Menu
+      </div>
+      <nav class="site-nav">
+        <ul class="menu-list">
+          
+            
+              <li class="menu-item">
+                <a href="/">Home</a>
+              </li> 
+                   
+          
+            
+              <li class="menu-item">
+                <a href="/about/">About</a>
+              </li> 
+                   
+          
+            
+              <li class="menu-item">
+                <a href="/archives/">Blogs</a>
+              </li> 
+                   
+          
+            
+              <li class="menu-item">
+                <a href="/tag/">Tag</a>
+              </li> 
+                   
+          
+          
+            <li class="menu-item search-btn">
+              <a href="#">Search</a>
+            </li>
+          
+        </ul>
+      </nav>
     </div>
-  </span>
+  </div>
 </div>
 
-    
-    <div class="content index py4">
-        
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle" itemprop="name headline">
-        Chapter5-程式介紹-JAVA
-    </h1>
 
+      <div class="main">
+        <div class="flex-container">
+          <article id="post">
 
-
-    <div class="meta">
-      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">PinJing Wang</span>
-      </span>
-      
-    <div class="postdate">
-      
-        <time datetime="2022-06-19T16:16:31.000Z" itemprop="datePublished">2022-06-20</time>
-        
-      
-    </div>
-
-
-      
-    <div class="article-category">
-        <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/Note/">Note</a> › <a class="category-link" href="/categories/Note/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/">計算機概論</a> › <a class="category-link" href="/categories/Note/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9/">程式介紹</a>
-    </div>
-
-
-      
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Abstract/" rel="tag">Abstract</a>, <a class="tag-link" href="/tags/Exception/" rel="tag">Exception</a>, <a class="tag-link" href="/tags/Final/" rel="tag">Final</a>, <a class="tag-link" href="/tags/Interface/" rel="tag">Interface</a>, <a class="tag-link" href="/tags/Java/" rel="tag">Java</a>, <a class="tag-link" href="/tags/Overriding/" rel="tag">Overriding</a>, <a class="tag-link" href="/tags/Static/" rel="tag">Static</a>, <a class="tag-link" href="/tags/super/" rel="tag">super</a>, <a class="tag-link" href="/tags/this/" rel="tag">this</a>, <a class="tag-link" href="/tags/%E5%A4%9A%E5%9E%8B/" rel="tag">多型</a>, <a class="tag-link" href="/tags/%E5%BB%BA%E6%A7%8B%E5%AD%90/" rel="tag">建構子</a>, <a class="tag-link" href="/tags/%E7%B9%BC%E6%89%BF/" rel="tag">繼承</a>
-    </div>
-
-
-    </div>
-  </header>
   
-
-  <div class="content" itemprop="articleBody">
+    <div class="post-head">
+    <div class="post-info">
+        <div class="tag-list">
+            
+                
+                    <span class="post-tag">
+                        <a href="/tags/%E5%BB%BA%E6%A7%8B%E5%AD%90/">
+                            建構子
+                        </a>
+                    </span>    
+                
+                    <span class="post-tag">
+                        <a href="/tags/Overriding/">
+                            Overriding
+                        </a>
+                    </span>    
+                
+                    <span class="post-tag">
+                        <a href="/tags/%E7%B9%BC%E6%89%BF/">
+                            繼承
+                        </a>
+                    </span>    
+                
+                    <span class="post-tag">
+                        <a href="/tags/%E5%A4%9A%E5%9E%8B/">
+                            多型
+                        </a>
+                    </span>    
+                
+                    <span class="post-tag">
+                        <a href="/tags/Interface/">
+                            Interface
+                        </a>
+                    </span>    
+                
+                    <span class="post-tag">
+                        <a href="/tags/Java/">
+                            Java
+                        </a>
+                    </span>    
+                
+                    <span class="post-tag">
+                        <a href="/tags/Exception/">
+                            Exception
+                        </a>
+                    </span>    
+                
+                    <span class="post-tag">
+                        <a href="/tags/Static/">
+                            Static
+                        </a>
+                    </span>    
+                
+                    <span class="post-tag">
+                        <a href="/tags/Final/">
+                            Final
+                        </a>
+                    </span>    
+                
+                    <span class="post-tag">
+                        <a href="/tags/Abstract/">
+                            Abstract
+                        </a>
+                    </span>    
+                
+                    <span class="post-tag">
+                        <a href="/tags/this/">
+                            this
+                        </a>
+                    </span>    
+                
+                    <span class="post-tag">
+                        <a href="/tags/super/">
+                            super
+                        </a>
+                    </span>    
+                           
+            
+        </div>
+        <div class="post-title">
+            
+            
+                Chapter5-程式介紹-JAVA
+            
+            
+        </div>
+        <span class="post-date">
+            6月 20, 2022
+        </span>
+    </div>
+    <div class="post-img">
+        
+            <div class="h-line-primary"></div>
+              
+    </div>
+</div>
+    <div class="post-content">
     <h1>5.5 JAVA</h1>
 <hr>
 <h2>Java VS C++</h2>
@@ -561,151 +596,98 @@ Note: java 中的 thread 的環境有較妥善的機制和方便 api 供 user �
 <li>抽象類別只要有一個是抽象就是, 介面就是全部</li>
 </ul>
 
-  </div>
-</article>
+</div> 
 
-
-
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/about/">About</a></li>
-         
-          <li><a href="/archives/">Articles</a></li>
-         
-          <li><a href="/categories">Categories</a></li>
-         
-          <li><a href="/tags">Tags</a></li>
-         
-          <li><a href="/search/">Search</a></li>
-        
-      </ul>
-    </div>
-
-    <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">5.5 JAVA</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">Java VS C++</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">Class 格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">Constructor (建構子)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">主程式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">配置物件 Mem.space &#x3D;&gt; &quot;new&quot;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">Inheritance 繼承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.7.</span> <span class="toc-text">Overriding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.8.</span> <span class="toc-text">this, super</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.9.</span> <span class="toc-text">Constructor 的進一步介紹 (constructor 的延伸)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.10.</span> <span class="toc-text">Java 的例外處理 (Exception Handler)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.11.</span> <span class="toc-text">array 初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.12.</span> <span class="toc-text">Java 中的 array 宣告</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.13.</span> <span class="toc-text">static keyword</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.14.</span> <span class="toc-text">static 注意事項</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.15.</span> <span class="toc-text">final keyword</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.16.</span> <span class="toc-text">polymorphism in Java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.17.</span> <span class="toc-text">Abstract method</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.18.</span> <span class="toc-text">Abstract class</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.19.</span> <span class="toc-text">interface</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.19.1.</span> <span class="toc-text">Why interface?</span></a></li></ol></li></ol></li></ol>
-    </div>
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/&text=Chapter5-程式介紹-JAVA" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/&title=Chapter5-程式介紹-JAVA" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/&is_video=false&description=Chapter5-程式介紹-JAVA" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Chapter5-程式介紹-JAVA&body=Check out this article: https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/&title=Chapter5-程式介紹-JAVA" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/&title=Chapter5-程式介紹-JAVA" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/&title=Chapter5-程式介紹-JAVA" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/&title=Chapter5-程式介紹-JAVA" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/&name=Chapter5-程式介紹-JAVA&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/&t=Chapter5-程式介紹-JAVA" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
-    </div>
-
-  </div>
+<script>
+    window.onload = detectors();
+</script>
+    <div class="post-footer">
+    <div class="h-line-primary"></div>
+    <nav class="post-nav">
+        <div class="prev-item">
+           
+                <div class="icon arrow-left"></div>
+                <div class="post-link">
+                    <a href="/2022/06/20/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Algorithm-s-Time-Complexity-and-Recursive-Program/">Prev</a>
+                </div>
+            
+        </div>
+        <div class="next-item">
+            
+                <div class="icon arrow-right"></div>
+                <div class="post-link">
+                  <a href="/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C-%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/">Next</a>  
+                </div>  
+            
+        </div>
+    </nav>
 </div>
 
-        
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
+    
+      <div class="post-comment">
+
+     
+
+     
     
     
-    2019-2023
-    PinJing Wang
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/about/">About</a></li>
-         
-          <li><a href="/archives/">Articles</a></li>
-         
-          <li><a href="/categories">Categories</a></li>
-         
-          <li><a href="/tags">Tags</a></li>
-         
-          <li><a href="/search/">Search</a></li>
-        
-      </ul>
-    </nav>
-  </div>
-</footer>
+
+</div>
+     
+  
+</article>
+        </div>
+      </div>
+      
+      <div class="footer">
+    <div class="flex-container">
+        <div class="footer-text">
+            
+            
+                © 2019-2023 PinJin Wang | 
+            
+                
+        </div>
+    </div>
+</div>
 
     </div>
-    <!-- styles -->
 
+    
+      <div class="search-popup">
+    <div class="search-popup-overlay">  
+    </div>
+    <div class="search-popup-window" >
+        <div class="search-header">
+            <div class="search-input-container">
+              <input autocomplete="off" autocapitalize="off" maxlength="80"
+                     placeholder="Search Anything" spellcheck="false"
+                     type="search" class="search-input">
+            </div>
+            <div class="search-close-btn">
+                <div class="icon close-btn"></div>
+            </div>
+        </div>
+        <div class="search-result-container">
+        </div>
+    </div>
+</div>
 
+<script>
+    const searchConfig = {
+        path             : "/search.xml",
+        top_n_per_article: "1",
+        unescape         : "false",
+        trigger: "auto",
+        preload: "false"
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script>
+<script src="/js/search.js"></script>
+    
+    
 
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
- 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
-
-
-
-
-<!-- clipboard -->
-
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
-  
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
-    btn += '<i class="far fa-clone"></i>';
-    btn += '</span>'; 
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "Copied!");
-      e.clearSelection();
-    })
-  })
-  </script>
-
-
-<script src="/js/main.js"></script>
-
-<!-- search -->
-
-<!-- Google Analytics -->
-
-<!-- Baidu Analytics -->
-
-<!-- Cloudflare Analytics -->
-
-<!-- Umami Analytics -->
-
-<!-- Disqus Comments -->
-
-
-<script type="text/x-mathjax-config">
+  <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         tex2jax: {
             inlineMath: [ ["$","$"], ["\\(","\\)"] ],

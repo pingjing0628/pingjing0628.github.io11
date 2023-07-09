@@ -1,175 +1,160 @@
 <!DOCTYPE html>
-<html lang=zh>
-<head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="基礎規則  需要新建一個表專門用來存放每一條評論，每一條評論都屬於某一篇文章。  &lt;!--more--&gt;  建立 model 和資料表  建立名為Comment的model，並順便建立附帶的migration php artisan make:model Comment -m 這樣一次性的建立兩個文件 database&#x2F;migrations&#x2F;2017_11_11_151823_crea">
-<meta property="og:type" content="article">
-<meta property="og:title" content="5.利用Laravel建立評論系統">
-<meta property="og:url" content="https://pingjing0628.github.io/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/">
-<meta property="og:site_name" content="PinJing&#39;s Blog">
-<meta property="og:description" content="基礎規則  需要新建一個表專門用來存放每一條評論，每一條評論都屬於某一篇文章。  &lt;!--more--&gt;  建立 model 和資料表  建立名為Comment的model，並順便建立附帶的migration php artisan make:model Comment -m 這樣一次性的建立兩個文件 database&#x2F;migrations&#x2F;2017_11_11_151823_crea">
-<meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2019-10-27T07:48:54.000Z">
-<meta property="article:modified_time" content="2022-09-19T12:42:37.704Z">
-<meta property="article:author" content="PinJing Wang">
-<meta property="article:tag" content="Laravel">
-<meta property="article:tag" content="Database">
-<meta name="twitter:card" content="summary">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-        
-      
-    
-    <!-- title -->
-    <title>5.利用Laravel建立評論系統</title>
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
+<html lang="zh-tw">
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <!-- persian styles -->
+    <meta name="author" content="PinJing Wang">
+
+
+
+
+
+
+
+<title>5.利用Laravel建立評論系統 | PinJin&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Roboto+Mono&display=swap');
+</style>
+
+
+
+    <!-- stylesheets list from _config.yml -->
     
-    <!-- rss -->
+    <link rel="stylesheet" href="/css/style.css">
     
+
+
+
+
+    <!-- scripts list from _config.yml -->
     
-	<!-- mathjax -->
-	
-		<script type="text/x-mathjax-config">
-		  MathJax.Hub.Config({
-			tex2jax: {
-			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-			  inlineMath: [['$','$']]
-			}
-		  });
-		</script>
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
-	
-<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+    <script src="/js/frame.js"></script>
+    
+
+
+
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+
+
+
+
+
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJin's Blog" type="application/atom+xml">
 </head>
-
-<body class="max-width mx-auto px3 ltr">    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/about/">About</a></li>
-         
-          <li><a href="/archives/">Articles</a></li>
-         
-          <li><a href="/categories">Categories</a></li>
-         
-          <li><a href="/tags">Tags</a></li>
-         
-          <li><a href="/search/">Search</a></li>
-        
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="Previous post " href="/2019/10/27/Laravel-Database/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="Next post " href="/2019/10/27/4-Laravel-Restful/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="Back to top " href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="Share post " href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/&text=5.利用Laravel建立評論系統" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/&title=5.利用Laravel建立評論系統" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/&is_video=false&description=5.利用Laravel建立評論系統" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=5.利用Laravel建立評論系統&body=Check out this article: https://pingjing0628.github.io/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/&title=5.利用Laravel建立評論系統" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/&title=5.利用Laravel建立評論系統" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/&title=5.利用Laravel建立評論系統" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/&title=5.利用Laravel建立評論系統" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/&name=5.利用Laravel建立評論系統&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/&t=5.利用Laravel建立評論系統" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
-
+  <body>
+    <div class="mask-border">
     </div>
-    <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">基礎規則</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.</span> <span class="toc-text">建立 model 和資料表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">3.</span> <span class="toc-text">建立一對多關係</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number"></span> <span class="toc-text">構建前台UI</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">0.1.</span> <span class="toc-text">建立前台的 ArticleController</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">0.2.</span> <span class="toc-text">建立前台文章</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">0.3.</span> <span class="toc-text">建立評論儲存功能</span></a></li></ol></li></ol>
+
+    <div class="wrapper">
+
+      <div class="header">
+  <div class="flex-container">
+    <div class="header-inner">
+      <div class="site-brand-container">
+        <a href="/">
+          
+            PinJin&#39;s Blog
+          
+        </a>
+      </div>
+      <div id="menu-btn" class="menu-btn" onclick="toggleMenu()">
+        Menu
+      </div>
+      <nav class="site-nav">
+        <ul class="menu-list">
+          
+            
+              <li class="menu-item">
+                <a href="/">Home</a>
+              </li> 
+                   
+          
+            
+              <li class="menu-item">
+                <a href="/about/">About</a>
+              </li> 
+                   
+          
+            
+              <li class="menu-item">
+                <a href="/archives/">Blogs</a>
+              </li> 
+                   
+          
+            
+              <li class="menu-item">
+                <a href="/tag/">Tag</a>
+              </li> 
+                   
+          
+          
+            <li class="menu-item search-btn">
+              <a href="#">Search</a>
+            </li>
+          
+        </ul>
+      </nav>
     </div>
-  </span>
+  </div>
 </div>
 
-    
-    <div class="content index py4">
-        
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle" itemprop="name headline">
-        5.利用Laravel建立評論系統
-    </h1>
 
+      <div class="main">
+        <div class="flex-container">
+          <article id="post">
 
-
-    <div class="meta">
-      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">PinJing Wang</span>
-      </span>
-      
-    <div class="postdate">
-      
-        <time datetime="2019-10-27T07:48:54.000Z" itemprop="datePublished">2019-10-27</time>
-        
-      
-    </div>
-
-
-      
-    <div class="article-category">
-        <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/Programming/">Programming</a> › <a class="category-link" href="/categories/Programming/PHP/">PHP</a> › <a class="category-link" href="/categories/Programming/PHP/Laravel/">Laravel</a>
-    </div>
-
-
-      
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Database/" rel="tag">Database</a>, <a class="tag-link" href="/tags/Laravel/" rel="tag">Laravel</a>
-    </div>
-
-
-    </div>
-  </header>
   
-
-  <div class="content" itemprop="articleBody">
+    <div class="post-head">
+    <div class="post-info">
+        <div class="tag-list">
+            
+                
+                    <span class="post-tag">
+                        <a href="/tags/Laravel/">
+                            Laravel
+                        </a>
+                    </span>    
+                
+                    <span class="post-tag">
+                        <a href="/tags/Database/">
+                            Database
+                        </a>
+                    </span>    
+                           
+            
+        </div>
+        <div class="post-title">
+            
+            
+                5.利用Laravel建立評論系統
+            
+            
+        </div>
+        <span class="post-date">
+            10月 27, 2019
+        </span>
+    </div>
+    <div class="post-img">
+        
+            <div class="h-line-primary"></div>
+              
+    </div>
+</div>
+    <div class="post-content">
     <h3>基礎規則</h3>
 <ul>
 <li>需要新建一個表專門用來存放每一條評論，每一條評論都屬於某一篇文章。</li>
@@ -233,151 +218,98 @@ model可利用「create」方法將array型態的資料進行模型(實體)的�
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// create方法</span></span><br><span class="line">$data = [</span><br><span class="line">    <span class="string">'column_1'</span> =&gt; <span class="string">'...'</span>,</span><br><span class="line">    <span class="string">'column_2'</span> =&gt; <span class="string">'...'</span>,</span><br><span class="line">];</span><br><span class="line">Post::create($data);</span><br><span class="line"></span><br><span class="line"><span class="comment">// save方法</span></span><br><span class="line">$post = <span class="keyword">new</span> Post;</span><br><span class="line">$post-&gt;column_1 = <span class="string">'...'</span>;</span><br><span class="line">$post-&gt;column_2 = <span class="string">'...'</span>;</span><br><span class="line">$post-&gt;save();</span><br></pre></td></tr></table></figure></li>
 </ul>
 
-  </div>
-</article>
+</div> 
 
-
-
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/about/">About</a></li>
-         
-          <li><a href="/archives/">Articles</a></li>
-         
-          <li><a href="/categories">Categories</a></li>
-         
-          <li><a href="/tags">Tags</a></li>
-         
-          <li><a href="/search/">Search</a></li>
-        
-      </ul>
-    </div>
-
-    <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text">基礎規則</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">2.</span> <span class="toc-text">建立 model 和資料表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">3.</span> <span class="toc-text">建立一對多關係</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number"></span> <span class="toc-text">構建前台UI</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">0.1.</span> <span class="toc-text">建立前台的 ArticleController</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">0.2.</span> <span class="toc-text">建立前台文章</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#"><span class="toc-number">0.3.</span> <span class="toc-text">建立評論儲存功能</span></a></li></ol></li></ol>
-    </div>
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://pingjing0628.github.io/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://pingjing0628.github.io/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/&text=5.利用Laravel建立評論系統" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://pingjing0628.github.io/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/&title=5.利用Laravel建立評論系統" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://pingjing0628.github.io/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/&is_video=false&description=5.利用Laravel建立評論系統" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=5.利用Laravel建立評論系統&body=Check out this article: https://pingjing0628.github.io/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://pingjing0628.github.io/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/&title=5.利用Laravel建立評論系統" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://pingjing0628.github.io/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/&title=5.利用Laravel建立評論系統" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://pingjing0628.github.io/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/&title=5.利用Laravel建立評論系統" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://pingjing0628.github.io/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/&title=5.利用Laravel建立評論系統" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://pingjing0628.github.io/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/&name=5.利用Laravel建立評論系統&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=https://pingjing0628.github.io/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/&t=5.利用Laravel建立評論系統" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
-    </div>
-
-  </div>
+<script>
+    window.onload = detectors();
+</script>
+    <div class="post-footer">
+    <div class="h-line-primary"></div>
+    <nav class="post-nav">
+        <div class="prev-item">
+           
+                <div class="icon arrow-left"></div>
+                <div class="post-link">
+                    <a href="/2019/10/27/Laravel-Database/">Prev</a>
+                </div>
+            
+        </div>
+        <div class="next-item">
+            
+                <div class="icon arrow-right"></div>
+                <div class="post-link">
+                  <a href="/2019/10/27/4-Laravel-Restful/">Next</a>  
+                </div>  
+            
+        </div>
+    </nav>
 </div>
 
-        
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
+    
+      <div class="post-comment">
+
+     
+
+     
     
     
-    2019-2023
-    PinJing Wang
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/about/">About</a></li>
-         
-          <li><a href="/archives/">Articles</a></li>
-         
-          <li><a href="/categories">Categories</a></li>
-         
-          <li><a href="/tags">Tags</a></li>
-         
-          <li><a href="/search/">Search</a></li>
-        
-      </ul>
-    </nav>
-  </div>
-</footer>
+
+</div>
+     
+  
+</article>
+        </div>
+      </div>
+      
+      <div class="footer">
+    <div class="flex-container">
+        <div class="footer-text">
+            
+            
+                © 2019-2023 PinJin Wang | 
+            
+                
+        </div>
+    </div>
+</div>
 
     </div>
-    <!-- styles -->
 
+    
+      <div class="search-popup">
+    <div class="search-popup-overlay">  
+    </div>
+    <div class="search-popup-window" >
+        <div class="search-header">
+            <div class="search-input-container">
+              <input autocomplete="off" autocapitalize="off" maxlength="80"
+                     placeholder="Search Anything" spellcheck="false"
+                     type="search" class="search-input">
+            </div>
+            <div class="search-close-btn">
+                <div class="icon close-btn"></div>
+            </div>
+        </div>
+        <div class="search-result-container">
+        </div>
+    </div>
+</div>
 
+<script>
+    const searchConfig = {
+        path             : "/search.xml",
+        top_n_per_article: "1",
+        unescape         : "false",
+        trigger: "auto",
+        preload: "false"
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script>
+<script src="/js/search.js"></script>
+    
+    
 
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
- 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
-
-
-
-
-<!-- clipboard -->
-
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
-  
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
-    btn += '<i class="far fa-clone"></i>';
-    btn += '</span>'; 
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "Copied!");
-      e.clearSelection();
-    })
-  })
-  </script>
-
-
-<script src="/js/main.js"></script>
-
-<!-- search -->
-
-<!-- Google Analytics -->
-
-<!-- Baidu Analytics -->
-
-<!-- Cloudflare Analytics -->
-
-<!-- Umami Analytics -->
-
-<!-- Disqus Comments -->
-
-
-<script type="text/x-mathjax-config">
+  <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         tex2jax: {
             inlineMath: [ ["$","$"], ["\\(","\\)"] ],

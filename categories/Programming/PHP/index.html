@@ -1,425 +1,546 @@
 <!DOCTYPE html>
-<html lang=zh>
-<head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta property="og:type" content="website">
-<meta property="og:title" content="PinJing&#39;s Blog">
-<meta property="og:url" content="https://pingjing0628.github.io/categories/Programming/PHP/">
-<meta property="og:site_name" content="PinJing&#39;s Blog">
-<meta property="og:locale" content="zh_TW">
-<meta property="article:author" content="PinJing Wang">
-<meta name="twitter:card" content="summary">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-        
-      
-    
-    <!-- title -->
-    <title>Category: PHP</title>
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
+<html lang="zh-tw">
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <!-- persian styles -->
+    <meta name="author" content="PinJing Wang">
+
+
+
+
+
+
+
+<title>Category: PHP | PinJin&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Roboto+Mono&display=swap');
+</style>
+
+
+
+    <!-- stylesheets list from _config.yml -->
     
-    <!-- rss -->
+    <link rel="stylesheet" href="/css/style.css">
     
+
+
+
+
+    <!-- scripts list from _config.yml -->
     
-	<!-- mathjax -->
-	
-		<script type="text/x-mathjax-config">
-		  MathJax.Hub.Config({
-			tex2jax: {
-			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-			  inlineMath: [['$','$']]
-			}
-		  });
-		</script>
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
-	
-<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJing's Blog" type="application/atom+xml">
+    <script src="/js/frame.js"></script>
+    
+
+
+
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+
+
+
+
+
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="PinJin's Blog" type="application/atom+xml">
 </head>
-
-<body class="max-width mx-auto px3 ltr">    
-    <div class="content index py4">
-        
-          <header id="header">
-  <a href="/">
-  
-    
-      <div id="logo" style="background-image: url(/images/logo.png);"></div>
-    
-  
-    <div id="title">
-      <h1>PinJing&#39;s Blog</h1>
+  <body>
+    <div class="mask-border">
     </div>
-  </a>
-  <div id="nav">
-    <ul>
-      <li class="icon">
-        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x"></i></a>
-      </li>
-       
-        <li><a href="/">Home</a></li>
-       
-        <li><a href="/about/">About</a></li>
-       
-        <li><a href="/archives/">Articles</a></li>
-       
-        <li><a href="/categories">Categories</a></li>
-       
-        <li><a href="/tags">Tags</a></li>
-       
-        <li><a href="/search/">Search</a></li>
-      
-    </ul>
+
+    <div class="wrapper">
+
+      <div class="header">
+  <div class="flex-container">
+    <div class="header-inner">
+      <div class="site-brand-container">
+        <a href="/">
+          
+            PinJin&#39;s Blog
+          
+        </a>
+      </div>
+      <div id="menu-btn" class="menu-btn" onclick="toggleMenu()">
+        Menu
+      </div>
+      <nav class="site-nav">
+        <ul class="menu-list">
+          
+            
+              <li class="menu-item">
+                <a href="/">Home</a>
+              </li> 
+                   
+          
+            
+              <li class="menu-item">
+                <a href="/about/">About</a>
+              </li> 
+                   
+          
+            
+              <li class="menu-item">
+                <a href="/archives/">Blogs</a>
+              </li> 
+                   
+          
+            
+              <li class="menu-item">
+                <a href="/tag/">Tag</a>
+              </li> 
+                   
+          
+          
+            <li class="menu-item search-btn">
+              <a href="#">Search</a>
+            </li>
+          
+        </ul>
+      </nav>
+    </div>
   </div>
-</header>
+</div>
 
+
+      <div class="main">
+        <div class="flex-container">
+          <div id="category">
+  <div class="post-gallery">
+    <div class="post-gallery-list">
         
-        <div id="archive">
-  <ul class="post-list">
-    
-    
-    
-    
-      
-      
-      
-      
-        <li class="post-year"><h2>2022</h2></li>
-      
-      <li class="post-item">
+            <div class="post-gallery-item">
+                <div class="post-info">
+                    <div class="tag-list">
+                        
+                            
+                                <span class="post-tag">
+                                    <a href="/tags/PHP/">
+                                        PHP
+                                    </a>
+                                </span>   
+                            
+                                <span class="post-tag">
+                                    <a href="/tags/phpunit/">
+                                        phpunit
+                                    </a>
+                                </span>   
+                            
+                                <span class="post-tag">
+                                    <a href="/tags/mockery/">
+                                        mockery
+                                    </a>
+                                </span>   
+                                       
+                        
+                    </div>
+                    <div class="post-title">
+                        <a href="/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/"</a>
+                            
+                                利用 PHPUnit + Mockery 開發 API
+                            
+                        </a>
+                    </div>
+                    <span class="post-date">
+                        11月 3, 2019
+                    </span>
+                </div>
+                <div class="post-img">
+                  
+                </div>
+            </div>
+            <div class="h-line-secondary"></div>
         
-    <div class="meta">
-      
+            <div class="post-gallery-item">
+                <div class="post-info">
+                    <div class="tag-list">
+                        
+                            
+                                <span class="post-tag">
+                                    <a href="/tags/Database/">
+                                        Database
+                                    </a>
+                                </span>   
+                            
+                                <span class="post-tag">
+                                    <a href="/tags/PHP/">
+                                        PHP
+                                    </a>
+                                </span>   
+                                       
+                        
+                    </div>
+                    <div class="post-title">
+                        <a href="/2019/11/03/PHP-%E8%89%AF%E5%A5%BD%E7%BF%92%E6%85%A3-%E8%B3%87%E6%96%99%E5%BA%AB/"</a>
+                            
+                                PHP 良好習慣- 資料庫
+                            
+                        </a>
+                    </div>
+                    <span class="post-date">
+                        11月 3, 2019
+                    </span>
+                </div>
+                <div class="post-img">
+                  
+                </div>
+            </div>
+            <div class="h-line-secondary"></div>
         
-          <time datetime="2019-10-27T07:51:08.000Z" itemprop="datePublished">2019-10-27</time>
+            <div class="post-gallery-item">
+                <div class="post-info">
+                    <div class="tag-list">
+                        
+                            
+                                <span class="post-tag">
+                                    <a href="/tags/PHP/">
+                                        PHP
+                                    </a>
+                                </span>   
+                                       
+                        
+                    </div>
+                    <div class="post-title">
+                        <a href="/2019/11/03/PHP-%E8%89%AF%E5%A5%BD%E7%BF%92%E6%85%A3-%E6%B6%88%E6%AF%92%E3%80%81%E9%A9%97%E8%AD%89%E5%92%8C%E9%80%83%E8%84%AB/"</a>
+                            
+                                PHP 良好習慣- 消毒、驗證和逃脫
+                            
+                        </a>
+                    </div>
+                    <span class="post-date">
+                        11月 3, 2019
+                    </span>
+                </div>
+                <div class="post-img">
+                  
+                </div>
+            </div>
+            <div class="h-line-secondary"></div>
         
-      
+            <div class="post-gallery-item">
+                <div class="post-info">
+                    <div class="tag-list">
+                        
+                            
+                                <span class="post-tag">
+                                    <a href="/tags/closure/">
+                                        closure
+                                    </a>
+                                </span>   
+                            
+                                <span class="post-tag">
+                                    <a href="/tags/PHP/">
+                                        PHP
+                                    </a>
+                                </span>   
+                                       
+                        
+                    </div>
+                    <div class="post-title">
+                        <a href="/2019/11/03/PHP-%E7%89%B9%E9%BB%9E-%E9%96%89%E5%8C%85/"</a>
+                            
+                                PHP 特點- 閉包
+                            
+                        </a>
+                    </div>
+                    <span class="post-date">
+                        11月 3, 2019
+                    </span>
+                </div>
+                <div class="post-img">
+                  
+                </div>
+            </div>
+            <div class="h-line-secondary"></div>
+        
+            <div class="post-gallery-item">
+                <div class="post-info">
+                    <div class="tag-list">
+                        
+                            
+                                <span class="post-tag">
+                                    <a href="/tags/PHP/">
+                                        PHP
+                                    </a>
+                                </span>   
+                            
+                                <span class="post-tag">
+                                    <a href="/tags/Traits/">
+                                        Traits
+                                    </a>
+                                </span>   
+                                       
+                        
+                    </div>
+                    <div class="post-title">
+                        <a href="/2019/11/03/PHP-%E7%89%B9%E9%BB%9E-%E7%89%B9%E5%BE%B5%E6%A9%9F%E5%88%B6/"</a>
+                            
+                                PHP 特點- 特徵機制
+                            
+                        </a>
+                    </div>
+                    <span class="post-date">
+                        11月 3, 2019
+                    </span>
+                </div>
+                <div class="post-img">
+                  
+                </div>
+            </div>
+            <div class="h-line-secondary"></div>
+        
+            <div class="post-gallery-item">
+                <div class="post-info">
+                    <div class="tag-list">
+                        
+                            
+                                <span class="post-tag">
+                                    <a href="/tags/PHP/">
+                                        PHP
+                                    </a>
+                                </span>   
+                            
+                                <span class="post-tag">
+                                    <a href="/tags/Namespaces/">
+                                        Namespaces
+                                    </a>
+                                </span>   
+                            
+                                <span class="post-tag">
+                                    <a href="/tags/Interface/">
+                                        Interface
+                                    </a>
+                                </span>   
+                                       
+                        
+                    </div>
+                    <div class="post-title">
+                        <a href="/2019/11/03/PHP-%E7%89%B9%E9%BB%9E-%E5%90%8D%E7%A8%B1%E7%A9%BA%E9%96%93-%E4%BB%8B%E9%9D%A2/"</a>
+                            
+                                PHP 特點- 名稱空間&amp;介面
+                            
+                        </a>
+                    </div>
+                    <span class="post-date">
+                        11月 3, 2019
+                    </span>
+                </div>
+                <div class="post-img">
+                  
+                </div>
+            </div>
+            <div class="h-line-secondary"></div>
+        
+            <div class="post-gallery-item">
+                <div class="post-info">
+                    <div class="tag-list">
+                        
+                            
+                                <span class="post-tag">
+                                    <a href="/tags/PHP/">
+                                        PHP
+                                    </a>
+                                </span>   
+                                       
+                        
+                    </div>
+                    <div class="post-title">
+                        <a href="/2019/10/27/PHP-Operators/"</a>
+                            
+                                PHP Operators
+                            
+                        </a>
+                    </div>
+                    <span class="post-date">
+                        10月 27, 2019
+                    </span>
+                </div>
+                <div class="post-img">
+                  
+                </div>
+            </div>
+            <div class="h-line-secondary"></div>
+        
+            <div class="post-gallery-item">
+                <div class="post-info">
+                    <div class="tag-list">
+                        
+                            
+                                <span class="post-tag">
+                                    <a href="/tags/PHP/">
+                                        PHP
+                                    </a>
+                                </span>   
+                                       
+                        
+                    </div>
+                    <div class="post-title">
+                        <a href="/2019/10/27/PHP-Setter-and-Getter/"</a>
+                            
+                                PHP Setter and Getter
+                            
+                        </a>
+                    </div>
+                    <span class="post-date">
+                        10月 27, 2019
+                    </span>
+                </div>
+                <div class="post-img">
+                  
+                </div>
+            </div>
+            <div class="h-line-secondary"></div>
+        
+            <div class="post-gallery-item">
+                <div class="post-info">
+                    <div class="tag-list">
+                        
+                            
+                                <span class="post-tag">
+                                    <a href="/tags/Laravel/">
+                                        Laravel
+                                    </a>
+                                </span>   
+                            
+                                <span class="post-tag">
+                                    <a href="/tags/Middleware/">
+                                        Middleware
+                                    </a>
+                                </span>   
+                                       
+                        
+                    </div>
+                    <div class="post-title">
+                        <a href="/2019/10/27/Laravel-Middleware/"</a>
+                            
+                                Laravel Middleware
+                            
+                        </a>
+                    </div>
+                    <span class="post-date">
+                        10月 27, 2019
+                    </span>
+                </div>
+                <div class="post-img">
+                  
+                </div>
+            </div>
+            <div class="h-line-secondary"></div>
+        
+            <div class="post-gallery-item">
+                <div class="post-info">
+                    <div class="tag-list">
+                        
+                            
+                                <span class="post-tag">
+                                    <a href="/tags/Laravel/">
+                                        Laravel
+                                    </a>
+                                </span>   
+                            
+                                <span class="post-tag">
+                                    <a href="/tags/CSRF/">
+                                        CSRF
+                                    </a>
+                                </span>   
+                                       
+                        
+                    </div>
+                    <div class="post-title">
+                        <a href="/2019/10/27/Laravel-CSRF/"</a>
+                            
+                                Laravel CSRF
+                            
+                        </a>
+                    </div>
+                    <span class="post-date">
+                        10月 27, 2019
+                    </span>
+                </div>
+                <div class="post-img">
+                  
+                </div>
+            </div>
+            <div class="h-line-secondary"></div>
+        
+    </div>
+    <div id="paginator">
+        
+    <div class=paginator>
+        <div class="h-line-primary"></div>
+        <nav class="pagination">
+            <span class="page-number current">1</span><a class="page-number" href="/categories/Programming/PHP/page/2/">2</a>
+        </nav>
     </div>
 
-
-        <span>
-    
-        <a class="" href="/2019/10/27/Laravel-Middleware/">Laravel Middleware</a>
-    
-
-
-</span>
-      </li>
-    
-      
-      
-      
-      
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2019-10-27T07:50:28.000Z" itemprop="datePublished">2019-10-27</time>
-        
-      
     </div>
-
-
-        <span>
-    
-        <a class="" href="/2019/10/27/Laravel-CSRF/">Laravel CSRF</a>
-    
-
-
-</span>
-      </li>
-    
-      
-      
-      
-      
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2019-10-27T07:51:42.000Z" itemprop="datePublished">2019-10-27</time>
-        
-      
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2019/10/27/PHP-Setter-and-Getter/">PHP Setter and Getter</a>
-    
-
-
-</span>
-      </li>
-    
-      
-      
-      
-      
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2019-10-27T07:52:16.000Z" itemprop="datePublished">2019-10-27</time>
-        
-      
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2019/10/27/PHP-Operators/">PHP Operators</a>
-    
-
-
-</span>
-      </li>
-    
-      
-      
-      
-      
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2019-11-03T07:23:13.000Z" itemprop="datePublished">2019-11-03</time>
-        
-      
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2019/11/03/PHP-%E7%89%B9%E9%BB%9E-%E9%96%89%E5%8C%85/">PHP 特點- 閉包</a>
-    
-
-
-</span>
-      </li>
-    
-      
-      
-      
-      
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2019-11-03T07:19:33.000Z" itemprop="datePublished">2019-11-03</time>
-        
-      
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2019/11/03/PHP-%E7%89%B9%E9%BB%9E-%E7%89%B9%E5%BE%B5%E6%A9%9F%E5%88%B6/">PHP 特點- 特徵機制</a>
-    
-
-
-</span>
-      </li>
-    
-      
-      
-      
-      
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2019-11-03T07:16:41.000Z" itemprop="datePublished">2019-11-03</time>
-        
-      
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2019/11/03/PHP-%E7%89%B9%E9%BB%9E-%E5%90%8D%E7%A8%B1%E7%A9%BA%E9%96%93-%E4%BB%8B%E9%9D%A2/">PHP 特點- 名稱空間&amp;介面</a>
-    
-
-
-</span>
-      </li>
-    
-      
-      
-      
-      
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2019-11-03T08:28:11.000Z" itemprop="datePublished">2019-11-03</time>
-        
-      
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2019/11/03/PHP-%E8%89%AF%E5%A5%BD%E7%BF%92%E6%85%A3-%E6%B6%88%E6%AF%92%E3%80%81%E9%A9%97%E8%AD%89%E5%92%8C%E9%80%83%E8%84%AB/">PHP 良好習慣- 消毒、驗證和逃脫</a>
-    
-
-
-</span>
-      </li>
-    
-      
-      
-      
-      
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2019-11-03T09:45:56.000Z" itemprop="datePublished">2019-11-03</time>
-        
-      
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2019/11/03/PHP-%E8%89%AF%E5%A5%BD%E7%BF%92%E6%85%A3-%E8%B3%87%E6%96%99%E5%BA%AB/">PHP 良好習慣- 資料庫</a>
-    
-
-
-</span>
-      </li>
-    
-      
-      
-      
-      
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2019-11-03T15:21:47.000Z" itemprop="datePublished">2019-11-03</time>
-        
-      
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/">利用 PHPUnit + Mockery 開發 API</a>
-    
-
-
-</span>
-      </li>
-    
-  </ul>
-  
-    <div class="pagination">
-        
-        <span class="page-number">Page 1 of 2</span>
-        
-            <a href="/categories/Programming/PHP/page/2/"><i class="fas fa-angle-right"></i>
-            </a>
-        
-    </div>
-
+</div>
 
 </div>
 
-        
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
-    
-    
-    2019-2023
-    PinJing Wang
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-          <li><a href="/">Home</a></li>
-         
-          <li><a href="/about/">About</a></li>
-         
-          <li><a href="/archives/">Articles</a></li>
-         
-          <li><a href="/categories">Categories</a></li>
-         
-          <li><a href="/tags">Tags</a></li>
-         
-          <li><a href="/search/">Search</a></li>
-        
-      </ul>
-    </nav>
-  </div>
-</footer>
+
+        </div>
+      </div>
+      
+      <div class="footer">
+    <div class="flex-container">
+        <div class="footer-text">
+            
+            
+                © 2019-2023 PinJin Wang | 
+            
+                
+        </div>
+    </div>
+</div>
 
     </div>
-    <!-- styles -->
 
+    
+      <div class="search-popup">
+    <div class="search-popup-overlay">  
+    </div>
+    <div class="search-popup-window" >
+        <div class="search-header">
+            <div class="search-input-container">
+              <input autocomplete="off" autocapitalize="off" maxlength="80"
+                     placeholder="Search Anything" spellcheck="false"
+                     type="search" class="search-input">
+            </div>
+            <div class="search-close-btn">
+                <div class="icon close-btn"></div>
+            </div>
+        </div>
+        <div class="search-result-container">
+        </div>
+    </div>
+</div>
 
+<script>
+    const searchConfig = {
+        path             : "/search.xml",
+        top_n_per_article: "1",
+        unescape         : "false",
+        trigger: "auto",
+        preload: "false"
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script>
+<script src="/js/search.js"></script>
+    
+    
 
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
- 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
-
-
-
-
-<!-- clipboard -->
-
-
-<script src="/js/main.js"></script>
-
-<!-- search -->
-
-<!-- Google Analytics -->
-
-<!-- Baidu Analytics -->
-
-<!-- Cloudflare Analytics -->
-
-<!-- Umami Analytics -->
-
-<!-- Disqus Comments -->
-
-
-<script type="text/x-mathjax-config">
+  <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         tex2jax: {
             inlineMath: [ ["$","$"], ["\\(","\\)"] ],
