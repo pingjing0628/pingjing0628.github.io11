@@ -947,15 +947,6 @@
   </url>
   
   <url>
-    <loc>https://pingjing0628.github.io/search/index.html</loc>
-    
-    <lastmod>2021-05-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://pingjing0628.github.io/2019/11/24/Laravel-service-container/</loc>
     
     <lastmod>2020-12-15</lastmod>
