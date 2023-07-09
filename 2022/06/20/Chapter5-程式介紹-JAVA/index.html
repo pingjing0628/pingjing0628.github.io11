@@ -136,14 +136,20 @@
                     </span>    
                 
                     <span class="post-tag">
-                        <a href="/repository/tags/Java/">
-                            Java
+                        <a href="/repository/tags/%E7%B9%BC%E6%89%BF/">
+                            繼承
                         </a>
                     </span>    
                 
                     <span class="post-tag">
-                        <a href="/repository/tags/%E7%B9%BC%E6%89%BF/">
-                            繼承
+                        <a href="/repository/tags/%E5%A4%9A%E5%9E%8B/">
+                            多型
+                        </a>
+                    </span>    
+                
+                    <span class="post-tag">
+                        <a href="/repository/tags/Java/">
+                            Java
                         </a>
                     </span>    
                 
@@ -156,12 +162,6 @@
                     <span class="post-tag">
                         <a href="/repository/tags/Static/">
                             Static
-                        </a>
-                    </span>    
-                
-                    <span class="post-tag">
-                        <a href="/repository/tags/%E5%A4%9A%E5%9E%8B/">
-                            多型
                         </a>
                     </span>    
                 
@@ -217,7 +217,7 @@
     <div class="post-content">
     <h1>5.5 JAVA</h1>
 <hr>
-<h2>Java VS C++</h2>
+<h2 id="Java-VS-C">Java VS C++</h2>
 <table>
 <thead>
 <tr>
@@ -261,18 +261,18 @@
 </tbody>
 </table>
 <blockquote>
-<p>Garbage Collection(垃圾回收): 指不要的 Mem. 會由系統來進行自動回收的機制 =&gt; 回收 programmer 不需介入, 所以不須 destructor
+<p>Garbage Collection(垃圾回收): 指不要的 Mem. 會由系統來進行自動回收的機制 =&gt; 回收 programmer 不需介入, 所以不須 destructor<br>
 Note: java 中的 thread 的環境有較妥善的機制和方便 api 供 user 使用</p>
 </blockquote>
-<h2>Class 格式</h2>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class class_name</span><br><span class="line">&#123;</span><br><span class="line">  constructor -&gt; object initial</span><br><span class="line">  att -&gt; 變數宣告</span><br><span class="line">  method -&gt; function define</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Class-格式">Class 格式</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class class_name</span><br><span class="line">&#123;</span><br><span class="line">  constructor -&gt; object initial</span><br><span class="line">  att -&gt; 變數宣告</span><br><span class="line">  method -&gt; function define</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>Ex:</li>
 </ul>
-<h2>Constructor (建構子)</h2>
+<h2 id="Constructor-建構子">Constructor (建構子)</h2>
 <ul>
 <li>和 C++ 概念相似</li>
-<li>O.O 中所有物件皆需 <strong>&quot;初始化&quot;</strong> =&gt; 一定要呼叫 constructor</li>
+<li>O.O 中所有物件皆需 <strong>“初始化”</strong> =&gt; 一定要呼叫 constructor</li>
 <li>當 class 無 constructor, 系統會補上 <strong>預設建構子</strong>
 <ul>
 <li>Default constructor:
@@ -285,18 +285,20 @@ Note: java 中的 thread 的環境有較妥善的機制和方便 api 供 user �
 </ul>
 </li>
 </ul>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class A </span><br><span class="line">&#123;</span><br><span class="line">  public A () &#123;&#125; &#x2F;&#x2F; 自動補上 default constructor</span><br><span class="line">  &#x2F;&#x2F; public 1</span><br><span class="line">  &#x2F;&#x2F; () 2</span><br><span class="line">  &#x2F;&#x2F; &#123;&#125; 3</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2>主程式</h2>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class Test</span><br><span class="line">&#123;</span><br><span class="line">  public static void main(string [] args)</span><br><span class="line">  &#123;</span><br><span class="line">    ...  &#x2F;&#x2F;進入點</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class A</span><br><span class="line">&#123;</span><br><span class="line">  public static void main() &#x2F;&#x2F; ()非主程式</span><br><span class="line">  &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">1. compile error</span><br><span class="line">2. runtime error</span><br><span class="line">3. No error</span><br><span class="line">Ans: 2</span><br><span class="line">出現 &quot;main method not found&quot;</span><br></pre></td></tr></table></figure></p>
-<h2>配置物件 Mem.space =&gt; &quot;new&quot;</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class A </span><br><span class="line">&#123;</span><br><span class="line">  public A () &#123;&#125; // 自動補上 default constructor</span><br><span class="line">  // public 1</span><br><span class="line">  // () 2</span><br><span class="line">  // &#123;&#125; 3</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="主程式">主程式</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class Test</span><br><span class="line">&#123;</span><br><span class="line">  public static void main(string [] args)</span><br><span class="line">  &#123;</span><br><span class="line">    ...  //進入點</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class A</span><br><span class="line">&#123;</span><br><span class="line">  public static void main() // ()非主程式</span><br><span class="line">  &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">1. compile error</span><br><span class="line">2. runtime error</span><br><span class="line">3. No error</span><br><span class="line">Ans: 2</span><br><span class="line">出現 &quot;main method not found&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="配置物件-Mem-space-“new”">配置物件 Mem.space =&gt; “new”</h2>
 <ul>
 <li>格式： <code>class object = new class 建構子 (...欲傳入的參數);</code></li>
-<li>Ex:
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Person p &#x3D; new Person();</span><br><span class="line">&#x2F;&#x2F; new 正式做 Memory allocation</span><br><span class="line">&#x2F;&#x2F; Person() 呼叫 class Person 不帶參數的 constructor</span><br><span class="line"></span><br><span class="line">Person p;</span><br><span class="line">p.height &#x3D; 180;</span><br><span class="line">&#x2F;&#x2F; in C ,Yes</span><br><span class="line">&#x2F;&#x2F; in Java , 尚未配置 Mem space</span><br></pre></td></tr></table></figure></li>
+<li>Ex:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Person p = new Person();</span><br><span class="line">// new 正式做 Memory allocation</span><br><span class="line">// Person() 呼叫 class Person 不帶參數的 constructor</span><br><span class="line"></span><br><span class="line">Person p;</span><br><span class="line">p.height = 180;</span><br><span class="line">// in C ,Yes</span><br><span class="line">// in Java , 尚未配置 Mem space</span><br></pre></td></tr></table></figure>
+<ul>
 <li>Note: 物件操作方式同 C++, <code>object.att</code> or <code>object.op</code></li>
 </ul>
-<h2>Inheritance 繼承</h2>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class A </span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class B extends A</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Inheritance-繼承">Inheritance 繼承</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class A </span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class B extends A</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <table>
 <thead>
 <tr>
@@ -317,17 +319,16 @@ Note: java 中的 thread 的環境有較妥善的機制和方便 api 供 user �
 </table>
 <ul>
 <li>圖：</li>
-<li>EX:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Person p &#x3D; new Superman(); &#x2F;&#x2F; superman upcasting</span><br><span class="line">Superman s &#x3D; new Person(); &#x2F;&#x2F; person downcasting</span><br><span class="line">Superman s &#x3D; new Xman(); &#x2F;&#x2F; X</span><br></pre></td></tr></table></figure></li>
+<li>EX:</li>
 </ul>
-<h2>Overriding</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Person p = new Superman(); // superman upcasting</span><br><span class="line">Superman s = new Person(); // person downcasting</span><br><span class="line">Superman s = new Xman(); // X</span><br></pre></td></tr></table></figure>
+<h2 id="Overriding">Overriding</h2>
 <ul>
-<li>
-<p>子類別把父類別的函式重新定義<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Person</span><br><span class="line">&#123;</span><br><span class="line">  public void iam()</span><br><span class="line">  &#123;</span><br><span class="line">    System.out.println(&quot;I am a Person&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">class Superman extends Person</span><br><span class="line">&#123;</span><br><span class="line">  public void iam()</span><br><span class="line">  &#123;</span><br><span class="line">    System.out.println(&quot;I am a Superman&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>注意：</p>
+<li>子類別把父類別的函式重新定義</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Person</span><br><span class="line">&#123;</span><br><span class="line">  public void iam()</span><br><span class="line">  &#123;</span><br><span class="line">    System.out.println(&quot;I am a Person&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">class Superman extends Person</span><br><span class="line">&#123;</span><br><span class="line">  public void iam()</span><br><span class="line">  &#123;</span><br><span class="line">    System.out.println(&quot;I am a Superman&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意：
 <ol>
 <li><strong>method signature 方法簽章</strong> 要一樣</li>
 </ol>
@@ -335,14 +336,14 @@ Note: java 中的 thread 的環境有較妥善的機制和方便 api 供 user �
 <li>return type + method name + (parameter list)</li>
 <li>Ex:
 <ul>
-<li>superclass: double getValue()... <code>// compile error 多型會錯</code></li>
-<li>subclass: string getValue()...</li>
+<li>superclass: double getValue()… <code>// compile error 多型會錯</code></li>
+<li>subclass: string getValue()…</li>
 </ul>
 </li>
 <li>Ex2:
 <ul>
-<li>superclass: void print(int i)... <code>沒有 overriding 為 overloading, compile OK</code></li>
-<li>subclass void print()...</li>
+<li>superclass: void print(int i)… <code>沒有 overriding 為 overloading, compile OK</code></li>
+<li>subclass void print()…</li>
 </ul>
 </li>
 </ul>
@@ -354,44 +355,39 @@ Note: java 中的 thread 的環境有較妥善的機制和方便 api 供 user �
 </ul>
 </li>
 </ul>
-<h2>this, super</h2>
+<h2 id="this-super">this, super</h2>
 <ul>
 <li>概念同 C++, 但 <strong>Java 中 this, super 非 pointer</strong>, 其用法同一般物件, <code>this/super.att/method</code></li>
 <li>圖：</li>
 <li>Ex:</li>
 </ul>
-<h2>Constructor 的進一步介紹 (constructor 的延伸)</h2>
+<h2 id="Constructor-的進一步介紹-constructor-的延伸">Constructor 的進一步介紹 (constructor 的延伸)</h2>
 <ul>
-<li>
-<p>constructor 不會被繼承</p>
-</li>
-<li>
-<p>在 inheritance之下, subclass 的 constructor 第一行需呼叫 &quot;super(...)&quot; (若無, 系統會自動加上&quot;super()&quot; 呼叫 parent, 不帶任何參數的 constructor) =&gt; 呼叫父類別的建構子產生 parent object</p>
-</li>
-<li>
-<p>處理的順序(初始化時)<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class A</span><br><span class="line">&#123;</span><br><span class="line">  public A() &#123;...&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class B extends A</span><br><span class="line">&#123;</span><br><span class="line">  public B() &#123;</span><br><span class="line">    super();</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>常見陷阱題：<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class A</span><br><span class="line">&#123;</span><br><span class="line">  public A(int a)&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">public class B extends A</span><br><span class="line">&#123;</span><br><span class="line">  public B() &#x2F;&#x2F; default constructor</span><br><span class="line">  &#123;</span><br><span class="line">    super(); &#x2F;&#x2F; 系統補上的, 找不到不帶參數的建構子</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Result: compile error</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>Summary:</p>
+<li>constructor 不會被繼承</li>
+<li>在 inheritance之下, subclass 的 constructor 第一行需呼叫 “super(…)” (若無, 系統會自動加上&quot;super()&quot; 呼叫 parent, 不帶任何參數的 constructor) =&gt; 呼叫父類別的建構子產生 parent object</li>
+<li>處理的順序(初始化時)</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class A</span><br><span class="line">&#123;</span><br><span class="line">  public A() &#123;...&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class B extends A</span><br><span class="line">&#123;</span><br><span class="line">  public B() &#123;</span><br><span class="line">    super();</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>常見陷阱題：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class A</span><br><span class="line">&#123;</span><br><span class="line">  public A(int a)&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">public class B extends A</span><br><span class="line">&#123;</span><br><span class="line">  public B() // default constructor</span><br><span class="line">  &#123;</span><br><span class="line">    super(); // 系統補上的, 找不到不帶參數的建構子</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Result: compile error</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Summary:
 <ol>
 <li>No constructor =&gt; 補上 default constructor</li>
-<li>若為 subclass 之 constructor 第一行無 &quot;super(...)&quot;, 自動補上 &quot;super(...)&quot; (不帶任何參數的)</li>
+<li>若為 subclass 之 constructor 第一行無 “super(…)”, 自動補上 “super(…)” (不帶任何參數的)</li>
 </ol>
 </li>
-<li>
-<p>Ex:</p>
-</li>
+<li>Ex:</li>
 </ul>
-<h2>Java 的例外處理 (Exception Handler)</h2>
+<h2 id="Java-的例外處理-Exception-Handler">Java 的例外處理 (Exception Handler)</h2>
 <ul>
-<li>於 Java 中採用 try...catch...finally 來做例外處理</li>
-<li>格式：<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">  &#x2F;&#x2F; 嘗試執行的動作</span><br><span class="line">&#125; catch (Exception e) &#123;</span><br><span class="line">  &#x2F;&#x2F; 做例外捕捉後的 exception</span><br><span class="line">&#125; finally &#123;</span><br><span class="line">  &#x2F;&#x2F; 最後需執行的動作</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>於 Java 中採用 try…catch…finally 來做例外處理</li>
+<li>格式：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">  // 嘗試執行的動作</span><br><span class="line">&#125; catch (Exception e) &#123;</span><br><span class="line">  // 做例外捕捉後的 exception</span><br><span class="line">&#125; finally &#123;</span><br><span class="line">  // 最後需執行的動作</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
 <li>說明：
 <ol>
 <li>try 一定存在, catch 跟 finally 至少需有1個</li>
@@ -404,38 +400,37 @@ Note: java 中的 thread 的環境有較妥善的機制和方便 api 供 user �
 </ol>
 </li>
 </ul>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">  ...</span><br><span class="line">  exception occurs; &#x2F;&#x2F; 1</span><br><span class="line">  System.out.println(&quot;1&quot;);</span><br><span class="line">&#125; catch (Exception e) &#123; &#x2F;&#x2F; 2 </span><br><span class="line">  System.out.println(&quot;2&quot;);</span><br><span class="line">&#125; finally &#123;</span><br><span class="line">  System.out.println(&quot;3&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Q1: output &#x3D; ? 2, 3</span><br><span class="line">&#x2F;&#x2F; Q2: 拿掉 1, output &#x3D; ? 1, 3</span><br><span class="line">&#x2F;&#x2F; Q3: 拿掉 2, output &#x3D; ? 3, runtime exception</span><br></pre></td></tr></table></figure></p>
-<h2>array 初始化</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">  ...</span><br><span class="line">  exception occurs; // 1</span><br><span class="line">  System.out.println(&quot;1&quot;);</span><br><span class="line">&#125; catch (Exception e) &#123; // 2 </span><br><span class="line">  System.out.println(&quot;2&quot;);</span><br><span class="line">&#125; finally &#123;</span><br><span class="line">  System.out.println(&quot;3&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Q1: output = ? 2, 3</span><br><span class="line">// Q2: 拿掉 1, output = ? 1, 3</span><br><span class="line">// Q3: 拿掉 2, output = ? 3, runtime exception</span><br></pre></td></tr></table></figure>
+<h2 id="array-初始化">array 初始化</h2>
 <ul>
 <li>in O.O 所有物件皆需 <strong>初始化</strong> (呼叫建構子)</li>
 <li>in Java array 即為物件, 所以需初始化</li>
 <li>不同型別的初始值
 <ul>
 <li>基本型別: boolean, char, byte, int, long, short, float, double</li>
-<li>物件型別: &quot;null&quot;</li>
+<li>物件型別: “null”</li>
 </ul>
 </li>
 </ul>
-<h2>Java 中的 array 宣告</h2>
+<h2 id="Java-中的-array-宣告">Java 中的 array 宣告</h2>
 <ul>
 <li>type 陣列 name[] = new type [size];</li>
 <li>ex: int a[] = new int[3];</li>
 <li>ex1: double d() = new double[3];</li>
-<li>主程式:
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String s[] &#x3D; new String[3];</span><br><span class="line">s[s.length - 1] &#x3D; &quot;hello&quot;;</span><br><span class="line">System.out.println(&quot;s[1]&quot;);</span><br></pre></td></tr></table></figure></li>
-<li>Note: 若為 &quot;基本型別&quot;, 且為 &quot;區域變數&quot;, 則：系統不會幫忙初始化, 需自行設預設值, <strong>若無則處理時會有compile error</strong></li>
+<li>主程式:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String s[] = new String[3];</span><br><span class="line">s[s.length - 1] = &quot;hello&quot;;</span><br><span class="line">System.out.println(&quot;s[1]&quot;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Note: 若為 “基本型別”, 且為 “區域變數”, 則：系統不會幫忙初始化, 需自行設預設值, <strong>若無則處理時會有compile error</strong></li>
 <li>Ex:</li>
 </ul>
-<h2>static keyword</h2>
+<h2 id="static-keyword">static keyword</h2>
 <blockquote>
 <p>類別 -&gt; 靜態, 物件 -&gt; 動態</p>
 </blockquote>
 <ul>
-<li>
-<p>說明: static 修飾詞可用於 attribute, method 宣告中, 代表此 attribute, method 為 class 所有, 非 object 的</p>
-</li>
-<li>
-<p>Note: data member 可分為:</p>
+<li>說明: static 修飾詞可用於 attribute, method 宣告中, 代表此 attribute, method 為 class 所有, 非 object 的</li>
+<li>Note: data member 可分為:
 <ul>
 <li>attribute:
 <ul>
@@ -451,12 +446,11 @@ Note: java 中的 thread 的環境有較妥善的機制和方便 api 供 user �
 </li>
 </ul>
 </li>
-<li>
-<p>Ex:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class A</span><br><span class="line">&#123;</span><br><span class="line">  public static int x;</span><br><span class="line">  public int y;</span><br><span class="line">&#125;</span><br><span class="line">A a1 &#x3D; new A();</span><br><span class="line">A a2 &#x3D; new A();</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>成大: 一公司有員工的類別, 有下列屬性, 何者適合宣告為 static:</p>
+<li>Ex:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class A</span><br><span class="line">&#123;</span><br><span class="line">  public static int x;</span><br><span class="line">  public int y;</span><br><span class="line">&#125;</span><br><span class="line">A a1 = new A();</span><br><span class="line">A a2 = new A();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>成大: 一公司有員工的類別, 有下列屬性, 何者適合宣告為 static:
 <ol>
 <li>姓名</li>
 <li>手機</li>
@@ -466,24 +460,22 @@ Note: java 中的 thread 的環境有較妥善的機制和方便 api 供 user �
 </ol>
 </li>
 </ul>
-<h2>static 注意事項</h2>
+<h2 id="static-注意事項">static 注意事項</h2>
 <ol>
 <li>static method 只能存取 static 的 attribute 及 method, 無法用 Non-static 之 attribute 及 method</li>
 </ol>
 <ul>
-<li>
-<p>Ex1:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 先有類別, 才有物件</span><br><span class="line">class A </span><br><span class="line">&#123;</span><br><span class="line">  public static int x;</span><br><span class="line">  public int y; &#x2F;&#x2F; non-static</span><br><span class="line">  public static void count()</span><br><span class="line">  &#123;</span><br><span class="line">    System.out.println(x+y); &#x2F;&#x2F; y compile error</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>Ex2:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class A </span><br><span class="line">&#123;</span><br><span class="line">  public void get X()</span><br><span class="line">  &#123;</span><br><span class="line">  &#125;</span><br><span class="line">  public static void get()</span><br><span class="line">  &#123;</span><br><span class="line">    get x(); &#x2F;&#x2F; compile error</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</li>
+<li>Ex1:</li>
 </ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 先有類別, 才有物件</span><br><span class="line">class A </span><br><span class="line">&#123;</span><br><span class="line">  public static int x;</span><br><span class="line">  public int y; // non-static</span><br><span class="line">  public static void count()</span><br><span class="line">  &#123;</span><br><span class="line">    System.out.println(x+y); // y compile error</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Ex2:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class A </span><br><span class="line">&#123;</span><br><span class="line">  public void get X()</span><br><span class="line">  &#123;</span><br><span class="line">  &#125;</span><br><span class="line">  public static void get()</span><br><span class="line">  &#123;</span><br><span class="line">    get x(); // compile error</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol start="2">
 <li>static method 不可被 override (因為 static method 為靜態的, 故無法達多型(Dynamic Binding))之效)</li>
 </ol>
-<h2>final keyword</h2>
+<h2 id="final-keyword">final keyword</h2>
 <p>可用來修飾:</p>
 <ol>
 <li>class: 代表此 class 不可再被<strong>繼承</strong></li>
@@ -491,8 +483,8 @@ Note: java 中的 thread 的環境有較妥善的機制和方便 api 供 user �
 <ul>
 <li>ex:
 <ul>
-<li>父: <code>final class A {}</code></li>
-<li>子: <code>calss B extends A{}</code> compile error</li>
+<li>父: <code>final class A &#123;&#125;</code></li>
+<li>子: <code>calss B extends A&#123;&#125;</code> compile error</li>
 </ul>
 </li>
 </ul>
@@ -502,8 +494,8 @@ Note: java 中的 thread 的環境有較妥善的機制和方便 api 供 user �
 <ul>
 <li>ex:
 <ul>
-<li>superclass: <code>public final void print() {}</code></li>
-<li>subclass: <code>public void print(){}</code> compile error, 因為 final 不能被 override</li>
+<li>superclass: <code>public final void print() &#123;&#125;</code></li>
+<li>subclass: <code>public void print()&#123;&#125;</code> compile error, 因為 final 不能被 override</li>
 </ul>
 </li>
 </ul>
@@ -517,81 +509,65 @@ Note: java 中的 thread 的環境有較妥善的機制和方便 api 供 user �
 </ul>
 </li>
 </ul>
-<h2>polymorphism in Java</h2>
+<h2 id="polymorphism-in-Java">polymorphism in Java</h2>
 <ul>
-<li>
-<p>Java 的多型不需有 &quot;virtual&quot; 的 keyword, 因為在 java 中所有的 method 皆具 virtual function 功能, 不需額外宣告, 亦即 method 皆可達 Dynamic Binding 之效</p>
-</li>
-<li>
-<p>說明:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">class Animal</span><br><span class="line">&#123;</span><br><span class="line">  public void walk()</span><br><span class="line">  &#123;</span><br><span class="line">    System.out.println(&quot;An.walk&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Person extends Animal</span><br><span class="line">&#123;</span><br><span class="line">  public void walk()</span><br><span class="line">  &#123;</span><br><span class="line">    System.out.println(&quot;Person walk&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Dog extends Animal</span><br><span class="line">&#123;</span><br><span class="line">  public void walk()</span><br><span class="line">  &#123;</span><br><span class="line">    System.out.println(&quot;Dog walk&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;*</span><br><span class="line">Polymorphism:</span><br><span class="line">inheritance</span><br><span class="line">+</span><br><span class="line">overriding</span><br><span class="line">+</span><br><span class="line">upcasting</span><br><span class="line">把子類別的物件, 向上看成父類別的型態</span><br><span class="line">*&#x2F;</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>Note:</p>
+<li>Java 的多型不需有 “virtual” 的 keyword, 因為在 java 中所有的 method 皆具 virtual function 功能, 不需額外宣告, 亦即 method 皆可達 Dynamic Binding 之效</li>
+<li>說明:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">class Animal</span><br><span class="line">&#123;</span><br><span class="line">  public void walk()</span><br><span class="line">  &#123;</span><br><span class="line">    System.out.println(&quot;An.walk&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Person extends Animal</span><br><span class="line">&#123;</span><br><span class="line">  public void walk()</span><br><span class="line">  &#123;</span><br><span class="line">    System.out.println(&quot;Person walk&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Dog extends Animal</span><br><span class="line">&#123;</span><br><span class="line">  public void walk()</span><br><span class="line">  &#123;</span><br><span class="line">    System.out.println(&quot;Dog walk&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">Polymorphism:</span><br><span class="line">inheritance</span><br><span class="line">+</span><br><span class="line">overriding</span><br><span class="line">+</span><br><span class="line">upcasting</span><br><span class="line">把子類別的物件, 向上看成父類別的型態</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Note:
 <ul>
 <li>在 C++, 中做多型要有 virtual</li>
 <li>在 java 中的 method 所有都是 virtual, 除了 static 的</li>
 </ul>
 </li>
-<li>
-<p>應用:</p>
-</li>
+<li>應用:</li>
 </ul>
-<h2>Abstract method</h2>
+<h2 id="Abstract-method">Abstract method</h2>
 <ul>
 <li>Def: 當 method 沒有 implement 謂之 abstract method</li>
-<li>Ex:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public abstract void walk()</span><br><span class="line">&#123;</span><br><span class="line">  &#x2F;&#x2F; implement</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>Ex:</li>
 </ul>
-<h2>Abstract class</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public abstract void walk()</span><br><span class="line">&#123;</span><br><span class="line">  // implement</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Abstract-class">Abstract class</h2>
 <ul>
-<li>
-<p>Def:</p>
+<li>Def:
 <ol>
 <li>當 class 中具 ≥ 1 個 abstract method, 即需定義為 abstract class</li>
-<li>abstract class 不能產生出實體(即無法 &quot;new&quot; 出 instance)</li>
+<li>abstract class 不能產生出實體(即無法 “new” 出 instance)</li>
 <li>繼承 abstract class, 並將其 abstract method override 掉的謂之 concrete class</li>
 </ol>
 </li>
-<li>
-<p>Ex1:</p>
-</li>
-<li>
-<p>Ex2:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Animal a &#x3D; new Animal(); &#x2F;&#x2F; X 抽象類別不能 new</span><br><span class="line">Person p &#x3D; new Person(); &#x2F;&#x2F; O</span><br><span class="line">Animal a &#x3D; new Person(); &#x2F;&#x2F; O 實際上產生具象, Person 做 upcasting -&gt; 準備做多型</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>Ex3:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">abstract class Animal</span><br><span class="line">&#123;</span><br><span class="line">  public abstract void walk();</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; compile error</span><br><span class="line">class Person extends Animal &#x2F;&#x2F; Solution1: 前方加上 abstract </span><br><span class="line">&#123;</span><br><span class="line">  &#x2F;&#x2F; solution 2</span><br><span class="line">  public void walk() </span><br><span class="line">  &#123;</span><br><span class="line">    System.out.println(&quot;Person walk&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>Note: 1, 2 擇一, 皆無時, 會有 compile error</p>
-</li>
-<li>
-<p>用 1 不用 2 時, 代表 Person 為 abstract, 代表此層不會是最後一層</p>
-</li>
-<li>
-<p>Sol: 既然不知道它該怎麼寫幹嘛定義? (第一個 abstract)</p>
-</li>
-<li>
-<p>ANS: 拿掉就好, 但它如果定義出來, 他會具備規範的效果, 若定義走路是抽象, 若以後繼承我, 一定要把走路做完, 否則 compile 會提醒, 程式少漏洞</p>
-</li>
+<li>Ex1:</li>
+<li>Ex2:</li>
 </ul>
-<h2>interface</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Animal a = new Animal(); // X 抽象類別不能 new</span><br><span class="line">Person p = new Person(); // O</span><br><span class="line">Animal a = new Person(); // O 實際上產生具象, Person 做 upcasting -&gt; 準備做多型</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Ex3:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">abstract class Animal</span><br><span class="line">&#123;</span><br><span class="line">  public abstract void walk();</span><br><span class="line">&#125;</span><br><span class="line">// compile error</span><br><span class="line">class Person extends Animal // Solution1: 前方加上 abstract </span><br><span class="line">&#123;</span><br><span class="line">  // solution 2</span><br><span class="line">  public void walk() </span><br><span class="line">  &#123;</span><br><span class="line">    System.out.println(&quot;Person walk&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Note: 1, 2 擇一, 皆無時, 會有 compile error</li>
+<li>用 1 不用 2 時, 代表 Person 為 abstract, 代表此層不會是最後一層</li>
+<li>Sol: 既然不知道它該怎麼寫幹嘛定義? (第一個 abstract)</li>
+<li>ANS: 拿掉就好, 但它如果定義出來, 他會具備規範的效果, 若定義走路是抽象, 若以後繼承我, 一定要把走路做完, 否則 compile 會提醒, 程式少漏洞</li>
+</ul>
+<h2 id="interface">interface</h2>
 <ul>
 <li>通常是規格規範的動作 (根本不會產生物件, 所以也陪有 non-static 的問題)</li>
-<li>格式:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">interface name</span><br><span class="line">&#123;</span><br><span class="line">  public static final attribute_name;</span><br><span class="line"></span><br><span class="line">  public abstract method signature;</span><br><span class="line">  &#x2F;&#x2F; public static or public abstract 可省略, 但系統會自動加上</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>格式:</li>
 </ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">interface name</span><br><span class="line">&#123;</span><br><span class="line">  public static final attribute_name;</span><br><span class="line"></span><br><span class="line">  public abstract method signature;</span><br><span class="line">  // public static or public abstract 可省略, 但系統會自動加上</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>方法全部都是抽象的, 就代表根本沒辦法實體化, 沒辦法產生物件, 幹嘛產生建構子, 建構子是用來做初始化的動作, 不會產生物件, 所以就不用有建構子了</p>
 </blockquote>
-<h3>Why interface?</h3>
+<h3 id="Why-interface">Why interface?</h3>
 <ul>
 <li>利用 interface 讓 Java 模擬出 Multiple Inheritance</li>
 <li>圖：</li>
 </ul>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Person </span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface Flyer</span><br><span class="line">&#123;</span><br><span class="line">  public static void fly(); &#x2F;&#x2F; 若只寫這樣也會過, 括號內連寫都沒寫, implement 是把它補起來, override 是重新定義</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Superman extends Person implements Flyer &#x2F;&#x2F; 介面可以實作很多個</span><br><span class="line">&#123;</span><br><span class="line">  public void fly()</span><br><span class="line">  &#123;</span><br><span class="line">    System.out.println(&quot;flying&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Person </span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface Flyer</span><br><span class="line">&#123;</span><br><span class="line">  public static void fly(); // 若只寫這樣也會過, 括號內連寫都沒寫, implement 是把它補起來, override 是重新定義</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Superman extends Person implements Flyer // 介面可以實作很多個</span><br><span class="line">&#123;</span><br><span class="line">  public void fly()</span><br><span class="line">  &#123;</span><br><span class="line">    System.out.println(&quot;flying&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>抽象類別只要有一個是抽象就是, 介面就是全部</li>
 </ul>

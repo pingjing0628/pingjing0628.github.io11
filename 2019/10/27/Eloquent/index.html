@@ -155,32 +155,28 @@
     </div>
 </div>
     <div class="post-content">
-    <h2>What is Eloquent?</h2>
-<p>&lt;!-- more --&gt;</p>
+    <h2 id="What-is-Eloquent">What is Eloquent?</h2>
+<span id="more"></span> 
 <hr>
 <ul>
 <li>Eloquent是一個ORM，Object Relational Mapping，翻譯為“對象關係映射”。</li>
 <li>所謂“對象”，就是“模型(Model)”</li>
 <li>對象關係映射，即為模型間關係。</li>
 </ul>
-<h2>一對一關係</h2>
+<h2 id="一對一關係">一對一關係</h2>
+<ul>
+<li>這描述的是兩個模型之間一對一的關係。</li>
+<li>假如我們有兩個模型：User 和Account，分別對應user和消費者，他們是一對一的關係，那麼如果我們要使用Eloquent 提供的一對一關係方法，表格結構應該是這樣的：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">user: id ... ... account_id</span><br><span class="line"></span><br><span class="line">account: id ... ... user_id</span><br></pre></td></tr></table></figure>
+<ul>
+<li>假設我們需要在User模型中查詢對應的Account表的信息，那麼應該是這樣的。</li>
+<li><code>/app/models/User.php</code>:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">extends</span> <span class="title">Eloquent</span> </span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="keyword">protected</span> <span class="variable">$table</span> = <span class="string">&#x27;users&#x27;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">hasOneAccount</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">hasOne</span>(<span class="string">&#x27;Account&#x27;</span>, <span class="string">&#x27;user_id&#x27;</span>, <span class="string">&#x27;id&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <ul>
 <li>
-<p>這描述的是兩個模型之間一對一的關係。</p>
-</li>
-<li>
-<p>假如我們有兩個模型：User 和Account，分別對應user和消費者，他們是一對一的關係，那麼如果我們要使用Eloquent 提供的一對一關係方法，表格結構應該是這樣的：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">user: id ... ... account_id</span><br><span class="line"></span><br><span class="line">account: id ... ... user_id</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>假設我們需要在User模型中查詢對應的Account表的信息，那麼應該是這樣的。</p>
-</li>
-<li>
-<p><code>/app/models/User.php</code>:
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">extends</span> <span class="title">Eloquent</span> </span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="keyword">protected</span> $table = <span class="string">'users'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">hasOneAccount</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;hasOne(<span class="string">'Account'</span>, <span class="string">'user_id'</span>, <span class="string">'id'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>當我們需要用到這種關係的時候
+<p>當我們需要用到這種關係的時候<br>
 <code>$account = User::find(10)-&gt;hasOneAccount;</code></p>
 </li>
 <li>
@@ -190,7 +186,7 @@
 <p>這裡最難的地方在於後面的兩個foreign_key 和local_key 的設置，</p>
 </li>
 <li>
-<p>在User 類中，無論hasOne 誰，第二個參數都是<code>user_id</code>，第三個參數一般都是<code>id</code>。由於前面的<code>find(10)</code> 已經鎖定了id = 10，所以這段函數對應的SQL 為： <code>select * from account where user_id=10</code>。</p>
+<p>在User 類中，無論hasOne 誰，第二個參數都是<code>user_id</code>，第三個參數一般都是<code>id </code>。由於前面的<code>find(10)</code> 已經鎖定了id = 10，所以這段函數對應的SQL 為： <code>select * from account where user_id=10</code>。</p>
 </li>
 <li>
 <p>使用Eloquent 時候的建議：</p>
@@ -201,59 +197,61 @@
 </ol>
 </li>
 </ul>
-<h4>belongsTo()</h4>
-<p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Account</span> <span class="keyword">extends</span> <span class="title">Eloquent</span> </span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="keyword">protected</span> $table = <span class="string">'accounts'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">belongsToUser</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;belongsTo(<span class="string">'User'</span>, <span class="string">'user_id'</span>, <span class="string">'id'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3>一對多關係</h3>
+<h4 id="belongsTo">belongsTo()</h4>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Account</span> <span class="keyword">extends</span> <span class="title">Eloquent</span> </span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="keyword">protected</span> <span class="variable">$table</span> = <span class="string">&#x27;accounts&#x27;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">belongsToUser</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">belongsTo</span>(<span class="string">&#x27;User&#x27;</span>, <span class="string">&#x27;user_id&#x27;</span>, <span class="string">&#x27;id&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="一對多關係">一對多關係</h3>
 <ul>
-<li>我們引入一個新的Model：Pay，付款記錄。表結構應該是這樣的：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">user: id ... ...</span><br><span class="line"></span><br><span class="line">pay: id ... ... user_id</span><br></pre></td></tr></table></figure></li>
+<li>我們引入一個新的Model：Pay，付款記錄。表結構應該是這樣的：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">user: id ... ...</span><br><span class="line"></span><br><span class="line">pay: id ... ... user_id</span><br></pre></td></tr></table></figure>
+<ul>
 <li>User 和Pay 具有一對多關係，換句話說就是一個User 可以有多個Pay，這樣的話，只在Pay 表中存在一個<code>user_id</code> 字段即可。</li>
-<li><code>/app/models/User.php</code>:
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">extends</span> <span class="title">Eloquent</span> </span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="keyword">protected</span> $table = <span class="string">'users'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">hasManyPays</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;hasMany(<span class="string">'Pay'</span>, <span class="string">'user_id'</span>, <span class="string">'id'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>需要用到這種關係的時候
+<li><code>/app/models/User.php</code>:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">extends</span> <span class="title">Eloquent</span> </span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="keyword">protected</span> <span class="variable">$table</span> = <span class="string">&#x27;users&#x27;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">hasManyPays</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">hasMany</span>(<span class="string">&#x27;Pay&#x27;</span>, <span class="string">&#x27;user_id&#x27;</span>, <span class="string">&#x27;id&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>需要用到這種關係的時候<br>
 <code>$accounts = User::find(10)-&gt;hasManyPays()-&gt;get();</code></li>
 <li>此時得到的<code>$accounts</code> 即為<code>Illuminate\Database\Eloquent\Collection</code> 類的一個實例。</li>
 <li>這裡不是簡單的<code>-&gt; hasOneAccount</code> 而是<code>-&gt;hasManyPays()-&gt;get()</code>，因為這裡是<code>hasMany</code>，操作的是一個對象集合。</li>
 </ul>
-<h4>相應的belongsTo() 的用法跟上面一對一關係一樣：</h4>
-<p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pay</span> <span class="keyword">extends</span> <span class="title">Eloquent</span> </span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="keyword">protected</span> $table = <span class="string">'pays'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">belongsToUser</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;belongsTo(<span class="string">'User'</span>, <span class="string">'user_id'</span>, <span class="string">'id'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3>多對多關係</h3>
+<h4 id="相應的belongsTo-的用法跟上面一對一關係一樣：">相應的belongsTo() 的用法跟上面一對一關係一樣：</h4>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pay</span> <span class="keyword">extends</span> <span class="title">Eloquent</span> </span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="keyword">protected</span> <span class="variable">$table</span> = <span class="string">&#x27;pays&#x27;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">belongsToUser</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">belongsTo</span>(<span class="string">&#x27;User&#x27;</span>, <span class="string">&#x27;user_id&#x27;</span>, <span class="string">&#x27;id&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="多對多關係">多對多關係</h3>
 <ul>
-<li>
-<p>多對多關係和之前的關係完全不一樣，因為多對多關係可能出現很多冗餘數據，用之前自帶的表存不下了。</p>
-</li>
-<li>
-<p>我們定義兩個模型：Article 和Tag，分別表示文章和標籤，他們是多對多的關係。表格結構應該是這樣的：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">article: id ... ...</span><br><span class="line"></span><br><span class="line">tag: id ... ...</span><br><span class="line"></span><br><span class="line">article_tag: article_id tag_id</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>在Model 中使用：
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tag</span> <span class="keyword">extends</span> <span class="title">Eloquent</span> </span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="keyword">protected</span> $table = <span class="string">'tags'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">belongsToManyArticle</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;belongsToMany(<span class="string">'Article'</span>, <span class="string">'article_tag'</span>, <span class="string">'tag_id'</span>, <span class="string">'article_id'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</li>
+<li>多對多關係和之前的關係完全不一樣，因為多對多關係可能出現很多冗餘數據，用之前自帶的表存不下了。</li>
+<li>我們定義兩個模型：Article 和Tag，分別表示文章和標籤，他們是多對多的關係。表格結構應該是這樣的：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">article: id ... ...</span><br><span class="line"></span><br><span class="line">tag: id ... ...</span><br><span class="line"></span><br><span class="line">article_tag: article_id tag_id</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在Model 中使用：</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tag</span> <span class="keyword">extends</span> <span class="title">Eloquent</span> </span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="keyword">protected</span> <span class="variable">$table</span> = <span class="string">&#x27;tags&#x27;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">belongsToManyArticle</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">belongsToMany</span>(<span class="string">&#x27;Article&#x27;</span>, <span class="string">&#x27;article_tag&#x27;</span>, <span class="string">&#x27;tag_id&#x27;</span>, <span class="string">&#x27;article_id&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
 <li>
 <p>需要注意的是，第三個參數是本類的id，第四個參數是第一個參數那個類的id。</p>
 </li>
 <li>
-<p>使用跟hasMany 一樣：
+<p>使用跟hasMany 一樣：<br>
 <code>$tagsWithArticles = Tag::take(10)-&gt;get()-&gt;belongsToManyArticle()-&gt;get();</code></p>
 </li>
 <li>
-<p>這裡會得到一個非常複雜的對象，可以自行<code>var_dump()</code>。跟大家說一個訣竅，<code>var_dump()</code> 以後，用Chrome 右鍵“查看原始代碼”，就可以看到非常整齊的對象/數組展開了。
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">parent_video</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;belongsToMany(<span class="keyword">$this</span>, <span class="string">'video_hierarchy'</span>, <span class="string">'video_id'</span>, <span class="string">'video_parent_id'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">children_video</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;belongsToMany(<span class="keyword">$this</span>, <span class="string">'video_hierarchy'</span>, <span class="string">'video_parent_id'</span>, <span class="string">'video_id'</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>可以belongsToMany 自己</p>
+<p>這裡會得到一個非常複雜的對象，可以自行<code>var_dump()</code>。跟大家說一個訣竅，<code>var_dump()</code> 以後，用Chrome 右鍵“查看原始代碼”，就可以看到非常整齊的對象/數組展開了。</p>
 </li>
 </ul>
-<h4>其他關係</h4>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">parent_video</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">belongsToMany</span>(<span class="variable">$this</span>, <span class="string">&#x27;video_hierarchy&#x27;</span>, <span class="string">&#x27;video_id&#x27;</span>, <span class="string">&#x27;video_parent_id&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">children_video</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">belongsToMany</span>(<span class="variable">$this</span>, <span class="string">&#x27;video_hierarchy&#x27;</span>, <span class="string">&#x27;video_parent_id&#x27;</span>, <span class="string">&#x27;video_id&#x27;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>可以belongsToMany 自己</li>
+</ul>
+<h4 id="其他關係">其他關係</h4>
 <ul>
 <li>Eloquent 還提供“遠層一對多關聯”、“多態關聯” 和“多態的多對多關聯” 這另外三種用法，經過上面的學習，我們已經掌握了Eloquent 模型間關係的基本概念和使用方法，剩下的幾種不常用的方法就留到我們用到的時候再自己探索吧。</li>
 </ul>
-<h3>重要技巧：關係預載入</h3>
+<h3 id="重要技巧：關係預載入">重要技巧：關係預載入</h3>
 <ul>
-<li>在一對一關係中，需要一次性查詢出10個User並帶上對應的Account的話，需要給數據庫打1 + 10條SQL，這樣性能是很差的。
+<li>在一對一關係中，需要一次性查詢出10個User並帶上對應的Account的話，需要給數據庫打1 + 10條SQL，這樣性能是很差的。<br>
 <code>$users = User::with('hasOneAccount')-&gt;take(10)-&gt;get()</code></li>
-<li>這樣生成的SQL 就是這個樣子的：
+<li>這樣生成的SQL 就是這個樣子的：<br>
 <code>select * from account where id in (1, 2, 3, ... ...)</code></li>
 <li>這樣1 + 10 條SQL 就變成了1 + 1 條，性能大增。</li>
 </ul>

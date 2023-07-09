@@ -124,6 +124,12 @@
             
                 
                     <span class="post-tag">
+                        <a href="/repository/tags/%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91/">
+                            物件導向
+                        </a>
+                    </span>    
+                
+                    <span class="post-tag">
                         <a href="/repository/tags/%E7%B9%BC%E6%89%BF/">
                             繼承
                         </a>
@@ -132,12 +138,6 @@
                     <span class="post-tag">
                         <a href="/repository/tags/%E5%A4%9A%E5%9E%8B/">
                             多型
-                        </a>
-                    </span>    
-                
-                    <span class="post-tag">
-                        <a href="/repository/tags/%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91/">
-                            物件導向
                         </a>
                     </span>    
                 
@@ -181,19 +181,19 @@
     <div class="post-content">
     <h1>5.3 物件導向概論</h1>
 <hr>
-<h2>Object Oriented:</h2>
+<h2 id="Object-Oriented">Object Oriented:</h2>
 <p>int x; (type 變數)<br>
 person P; (類別 物件)</p>
 <ul>
-<li>Ex:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">person p;</span><br><span class="line">p.h &#x3D; 180</span><br><span class="line">p.w &#x3D; 80;</span><br><span class="line">p.walk();</span><br></pre></td></tr></table></figure></li>
+<li>Ex:</li>
 </ul>
-<h3>why O.O</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">person p;</span><br><span class="line">p.h = 180</span><br><span class="line">p.w = 80;</span><br><span class="line">p.walk();</span><br></pre></td></tr></table></figure>
+<h3 id="why-O-O">why O.O</h3>
 <ul>
 <li>可用以反應出真實世界的情況, 使程式的可讀性更佳, 日後的可維護性亦更好</li>
 <li><strong>彈性好, 但 performance 差</strong></li>
 </ul>
-<h2>物件(object)</h2>
+<h2 id="物件-object">物件(object)</h2>
 <ul>
 <li>Def:
 <ul>
@@ -209,7 +209,7 @@ person P; (類別 物件)</p>
 </ol>
 </li>
 </ul>
-<h2>類別(class)</h2>
+<h2 id="類別-class">類別(class)</h2>
 <ul>
 <li>Def:
 <ul>
@@ -231,13 +231,13 @@ person P; (類別 物件)</p>
 </li>
 <li>概念：
 <ul>
-<li>圖：
+<li>圖：<br>
 <img src="%E5%80%9F%E6%9B%B8.png" alt=""></li>
-<li>Note: Object 之間溝通採用 <strong>&quot;Message Passing&quot;</strong> (因為物件間是獨立的, 無共享Mem.)</li>
+<li>Note: Object 之間溝通採用 <strong>“Message Passing”</strong> (因為物件間是獨立的, 無共享Mem.)</li>
 </ul>
 </li>
 </ul>
-<h2>Object Oriented 四大特色</h2>
+<h2 id="Object-Oriented-四大特色">Object Oriented 四大特色</h2>
 <ol>
 <li>Data Abstraction 資料抽象化
 <ul>
@@ -255,15 +255,15 @@ person P; (類別 物件)</p>
 </li>
 <li>優點：
 <ol>
-<li>確保私有 data 不受外界影響 =&gt; 可避免不當操作發生, 如 ....heart</li>
+<li>確保私有 data 不受外界影響 =&gt; 可避免不當操作發生, 如 …heart</li>
 <li>適時將製作的細節封裝, 如此可在改變時, 減少對外操作的影響 =&gt; ripple effect 低, 可維護性高(如程式碼2)</li>
 </ol>
 </li>
 </ul>
 </li>
 </ol>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Person                   外界</span><br><span class="line">setHeight(int h)         height &#x3D; -30; (Can&#39;t use)</span><br><span class="line">&#123;                        setHeight(-30);</span><br><span class="line">    if (h &lt; 0) error;</span><br><span class="line">    height &#x3D; n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;今日有一客戶需一排序程式</span><br><span class="line">BubbleSort(data) &#123;</span><br><span class="line">    ...             &#x2F;&#x2F;但由於資料愈來愈多嫌太慢</span><br><span class="line">&#125;</span><br><span class="line">QuickSort(data) &#123;</span><br><span class="line">    ...             &#x2F;&#x2F;卻發現舊系統中都是 bubble sort, 無法執行 quick sort</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 所以當初應</span><br><span class="line">Sort(data) &#123;</span><br><span class="line">    BubbleSort(data) &#x2F;&#x2F; 改成</span><br><span class="line">    QuickSort(data)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Person                   外界</span><br><span class="line">setHeight(int h)         height = -30; (Can&#x27;t use)</span><br><span class="line">&#123;                        setHeight(-30);</span><br><span class="line">    if (h &lt; 0) error;</span><br><span class="line">    height = n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//今日有一客戶需一排序程式</span><br><span class="line">BubbleSort(data) &#123;</span><br><span class="line">    ...             //但由於資料愈來愈多嫌太慢</span><br><span class="line">&#125;</span><br><span class="line">QuickSort(data) &#123;</span><br><span class="line">    ...             //卻發現舊系統中都是 bubble sort, 無法執行 quick sort</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 所以當初應</span><br><span class="line">Sort(data) &#123;</span><br><span class="line">    BubbleSort(data) // 改成</span><br><span class="line">    QuickSort(data)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol start="3">
 <li>Inheritance 繼承
 <ul>
@@ -285,7 +285,7 @@ person P; (類別 物件)</p>
 <li>當繼承深且複雜的時候, 會使 compiler 的 performance 下降, 耗費時間去找尋各 data 的來源<br>
 <img src="%E7%B9%BC%E6%89%BF.png" alt=""></li>
 <li>readable 及 maintainable 的程度下降, 因為太多層, 所以視窗太多, 要找時也困難</li>
-<li>有 Naming Conflicting 的議題(命名衝突), 又稱 &quot;ambiguous calling&quot; (模糊呼叫)<br>
+<li>有 Naming Conflicting 的議題(命名衝突), 又稱 “ambiguous calling” (模糊呼叫)<br>
 <img src="%E5%91%BD%E5%90%8D%E8%A1%9D%E7%AA%81.png" alt=""></li>
 <li>重複繼承的問題<br>
 <img src="%E9%87%8D%E8%A4%87%E7%B9%BC%E6%89%BF.png" alt=""></li>
@@ -299,14 +299,14 @@ person P; (類別 物件)</p>
 <img src="%E5%B0%81%E8%A3%9D%E5%AD%98%E5%8F%96%E6%AC%8A%E9%99%90.png" alt=""><br>
 Note:</p>
 <ol>
-<li>在 c++中額外提供 &quot;friendly&quot; 權限, 當 class A, B 2者設為 friend, 即可取用之</li>
+<li>在 c++中額外提供 “friendly” 權限, 當 class A, B 2者設為 friend, 即可取用之</li>
 <li>在 java 中若沒宣稱權限, 則為 default 權限, <strong>此時只有 class 本身及同 package(類似目錄的概念) 下方可使用</strong></li>
 </ol>
 </blockquote>
 <ol start="4">
 <li>Polymorphism 多型
 <ul>
-<li>Def: O.O 程式於 &quot;執行期間&quot; (Runtime 才決定呼叫的 function 之所在 -&gt; Dynamic Binding), 不同型別之物件, 接收到同一訊息 <strong>(同名)</strong>, 會有不同的行為 <strong>(異式)</strong>, 反應謂之「多型」</li>
+<li>Def: O.O 程式於 “執行期間” (Runtime 才決定呼叫的 function 之所在 -&gt; Dynamic Binding), 不同型別之物件, 接收到同一訊息 <strong>(同名)</strong>, 會有不同的行為 <strong>(異式)</strong>, 反應謂之「多型」</li>
 <li>Note: binding<br>
 <img src="%E5%A4%9A%E5%9E%8B2.png" alt=""></li>
 <li>Ex:<br>

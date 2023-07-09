@@ -149,8 +149,8 @@
     </div>
 </div>
     <div class="post-content">
-    <h3>Kubernetes</h3>
-<p>&lt;!--more--&gt;</p>
+    <h3 id="Kubernetes">Kubernetes</h3>
+<span id="more"></span>
 <hr>
 <ul>
 <li>容器的全自動管理/調度平台，誕生自Google Borg</li>
@@ -164,16 +164,16 @@
 </ul>
 </li>
 </ul>
-<h3>Why is Container</h3>
+<h3 id="Why-is-Container">Why is Container</h3>
 <ul>
 <li>一致性的執行環境</li>
 <li>方便的應用部署，有利於CI/CD</li>
 <li>清楚的分離Dev與Ops，有利於分工</li>
 <li>以應用為中心的管理方式</li>
 </ul>
-<h3>Docker</h3>
+<h3 id="Docker">Docker</h3>
 <hr>
-<h4>Docker生命週期</h4>
+<h4 id="Docker生命週期">Docker生命週期</h4>
 <ol>
 <li>Code your app</li>
 <li>Write Dockerfile</li>
@@ -184,10 +184,10 @@
 <li>Push or continue developing</li>
 </ol>
 <ul>
-<li>寫好的dockerfile，build 成image後只是存在你build 好的那台機器上面，所以若是要share給別人使用的話，就是要放到第三方的地方，所以image會放在registry的地方
-<img src="https://docs.microsoft.com/zh-tw/dotnet/architecture/microservices/docker-application-development-process/media/image1.png" class="" width="1000" height="400" title="vi-vim-cheat-sheet"></li>
+<li>寫好的dockerfile，build 成image後只是存在你build 好的那台機器上面，所以若是要share給別人使用的話，就是要放到第三方的地方，所以image會放在registry的地方</li>
 </ul>
-<h4>Docker Registry</h4>
+<img src="https://docs.microsoft.com/zh-tw/dotnet/architecture/microservices/docker-application-development-process/media/image1.png" class="" width="1000" height="400" title="vi-vim-cheat-sheet">
+<h4 id="Docker-Registry">Docker Registry</h4>
 <ul>
 <li>維護方式跟 github 機制有87%像，但只是拿來放docker image</li>
 <li>DockerHub ，目前最大的public registry</li>
@@ -199,13 +199,13 @@
 <li>在900之後，有一個內建的registry，gitlab.com上面就有提供一個免費的registry，可以build 自己的code，丟到gitlab registry</li>
 </ul>
 </li>
-<li>Cloud: AWS/GCP/Azure...</li>
+<li>Cloud: AWS/GCP/Azure…</li>
 </ul>
 </li>
 </ul>
-<h3>Kubernetes 資源介紹</h3>
+<h3 id="Kubernetes-資源介紹">Kubernetes 資源介紹</h3>
 <hr>
-<h4>Kubernetes Nodes</h4>
+<h4 id="Kubernetes-Nodes">Kubernetes Nodes</h4>
 <ul>
 <li>Node (就是實體機，分成以下兩個)
 <ol>
@@ -231,35 +231,35 @@
 </ul>
 </li>
 </ul>
-<h4>Kubernetes 抽象資源</h4>
+<h4 id="Kubernetes-抽象資源">Kubernetes 抽象資源</h4>
 <ol>
 <li>Namespace</li>
 </ol>
 <ul>
 <li>一組資源的集合</li>
 <li>隔離不同 namespace 之間的資源 (persistant volume除外)</li>
-<li>預設有 kube-system/kube-public/default
-<img src="http://www.mundodocker.com.br/wp-content/uploads/2017/06/namespaces.png" class="" width="600" height="300" title="vi-vim-cheat-sheet"></li>
+<li>預設有 kube-system/kube-public/default</li>
 </ul>
+<img src="http://www.mundodocker.com.br/wp-content/uploads/2017/06/namespaces.png" class="" width="600" height="300" title="vi-vim-cheat-sheet">
 <ol start="2">
 <li>Pod</li>
 </ol>
 <ul>
 <li>Kubernetes中最小執行單位</li>
 <li>一個完整的 application 部署封裝，可能有一個以上的container</li>
-<li>共享儲存空間/網路
-<img src="http://i0.wp.com/foxutech.com/wp-content/uploads/2018/02/Kubernetes-Pod.jpg" class="" width="800" height="300" title="vi-vim-cheat-sheet"></li>
+<li>共享儲存空間/網路</li>
 </ul>
+<img src="http://i0.wp.com/foxutech.com/wp-content/uploads/2018/02/Kubernetes-Pod.jpg" class="" width="800" height="300" title="vi-vim-cheat-sheet">
 <ol start="3">
 <li>ReplicaSet</li>
 </ol>
 <ul>
-<li>保證Pod數量跟設定中要求的一樣
+<li>保證Pod數量跟設定中要求的一樣<br>
 ex: 譬如今天保證要有3台在運作，那麼就可以把replica設成3，假設今天把一台pod刪掉，那麼他今天就會再幫你生一台新的出來，那如果有多的話，就會把最舊的那台砍掉</li>
 <li>少了就補齊，多了就砍掉，絕對不多不少</li>
-<li>支援動態縮放
-<img src="https://prod-edxapp.edx-cdn.org/assets/courseware/v1/bfc5b38f02fcd9cd9c290750ecbc70a1/asset-v1:LinuxFoundationX+LFS158x+2T2017+type@asset+block/replicaset-1.png" class="" width="500" height="300" title="vi-vim-cheat-sheet"></li>
+<li>支援動態縮放</li>
 </ul>
+<img src="https://prod-edxapp.edx-cdn.org/assets/courseware/v1/bfc5b38f02fcd9cd9c290750ecbc70a1/asset-v1:LinuxFoundationX+LFS158x+2T2017+type@asset+block/replicaset-1.png" class="" width="500" height="300" title="vi-vim-cheat-sheet">
 <ol start="4">
 <li>Deployment</li>
 </ol>
@@ -277,14 +277,14 @@ ex: 譬如今天保證要有3台在運作，那麼就可以把replica設成3，�
 <p><strong>Rolling Update</strong></p>
 </li>
 <li>
-<p>此image版本為1.0，若此時想換成2.0時
-<img src="https://codelabs.developers.google.com/codelabs/k8s-kickstart/img/6a62a850f2be0c9b.png" class="" width="600" height="400" title="vi-vim-cheat-sheet"></p>
-</li>
-<li>
-<p>此時deployment會去開一個新的replicaSet，這個replicaSet會去開一個新的Pod，而這個Pod會去用2.0的image，此時2.0開了新的一台，而就的那邊就會關掉一台，且不會斷掉，以此類推，最後就會把舊的1.0的都關掉，變成2.0的Pod(先開新的，確定能夠使用，才把1.0關掉)
-<img src="https://codelabs.developers.google.com/codelabs/k8s-kickstart/img/8d107e36763fd5c1.png" class="" width="800" height="400" title="vi-vim-cheat-sheet"></p>
+<p>此image版本為1.0，若此時想換成2.0時</p>
 </li>
 </ul>
+<img src="https://codelabs.developers.google.com/codelabs/k8s-kickstart/img/6a62a850f2be0c9b.png" class="" width="600" height="400" title="vi-vim-cheat-sheet">
+<ul>
+<li>此時deployment會去開一個新的replicaSet，這個replicaSet會去開一個新的Pod，而這個Pod會去用2.0的image，此時2.0開了新的一台，而就的那邊就會關掉一台，且不會斷掉，以此類推，最後就會把舊的1.0的都關掉，變成2.0的Pod(先開新的，確定能夠使用，才把1.0關掉)</li>
+</ul>
+<img src="https://codelabs.developers.google.com/codelabs/k8s-kickstart/img/8d107e36763fd5c1.png" class="" width="800" height="400" title="vi-vim-cheat-sheet">
 <ol start="5">
 <li>Job (與deployment不同的是，deployment是提供一個持續性的服務，不會斷掉)</li>
 </ol>

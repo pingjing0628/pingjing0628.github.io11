@@ -162,7 +162,7 @@
 </div>
     <div class="post-content">
     <h1>3.9 磁碟管理 (Disk Management)</h1>
-<h2>目錄</h2>
+<h2 id="目錄">目錄</h2>
 <ul>
 <li>Free space management
 <ul>
@@ -213,7 +213,7 @@
 <li>Summary</li>
 </ul>
 <hr>
-<h2>Disk structure</h2>
+<h2 id="Disk-structure">Disk structure</h2>
 <ul>
 <li>圖：<img src="diskStructure.png" alt=""></li>
 <li>track 的水平集合 =&gt; surface (磁面)</li>
@@ -223,7 +223,7 @@
 <ul>
 <li>each track has 320 sector</li>
 <li>each sector 的 size = 512 bytes<br>
-What's the disk total size?<br>
+What’s the disk total size?<br>
 Sol:<br>
 <code>10 * 20 * 320 * 512 bytes</code><br>
 <code>= 32000 KB</code><br>
@@ -231,7 +231,7 @@ Sol:<br>
 </ul>
 </li>
 </ul>
-<h2>Disk access time</h2>
+<h2 id="Disk-access-time">Disk access time</h2>
 <ul>
 <li>
 <p>由下列組成：</p>
@@ -243,16 +243,16 @@ Sol:<br>
 </li>
 <li>
 <p>Ex: seek time 平均需 8ms, 而 disk 為 7200RPM(轉), 問平均 disk access time = ?<br>
-RPM = Rotate Per Minute: 7200/60 = 120/sec
+RPM = Rotate Per Minute: 7200/60 = 120/sec<br>
 Sol:<br>
 seek time + rotate (平均) = 8ms + 1/120 sec * 1/2 = 8ms + 1/240 sec<br>
 <img src="Ex.png" alt=""></p>
 </li>
 </ul>
-<h2>Disk Scheduling</h2>
+<h2 id="Disk-Scheduling">Disk Scheduling</h2>
 <ul>
 <li>Def: 指當有多個 access request, 在不同的 disk 之上, 則 Header 之移動服務順序為何</li>
-<li><strong>策略採 &quot;Disk Scheduling algorithm&quot;</strong>
+<li><strong>策略採 “Disk Scheduling algorithm”</strong>
 <ol>
 <li><strong>FCFS (FIFO) (First Come First Service)</strong>
 <ul>
@@ -266,7 +266,7 @@ Sol: <img src="FCFS.png" alt=""></li>
 </ul>
 </li>
 <li><strong>SCAN (掃描法)</strong>: 來回於兩端移動, 遇到 access request 即停下來服務之</li>
-<li><strong>C-SCAN</strong> =&gt; 同 SCAN, 但 &quot;單向服務&quot;
+<li><strong>C-SCAN</strong> =&gt; 同 SCAN, 但 “單向服務”
 <ul>
 <li>圖：<img src="C-SCAN.png" alt=""></li>
 </ul>
@@ -277,7 +277,7 @@ Sol: <img src="FCFS.png" alt=""></li>
 <li>圖：<img src="LOOK.png" alt=""></li>
 </ul>
 </li>
-<li><strong>C-LOOK</strong>: 同 LOOK, 但 &quot;單向服務&quot;
+<li><strong>C-LOOK</strong>: 同 LOOK, 但 “單向服務”
 <ul>
 <li>圖：<img src="C-LOOK.png" alt=""></li>
 </ul>
@@ -285,7 +285,7 @@ Sol: <img src="FCFS.png" alt=""></li>
 </ol>
 </li>
 </ul>
-<h2>補充</h2>
+<h2 id="補充">補充</h2>
 <table>
 <thead>
 <tr>
@@ -298,7 +298,7 @@ Sol: <img src="FCFS.png" alt=""></li>
 <tr>
 <td>比較 1</td>
 <td>Header 採機械式移動 =&gt; 慢 (seek 是 sequential)</td>
-<td>採用 &quot;電子式&quot; =&gt; 快 (random access)</td>
+<td>採用 “電子式” =&gt; 快 (random access)</td>
 </tr>
 <tr>
 <td>比較 2</td>

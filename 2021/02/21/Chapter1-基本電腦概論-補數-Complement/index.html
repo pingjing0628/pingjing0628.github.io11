@@ -157,60 +157,60 @@
     <div class="post-content">
     <h1>1.3 補數</h1>
 <hr>
-<h2>補數</h2>
+<h2 id="補數">補數</h2>
 <p>目的： 簡化減法過程，縮減電路成本<br>
 作法： 利用 “補數相加”“取代減法”<br>
 <code>ex: A - B = A + B' =&gt; (-B)</code><br>
 定義： 一數值 N (整數 n 位，小數 m 位)，基底為 b<br>
 <img src="" alt=""></p>
 <ol>
-<li>b's 補數：<br>
+<li>b’s 補數：<br>
 (1) b^n - N, if N 不等於 0<br>
 (2) 0, if N = 0</li>
 <li>(b-1)'s 補數：<br>
 b^n - b ^ -m - N</li>
 </ol>
-<p>ex: (49.2)10, 求 10's 補數及 9's 補數<br>
+<p>ex: (49.2)10, 求 10’s 補數及 9’s 補數<br>
 Sol:<br>
 N = 49.2, b = 10, 整數位數 n = 2, 小數位數 m = 1<br>
-10's 補數： 10^2 - 49.2 = 50.8<br>
-9's 補數： 10^2 - 10^-1 - 49.2 = 100 - 0.1 - 49.2 = 50.7</p>
+10’s 補數： 10^2 - 49.2 = 50.8<br>
+9’s 補數： 10^2 - 10^-1 - 49.2 = 100 - 0.1 - 49.2 = 50.7</p>
 <blockquote>
 <p>快速解法：<br>
 欲求 b 進制的： (b-1)'s 補數：拿(b-1) 去減每一位數<br>
-b's 補數：將(b-1)'s 補數之最後位元 +1 即(b-1)'s complement + b^-m</p>
+b’s 補數：將(b-1)'s 補數之最後位元 +1 即(b-1)'s complement + b^-m</p>
 </blockquote>
-<p>ex: (1783.25)10, 求 10's 及 9's complement.<br>
+<p>ex: (1783.25)10, 求 10’s 及 9’s complement.<br>
 Sol:<br>
-1. 9's complement<br>
+1. 9’s complement<br>
 正：10000 - 0.01 - 1783.25 = 8216.74<br>
 快：9999.99 - 1783.25 = 8216.74<br>
-2. 10's complement<br>
+2. 10’s complement<br>
 正：10000 - 1783.25 = 8216.75<br>
 快：8216.74 + 0.01 = 8216.75</p>
 <p>ex1: 更快解<br>
-(10101000)2 求 1's 及 2's<br>
-1's: 01010111 =&gt; 1 -&gt; 0, 0 -&gt; 1<br>
-2's: 將最右 &quot;1&quot; bit 之前皆保留，其餘 1 -&gt; 0, 0 -&gt; 1<br>
+(10101000)2 求 1’s 及 2’s<br>
+1’s: 01010111 =&gt; 1 -&gt; 0, 0 -&gt; 1<br>
+2’s: 將最右 “1” bit 之前皆保留，其餘 1 -&gt; 0, 0 -&gt; 1<br>
 1010|1000 =&gt; 01011000</p>
 <p>ex2: (0.01010)2<br>
-1's: 0.10101<br>
-2's: 0.010|10 =&gt; 0.10110</p>
-<h2>整數的表示方法</h2>
+1’s: 0.10101<br>
+2’s: 0.010|10 =&gt; 0.10110</p>
+<h2 id="整數的表示方法">整數的表示方法</h2>
 <ol>
 <li>Unsigned (無號數)：無負數，無正負號，若有 N 個 bits，可表示範圍： 0 ≤ x ≤ 2^N -1</li>
 <li>Signed(有號數)：指令以最左邊之 bits 表示正負號，如下：<br>
-<img src="%E6%95%B4%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95.png" alt="">
+<img src="%E6%95%B4%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95.png" alt=""><br>
 表示方法：<br>
 正數： 最大範圍 -&gt; 2^N-1 -1<br>
 負數：<br>
 (1) 符號大小值法 (Sign Magnitude)<br>
-(2) 1's 補數表示法 (1's complement)<br>
-(3) 2's 補數表示法 (2's complement)</li>
+(2) 1’s 補數表示法 (1’s complement)<br>
+(3) 2’s 補數表示法 (2’s complement)</li>
 </ol>
-<h2>Compare</h2>
+<h2 id="Compare">Compare</h2>
 <p><img src="%E8%A3%9C%E6%95%B8%E6%AF%94%E8%BC%83.png" alt=""></p>
-<p>ex1: 將下列值分別採 (1)符號大小 (2)1's 補數表示法 (3)2's 補數表示法<br>
+<p>ex1: 將下列值分別採 (1)符號大小 (2)1’s 補數表示法 (3)2’s 補數表示法<br>
 (1) +7 (2) -11 (3) -16 (4) 可表示 range?<br>
 Sol:<br>
 (1) 符號大小<br>
@@ -218,17 +218,17 @@ Sol:<br>
 -11 =&gt; 1 | 1011<br>
 -16 =&gt; 無法表示，因為 underflow<br>
 5 bits 可表示 range =&gt; <code>-(2^5-1 -1)~ +(2^5-1 -1)</code> =&gt; <code>-15 ~ +15</code><br>
-(2) 1's complement 表示<br>
+(2) 1’s complement 表示<br>
 +7 =&gt; 0 | 0111<br>
-+11 = (01011)2 =&gt; 1's =&gt; 1 | 0100 =&gt; -11<br>
++11 = (01011)2 =&gt; 1’s =&gt; 1 | 0100 =&gt; -11<br>
 -16 =&gt; 無法表示<br>
 <code>-(2^5-1 -1) ~ +(2^5-1 -1)</code> =&gt; <code>-15 ~ +15</code><br>
-(3) 2's complement 表示<br>
+(3) 2’s complement 表示<br>
 +7 =&gt; 0|0111<br>
-+11 =&gt; 0|1011 =&gt; 2's =&gt; 1|0101 =&gt; -11<br>
-+16 =&gt; 10000 =&gt; 2's =&gt; 10000 =&gt; -16<br>
++11 =&gt; 0|1011 =&gt; 2’s =&gt; 1|0101 =&gt; -11<br>
++16 =&gt; 10000 =&gt; 2’s =&gt; 10000 =&gt; -16<br>
 5 bits 的 range =&gt; <code>-2^5-1 ~ 2^5-1 -1</code> =&gt; <code>-16 ~ +15</code></p>
-<p>ex2: 8 bits, 採 1's 補數, 表示 (1) 0 (2)最大,最小值<br>
+<p>ex2: 8 bits, 採 1’s 補數, 表示 (1) 0 (2)最大,最小值<br>
 Sol:<br>
 (1)<br>
 +0: 00000000<br>
@@ -239,77 +239,77 @@ Sol:<br>
 =&gt; -127 ~ +127<br>
 所以 最大：+127 01111111<br>
 最小： -127 10000000</p>
-<p>ex3: 7 bits: 1101001 「反向」分別以 (1) Sign Magnitude (2) 1's complement notation (3) 2's complement notation 求原始值？<br>
+<p>ex3: 7 bits: 1101001 「反向」分別以 (1) Sign Magnitude (2) 1’s complement notation (3) 2’s complement notation 求原始值？<br>
 Sol:<br>
 (1) Sign Magnitude<br>
 1101001<br>
 -(101001)2 = -41<br>
-(2) 1's Complement notation<br>
-1|101001 =&gt; 1's =&gt; -(010110)2 = -22<br>
-(3) 2's Complement notation<br>
-1101001 =&gt; 2's =&gt; -(010111)2 = -23</p>
-<h2>1's 及 2's complement 的整數運算法則</h2>
+(2) 1’s Complement notation<br>
+1|101001 =&gt; 1’s =&gt; -(010110)2 = -22<br>
+(3) 2’s Complement notation<br>
+1101001 =&gt; 2’s =&gt; -(010111)2 = -23</p>
+<h2 id="1’s-及-2’s-complement-的整數運算法則">1’s 及 2’s complement 的整數運算法則</h2>
 <ul>
 <li>
-<p>1's complement<br>
+<p>1’s complement<br>
 同號：直接相加<br>
 異號：將減法變成補數的相加 <code>A-B = A+(B 的 1's 補數)</code><br>
 作法：</p>
 <ol>
-<li>B 變成 1's complement</li>
-<li>A+(B 的 1's complement)</li>
+<li>B 變成 1’s complement</li>
+<li>A+(B 的 1’s complement)</li>
 <li>檢查最高位元有無溢位<br>
 無進位 =&gt; 負值<br>
 有進位 =&gt; 正值(須作端迴進位相加)</li>
 </ol>
 </li>
 <li>
-<p>2's complement<br>
+<p>2’s complement<br>
 同號：直接相加<br>
 異號：將減法變成補數的相加<br>
 作法：</p>
 <ol>
-<li>A+(B 的 2's complement)</li>
+<li>A+(B 的 2’s complement)</li>
 <li>檢查最高位元有無進位<br>
-無進位 =&gt; 負值, 取 2's complement<br>
+無進位 =&gt; 負值, 取 2’s complement<br>
 有進位 =&gt; 正值, 進位捨去 (不須作端迴進位相加)</li>
 </ol>
 </li>
 </ul>
-<p>Ex1: 24-6, 6 bits 採 1's, 求過程？<br>
+<p>Ex1: 24-6, 6 bits 採 1’s, 求過程？<br>
 Sol:<br>
 24 - 6 = 24 + (-6)<br>
 +24 = 011000<br>
-+6 = 000110 =&gt; 1's =&gt; 111001 =&gt; -6<br>
++6 = 000110 =&gt; 1’s =&gt; 111001 =&gt; -6<br>
 <img src="Ex1.png" alt=""></p>
-<p>Ex2: 3-17, 6 bits 採 2's, 求過程？<br>
+<p>Ex2: 3-17, 6 bits 採 2’s, 求過程？<br>
 Sol:<br>
 3-17 = 3+(-17)<br>
 +3 = (000011)2<br>
--17 = (010001)2 =&gt; 2's =&gt; (101111)2 = -17<br>
+-17 = (010001)2 =&gt; 2’s =&gt; (101111)2 = -17<br>
 <img src="Ex2.png" alt=""></p>
-<p>Ex3: 以 2's complement(6 bits) 執行 (1) 27-14 (2) 8-19<br>
+<p>Ex3: 以 2’s complement(6 bits) 執行 (1) 27-14 (2) 8-19<br>
 Sol:<br>
 (1) 27-14 = 27 + (-14)<br>
 +27 = 011011<br>
-+14 = 001110 =&gt; 2's =&gt; 110010 =&gt; -14<br>
-<img src="Ex3.png" alt="">
++14 = 001110 =&gt; 2’s =&gt; 110010 =&gt; -14<br>
+<img src="Ex3.png" alt=""><br>
 (2) 8-19 = 8+(-19)<br>
 +8 = 001000<br>
-+19 = 010011 =&gt; 2's =&gt; 101101 =&gt; -19
++19 = 010011 =&gt; 2’s =&gt; 101101 =&gt; -19<br>
 <img src="Ex4.png" alt=""></p>
-<h2>溢位 (Overflow or underflow)</h2>
+<h2 id="溢位-Overflow-or-underflow">溢位 (Overflow or underflow)</h2>
 <p>指欲表示的數值, 超出可表示的範圍 (因為電腦儲存長度有限)<br>
 <img src="%E6%BA%A2%E4%BD%8D.png" alt=""></p>
 <ul>
-<li>判別原則：
+<li>判別原則：<br>
 若 A,B 2 數值皆於合理的表示範圍內,<br>
 則：<br>
 (1) A,B 一正一負 =&gt; No 溢位<br>
 (2) A,B 皆正 =&gt; 相加後 sign bit = 1, 有 overflow<br>
 (3) A,B 皆負 =&gt; 相加後 sign bit = 0, 有 underflow</li>
 </ul>
-<p>Ex: 8 bits, 採 2's complement 表示, 問 135-44 之結果？<br>
+<p>Ex: 8 bits, 採 2’s complement 表示, 問 135-44 之結果？<br>
 Sol:<br>
 range 為 -2^8-1 ~ +(2^8-1 -1)<br>
 =&gt; -128 ~ +127<br>

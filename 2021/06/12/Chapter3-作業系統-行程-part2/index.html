@@ -168,7 +168,7 @@
 </div>
     <div class="post-content">
     <h1>3.4 行程</h1>
-<h2>目錄</h2>
+<h2 id="目錄">目錄</h2>
 <ul>
 <li>Process Definition</li>
 <li>Program vs Process</li>
@@ -178,7 +178,7 @@
 <li>Thread 執行緒</li>
 </ul>
 <hr>
-<h2>CPU Scheduling algorithms</h2>
+<h2 id="CPU-Scheduling-algorithms">CPU Scheduling algorithms</h2>
 <p>=&gt; 針對 <strong>STS</strong> 從 <strong>Ready Queue</strong> 挑出一 process 獲得 CPU 之挑選策略方法</p>
 <ul>
 <li>FIFO</li>
@@ -255,11 +255,23 @@ Note: <code>1. ~ 2.</code> 愈高愈好, <code>3. ~ 5.</code>時間愈短愈好<
 <td style="text-align:center">3</td>
 <td style="text-align:center">0</td>
 </tr>
+<tr>
+<td style="text-align:center">Sol:</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">A.W.T = <code>(0 + 24 + 27) / 3 = 17</code></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">A.T.T = <code>(24 + 27 + 30) / 3 = 27</code></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
 </tbody>
 </table>
-<p>Sol:<br>
-A.W.T = <code>(0 + 24 + 27) / 3 = 17</code><br>
-A.T.T = <code>(24 + 27 + 30) / 3 = 27</code></p>
 </li>
 </ul>
 <ol start="2">
@@ -272,7 +284,7 @@ Def: 指所需的 CPU 時間愈短, 愈先獲得 CPU 之服務</li>
 <ul>
 <li>效益最佳 (A.W.T &amp; A.T.T 短)</li>
 <li>No convoy effect</li>
-<li><strong>適用於 LTS</strong>
+<li><strong>適用於 LTS</strong><br>
 缺點：</li>
 <li>No fair</li>
 <li>可能會有 <strong>starvation</strong></li>
@@ -316,17 +328,29 @@ Def: 同 2. , 但為 preemtpive, 且 Context Switching 較重</li>
 <td style="text-align:center">5</td>
 <td style="text-align:center">3</td>
 </tr>
+<tr>
+<td style="text-align:center">分別採 SJF &amp; SRJF, 求 A.W.T &amp; A.T.T = ?</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><img src="%E6%B5%81%E7%A8%8B.png" alt=""></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">Sol:</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
 </tbody>
 </table>
-<p>分別採 SJF &amp; SRJF, 求 A.W.T &amp; A.T.T = ?<br>
-<img src="%E6%B5%81%E7%A8%8B.png" alt="">
-Sol:</p>
 <ol>
 <li>SJF<br>
 <img src="exSJF.png" alt=""><br>
 A.W.T = <code>(0 - 0 + 8 - 1 + 17 - 2 + 12 - 3) / 4 = 7.75</code><br>
 A.T.T = <code>(8 - 0 + 12 - 1 + 26 - 2 + 17 - 3) / 4 = 14.25</code></li>
-<li>SRJF
+<li>SRJF<br>
 <img src="exSRJF.png" alt=""><br>
 A.W.T = <code>(0 - 0 + 10 - 1 + 1 - 1 + 17 - 2 + 5 - 3) / 4 = 6.5</code><br>
 A.T.T = <code>(17 - 0 + 5 - 1 + 26 - 2 + 10 - 3) / 4 = 13</code></li>
@@ -377,7 +401,7 @@ Def: priority 愈高者, 愈先取得 CPU 之服務</li>
 <ul>
 <li>Preemptive =&gt; 易造成 starvation
 <ul>
-<li><strong>Solution: 採 &quot;Aging Technique&quot; (老化技術)</strong><br>
+<li><strong>Solution: 採 “Aging Technique” (老化技術)</strong><br>
 Def: 指每隔一段時間逐步將 low priority 之 process 的 優先權提高</li>
 </ul>
 </li>
@@ -419,12 +443,18 @@ Def: 指每隔一段時間逐步將 low priority 之 process 的 優先權提高
 <td style="text-align:center">5</td>
 <td style="text-align:center">2 No.2</td>
 </tr>
+<tr>
+<td style="text-align:center">Sol:</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
 </tbody>
 </table>
-Sol:<br>
-<img src="expriority.png" alt=""><br>
-A.W.T = <code>(6 + 0 + 16 + 18 + 1) / 5 = 8.2</code><br>
-A.T.T = <code>(16 + 1 + 18 + 19 + 6) / 5 = 12</code></li>
+<pre><code>  ![](expriority.png)  
+  A.W.T = `(6 + 0 + 16 + 18 + 1) / 5 = 8.2`  
+  A.T.T = `(16 + 1 + 18 + 19 + 6) / 5 = 12`
+</code></pre>
+</li>
 </ul>
 <ol start="5">
 <li><strong>Round-Robin (R.R)</strong></li>
@@ -476,12 +506,28 @@ A.T.T = <code>(16 + 1 + 18 + 19 + 6) / 5 = 12</code></li>
 <td style="text-align:center">7</td>
 <td style="text-align:center">6</td>
 </tr>
+<tr>
+<td style="text-align:center">Sol:</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><img src="exRR.png" alt=""></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">A.W.T = <code>(0 - 0 + 7 - 5 + 5 - 3 + 10 - 6) / 3 = 8/3</code></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">A.T.T = <code>(10 + 7 - 3 + 17 - 6) / 3 = 25/3</code></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
 </tbody>
 </table>
-<p>Sol:<br>
-<img src="exRR.png" alt="">
-A.W.T = <code>(0 - 0 + 7 - 5 + 5 - 3 + 10 - 6) / 3 = 8/3</code><br>
-A.T.T = <code>(10 + 7 - 3 + 17 - 6) / 3 = 25/3</code></p>
 </li>
 </ul>
 <ol start="6">
@@ -511,7 +557,7 @@ Def: 同 6. , 但 <strong>process 可於 Queue 之間挪動</strong><br>
 </ol>
 <hr>
 <ul>
-<li>Summary
+<li>Summary<br>
 <img src="summary.png" alt=""></li>
 </ul>
 

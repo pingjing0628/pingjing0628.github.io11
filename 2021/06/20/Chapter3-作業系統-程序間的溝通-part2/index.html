@@ -161,19 +161,22 @@
 <ol>
 <li>Shared Memory</li>
 <li>Message Passing<br>
-圖：
+圖：<br>
 <img src="3.6.png" alt=""></li>
 </ol>
-<h2>目錄</h2>
+<h2 id="目錄">目錄</h2>
 <ul>
 <li>Shared Memory</li>
 <li><strong>Message Passing</strong></li>
 </ul>
 <hr>
-<h2>Message Passing (訊息傳遞)</h2>
+<h2 id="Message-Passing-訊息傳遞">Message Passing (訊息傳遞)</h2>
 <ul>
-<li>Def: 當 process 之間不易採用 Shared Memory, 則可採 Message Passing</li>
-<li>步驟:
+<li>
+<p>Def: 當 process 之間不易採用 Shared Memory, 則可採 Message Passing</p>
+</li>
+<li>
+<p>步驟:</p>
 <ol>
 <li>先建立雙方連結</li>
 <li>將 Message send 到收方</li>
@@ -181,7 +184,8 @@
 <img src="messagePass.png" alt=""></li>
 </ol>
 </li>
-<li>可分為:
+<li>
+<p>可分為:</p>
 <ul>
 <li>直接通訊:
 <ul>
@@ -198,9 +202,9 @@ ex: <code>send (process, message), receive (id, message)</code>, id 為接收後
 </li>
 </ul>
 </li>
-</ul>
-<ul>
-<li>Ex: 用 Message Passing 解決 Producer (生產者 P1) / Consumer (消費者 P2) 問題 (<strong>直接通訊, 對稱式</strong>)</li>
+<li>
+<p>Ex: 用 Message Passing 解決 Producer (生產者 P1) / Consumer (消費者 P2) 問題 (<strong>直接通訊, 對稱式</strong>)</p>
+</li>
 </ul>
 <pre><code>// 拿筷子
 wait (right);
@@ -213,7 +217,7 @@ R.S. // 放下筷子
 <p><strong>Hold and wait</strong><br>
 <strong>Circular waiting</strong><br>
 <strong>當同時執行時, 會有 deadlock 現象, 故違反 progress</strong></p>
-<p><strong>流程：... produce item; ...-&gt; 1. send(consumer, item); ...-&gt; 2. receive(producer, item); ...-&gt; 3. consume item;</strong></p>
+<p><strong>流程：… produce item; …-&gt; 1. send(consumer, item); …-&gt; 2. receive(producer, item); …-&gt; 3. consume item;</strong></p>
 
 </div> 
 

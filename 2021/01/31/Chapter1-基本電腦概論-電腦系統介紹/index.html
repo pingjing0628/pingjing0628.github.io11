@@ -169,7 +169,7 @@
     <div class="post-content">
     <h1>1.1 電腦系統介紹</h1>
 <hr>
-<h2>電腦發展史</h2>
+<h2 id="電腦發展史">電腦發展史</h2>
 <table>
 <thead>
 <tr>
@@ -212,35 +212,35 @@
 </tr>
 </tbody>
 </table>
-<h2>電腦架構</h2>
-<p>常見：范紐曼架構 Von-Neumann
+<h2 id="電腦架構">電腦架構</h2>
+<p>常見：范紐曼架構 Von-Neumann<br>
 特色：</p>
 <ol>
-<li>採用 <strong>內儲程式 Stored Programming</strong> 概念：
+<li>採用 <strong>內儲程式 Stored Programming</strong> 概念：<br>
 指欲執行的程式(Program)跟資料(data)必須先載入記憶體(Mem.)中，再由 CPU 從 memory 中抓取資料處理之
 <ul>
-<li>程式：
+<li>程式：<br>
 Def: 由指令組合之集合，永已達到某一特定任務</li>
-<li>指令：
-Instruction: 電腦最基本的執行單位，過程不可分割
+<li>指令：<br>
+Instruction: 電腦最基本的執行單位，過程不可分割<br>
 ex: 3+5 =&gt; <code>+</code> 是指令</li>
 </ul>
 </li>
-<li><strong>循序執行 Sequential Execution</strong>:
+<li><strong>循序執行 Sequential Execution</strong>:<br>
 指令會依序一一執行
 <ul>
-<li>圖示：
+<li>圖示：<br>
 <img src="%E5%BE%AA%E5%BA%8F%E5%9F%B7%E8%A1%8C.png" alt=""></li>
 </ul>
 </li>
 </ol>
-<h2>五大單元結構</h2>
+<h2 id="五大單元結構">五大單元結構</h2>
 <p><img src="5_units.png" alt=""></p>
-<h4>補充：Von Neumann 瓶頸</h4>
+<h4 id="補充：Von-Neumann-瓶頸">補充：Von Neumann 瓶頸</h4>
 <p>說明：<br>
 在 CPU 和 Mem. 處理速度不斷上升之下，資料的傳輸速度將成為瓶頸<br>
 <img src="Von_Neumann_bottleneck.png" alt=""></p>
-<h2>機器指令週期 (Machine Cycle)</h2>
+<h2 id="機器指令週期-Machine-Cycle">機器指令週期 (Machine Cycle)</h2>
 <p>Def: 為 CPU 執行一個指令所需的時間<br>
 5個步驟：</p>
 <ol>
@@ -248,22 +248,22 @@ ex: 3+5 =&gt; <code>+</code> 是指令</li>
 <li>Decode (DE) 解碼： 針對擷取指令解碼，以了解所需運算為何</li>
 <li>Fetch Operation (FO) 擷取運算元： 從記憶體中擷取 CPU 運算所需資料</li>
 <li>Execution (EX) 執行： 針對擷取資料進行運算</li>
-<li>Write to Memory (WM) 攜回記憶體：將運算結果寫回記憶體 (反正執行一定要抓運算元)
+<li>Write to Memory (WM) 攜回記憶體：將運算結果寫回記憶體 (反正執行一定要抓運算元)<br>
 <img src="maching_cycle.png" alt=""></li>
 </ol>
-<h2>Pipeline 管線技術</h2>
+<h2 id="Pipeline-管線技術">Pipeline 管線技術</h2>
 <p>Def: 指不同指令的不同執行週期重疊執行 (Overlay execution) 謂之<br>
 目的：提升系統的執行效能 (system performance 上升)<br>
 傳統指令：<br>
 <img src="%E5%82%B3%E7%B5%B1%E6%8C%87%E4%BB%A4.png" alt=""></p>
 <p>In Pipeline:<br>
-<img src="In_pipeline.png" alt="">
+<img src="In_pipeline.png" alt=""><br>
 <strong>CPU 速度沒變快，只是效能提高</strong></p>
-<h4>例：</h4>
+<h4 id="例：">例：</h4>
 <blockquote>
 <p>Q: IF=3, DE=5, FO=2, EX=3, WM=2,問採 Pipeline 下, 100條指令, 所需花的總時間？<br>
 Sol:<br>
-<img src="Ex1.png" alt="">
+<img src="Ex1.png" alt=""><br>
 <code>Max(IF, DE, FO, EX, WM) = 5</code><br>
 (N 條指令)<br>
 公式1: 第一條指令總時間 + (N-1) * Max(各週期值) = 510<br>
@@ -271,7 +271,7 @@ Sol:<br>
 (常用)<br>
 公式2: 以最大週期數算所有週期 = 520</p>
 </blockquote>
-<h2>儲存單位</h2>
+<h2 id="儲存單位">儲存單位</h2>
 <ol>
 <li>bit (位元) =&gt; 0 &amp; 1 =&gt; 為最基本單位</li>
 <li>byte (位元組)  byte = 8 bits</li>
@@ -306,7 +306,7 @@ Sol:<br>
 </table>
 <p>容量, 儲存相關 =&gt; 2進制<br>
 速度相關 =&gt; 10 進制</p>
-<h2>匯流排</h2>
+<h2 id="匯流排">匯流排</h2>
 <ol>
 <li>位址匯流排(Address Bus)
 <ul>
@@ -325,12 +325,12 @@ Sol:<br>
 <li>控制匯流排(Control Bus)
 <ul>
 <li>負責傳送 CPU 所發出的控制訊號</li>
-<li>Ex: 計算 =&gt; address line + data line
+<li>Ex: 計算 =&gt; address line + data line<br>
 <img src="Control_bus.png" alt=""></li>
 </ul>
 </li>
 </ol>
-<h4>例：</h4>
+<h4 id="例：-2">例：</h4>
 <blockquote>
 <p>Q1: 電腦 Mem size = 4GB, 有 30 條 address line(決定格數), 問 CPU word size(data line =&gt; 決定格子大小)?<br>
 Sol:<br>
@@ -344,33 +344,13 @@ Sol:<br>
 X * 4 bytes = 4GB<br>
 x = 1G = 2^30 格子 =&gt; 30 條</p>
 </blockquote>
-<h2>常見的時間單位</h2>
-<table>
-<thead>
-<tr>
-<th>毫(sec)</th>
-<th>微(sec)</th>
-<th>奈(sec)</th>
-<th>皮(sec)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1 ms</td>
-<td>1 us</td>
-<td>1 ns</td>
-<td>1 ps</td>
-</tr>
-<tr>
-<td>10^-3 sec</td>
-<td>10^-6 sec</td>
-<td>10^-9 sec</td>
-<td>10^-12 sec</td>
-</tr>
-</tbody>
-</table>
-<p>1 秒 = 10^3 ms = 10^6 us = 10^9 ns = 10^12 ps</p>
-<h2>硬體介紹</h2>
+<h2 id="常見的時間單位">常見的時間單位</h2>
+<p>|毫(sec)|微(sec)|奈(sec)|皮(sec)|<br>
+|–|–|–|–|–|<br>
+|1 ms|1 us|1 ns|1 ps|<br>
+|10^-3 sec|10^-6 sec|10^-9 sec|10^-12 sec|<br>
+1 秒 = 10^3 ms = 10^6 us = 10^9 ns = 10^12 ps</p>
+<h2 id="硬體介紹">硬體介紹</h2>
 <ul>
 <li>CPU (Central Processing Unit) 中央處理器
 <ol>
@@ -398,16 +378,16 @@ ex: (1) 1MHz =&gt; 每秒做 10 的 6 次方個 clock cycle<br>
 <li>Ex: 下列哪個選項錯？<br>
 (A) 8KB = 2^13 bytes (2^3 * 2^30)<br>
 (B) 8MB = 2^13 KB (2^3 * 2^20 = 2^13 * 2^10)<br>
-(C) 8GB = 2^33 bytes (2^3 * 2^30 = 2^33)<br>
+© 8GB = 2^33 bytes (2^3 * 2^30 = 2^33)<br>
 (D) 8GHz = 2^33 Hz (2^3 * 10^9 = 2^20) 錯</li>
 </ul>
 </li>
 </ul>
-<h2>CPU 的種類</h2>
+<h2 id="CPU-的種類">CPU 的種類</h2>
 <ol>
-<li>RISC(Reduced): 最大特點是指令長度固定，指令格式種類少，定址方式種類少，易於設計超純量(Superscalar) 和 Pipeline，暫存器數量多，RISC 比 CISC 性能高很多
+<li>RISC(Reduced): 最大特點是指令長度固定，指令格式種類少，定址方式種類少，易於設計超純量(Superscalar) 和 Pipeline，暫存器數量多，RISC 比 CISC 性能高很多<br>
 <img src="RISC.png" alt=""></li>
-<li>CISC(Complex): 大量的複雜指令、可變得指令長度、多種的定址方式，大大增加了解碼的難度
+<li>CISC(Complex): 大量的複雜指令、可變得指令長度、多種的定址方式，大大增加了解碼的難度<br>
 <img src="CISC.png" alt=""></li>
 </ol>
 <ul>
@@ -452,11 +432,11 @@ ex: (1) 1MHz =&gt; 每秒做 10 的 6 次方個 clock cycle<br>
 </tbody>
 </table>
 <p>Note: <strong>Pipeline (管線技術)</strong> 和 <strong>Superscalar (超純量)</strong> =&gt; 即 Pipeline + Parallel processing =&gt; 週期長度固定</p>
-<p>圖示：
+<p>圖示：<br>
 <img src="Pipe+parallel.png" alt=""></p>
 </li>
 </ul>
-<h2>記憶體階層</h2>
+<h2 id="記憶體階層">記憶體階層</h2>
 <p>Q: Why Memory Hierarchy?<br>
 A: 欲於 Speed 和 Cost 之間取得一平衡點</p>
 <ul>
@@ -467,7 +447,7 @@ A: 欲於 Speed 和 Cost 之間取得一平衡點</p>
 </ol>
 </li>
 </ul>
-<h2>記憶體的種類</h2>
+<h2 id="記憶體的種類">記憶體的種類</h2>
 <ol>
 <li>RAM (Random Access Memory) 隨機存取記憶體： SRAM, DRAM</li>
 <li>ROM (Read Only Memory) 唯讀記憶體
@@ -488,7 +468,7 @@ Read many, Write many<br>
 <ul>
 <li>Note: Flash ROM 快閃記憶體 (目前常用的 ROM) =&gt; 比 EEPROM 密度高(容量大)，又更便宜</li>
 </ul>
-<h2>ROM vs RAM</h2>
+<h2 id="ROM-vs-RAM">ROM vs RAM</h2>
 <table>
 <thead>
 <tr>
@@ -519,7 +499,7 @@ Read many, Write many<br>
 </tr>
 </tbody>
 </table>
-<h2>DRAM vs SRAM</h2>
+<h2 id="DRAM-vs-SRAM">DRAM vs SRAM</h2>
 <table>
 <thead>
 <tr>
@@ -564,12 +544,12 @@ Read many, Write many<br>
 <ul>
 <li>Ex: <img src="DRAM_vs_SRAM.png" alt=""></li>
 </ul>
-<h2>I/O的定址方式</h2>
+<h2 id="I-O的定址方式">I/O的定址方式</h2>
 <ol>
 <li>隔離式 I/O (isolated I/O): 不佔記憶體空間，但須額外指令來區分</li>
 <li>記憶體映射式 I/O (memory mapped I/O): 不需額外指令，但佔 Memory 空間</li>
 </ol>
-<h2>圖形表示法</h2>
+<h2 id="圖形表示法">圖形表示法</h2>
 <ol>
 <li>點陣圖 bitmap
 <ul>
@@ -591,7 +571,7 @@ Sol: 1024 * 768 * 24 bits(3 bytes) = 2304 KB 約等於 2.3 MB</p>
 </li>
 <li>
 <p>Ex2: 呈上，此圖可表示的顏色有幾種？<br>
-Sol: 1 bit =&gt; 2^1.....N bits = 2^N, Ans: 2 的 24 次方</p>
+Sol: 1 bit =&gt; 2^1…N bits = 2^N, Ans: 2 的 24 次方</p>
 </li>
 <li>
 <p>Ex3: 若轉為黑白差幾倍？<br>
@@ -599,7 +579,7 @@ Sol: 各 pixel 只需 1 bit, 所以差 24 倍</p>
 </li>
 <li>
 <p>Ex4: 圖 1024 * 768, 由三色系 RGB 組成, 又各色系需 8 bits, 問圖的大小？<br>
-Sol: 8 bits = 1 byte
+Sol: 8 bits = 1 byte<br>
 <img src="RGB.png" alt=""></p>
 </li>
 </ul>

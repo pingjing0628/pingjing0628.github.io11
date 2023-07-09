@@ -124,6 +124,12 @@
             
                 
                     <span class="post-tag">
+                        <a href="/repository/tags/Structure-Programming-Language/">
+                            Structure Programming Language
+                        </a>
+                    </span>    
+                
+                    <span class="post-tag">
                         <a href="/repository/tags/OOP/">
                             OOP
                         </a>
@@ -152,12 +158,6 @@
                             Call by value result
                         </a>
                     </span>    
-                
-                    <span class="post-tag">
-                        <a href="/repository/tags/Structure-Programming-Language/">
-                            Structure Programming Language
-                        </a>
-                    </span>    
                            
             
         </div>
@@ -181,7 +181,7 @@
     <div class="post-content">
     <h1>5.1 基本介紹</h1>
 <hr>
-<h2>Programming Language 程式語言</h2>
+<h2 id="Programming-Language-程式語言">Programming Language 程式語言</h2>
 <table>
 <thead>
 <tr>
@@ -205,7 +205,7 @@
 <tr>
 <td>2GL (Assembly Language)<strong>低階語言</strong></td>
 <td>提供簡易的符號供 user 使用</td>
-<td>用 &quot;assembler&quot; 將之轉成 object code</td>
+<td>用 “assembler” 將之轉成 object code</td>
 <td>Ex: ADD R1 3 <strong>=&gt; 將 3 加到 Register R1 中</strong></td>
 <td></td>
 <td></td>
@@ -213,14 +213,14 @@
 <tr>
 <td>3GL (High-Level Language)<strong>高階語言</strong></td>
 <td>提供更多貼近 user 的指令</td>
-<td>多為程序導向的程式語言 (procedural language -&gt; tell &quot;how&quot; to do)</td>
+<td>多為程序導向的程式語言 (procedural language -&gt; tell “how” to do)</td>
 <td>Ex: <code>int i = 3 + 5;</code></td>
 <td>代表：C (具 self-compile), PASCAL, FURTRAN, COBOL, BASIC, C++, JAVA, .NET</td>
 <td>C 語言：  1. compile 完的 object code, 不能跨平台  2. 此邊是語法, 故可跨平台</td>
 </tr>
 <tr>
 <td>4GL (Non-procedural Language) 非程序導向<strong>高階語言</strong></td>
-<td>又稱為<strong>宣告式語言 (Declaractive Language)</strong> -&gt; tell &quot;what&quot; to do</td>
+<td>又稱為<strong>宣告式語言 (Declaractive Language)</strong> -&gt; tell “what” to do</td>
 <td>代表：SQL, report generator</td>
 <td>Ex: <code>Select height From student where height ≥ 180</code></td>
 <td></td>
@@ -236,7 +236,7 @@
 </tr>
 </tbody>
 </table>
-<h3>種類</h3>
+<h3 id="種類">種類</h3>
 <table>
 <thead>
 <tr>
@@ -273,28 +273,28 @@
 </tr>
 </tbody>
 </table>
-<h2>funtion (函式) =&gt; C, C++, Java</h2>
+<h2 id="funtion-函式-C-C-Java">funtion (函式) =&gt; C, C++, Java</h2>
 <ul>
-<li>格式：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">return type   function name  parameter list</span><br><span class="line">&#123;</span><br><span class="line">    function code (body)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>格式：</li>
 </ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">return type   function name  parameter list</span><br><span class="line">&#123;</span><br><span class="line">    function code (body)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol>
 <li><code>return type</code> : 回傳型態 <strong>output</strong></li>
 <li><code>function name</code>: in c, c++ 中 main 代表主程式</li>
 <li><code>parameter List</code>: 參數串列, 接收外界呼叫時須引入的參數 <strong>input</strong></li>
 <li><code>function code</code> <strong>process</strong></li>
 </ol>
-<h2>funtion calling (呼叫)</h2>
+<h2 id="funtion-calling-呼叫">funtion calling (呼叫)</h2>
 <ul>
-<li>格式：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">funA()</span><br><span class="line">&#123;</span><br><span class="line">    int a, b;</span><br><span class="line">    ...</span><br><span class="line">    funcB(a, b) &#x2F;&#x2F; (a, b 為 actual parameter 實際參數 AP)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">funB(x, y) &#x2F;&#x2F; (x, y 為 foraml parameter 型式參數 FP)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>格式：</li>
 </ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">funA()</span><br><span class="line">&#123;</span><br><span class="line">    int a, b;</span><br><span class="line">    ...</span><br><span class="line">    funcB(a, b) // (a, b 為 actual parameter 實際參數 AP)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">funB(x, y) // (x, y 為 foraml parameter 型式參數 FP)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol>
 <li>參數傳遞 (funcB in funcA)</li>
 <li>funcB execute</li>
 <li>funcB return</li>
 </ol>
-<h2>參數傳遞種類</h2>
+<h2 id="參數傳遞種類">參數傳遞種類</h2>
 <table>
 <thead>
 <tr>
@@ -332,9 +332,9 @@
 </tbody>
 </table>
 <ul>
-<li>Ex1:
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a &#x3D; 10, b &#x3D; 20;</span><br><span class="line">    fun(a, b);</span><br><span class="line">    print(a, b);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void fun(int x, int y)</span><br><span class="line">&#123;</span><br><span class="line">    x &#x3D; 3;</span><br><span class="line">    y &#x3D; 6;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>Ex1:</li>
 </ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a = 10, b = 20;</span><br><span class="line">    fun(a, b);</span><br><span class="line">    print(a, b);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void fun(int x, int y)</span><br><span class="line">&#123;</span><br><span class="line">    x = 3;</span><br><span class="line">    y = 6;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>問分別採 1. call by value 2. call by address 3. call by value result, output = ? a = ? b = ?<br>
 <strong>Sol:</strong></p>
 <ol>
@@ -343,9 +343,9 @@
 <li><strong>最後結束時會將 FP 寫回對應 AP 之內容</strong>, 具 side effect(砍掉前，將最後的值抓回)。Ans: a=3, b=6</li>
 </ol>
 <ul>
-<li>Ex2:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a &#x3D; 4, b &#x3D; 6;</span><br><span class="line">    fun(a, b, a+b);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void fun(int x, int y, int z)</span><br><span class="line">&#123;</span><br><span class="line">    x &#x3D; 7;</span><br><span class="line">    y &#x3D; 10;</span><br><span class="line">    int t &#x3D; z * z;</span><br><span class="line">    printf(t)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>Ex2:</li>
 </ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a = 4, b = 6;</span><br><span class="line">    fun(a, b, a+b);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void fun(int x, int y, int z)</span><br><span class="line">&#123;</span><br><span class="line">    x = 7;</span><br><span class="line">    y = 10;</span><br><span class="line">    int t = z * z;</span><br><span class="line">    printf(t)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>問採 1. call by name? 2. call by address?<br>
 <strong>Sol:</strong></p>
 <ol>
@@ -358,23 +358,23 @@
 <code>call by-reference</code> 一般而言相同, 但在 c++ 中, 2 者完全不同<br>
 <code>call by-name</code> 多做一件事, 所以居中</li>
 </ul>
-<h2>結構化程式三要求 Structure Programming Language SPL</h2>
+<h2 id="結構化程式三要求-Structure-Programming-Language-SPL">結構化程式三要求 Structure Programming Language SPL</h2>
 <p>三要素：</p>
 <ol>
 <li>循序 sequential<br>
 指令會依序一一往下執行</li>
 <li>選擇 selective/conditional<br>
-利用 &quot;判別式&quot; 來決定接下來的執行步驟為何<br>
+利用 “判別式” 來決定接下來的執行步驟為何<br>
 <code>if...else...</code><br>
 <code>switch...case...</code></li>
 <li>重複 repeat/iteractive<br>
-利用 &quot;loop&quot; 來反覆執行部分的 step<br>
+利用 “loop” 來反覆執行部分的 step<br>
 <code>for loop</code><br>
 <code>while</code><br>
 <code>do...while</code></li>
 </ol>
 <ul>
-<li>SPL 中避免使用 &quot;跳躍&quot; 指令或動作<br>
+<li>SPL 中避免使用 “跳躍” 指令或動作<br>
 <code>jump</code>, <code>goto</code></li>
 </ul>
 

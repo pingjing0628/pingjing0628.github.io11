@@ -124,12 +124,6 @@
             
                 
                     <span class="post-tag">
-                        <a href="/repository/tags/Structure-Programming-Language/">
-                            Structure Programming Language
-                        </a>
-                    </span>    
-                
-                    <span class="post-tag">
                         <a href="/repository/tags/C/">
                             C
                         </a>
@@ -158,6 +152,12 @@
                             雙重指標
                         </a>
                     </span>    
+                
+                    <span class="post-tag">
+                        <a href="/repository/tags/Structure-Programming-Language/">
+                            Structure Programming Language
+                        </a>
+                    </span>    
                            
             
         </div>
@@ -181,7 +181,7 @@
     <div class="post-content">
     <h1>5.2 C 語言重點</h1>
 <hr>
-<h2>C Language</h2>
+<h2 id="C-Language">C Language</h2>
 <ul>
 <li>結構
 <ul>
@@ -190,10 +190,10 @@
 <li>body: object code</li>
 </ul>
 </li>
-<li>Ex:
+<li>Ex:<br>
 <code># include &lt;stdio.h&gt;</code> =&gt; stdio.h 為 linker, 外部函式庫之 header file</li>
 </ul>
-<h2>變數 vs 常數</h2>
+<h2 id="變數-vs-常數">變數 vs 常數</h2>
 <table>
 <thead>
 <tr>
@@ -212,7 +212,7 @@
 </tr>
 <tr>
 <td>int x;</td>
-<td>ex: 'a' or 100</td>
+<td>ex: ‘a’ or 100</td>
 </tr>
 </tbody>
 </table>
@@ -220,10 +220,10 @@
 <li>Note: 常數變數 (constant variable)<br>
 Define: <code>const int x = 10;</code></li>
 </ul>
-<h2>變數宣告</h2>
+<h2 id="變數宣告">變數宣告</h2>
 <p>格式： <code>type (space) variable;</code><br>
 ex: int x;</p>
-<h2>Compare Static typed and Dynamic typed</h2>
+<h2 id="Compare-Static-typed-and-Dynamic-typed">Compare Static typed and Dynamic typed</h2>
 <table>
 <thead>
 <tr>
@@ -246,7 +246,7 @@ ex: int x;</p>
 </tr>
 </tbody>
 </table>
-<h2>常見的 data type 介紹</h2>
+<h2 id="常見的-data-type-介紹">常見的 data type 介紹</h2>
 <ol>
 <li>boolean (布林):</li>
 </ol>
@@ -263,13 +263,13 @@ ex: int x;</p>
 <li>character (字元):</li>
 </ol>
 <ul>
-<li>利用 &quot;ASCII&quot; 來存放</li>
+<li>利用 “ASCII” 來存放</li>
 <li>佔用 1 byte memory space</li>
 <li>常見字元編碼
 <ul>
-<li>'0' =&gt; (48)10</li>
-<li>'A' =&gt; (65)10</li>
-<li>'a' =&gt; (97)10</li>
+<li>‘0’ =&gt; (48)10</li>
+<li>‘A’ =&gt; (65)10</li>
+<li>‘a’ =&gt; (97)10</li>
 </ul>
 </li>
 <li>Ex: <code>char c1;</code></li>
@@ -292,8 +292,8 @@ ex: int x;</p>
 <td>用雙引號括住</td>
 </tr>
 <tr>
-<td>'a', 'B'(對), &quot;B&quot;(錯)</td>
-<td>&quot;hello&quot;(對), 'hello'(錯)</td>
+<td>‘a’, ‘B’(對), “B”(錯)</td>
+<td>“hello”(對), ‘hello’(錯)</td>
 </tr>
 </tbody>
 </table>
@@ -305,13 +305,13 @@ ex: int x;</p>
 <li>Ex: <code>int x;</code></li>
 <li>除法:
 <ul>
-<li>&quot;/&quot; =&gt; 取商, <code>x = 6/4</code></li>
-<li>&quot;%&quot; =&gt; 取餘, <code>y = 6%4</code></li>
+<li>“/” =&gt; 取商, <code>x = 6/4</code></li>
+<li>“%” =&gt; 取餘, <code>y = 6%4</code></li>
 </ul>
 </li>
-<li>Ex2:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int x;</span><br><span class="line">char a1 &#x3D; &#39;a&#39;;</span><br><span class="line">x &#x3D; a1;</span><br><span class="line">a1 &#x3D; a1 + 3;</span><br><span class="line">printf(&quot;%d&quot;, x); &#x2F;&#x2F; x &#x3D; 97</span><br><span class="line">printf(&quot;%c&quot;, a1); &#x2F;&#x2F; a1 &#x3D; 100</span><br></pre></td></tr></table></figure></li>
+<li>Ex2:</li>
 </ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int x;</span><br><span class="line">char a1 = &#x27;a&#x27;;</span><br><span class="line">x = a1;</span><br><span class="line">a1 = a1 + 3;</span><br><span class="line">printf(&quot;%d&quot;, x); // x = 97</span><br><span class="line">printf(&quot;%c&quot;, a1); // a1 = 100</span><br></pre></td></tr></table></figure>
 <ol start="4">
 <li>浮點數:</li>
 </ol>
@@ -364,7 +364,7 @@ ex: int x;</p>
 <blockquote>
 <p>NOTE: type range =&gt; byte &lt; short &lt; int &lt; long &lt; float &lt; double</p>
 </blockquote>
-<h2>變數種類</h2>
+<h2 id="變數種類">變數種類</h2>
 <table>
 <thead>
 <tr>
@@ -390,36 +390,30 @@ ex: int x;</p>
 <ul>
 <li>static variable</li>
 </ul>
-<h2>變數的存取順序</h2>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">全域變數</span><br><span class="line">3.&#123;</span><br><span class="line">    2.&#123;</span><br><span class="line">        1.&#123;</span><br><span class="line">            print(x)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="變數的存取順序">變數的存取順序</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">全域變數</span><br><span class="line">3.&#123;</span><br><span class="line">    2.&#123;</span><br><span class="line">        1.&#123;</span><br><span class="line">            print(x)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol>
 <li>先找自身區塊</li>
 <li>若 1 無, 往外層找</li>
 <li>若 2 無, 往 global 找</li>
 </ol>
 <ul>
-<li>
-<p>Note: dynamic scoping =&gt; 依程式執行時的呼叫順序 (runtime) 來決定找尋順序, <code>main() -&gt; A() -&gt; B()</code> =&gt; 找B找不到, 找A, 在找不到找 main</p>
-</li>
-<li>
-<p>Ex1:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int x &#x3D; 10; &#x2F;&#x2F;global</span><br><span class="line">int main() </span><br><span class="line">&#123;</span><br><span class="line">    int y &#x3D; 5;</span><br><span class="line">    &#123;</span><br><span class="line">        int x &#x3D; 20;</span><br><span class="line">        int z &#x3D; 8;</span><br><span class="line">        printf(&quot;%d&quot;, x); &#x2F;&#x2F; x&#x3D;20, 用完即清除</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;%d&quot;, x); &#x2F;&#x2F; x&#x3D;10</span><br><span class="line">    printf(&quot;%d&quot;, z); &#x2F;&#x2F; compile error</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>Ex2:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int x &#x3D; 20;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int y &#x3D; 10;</span><br><span class="line">    fun(y);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line">-------------------</span><br><span class="line">void fun(int a)</span><br><span class="line">&#123;</span><br><span class="line">    int y &#x3D; 30;</span><br><span class="line">    printf(&quot;%d, %d&quot;, x, y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-Ans: (20, 30)</p>
-</li>
-<li>
-<p>Note: 在 C 語言裡, 只要不是指標, 就是 call by-value</p>
-</li>
-<li>
-<p>local variable =&gt; 與 function 一樣, 用 stack 放 =&gt; 後進先出</p>
-</li>
+<li>Note: dynamic scoping =&gt; 依程式執行時的呼叫順序 (runtime) 來決定找尋順序, <code>main() -&gt; A() -&gt; B()</code> =&gt; 找B找不到, 找A, 在找不到找 main</li>
+<li>Ex1:</li>
 </ul>
-<h2>Standard I/O library 標準輸出/輸入函式庫</h2>
-<h3>程式欲使用須引入： <code>#include &lt;stdio.h&gt;</code></h3>
-<h3>常用函式：</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int x = 10; //global</span><br><span class="line">int main() </span><br><span class="line">&#123;</span><br><span class="line">    int y = 5;</span><br><span class="line">    &#123;</span><br><span class="line">        int x = 20;</span><br><span class="line">        int z = 8;</span><br><span class="line">        printf(&quot;%d&quot;, x); // x=20, 用完即清除</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;%d&quot;, x); // x=10</span><br><span class="line">    printf(&quot;%d&quot;, z); // compile error</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Ex2:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int x = 20;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int y = 10;</span><br><span class="line">    fun(y);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line">-------------------</span><br><span class="line">void fun(int a)</span><br><span class="line">&#123;</span><br><span class="line">    int y = 30;</span><br><span class="line">    printf(&quot;%d, %d&quot;, x, y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Ans: (20, 30)</p>
+<ul>
+<li>Note: 在 C 語言裡, 只要不是指標, 就是 call by-value</li>
+<li>local variable =&gt; 與 function 一樣, 用 stack 放 =&gt; 後進先出</li>
+</ul>
+<h2 id="Standard-I-O-library-標準輸出-輸入函式庫">Standard I/O library 標準輸出/輸入函式庫</h2>
+<h3 id="程式欲使用須引入：-include-stdio-h">程式欲使用須引入： <code>#include &lt;stdio.h&gt;</code></h3>
+<h3 id="常用函式：">常用函式：</h3>
 <ol>
 <li>
 <p><code>printf</code> =&gt; 標準輸出<br>
@@ -436,22 +430,22 @@ Note:</p>
 %c 字元<br>
 %s 字串</p>
 </blockquote>
-<p>EX:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">printf(&quot;hello&quot;);</span><br><span class="line">int x;</span><br><span class="line">printf(&quot;x is %d&quot;, x);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; x is 100</span><br></pre></td></tr></table></figure></p>
+<p>EX:</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">printf(&quot;hello&quot;);</span><br><span class="line">int x;</span><br><span class="line">printf(&quot;x is %d&quot;, x);</span><br><span class="line"></span><br><span class="line">// x is 100</span><br></pre></td></tr></table></figure>
 </li>
 <li>
 <p><code>scanf</code> =&gt; 標準輸入<br>
 從外界 key in 值, 接收到程式<br>
 格式： <code>scanf(&quot;格式字串&quot;, &amp;var1, &amp;var2...); // &amp;位址</code><br>
 Note: 格式碼與 <code>printf</code> 相同<br>
-EX:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int x;</span><br><span class="line">scanf(&quot;input: %d&quot;, &amp;x);</span><br></pre></td></tr></table></figure></p>
+EX:</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int x;</span><br><span class="line">scanf(&quot;input: %d&quot;, &amp;x);</span><br></pre></td></tr></table></figure>
 <p>EX:<br>
-<code>Sum = 1+2+3+4...+N</code>, N 為輸入值<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int main() </span><br><span class="line">&#123;</span><br><span class="line">    int N, sum &#x3D; 0, i;</span><br><span class="line">    scanf(&quot;input: %d&quot;, &amp;N);</span><br><span class="line">    for(i &#x3D; 1; i ≤ N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        sum &#x3D; sum + i;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;total:%d&quot;, sum);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<code>Sum = 1+2+3+4...+N</code>, N 為輸入值</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int main() </span><br><span class="line">&#123;</span><br><span class="line">    int N, sum = 0, i;</span><br><span class="line">    scanf(&quot;input: %d&quot;, &amp;N);</span><br><span class="line">    for(i = 1; i ≤ N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        sum = sum + i;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;total:%d&quot;, sum);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h2>運算子</h2>
+<h2 id="運算子">運算子</h2>
 <table>
 <thead>
 <tr>
@@ -467,7 +461,7 @@ EX:<br>
 <td>右結合</td>
 </tr>
 <tr>
-<td>!, ~, -(負), ++, --</td>
+<td>!, ~, -(負), ++, –</td>
 <td></td>
 <td>左結合</td>
 </tr>
@@ -527,8 +521,8 @@ ex: -5, !flag</li>
 <li>binary operator (二元)<br>
 ex: 3+5, 6-4, 7*8</li>
 <li>trinary operator (三元)<br>
-<code>條件式 ? x : y</code><br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if (條件式)</span><br><span class="line">&#123;</span><br><span class="line">    x</span><br><span class="line">&#125; else </span><br><span class="line">&#123;</span><br><span class="line">    y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<code>條件式 ? x : y</code> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if (條件式)</span><br><span class="line">&#123;</span><br><span class="line">    x</span><br><span class="line">&#125; else </span><br><span class="line">&#123;</span><br><span class="line">    y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
 </li>
 <li>
@@ -537,7 +531,7 @@ ex: 3+5, 6-4, 7*8</li>
 </ol>
 </li>
 </ul>
-<h2>++, --</h2>
+<h2 id="–">++, –</h2>
 <table>
 <thead>
 <tr>
@@ -548,27 +542,25 @@ ex: 3+5, 6-4, 7*8</li>
 <tbody>
 <tr>
 <td>先做++, --, 再取值</td>
-<td>先取值, 再做++, --</td>
+<td>先取值, 再做++, –</td>
 </tr>
 <tr>
 <td>++x, --x</td>
-<td>x++, x--</td>
+<td>x++, x–</td>
 </tr>
 </tbody>
 </table>
 <ul>
-<li>
-<p>Ex1:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int x &#x3D; 5, y&#x3D;5;</span><br><span class="line">int A, B;</span><br><span class="line">A &#x3D; x++;</span><br><span class="line">B &#x3D; ++y;</span><br><span class="line">print(A, B, x, y);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 5, 6, 6, 6</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>Ex2:<br>
+<li>Ex1:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int x = 5, y=5;</span><br><span class="line">int A, B;</span><br><span class="line">A = x++;</span><br><span class="line">B = ++y;</span><br><span class="line">print(A, B, x, y);</span><br><span class="line"></span><br><span class="line">// 5, 6, 6, 6</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Ex2:<br>
 <code>a = 3, b = 6</code>, 則 <code>39/-++a+-20%b--</code><br>
 Sol:<br>
-<code>39/(-4)+(-29)%6</code> = <code>-9 + (-5)</code> = <code>-14</code></p>
-</li>
+<code>39/(-4)+(-29)%6</code> = <code>-9 + (-5)</code> = <code>-14</code></li>
 </ul>
-<h2>位元運算</h2>
+<h2 id="位元運算">位元運算</h2>
 <ul>
 <li>概念：先將資料化成 2 進制, 再開始進行運算</li>
 </ul>
@@ -577,7 +569,7 @@ Sol:<br>
 <li>OR (|)</li>
 <li>XOR (^)</li>
 <li>&lt;&lt;</li>
-<li>&quot;&gt;&gt;&quot;</li>
+<li>“&gt;&gt;”</li>
 </ol>
 <ul>
 <li>EX1:  <code>int x = 8 &amp; 6;</code>, <code>(0 0 0 0)2 = 0</code>, 同時為 1 才成立, <strong>像 (．)</strong></li>
@@ -594,110 +586,98 @@ Sol:<br>
 <ol>
 <li>正 =&gt; 0 (n 個)</li>
 <li>負 =&gt; 1 (n 個)<br>
-（具備 <strong>除法</strong> 效果)
+（具備 <strong>除法</strong> 效果)<br>
 例如：<code>int x = 8 &gt;&gt; 2;</code>, (<strong>00</strong>1000)2 = 2</li>
 </ol>
 </li>
 </ul>
 </li>
 </ul>
-<h2>Logical</h2>
-<h3>NOT (!)</h3>
+<h2 id="Logical">Logical</h2>
+<h3 id="NOT">NOT (!)</h3>
 <ul>
 <li>false -&gt; true</li>
-<li>true -&gt; false<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bool flag &#x3D; true;</span><br><span class="line">&#x3D;&gt; !flag &#x3D;&gt; false</span><br></pre></td></tr></table></figure></li>
+<li>true -&gt; false</li>
 </ul>
-<h3>AND (&amp;&amp;) and OR (||)</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bool flag = true;</span><br><span class="line">=&gt; !flag =&gt; false</span><br></pre></td></tr></table></figure>
+<h3 id="AND-and-OR">AND (&amp;&amp;) and OR (||)</h3>
 <ul>
 <li><strong>布林運算式最佳化</strong>  =&gt; <strong>短路現象</strong> =&gt; <strong>shortcut 捷徑運算</strong></li>
 <li>A, B 均為 conditional (條件式)<br>
 <code>if(A &amp;&amp; B)</code>, A = false, B 不做, 結果必為 false<br>
 <code>if(A || B)</code>, A = true, B 不做, 結果必為 true</li>
 </ul>
-<h2>if - else</h2>
+<h2 id="if-else">if - else</h2>
 <ul>
-<li>
-<p>格式一：<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if (cond 1) &#123;</span><br><span class="line">    true (2)</span><br><span class="line">&#125;else &#123;</span><br><span class="line">    false (3)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-1 ? 2 : 3</p>
-</li>
-<li>
-<p>格式二：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">if (cond) &#123;</span><br><span class="line">    true 1</span><br><span class="line">&#125;else &#123;</span><br><span class="line">    if (cond) &#123;</span><br><span class="line">        true 2</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        false 3</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">------------</span><br><span class="line">if (cond) &#123;</span><br><span class="line">    1</span><br><span class="line">&#125;else if (cond) &#123;</span><br><span class="line">    2</span><br><span class="line">&#125;else &#123;</span><br><span class="line">    3</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>Note: 當 if ... else 沒有 block 時, 則只會影響到下一個 statement (敘述)</p>
-</li>
-<li>
-<p>ex1:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int x &#x3D; 1;</span><br><span class="line">if (x &lt; 5) &#123;</span><br><span class="line">    x--;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    x++;</span><br><span class="line">&#125;</span><br><span class="line">x++;</span><br><span class="line">printf(&quot;%d&quot;, x);</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>ex2:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int x &#x3D; 10;</span><br><span class="line">&#x2F;*</span><br><span class="line">    說明, 此程式在判別 x 是否大於 5 後, 再行動行</span><br><span class="line">*&#x2F;</span><br><span class="line">if (x &gt; 5) </span><br><span class="line">    x &#x3D; x + 5;</span><br><span class="line">else </span><br><span class="line">    x &#x3D; x - 5;</span><br><span class="line">printf(&quot;%d&quot;, x);</span><br></pre></td></tr></table></figure></p>
-</li>
+<li>格式一：</li>
 </ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if (cond 1) &#123;</span><br><span class="line">    true (2)</span><br><span class="line">&#125;else &#123;</span><br><span class="line">    false (3)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>1 ? 2 : 3</p>
+<ul>
+<li>格式二：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">if (cond) &#123;</span><br><span class="line">    true 1</span><br><span class="line">&#125;else &#123;</span><br><span class="line">    if (cond) &#123;</span><br><span class="line">        true 2</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        false 3</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">------------</span><br><span class="line">if (cond) &#123;</span><br><span class="line">    1</span><br><span class="line">&#125;else if (cond) &#123;</span><br><span class="line">    2</span><br><span class="line">&#125;else &#123;</span><br><span class="line">    3</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Note: 當 if … else 沒有 block 時, 則只會影響到下一個 statement (敘述)</li>
+<li>ex1:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int x = 1;</span><br><span class="line">if (x &lt; 5) &#123;</span><br><span class="line">    x--;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    x++;</span><br><span class="line">&#125;</span><br><span class="line">x++;</span><br><span class="line">printf(&quot;%d&quot;, x);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ex2:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int x = 10;</span><br><span class="line">/*</span><br><span class="line">    說明, 此程式在判別 x 是否大於 5 後, 再行動行</span><br><span class="line">*/</span><br><span class="line">if (x &gt; 5) </span><br><span class="line">    x = x + 5;</span><br><span class="line">else </span><br><span class="line">    x = x - 5;</span><br><span class="line">printf(&quot;%d&quot;, x);</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>Note: 註解可分, // =&gt; 單行, /<em>...</em>/ =&gt; 多行註解</p>
+<p>Note: 註解可分, // =&gt; 單行, /<em>…</em>/ =&gt; 多行註解</p>
 </blockquote>
 <ul>
-<li>ex3:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int i &#x3D; 3, j &#x3D; 5;</span><br><span class="line">if (cond) &#123;</span><br><span class="line">    printf(&quot;%d&quot;, i);</span><br><span class="line">    printf(&quot;%d&quot;, j);</span><br><span class="line">&#125;else &#123;</span><br><span class="line">    printf(&quot;false&quot;);</span><br><span class="line">    printf(&quot;%d, %d&quot;, i, j);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-Q: cond 為：
-<ol>
-<li>(i = 0) &amp;&amp; (j = 4), false, 0, 5 =&gt; Ans</li>
-<li>i == 2 &amp;&amp; j == 4, false, 3, 5</li>
-<li>(i = 0) &amp; (j = 4), false, 0, 4</li>
-<li>(i = 2) || (j = 4), 2, 5</li>
-</ol>
-</li>
+<li>ex3:</li>
 </ul>
-<h2>switch...case</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int i = 3, j = 5;</span><br><span class="line">if (cond) &#123;</span><br><span class="line">    printf(&quot;%d&quot;, i);</span><br><span class="line">    printf(&quot;%d&quot;, j);</span><br><span class="line">&#125;else &#123;</span><br><span class="line">    printf(&quot;false&quot;);</span><br><span class="line">    printf(&quot;%d, %d&quot;, i, j);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Q: cond 為：<br>
+1. (i = 0) &amp;&amp; (j = 4), false, 0, 5 =&gt; Ans<br>
+2. i == 2 &amp;&amp; j == 4, false, 3, 5<br>
+3. (i = 0) &amp; (j = 4), false, 0, 4<br>
+4. (i = 2) || (j = 4), 2, 5</p>
+<h2 id="switch…case">switch…case</h2>
 <ul>
-<li>
-<p>思考：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if(c1)</span><br><span class="line">else if (c2)</span><br><span class="line">else if (c3)</span><br><span class="line">else</span><br><span class="line">&#x2F;&#x2F; 當 else if 太多時，採用 switch...case 較清楚</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>格式：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">switch(變數 or 運算式)</span><br><span class="line">&#123;</span><br><span class="line">    case 符合文 or 數字：</span><br><span class="line">        statement;</span><br><span class="line">    case ...:</span><br><span class="line">        statement;</span><br><span class="line">    case ...:</span><br><span class="line">        ...;</span><br><span class="line">    default: &#x2F;&#x2F;當所有 case 皆不成立, 則於此</span><br><span class="line">        statement;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>執行方式：</p>
+<li>思考：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if(c1)</span><br><span class="line">else if (c2)</span><br><span class="line">else if (c3)</span><br><span class="line">else</span><br><span class="line">// 當 else if 太多時，採用 switch...case 較清楚</span><br></pre></td></tr></table></figure>
+<ul>
+<li>格式：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">switch(變數 or 運算式)</span><br><span class="line">&#123;</span><br><span class="line">    case 符合文 or 數字：</span><br><span class="line">        statement;</span><br><span class="line">    case ...:</span><br><span class="line">        statement;</span><br><span class="line">    case ...:</span><br><span class="line">        ...;</span><br><span class="line">    default: //當所有 case 皆不成立, 則於此</span><br><span class="line">        statement;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>執行方式：
 <ul>
 <li>step1: 從 switch 的變數去比對哪個 case 符合條件</li>
 <li>step2: 從符合的 case 之 statement 往下做, 直到 break 或 block 結束才停止</li>
 </ul>
 </li>
-<li>
-<p>Ex:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">switch(x) &#123;</span><br><span class="line">    default:</span><br><span class="line">        printf(&quot;No match&quot;);</span><br><span class="line">    case 1:</span><br><span class="line">        printf(&quot;1&quot;);</span><br><span class="line">    case 2:</span><br><span class="line">        printf(&quot;2&quot;);</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; 1. x &#x3D; 2 &#x3D;&gt; 印出 2</span><br><span class="line">&#x2F;&#x2F; 2. x &#x3D; 5 &#x3D;&gt; 印出 No match 1 2</span><br></pre></td></tr></table></figure></p>
-</li>
+<li>Ex:</li>
 </ul>
-<h2>重複 =&gt; loop in C 常用 loop 語法</h2>
-<h3>for</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">switch(x) &#123;</span><br><span class="line">    default:</span><br><span class="line">        printf(&quot;No match&quot;);</span><br><span class="line">    case 1:</span><br><span class="line">        printf(&quot;1&quot;);</span><br><span class="line">    case 2:</span><br><span class="line">        printf(&quot;2&quot;);</span><br><span class="line">&#125;</span><br><span class="line">// 1. x = 2 =&gt; 印出 2</span><br><span class="line">// 2. x = 5 =&gt; 印出 No match 1 2</span><br></pre></td></tr></table></figure>
+<h2 id="重複-loop-in-C-常用-loop-語法">重複 =&gt; loop in C 常用 loop 語法</h2>
+<h3 id="for">for</h3>
 <ul>
-<li>
-<p>格式：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">for ( exp1(1); exp2(2); exp3(4)) </span><br><span class="line">&#123;</span><br><span class="line">    statement(3);</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; 1. initial: 只做一次，於進入時做</span><br><span class="line">&#x2F;&#x2F; 2. conditional: 成立，做 3, 接著 4, 再回到 2。不成立，跳出 for loop</span><br><span class="line">----------------------------------</span><br><span class="line">&#x2F;&#x2F; special case:</span><br><span class="line">for ( ; (true); ;)</span><br><span class="line">[</span><br><span class="line">    &#x2F;&#x2F; 無窮迴圈</span><br><span class="line">]</span><br><span class="line">&#x3D;&gt;</span><br><span class="line">while (true)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>Ex: 1+2+3....+10, 用 for 寫
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int sum &#x3D; 0, i;</span><br><span class="line">for(i &#x3D; 1; i ≤ 10; i++) &#123;</span><br><span class="line">    sum &#x3D; sum + i;</span><br><span class="line">&#125;</span><br><span class="line">printf(&quot;sum&#x3D;%d&quot;, sum);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 55, i &#x3D; 11 最終跑到 11 不成立</span><br></pre></td></tr></table></figure></p>
-</li>
+<li>格式：</li>
 </ul>
-<h3>while</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">for ( exp1(1); exp2(2); exp3(4)) </span><br><span class="line">&#123;</span><br><span class="line">    statement(3);</span><br><span class="line">&#125;</span><br><span class="line">// 1. initial: 只做一次，於進入時做</span><br><span class="line">// 2. conditional: 成立，做 3, 接著 4, 再回到 2。不成立，跳出 for loop</span><br><span class="line">----------------------------------</span><br><span class="line">// special case:</span><br><span class="line">for ( ; (true); ;)</span><br><span class="line">[</span><br><span class="line">    // 無窮迴圈</span><br><span class="line">]</span><br><span class="line">=&gt;</span><br><span class="line">while (true)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>格式：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 承上題</span><br><span class="line">int sum &#x3D; 0, i;</span><br><span class="line">i &#x3D; 1;</span><br><span class="line">while (i ≤ 10)</span><br><span class="line">&#123;</span><br><span class="line">    sum &#x3D; sum + i;</span><br><span class="line">    i++;</span><br><span class="line">&#125;</span><br><span class="line">printf(&quot;sum&#x3D;%d&quot;, sum);</span><br></pre></td></tr></table></figure></li>
+<li>Ex: 1+2+3…+10, 用 for 寫</li>
 </ul>
-<h3>do...while</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int sum = 0, i;</span><br><span class="line">for(i = 1; i ≤ 10; i++) &#123;</span><br><span class="line">    sum = sum + i;</span><br><span class="line">&#125;</span><br><span class="line">printf(&quot;sum=%d&quot;, sum);</span><br><span class="line"></span><br><span class="line">// 55, i = 11 最終跑到 11 不成立</span><br></pre></td></tr></table></figure>
+<h3 id="while">while</h3>
 <ul>
-<li>格式：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">do(1)</span><br><span class="line">&#123;</span><br><span class="line">(3)</span><br><span class="line">(4)</span><br><span class="line">&#125;while(2);</span><br></pre></td></tr></table></figure></li>
+<li>格式：</li>
 </ul>
-<h3>Compare 前測式 VS 後測式</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 承上題</span><br><span class="line">int sum = 0, i;</span><br><span class="line">i = 1;</span><br><span class="line">while (i ≤ 10)</span><br><span class="line">&#123;</span><br><span class="line">    sum = sum + i;</span><br><span class="line">    i++;</span><br><span class="line">&#125;</span><br><span class="line">printf(&quot;sum=%d&quot;, sum);</span><br></pre></td></tr></table></figure>
+<h3 id="do…while">do…while</h3>
+<ul>
+<li>格式：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">do(1)</span><br><span class="line">&#123;</span><br><span class="line">(3)</span><br><span class="line">(4)</span><br><span class="line">&#125;while(2);</span><br></pre></td></tr></table></figure>
+<h3 id="Compare-前測式-VS-後測式">Compare 前測式 VS 後測式</h3>
 <table>
 <thead>
 <tr>
@@ -719,7 +699,7 @@ Q: cond 為：
 <ul>
 <li>Note: C語言和 C++ 中, 所有關鍵字都是小寫</li>
 </ul>
-<h3>Compare counted loop VS conditional loop</h3>
+<h3 id="Compare-counted-loop-VS-conditional-loop">Compare counted loop VS conditional loop</h3>
 <table>
 <thead>
 <tr>
@@ -733,7 +713,7 @@ Q: cond 為：
 <td>執行次數不明確，在一特定的條件，成立或不成立才終止</td>
 </tr>
 <tr>
-<td>ex: 1+2+....+100</td>
+<td>ex: 1+2+…+100</td>
 <td>linked list 長度</td>
 </tr>
 <tr>
@@ -742,7 +722,7 @@ Q: cond 為：
 </tr>
 </tbody>
 </table>
-<h3>continue &amp; break</h3>
+<h3 id="continue-break">continue &amp; break</h3>
 <table>
 <thead>
 <tr>
@@ -758,20 +738,18 @@ Q: cond 為：
 </tbody>
 </table>
 <ul>
-<li>
-<p>ex:
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">int sum &#x3D; 0;</span><br><span class="line">for (int i &#x3D; 2; i ≤ 10; i+&#x3D;2)</span><br><span class="line">&#123;</span><br><span class="line">    if (i &#x3D;&#x3D; 6) continue;</span><br><span class="line">    sum +&#x3D; i;</span><br><span class="line">&#125;</span><br><span class="line">printf(&quot;%d&quot;, sum);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; i  2 4 6 8  10 12</span><br><span class="line">&#x2F;&#x2F;sum 2 6 X 14 24 stop</span><br><span class="line">&#x2F;&#x2F;sum &#x3D; 24</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>ex2: 承上題 若 continue 改為 break
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">int sum &#x3D; 0;</span><br><span class="line">for (int i &#x3D; 2; i ≤ 10; i+&#x3D;2)</span><br><span class="line">&#123;</span><br><span class="line">    if (i &#x3D;&#x3D; 6) break;</span><br><span class="line">    sum +&#x3D; i;</span><br><span class="line">&#125;</span><br><span class="line">printf(&quot;%d&quot;, sum);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; i  2 4 6 </span><br><span class="line">&#x2F;&#x2F;sum 2 6 X </span><br><span class="line">&#x2F;&#x2F;sum &#x3D; 6</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>ex3: 呈例 2, 將 <strong>==</strong> 改為 <strong>=</strong>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int sum &#x3D; 0;</span><br><span class="line">for (int i &#x3D; 2; i ≤ 10; i+&#x3D;2)</span><br><span class="line">&#123;</span><br><span class="line">    if (i &#x3D; 6) break;</span><br><span class="line">    sum +&#x3D; i;</span><br><span class="line">&#125;</span><br><span class="line">printf(&quot;%d&quot;, sum);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;sum &#x3D; 0</span><br></pre></td></tr></table></figure></p>
-</li>
+<li>ex:</li>
 </ul>
-<h2>Pointer (指標)</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">int sum = 0;</span><br><span class="line">for (int i = 2; i ≤ 10; i+=2)</span><br><span class="line">&#123;</span><br><span class="line">    if (i == 6) continue;</span><br><span class="line">    sum += i;</span><br><span class="line">&#125;</span><br><span class="line">printf(&quot;%d&quot;, sum);</span><br><span class="line"></span><br><span class="line">// i  2 4 6 8  10 12</span><br><span class="line">//sum 2 6 X 14 24 stop</span><br><span class="line">//sum = 24</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ex2: 承上題 若 continue 改為 break</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">int sum = 0;</span><br><span class="line">for (int i = 2; i ≤ 10; i+=2)</span><br><span class="line">&#123;</span><br><span class="line">    if (i == 6) break;</span><br><span class="line">    sum += i;</span><br><span class="line">&#125;</span><br><span class="line">printf(&quot;%d&quot;, sum);</span><br><span class="line"></span><br><span class="line">// i  2 4 6 </span><br><span class="line">//sum 2 6 X </span><br><span class="line">//sum = 6</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ex3: 呈例 2, 將 <strong>==</strong> 改為 <strong>=</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int sum = 0;</span><br><span class="line">for (int i = 2; i ≤ 10; i+=2)</span><br><span class="line">&#123;</span><br><span class="line">    if (i = 6) break;</span><br><span class="line">    sum += i;</span><br><span class="line">&#125;</span><br><span class="line">printf(&quot;%d&quot;, sum);</span><br><span class="line"></span><br><span class="line">//sum = 0</span><br></pre></td></tr></table></figure>
+<h2 id="Pointer-指標">Pointer (指標)</h2>
 <ul>
 <li>說明：</li>
 </ul>
@@ -790,25 +768,21 @@ Q: cond 為：
 </tbody>
 </table>
 <ul>
-<li>
-<p>Ex:
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int x &#x3D; 5;</span><br><span class="line">&#x2F;&#x2F; 下面兩行為 int *p &#x3D; &amp;x</span><br><span class="line">int *p;</span><br><span class="line">p &#x3D; &amp;x;</span><br><span class="line">*p &#x3D; *p + 1; &#x2F;&#x2F; 利用指標間接操作指向的內容</span><br><span class="line">printf(&quot;%d&quot;, x)</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>Ex: 一學生採 C language coding 如下：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a &#x3D; 10, b &#x3D; 20;</span><br><span class="line">    swap(a, b);</span><br><span class="line">    printf(&quot;%d, %d&quot;, a, b);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line">void swap(int x, int y)</span><br><span class="line">&#123;</span><br><span class="line">    int temp;</span><br><span class="line">    temp &#x3D; x;</span><br><span class="line">    x &#x3D; y;</span><br><span class="line">    y &#x3D; temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-Q:</p>
-<ol>
-<li>為何呼叫 swap 後, a, b 沒變動？<br>
-由於此時 swap 的參數傳遞是採用 call by value, 而非 call by address, 故沒有 side effect, 因此 x, y 的變動, a, b 不受影響</li>
-<li>How to modify the program?<br>
-in C =&gt; 用 pointer 以改成 call by address<br>
-in C++ =&gt; 用 pointer or 用 call by reference<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a &#x3D; 10, b &#x3D; 20;</span><br><span class="line">    swap(&amp;a, &amp;b);</span><br><span class="line">    printf(&quot;%d, %d&quot;, a, b);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line">void swap(int *x, int *y)</span><br><span class="line">&#123;</span><br><span class="line">    int temp;</span><br><span class="line">    temp &#x3D; *x;</span><br><span class="line">    *x &#x3D; *y;</span><br><span class="line">    *y &#x3D; temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-</li>
+<li>Ex:</li>
 </ul>
-<h2>陣列(Array)</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int x = 5;</span><br><span class="line">// 下面兩行為 int *p = &amp;x</span><br><span class="line">int *p;</span><br><span class="line">p = &amp;x;</span><br><span class="line">*p = *p + 1; // 利用指標間接操作指向的內容</span><br><span class="line">printf(&quot;%d&quot;, x)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Ex: 一學生採 C language coding 如下：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a = 10, b = 20;</span><br><span class="line">    swap(a, b);</span><br><span class="line">    printf(&quot;%d, %d&quot;, a, b);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line">void swap(int x, int y)</span><br><span class="line">&#123;</span><br><span class="line">    int temp;</span><br><span class="line">    temp = x;</span><br><span class="line">    x = y;</span><br><span class="line">    y = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Q:<br>
+1. 為何呼叫 swap 後, a, b 沒變動？<br>
+由於此時 swap 的參數傳遞是採用 call by value, 而非 call by address, 故沒有 side effect, 因此 x, y 的變動, a, b 不受影響<br>
+2. How to modify the program?<br>
+in C =&gt; 用 pointer 以改成 call by address<br>
+in C++ =&gt; 用 pointer or 用 call by reference</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a = 10, b = 20;</span><br><span class="line">    swap(&amp;a, &amp;b);</span><br><span class="line">    printf(&quot;%d, %d&quot;, a, b);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line">void swap(int *x, int *y)</span><br><span class="line">&#123;</span><br><span class="line">    int temp;</span><br><span class="line">    temp = *x;</span><br><span class="line">    *x = *y;</span><br><span class="line">    *y = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="陣列-Array">陣列(Array)</h2>
 <ul>
 <li>
 <p>宣告方式：<br>
@@ -832,18 +806,18 @@ int  A  [5];</p>
 </ol>
 </li>
 <li>
-<p>Ex1:
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int A[5];</span><br><span class="line">int *p;</span><br><span class="line">for ( i &#x3D; 0; ≤ 4; i++)</span><br><span class="line">&#123;</span><br><span class="line">    A[i] &#x3D; 5 - i;</span><br><span class="line">&#125;</span><br><span class="line">p &#x3D; A; &#x2F;&#x2F; A為何不用&amp;, 因為A已經是 address 所以不須加</span><br></pre></td></tr></table></figure>
-<img src="pointer.png" alt=""></p>
+<p>Ex1:</p>
 </li>
 </ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int A[5];</span><br><span class="line">int *p;</span><br><span class="line">for ( i = 0; ≤ 4; i++)</span><br><span class="line">&#123;</span><br><span class="line">    A[i] = 5 - i;</span><br><span class="line">&#125;</span><br><span class="line">p = A; // A為何不用&amp;, 因為A已經是 address 所以不須加</span><br></pre></td></tr></table></figure>
+<p><img src="pointer.png" alt=""></p>
 <p>Q:<br>
 1. printf(*p);  5<br>
 2. printf(<em>p++);  5 // 先取值再往下一格<br>
 3. printf(</em>++p);  3<br>
 4. printf(++*p);  4<br>
 5. printf((<em>p++));  4<br>
-6. printf(</em>--p);  4</p>
+6. printf(</em>–p);  4</p>
 <ul>
 <li>Note:<br>
 p++ or ++p =&gt; p=p+1 往下一格<br>
@@ -851,21 +825,18 @@ p-- or --p =&gt; p=p-1 往上一格</li>
 </ul>
 <p>(*p)++ or ++*p =&gt; *p=*p+1 將p指向的內容+1<br>
 (*p)-- or --*p =&gt; *p=*p-1 將p指向的內容-1</p>
-<h2>雙重指標</h2>
+<h2 id="雙重指標">雙重指標</h2>
 <ul>
-<li>
-<p>宣告：<br>
+<li>宣告：<br>
 type  **變數名稱<br>
 指標的指標<br>
-=&gt; 需 &quot;2次&quot; 的 Mem. access 才可取得data</p>
-</li>
-<li>
-<p>Ex:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int x &#x3D; 5;</span><br><span class="line">int *p &#x3D; &amp;x;</span><br><span class="line">int **q &#x3D; &amp;p;</span><br></pre></td></tr></table></figure>
-<img src="double_pointer.png" alt=""></p>
-</li>
-<li>
-<p>Q:</p>
+=&gt; 需 “2次” 的 Mem. access 才可取得data</li>
+<li>Ex:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int x = 5;</span><br><span class="line">int *p = &amp;x;</span><br><span class="line">int **q = &amp;p;</span><br></pre></td></tr></table></figure>
+<p><img src="double_pointer.png" alt=""></p>
+<ul>
+<li>Q:
 <ol>
 <li>q = ?  2000</li>
 <li>&amp;q = ?  3000</li>
@@ -874,19 +845,19 @@ type  **變數名稱<br>
 </ol>
 </li>
 </ul>
-<h2>字串的處理方式</h2>
+<h2 id="字串的處理方式">字串的處理方式</h2>
 <ul>
-<li>C 語言中無 string 之 data type =&gt; 拿 &quot;字元陣列&quot; 來存字串</li>
+<li>C 語言中無 string 之 data type =&gt; 拿 “字元陣列” 來存字串</li>
 <li>ex: cahr a[10];<br>
-a = &quot;hello&quot;;</li>
+a = “hello”;</li>
 <li>ex1:<br>
-char *S = &quot;hello&quot;;
+char *S = “hello”;
 <ul>
 <li>Q:
 <ol>
 <li>S[0] = ?</li>
 <li>*(S+4) = ?</li>
-<li>printf(&quot;%s&quot;, S+2);?</li>
+<li>printf(“%s”, S+2);?</li>
 </ol>
 </li>
 <li>Sol:

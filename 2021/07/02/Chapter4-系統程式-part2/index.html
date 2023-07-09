@@ -181,24 +181,24 @@
     <div class="post-content">
     <h1>4 系統程式 (System Program)</h1>
 <hr>
-<h2>補充 - Linking 的種類</h2>
+<h2 id="補充-Linking-的種類">補充 - Linking 的種類</h2>
 <ul>
 <li>Static Linking (like MACRO)</li>
 <li>Dynamic Linking (like Subroutine)</li>
 </ul>
-<h3>Static Linking</h3>
+<h3 id="Static-Linking">Static Linking</h3>
 <ul>
 <li>指在 linking 時會將外部參考的函式皆搬到程式中, 成為程式的一部份, 故<strong>程式將較佔 space, 但後續執行不需去呼叫外部函式</strong></li>
 <li>巨集 =&gt; 程式碼被撐大</li>
 <li>Static Linking =&gt; 執行檔會被撐大</li>
 <li>圖：<img src="staticLinking.png" alt=""></li>
 </ul>
-<h3>Dynamic Linking</h3>
+<h3 id="Dynamic-Linking">Dynamic Linking</h3>
 <ul>
 <li>Linking 時, 只將外部參考和外部函式所在做繫結, 不將外部函式載入, 故執行時在動態呼叫之</li>
 <li>Ex: .dll =&gt; Dynamic Linking Library</li>
 </ul>
-<h3>Compare</h3>
+<h3 id="Compare">Compare</h3>
 <table>
 <thead>
 <tr>
@@ -225,7 +225,7 @@
 </tr>
 </tbody>
 </table>
-<h2>P-code compiler</h2>
+<h2 id="P-code-compiler">P-code compiler</h2>
 <ul>
 <li>Def: 為 pesudo-machine 之 object code
 <ul>
@@ -239,9 +239,9 @@
 <li>缺點：P-code 使用 interpreter 執行, 所以執行速度較慢</li>
 <li>中間碼：類似目的碼, 由 0, 1 組成, 但和機器獨立</li>
 </ul>
-<h2>Java-compiler</h2>
+<h2 id="Java-compiler">Java-compiler</h2>
 <p><img src="java-compiler.png" alt=""></p>
-<h2>JVM - Java Virtual Machine</h2>
+<h2 id="JVM-Java-Virtual-Machine">JVM - Java Virtual Machine</h2>
 <p><img src="jvm.png" alt=""></p>
 
 </div> 

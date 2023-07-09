@@ -181,15 +181,15 @@
     <div class="post-content">
     <h1>1.5 數碼、文字碼</h1>
 <hr>
-<h2>BCD 碼</h2>
+<h2 id="BCD-碼">BCD 碼</h2>
 <p>利用 4 個 bits (2進制) 表示 10 進制中每一位數之值<br>
 <strong>有6種組合不用：</strong> 1010(10), 1011(11), 1100(12), 1101(13), 1110(14), 1111(15)</p>
-<h2>8, 4, -2, -1 碼 (BCD 碼之變形)</h2>
-<h2>Excess-3 code = BCD code + 3</h2>
+<h2 id="8-4-2-1-碼-BCD-碼之變形">8, 4, -2, -1 碼 (BCD 碼之變形)</h2>
+<h2 id="Excess-3-code-BCD-code-3">Excess-3 code = BCD code + 3</h2>
 <p><strong>有6種組合不用：</strong> 0000(0), 0001(1), 0010(2), 1101(13), 1110(14), 1111(15)<br>
 具有<strong>Self-Complement(自我補數)</strong> 功能<br>
-當 10 進制位數值轉成 excess-3 code後, 再取 1's complement 會同於 10 進制取 9's 補數<br>
-Ex:
+當 10 進制位數值轉成 excess-3 code後, 再取 1’s complement 會同於 10 進制取 9’s 補數<br>
+Ex:<br>
 <img src="self-complement.png" alt=""><br>
 8, 4, -2, -1 (+3)=&gt; excess-3 code</p>
 <table>
@@ -262,23 +262,73 @@ Ex:
 <td style="text-align:center">1111</td>
 <td style="text-align:center">1100</td>
 </tr>
+<tr>
+<td style="text-align:center"><strong>Ex:</strong></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">(42)10</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">= (0100 0010)BCD</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">= (0100 0110)8, 4, -2, -1</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">= (0111 0101)excess-3</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Ex:</strong></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">48 bits 採 BCD 編號後可表示多少組合？</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">(A) 2^48 (B) 2^12 © 10^48 (D) 10^12</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">D</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">48/4 = 12 (若 BCD 拿掉, 則選 A)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
 </tbody>
 </table>
-<p><strong>Ex:</strong><br>
-(42)10<br>
-= (0100 0010)BCD<br>
-= (0100 0110)8, 4, -2, -1<br>
-= (0111 0101)excess-3<br>
-<strong>Ex:</strong><br>
-48 bits 採 BCD 編號後可表示多少組合？<br>
-(A) 2^48 (B) 2^12 (C) 10^48 (D) 10^12<br>
-D<br>
-48/4 = 12 (若 BCD 拿掉, 則選 A)</p>
-<h2>Gray code (格雷碼)</h2>
+<h2 id="Gray-code-格雷碼">Gray code (格雷碼)</h2>
 <p><strong>Def:</strong> 任何 2 個連續數字利用 2 進位表示只有一個 bit 不同謂之<br>
 <strong>特色:</strong><br>
-1. Gray Code 不唯一, 欲得唯一的 Gray Code, 用 <strong>reflected (反射) Gray Code</strong>
-2. 適用於 data 傳輸
+1. Gray Code 不唯一, 欲得唯一的 Gray Code, 用 <strong>reflected (反射) Gray Code</strong><br>
+2. 適用於 data 傳輸<br>
 3. 每次僅更動 1 bit</p>
 <p><strong>Ex:</strong></p>
 <table>
@@ -315,7 +365,7 @@ D<br>
 <p><strong>Part1:</strong> 10 進制 -&gt; Gray Code<br>
 <strong>作法：</strong><br>
 (1) 將 10 進制 -&gt; 2 進制<br>
-(2) 若 2 進制為 (Xn, Xn-1, .....X0)2, 則 Gray Code 如：<br>
+(2) 若 2 進制為 (Xn, Xn-1, …X0)2, 則 Gray Code 如：<br>
 <img src="10%E8%BD%89Gray.png" alt=""><br>
 <strong>Ex:</strong><br>
 A ⊕ B -&gt; 若 A, B (1) 相同為 0, (2) 相異為 1<br>
@@ -330,41 +380,41 @@ A ⊕ B -&gt; 若 A, B (1) 相同為 0, (2) 相異為 1<br>
 <img src="7.png" alt=""></p>
 <p><strong>Part2:</strong> Gray Code -&gt; 10 進制<br>
 <strong>作法：</strong><br>
-若一 Gray Code:(Gn, Gn-1, ...G0)Gray, 則<br>
+若一 Gray Code:(Gn, Gn-1, …G0)Gray, 則<br>
 (1) Gn 直接留下(即最左位元)<br>
 (2) 將 Gn 和 Gn-1 做 ⊕ 得到 R2, 而 R2 跟 Gn-2 做 ⊕<br>
 <img src="Gray%E8%BD%892.png" alt=""><br>
 <strong>Ex:</strong>  (0101)Gray Code = (6)10<br>
 <img src="ExGray%E8%BD%892.png" alt=""></p>
-<h2>ASCII (American Standard Code for Information Interchange)</h2>
+<h2 id="ASCII-American-Standard-Code-for-Information-Interchange">ASCII (American Standard Code for Information Interchange)</h2>
 <p><strong>特色:</strong><br>
-(1) 理論上由 <strong>7 個 bits</strong> (2^7 = 128 組合) 所組成，而實際應用是由 8 bits (1 byte) 組成
+(1) 理論上由 <strong>7 個 bits</strong> (2^7 = 128 組合) 所組成，而實際應用是由 8 bits (1 byte) 組成<br>
 (2) 常用字元：<br>
-'A' -&gt; (65)10 -&gt; (41)16<br>
-'a' -&gt; (97)10 -&gt; (61)16<br>
-'0' -&gt; (48)10 -&gt; (30)16<br>
-(3) 編號順序 '0' &lt; 'A' &lt; 'a' =&gt; 特殊符號(，, Esc) &lt; 數字 &lt; 大寫 &lt; 小寫<br>
+‘A’ -&gt; (65)10 -&gt; (41)16<br>
+‘a’ -&gt; (97)10 -&gt; (61)16<br>
+‘0’ -&gt; (48)10 -&gt; (30)16<br>
+(3) 編號順序 ‘0’ &lt; ‘A’ &lt; ‘a’ =&gt; 特殊符號(，, Esc) &lt; 數字 &lt; 大寫 &lt; 小寫<br>
 ASCII 100 = (97) =&gt; a, (98) =&gt; b, (99) =&gt; c, (100) =&gt; d</p>
-<h2>EBCDIC (Extended BCDIC)</h2>
+<h2 id="EBCDIC-Extended-BCDIC">EBCDIC (Extended BCDIC)</h2>
 <p><strong>特色：</strong><br>
 (1) 由 IBM 所發明，中大型主機採用 (現在也均用 ASCII)<br>
 (2) 用 8 bits 表示一字元<br>
 (3) 編碼順序(和 ASCII 相反) -&gt; 小寫 &lt; 大寫 &lt; 數字</p>
-<h2>Unicode (萬用/完全/統一碼)</h2>
+<h2 id="Unicode-萬用-完全-統一碼">Unicode (萬用/完全/統一碼)</h2>
 <p><strong>特色：</strong><br>
 (1) 用 16 bits 表示字元符號<br>
 (2) 前 128 個字元符號和 ASCII 相同<br>
 (3) 主要解決 <strong>跨國語系</strong> 問題<br>
 (4) 目前常使用的格式為 UTF-8, UTF-8 表示中, 日, 韓文需 3 個 Byte (Taiwan =&gt; 6 bytes)<br>
 Note: 繁體中文 =&gt; Big5, 簡體中文 =&gt; GBK</p>
-<h2>錯誤碼的偵測與更正</h2>
+<h2 id="錯誤碼的偵測與更正">錯誤碼的偵測與更正</h2>
 <ol>
 <li>Parity Check =&gt; 只能 Detect Errors</li>
 <li>CRC =&gt; 只能 Detect Errors</li>
 <li>Hamming Code =&gt; 具有 error correction 之能力<br>
 <img src="%E9%8C%AF%E8%AA%A4%E7%A2%BC%E5%81%B5%E6%B8%AC.png" alt=""></li>
 </ol>
-<h3>(1)Parity Check: 同位元檢查</h3>
+<h3 id="1-Parity-Check-同位元檢查">(1)Parity Check: 同位元檢查</h3>
 <ul>
 <li>
 <p>偶同位(Even Parity Check):<br>
@@ -376,28 +426,28 @@ Note: 繁體中文 =&gt; Big5, 簡體中文 =&gt; GBK</p>
 </li>
 </ul>
 <p><strong>Ex:</strong><br>
-M(x) = 1010100, 問採偶同位, T(x) = ?
+M(x) = 1010100, 問採偶同位, T(x) = ?<br>
 <strong>Sol:</strong><br>
-10101001 = T(x)
+10101001 = T(x)<br>
 <strong>Ex:</strong><br>
 下列何者為非奇同位？<br>
 (A) 0011010<br>
 (B) 1100100<br>
-(C) 1000000<br>
+© 1000000<br>
 (D) 0010111</p>
-<h3>(2) CRC (Cycle Redundancy Check): 循環冗餘檢查碼</h3>
+<h3 id="2-CRC-Cycle-Redundancy-Check-循環冗餘檢查碼">(2) CRC (Cycle Redundancy Check): 循環冗餘檢查碼</h3>
 <p><strong>特性：</strong>  應用多項式除法概念, 其中除法利用減法取代, 而減法採 ⊕ 運算</p>
 <ul>
 <li>多項式 x^5 + x^4 + 1 =&gt; 位元串 11001</li>
-<li>圖示：
+<li>圖示：<br>
 <img src="CRC.png" alt=""><br>
 (1) 送方作法：<br>
 step1:<br>
 <img src="%E9%80%81%E6%96%B9step1.png" alt=""><br>
 step2:<br>
-<img src="%E9%80%81%E6%96%B9step2.png" alt="">
+<img src="%E9%80%81%E6%96%B9step2.png" alt=""><br>
 (2) 收方檢查：<br>
-<img src="%E6%94%B6%E6%96%B9check.png" alt="">
+<img src="%E6%94%B6%E6%96%B9check.png" alt=""><br>
 <strong>Ex:</strong><br>
 M(x) = 1101011011, G(x) = x^4+x+1 =&gt; 10011<br>
 <strong>Sol:</strong><br>
@@ -406,7 +456,7 @@ step1:<br>
 step2:<br>
 <img src="exstep2.png" alt=""></li>
 </ul>
-<h3>(3) Hamming Code (漢明碼) 又稱 Error Correcting Code (ECC)</h3>
+<h3 id="3-Hamming-Code-漢明碼-又稱-Error-Correcting-Code-ECC">(3) Hamming Code (漢明碼) 又稱 Error Correcting Code (ECC)</h3>
 <p><strong>特性：</strong> 有更正錯誤的能力<br>
 <strong>作法：</strong> 決定需要幾個 Hamming Code Bits:</p>
 <ul>
@@ -435,7 +485,7 @@ B: 111111<br>
 <p><strong>Ex:</strong><br>
 C: 000011<br>
 =&gt; min{AB, AC, BC} = 3</p>
-<h2>Summary</h2>
+<h2 id="Summary">Summary</h2>
 <p><img src="summary.png" alt=""></p>
 
 </div> 

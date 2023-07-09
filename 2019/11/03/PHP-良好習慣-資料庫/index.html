@@ -155,20 +155,19 @@
     </div>
 </div>
     <div class="post-content">
-    <h2>Database</h2>
-<p>&lt;!--more--&gt;</p>
+    <h2 id="Database">Database</h2>
+<span id="more"></span>
 <hr>
-<h3>PDO 擴充</h3>
+<h3 id="PDO-擴充">PDO 擴充</h3>
 <ul>
 <li>
 <p>PHP 提供了原生的PDO擴充，PDO(PHP data objects)是一組PHP類別，可以用單一使用者介面和許多不同的SQL資料庫溝通，讓資料庫的實作方式被抽象化出來，無論使用哪種資料庫系統，都可以用單一的介面撰寫和執行資料庫查詢</p>
 </li>
 <li>
-<p>PDO 建構子
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	$pdo = <span class="keyword">new</span> PDO(</span><br><span class="line">		<span class="string">'mysql:host=127.0.0.1;dbname=books;port=3306;charset=utf8'</span>,</span><br><span class="line">		<span class="string">'USERNAME'</span>,</span><br><span class="line">		<span class="string">'PASSWORD'</span></span><br><span class="line">	);</span><br><span class="line">&#125; <span class="keyword">catch</span> (PDOException $e) &#123;</span><br><span class="line">	<span class="comment">// 資料庫連線失敗</span></span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"Database connection failed"</span>;</span><br><span class="line">	<span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>PDO 建構子</p>
 </li>
 </ul>
-
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	<span class="variable">$pdo</span> = <span class="keyword">new</span> <span class="title function_ invoke__">PDO</span>(</span><br><span class="line">		<span class="string">&#x27;mysql:host=127.0.0.1;dbname=books;port=3306;charset=utf8&#x27;</span>,</span><br><span class="line">		<span class="string">&#x27;USERNAME&#x27;</span>,</span><br><span class="line">		<span class="string">&#x27;PASSWORD&#x27;</span></span><br><span class="line">	);</span><br><span class="line">&#125; <span class="keyword">catch</span> (PDOException <span class="variable">$e</span>) &#123;</span><br><span class="line">	<span class="comment">// 資料庫連線失敗</span></span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;Database connection failed&quot;</span>;</span><br><span class="line">	<span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </div> 
 
 <script>

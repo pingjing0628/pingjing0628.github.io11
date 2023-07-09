@@ -155,35 +155,35 @@
     </div>
 </div>
     <div class="post-content">
-    <h2>CSRF</h2>
-<p>&lt;!--more--&gt;</p>
+    <h2 id="CSRF">CSRF</h2>
+<span id="more"></span>
 <hr>
 <ul>
 <li>跨站請求偽造（英語：Cross-site request forgery），也被稱為 one-click attack 或者 session riding，通常縮寫為 CSRF 或者 XSRF，是一種挾制用戶在當前已登錄的Web應用程式上執行非本意的操作的攻擊方法。</li>
 <li>跟跨網站指令碼（XSS）相比，XSS 利用的是用戶對指定網站的信任，CSRF 利用的是網站對用戶網頁瀏覽器的信任。</li>
 </ul>
-<h2>Laravel 內建 CSRF token</h2>
+<h2 id="Laravel-內建-CSRF-token">Laravel 內建 CSRF token</h2>
 <ul>
 <li>Laravel 透過應用程式自動產生一個 CSRF「token」來管理每個活躍的使用者 session。這個 token 用於驗證已認證使用者是否實際向應用程式發出請求。</li>
 </ul>
 <ol>
+<li><code>vender/laravel/framework/src/Illuminate/Session/Store.php</code> 這支檔案，可以知道每次進入 laravel 專案的時候，都會檢查 session 中 <code>_token</code> 是否存在，如果不存在就會呼叫 <code>regenerateToken</code> 重新生成一個 token</li>
+</ol>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">start</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">      <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">loadSession</span>();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (! <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">has</span>(<span class="string">&#x27;_token&#x27;</span>)) &#123;</span><br><span class="line">          <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">regenerateToken</span>();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;started = <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><code>regenerateToken</code> 實作內容，即隨機產生亂數字元。</li>
+</ol>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">regenerateToken</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">put</span>(<span class="string">&#x27;_token&#x27;</span>, <span class="title class_">Str</span>::<span class="title function_ invoke__">random</span>(<span class="number">40</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
 <li>
-<p><code>vender/laravel/framework/src/Illuminate/Session/Store.php</code> 這支檔案，可以知道每次進入 laravel 專案的時候，都會檢查 session 中 <code>_token</code> 是否存在，如果不存在就會呼叫 <code>regenerateToken</code> 重新生成一個 token
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">start</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">      <span class="keyword">$this</span>-&gt;loadSession();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (! <span class="keyword">$this</span>-&gt;has(<span class="string">'_token'</span>)) &#123;</span><br><span class="line">          <span class="keyword">$this</span>-&gt;regenerateToken();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;started = <span class="keyword">true</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p><code>regenerateToken</code> 實作內容，即隨機產生亂數字元。
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">regenerateToken</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;put(<span class="string">'_token'</span>, Str::random(<span class="number">40</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>實際用 POSTMAN 看看伺服器是不是真的有回傳 token
+<p>實際用 POSTMAN 看看伺服器是不是真的有回傳 token<br>
 <img src="https://i.imgur.com/T6PLbma.png" alt=""></p>
 </li>
 <li>
 <p>確實有一個名為 XSRF-TOKEN 的 token。</p>
 </li>
 </ol>
-<h2>添加校驗 token</h2>
+<h2 id="添加校驗-token">添加校驗 token</h2>
 
 </div> 
 

@@ -155,76 +155,64 @@
     </div>
 </div>
     <div class="post-content">
-    <h2>Protocol Buffer</h2>
-<p>&lt;!--more--&gt;</p>
-<p>&lt;b&gt;Protocol Buffer&lt;/b&gt; is like json、xml, but smaller, faster, simplifier.
+    <h2 id="Protocol-Buffer">Protocol Buffer</h2>
+<span id="more"></span>
+<p><b>Protocol Buffer</b> is like json、xml, but smaller, faster, simplifier.<br>
 Only have to define data structure once, and it will generate the file which is match to your programming language automatically, let you use directly.</p>
-<h3>Structure is Document</h3>
-<h4>Define data structure.</h4>
+<h3 id="Structure-is-Document">Structure is Document</h3>
+<h4 id="Define-data-structure">Define data structure.</h4>
 <p>File should be <code>.proto</code> as suffix.</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Format is Proto v3</span><br><span class="line">syntax &#x3D; &quot;proto3&quot;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; User</span><br><span class="line">message User &#123;</span><br><span class="line">    string username &#x3D; 2;</span><br><span class="line">    string password &#x3D; 3;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Post</span><br><span class="line">message Post &#123;</span><br><span class="line">    int64 id       &#x3D; 1;</span><br><span class="line">    string content &#x3D; 2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4>What is the number after each field?</h4>
-<p>In fact, these are protocol buffer's id when using decode and encode.
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// Format is Proto v3</span><br><span class="line">syntax = &quot;proto3&quot;;</span><br><span class="line"></span><br><span class="line">// User</span><br><span class="line">message User &#123;</span><br><span class="line">    string username = 2;</span><br><span class="line">    string password = 3;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Post</span><br><span class="line">message Post &#123;</span><br><span class="line">    int64 id       = 1;</span><br><span class="line">    string content = 2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="What-is-the-number-after-each-field">What is the number after each field?</h4>
+<p>In fact, these are protocol buffer’s id when using decode and encode.<br>
 These will make you remove one of the field without messing up entire data structure encoding or decoding.</p>
-<h3>Pros and Cons with Json</h3>
+<h3 id="Pros-and-Cons-with-Json">Pros and Cons with Json</h3>
 <ul>
 <li>More lightweight</li>
 <li>Confusion: being encoded</li>
 <li>Performance high</li>
-<li>Much more convenient: structure is your data model, don't have to create object to mapping these data</li>
+<li>Much more convenient: structure is your data model, don’t have to create object to mapping these data</li>
 <li>Clear, no need document: <code>.proto</code> is your document</li>
 </ul>
-<h3>Installation</h3>
+<h3 id="Installation">Installation</h3>
 <ol>
 <li>Install protocol buffer generator</li>
 </ol>
 <ul>
 <li>First, install <code>protoc</code>, which is the tool for transforming <code>.proto</code> to program.</li>
-<li>https://github.com/protocolbuffers/protobuf/releases install the protocol compiler</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/protocolbuffers/protobuf/releases">https://github.com/protocolbuffers/protobuf/releases</a> install the protocol compiler</li>
 <li>After unzip, put the <code>bin/protoc</code> file to <code>$PATH</code>, this make us to use in terminal.</li>
 </ul>
 <ol start="2">
 <li>Install Golang plugin</li>
 </ol>
 <ul>
-<li><code>go get -u github.com/golang/protobuf/{proto,protoc-gen-go}</code></li>
+<li><code> go get -u github.com/golang/protobuf/&#123;proto,protoc-gen-go&#125;</code></li>
 <li>Do <code>touch .bash_profile</code>, and <code>export PATH=$PATH:/Users/pingjing/go/bin</code> to execute in terminal.</li>
 </ul>
 <ol start="3">
 <li>Transform proto document</li>
 </ol>
 <ul>
-<li>
-<p>Create a <code>example.proto</code> file
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Format is Proto v3</span><br><span class="line">syntax &#x3D; &quot;proto3&quot;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 生成的程式在 Golang 中將會是屬於 protobuf 套件</span><br><span class="line">package protobuf;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; User</span><br><span class="line">message User &#123;</span><br><span class="line">    int64 id        &#x3D; 1;</span><br><span class="line">    string username &#x3D; 2;</span><br><span class="line">    string password &#x3D; 3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p><code>protoc --go_out=. *.proto</code> transform to golang</p>
-</li>
-<li>
-<p>And we will get a file <code>example.pb.go</code> which is belongs to <code>protobuf</code> plugin.</p>
-</li>
-<li>
-<p>Then we can use this structure in golang.</p>
-</li>
+<li>Create a <code>example.proto</code> file</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// Format is Proto v3</span><br><span class="line">syntax = &quot;proto3&quot;;</span><br><span class="line"></span><br><span class="line">// 生成的程式在 Golang 中將會是屬於 protobuf 套件</span><br><span class="line">package protobuf;</span><br><span class="line"></span><br><span class="line">// User</span><br><span class="line">message User &#123;</span><br><span class="line">    int64 id        = 1;</span><br><span class="line">    string username = 2;</span><br><span class="line">    string password = 3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code> protoc --go_out=. *.proto</code> transform to golang</li>
+<li>And we will get a file <code>example.pb.go</code> which is belongs to <code>protobuf</code> plugin.</li>
+<li>Then we can use this structure in golang.</li>
 </ul>
 <ol start="4">
 <li>Decode and Encode</li>
 </ol>
 <ul>
-<li>
-<p>Create a folder <code>/protobuf</code>, and put <code>example.pb.go</code> in it.</p>
-</li>
-<li>
-<p>Create <code>main.go</code>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line">	<span class="string">"./protobuf"</span></span><br><span class="line">	<span class="string">"github.com/golang/protobuf/proto"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Create a User format, and put data into it.</span></span><br><span class="line">	data := protobuf.User&#123;</span><br><span class="line">		Id:       <span class="number">12345</span>,</span><br><span class="line">		Username: <span class="string">"Yu Wang"</span>,</span><br><span class="line">		Password: <span class="string">"Hello"</span>,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Make data encode to Protocol buffer format (Be aware of using Pointer)</span></span><br><span class="line">	dataBuffer, _ := proto.Marshal(&amp;data)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Make the data which is already encoded, decode to protobuf.User format</span></span><br><span class="line">	<span class="keyword">var</span> user protobuf.User</span><br><span class="line">	proto.Unmarshal(dataBuffer, &amp;user)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Output the result</span></span><br><span class="line">	fmt.Println(user.Id, <span class="string">" "</span>, user.Username, <span class="string">" "</span>, user.Password)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p><code>go run main.go</code></p>
-</li>
-<li>
-<p>Output <code>12345 Yu Wang Hello</code></p>
-</li>
+<li>Create a folder <code>/protobuf</code>, and put <code>example.pb.go</code> in it.</li>
+<li>Create <code>main.go</code></li>
+</ul>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line">	<span class="string">&quot;./protobuf&quot;</span></span><br><span class="line">	<span class="string">&quot;github.com/golang/protobuf/proto&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Create a User format, and put data into it.</span></span><br><span class="line">	data := protobuf.User&#123;</span><br><span class="line">		Id:       <span class="number">12345</span>,</span><br><span class="line">		Username: <span class="string">&quot;Yu Wang&quot;</span>,</span><br><span class="line">		Password: <span class="string">&quot;Hello&quot;</span>,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Make data encode to Protocol buffer format (Be aware of using Pointer)</span></span><br><span class="line">	dataBuffer, _ := proto.Marshal(&amp;data)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Make the data which is already encoded, decode to protobuf.User format</span></span><br><span class="line">	<span class="keyword">var</span> user protobuf.User</span><br><span class="line">	proto.Unmarshal(dataBuffer, &amp;user)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Output the result</span></span><br><span class="line">	fmt.Println(user.Id, <span class="string">&quot; &quot;</span>, user.Username, <span class="string">&quot; &quot;</span>, user.Password)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>go run main.go</code></li>
+<li>Output <code>12345   Yu Wang   Hello</code></li>
 </ul>
 
 </div> 

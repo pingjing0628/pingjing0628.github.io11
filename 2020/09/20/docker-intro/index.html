@@ -156,14 +156,15 @@
 </div>
     <div class="post-content">
     <h1>Docker Introduction</h1>
-<h2>&lt;!--more--&gt;</h2>
-<h2>The Existence of docker</h2>
-<p>Before: 傳統 VM 因為需額外安裝 OS，導致啟動慢，佔較大記憶體問題
+<span id="more"></span>
+<p>–</p>
+<h2 id="The-Existence-of-docker">The Existence of docker</h2>
+<p>Before: 傳統 VM 因為需額外安裝 OS，導致啟動慢，佔較大記憶體問題<br>
 Solution: 以應用程式為核心虛擬化，取代傳統需要 OS 的虛擬化技術</p>
-<h2>What is virtualization?</h2>
+<h2 id="What-is-virtualization">What is virtualization?</h2>
 <p>虛擬化是模擬出一個環境，讓程式可在不同硬體上執行都以為是在同一個環境中執行</p>
 <p>Sol: <code>避免在電腦上可運行的程式，移至其他電腦環境卻無法運行</code></p>
-<h3>虛擬化技術有兩種</h3>
+<h3 id="虛擬化技術有兩種">虛擬化技術有兩種</h3>
 <ol>
 <li>系統層級的虛擬化技術 ex: VM (Virtual box)</li>
 <li>作業層級的虛擬化技術 ex: Container (Docker)</li>
@@ -187,22 +188,22 @@ Solution: 以應用程式為核心虛擬化，取代傳統需要 OS 的虛擬化
 </tr>
 </tbody>
 </table>
-<p>在 OS 上虛擬化，透過 container Manager 將一個 application 所需的程式碼、函式庫打包，建立資源控管機制隔離各 container，並分配 Host OS 上的系統資源
+<p>在 OS 上虛擬化，透過 container Manager 將一個 application 所需的程式碼、函式庫打包，建立資源控管機制隔離各 container，並分配 Host OS 上的系統資源<br>
 透過容器，application 不需再另外安裝 OS 也可以執行</p>
 <p><img src="container.png" alt=""></p>
-<h3>Docker 3 元素</h3>
+<h3 id="Docker-3-元素">Docker 3 元素</h3>
 <ol>
 <li>
-<p>Image:
-像模板，重複產生容器實體，透過 image，可以快速的產生執行 app 的 container
+<p>Image:<br>
+像模板，重複產生容器實體，透過 image，可以快速的產生執行 app 的 container<br>
 image 可由 dockerfile 建立</p>
 </li>
 <li>
-<p>Container:
+<p>Container:<br>
 容器是 image 建立出來的執行實例，每個 container 都是分開、隔離的</p>
 </li>
 <li>
-<p>Repository:
+<p>Repository:<br>
 集中存放 image 的地方</p>
 </li>
 </ol>

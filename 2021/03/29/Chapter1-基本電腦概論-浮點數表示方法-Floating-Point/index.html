@@ -157,9 +157,9 @@
     <div class="post-content">
     <h1>1.3 補數</h1>
 <hr>
-<h2>對應方式</h2>
+<h2 id="對應方式">對應方式</h2>
 <p><img src="%E5%B0%8D%E6%87%89%E6%96%B9%E5%BC%8F.png" alt=""></p>
-<h2>超碼 (Excess code)</h2>
+<h2 id="超碼-Excess-code">超碼 (Excess code)</h2>
 <ul>
 <li>excess - α code =&gt; 代表超 α 碼</li>
 <li>一般若有 N bit 則超 2^N-1 碼, 即 excess - 2^N-1 code</li>
@@ -168,7 +168,7 @@
 </ul>
 <p><strong>ex1:</strong> (1011.11)2, 若格式 S(1) C(5) M(10), 問以<br>
 (1) excess-16 表示<br>
-(2) 以 2's complement 表示 the result?<br>
+(2) 以 2’s complement 表示 the result?<br>
 <strong>Sol:</strong><br>
 正規化 = +(0.101111)2 * 2^4<br>
 (1) excess-16</p>
@@ -190,7 +190,7 @@
 </table>
 <p><code>α = 16</code><br>
 <code>c = x + α = 4 + 16 = 20</code></p>
-<p>(2) 2's complement<br>
+<p>(2) 2’s complement<br>
 <code>+4 = 00100</code></p>
 <table>
 <thead>
@@ -225,8 +225,8 @@
 <thead>
 <tr>
 <th>計算組合</th>
-<th>..</th>
-<th>..</th>
+<th>…</th>
+<th>…</th>
 </tr>
 </thead>
 <tbody>
@@ -242,7 +242,7 @@
 </tr>
 <tr>
 <td>x:</td>
-<td>-16 ~ + 15 =&gt; 同 2's 補數表示法</td>
+<td>-16 ~ + 15 =&gt; 同 2’s 補數表示法</td>
 <td></td>
 </tr>
 </tbody>
@@ -251,7 +251,7 @@
 </ol>
 <p><strong>ex3:</strong> (0.00001101)2, 若格式 S(1) C(5) M(10), 問以<br>
 (1) excess-16表示<br>
-(2) 以 2's complement 表示的 result?<br>
+(2) 以 2’s complement 表示的 result?<br>
 <strong>Sol:</strong><br>
 正規化 = +(0.1101)2 x 2^-4<br>
 (1) excess-16<br>
@@ -273,7 +273,7 @@
 </tr>
 </tbody>
 </table>
-<p>(2) 2's complement
+<p>(2) 2’s complement<br>
 <code>+4 = 00100 =&gt; -4 = 11100</code></p>
 <table>
 <thead>
@@ -293,7 +293,7 @@
 </table>
 <p><strong>ex4:</strong>[反向題] - floating-point 格式 S(1) C(5) M(10), 內容為： 1110011110100100, 若指數分別以<br>
 (1) excess-16<br>
-(2) 2's complement, 求原始值？<br>
+(2) 2’s complement, 求原始值？<br>
 <strong>Sol:</strong><br>
 (1)</p>
 <table>
@@ -310,10 +310,18 @@
 <td>11001</td>
 <td>1110100100</td>
 </tr>
+<tr>
+<td>=&gt; -(0.1110100100)2 x 2^9</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>x = c - α =&gt; 25 - 16 = 9</code></td>
+<td></td>
+<td></td>
+</tr>
 </tbody>
 </table>
-<p>=&gt; -(0.1110100100)2 x 2^9<br>
-<code>x = c - α =&gt; 25 - 16 = 9</code></p>
 <p>(2)</p>
 <table>
 <thead>
@@ -329,17 +337,25 @@
 <td>11001</td>
 <td>1110100100</td>
 </tr>
+<tr>
+<td>=&gt; -(0.1110100100)2 x 2^-7</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2’s complement 表示法 1 1001 =&gt; -0111 = -7</td>
+<td></td>
+<td></td>
+</tr>
 </tbody>
 </table>
-<p>=&gt; -(0.1110100100)2 x 2^-7<br>
-2's complement 表示法 1 1001 =&gt; -0111 = -7</p>
-<h2>Floating-point 的邊界值</h2>
+<h2 id="Floating-point-的邊界值">Floating-point 的邊界值</h2>
 <ul>
 <li>最大正數, 最小正數, 最大負數, 最小負數</li>
 </ul>
 <ol>
 <li>
-<p>圖示：
+<p>圖示：<br>
 <img src="%E5%9C%96%E7%A4%BA.png" alt=""></p>
 </li>
 <li>
@@ -368,22 +384,22 @@
 </thead>
 <tbody>
 <tr>
-<td>(0.1.......1)2 = 1 - 2^-N</td>
+<td>(0.1…1)2 = 1 - 2^-N</td>
 </tr>
 <tr>
-<td>(0.0......01)2 = 2^-N</td>
+<td>(0.0…01)2 = 2^-N</td>
 </tr>
 <tr>
-<td>(100.......0)2 = 2^N</td>
+<td>(100…0)2 = 2^N</td>
 </tr>
 <tr>
-<td>(1.........1)2 = 2^N - 1</td>
+<td>(1…1)2 = 2^N - 1</td>
 </tr>
 </tbody>
 </table>
 </li>
 </ol>
-<h2>IEEE754 浮點數表示法</h2>
+<h2 id="IEEE754-浮點數表示法">IEEE754 浮點數表示法</h2>
 <p>分為：</p>
 <ul>
 <li>單精確度 Single precision =&gt; 32 bits<br>
@@ -395,7 +411,7 @@
 =&gt; 正規化表示方式：<br>
 <img src="Double_precision.png" alt=""></li>
 </ul>
-<h2>特殊值</h2>
+<h2 id="特殊值">特殊值</h2>
 <ol>
 <li>E = 255, F = 0 =&gt; 代表正無限大<br>
 255 代表全為 1 時, 保留給系統不可使用</li>
@@ -424,9 +440,13 @@
 <td>10000101</td>
 <td>10001010100000000000000</td>
 </tr>
+<tr>
+<td>=&gt; (42C54000)16</td>
+<td></td>
+<td></td>
+</tr>
 </tbody>
 </table>
-<p>=&gt; (42C54000)16</p>
 
 </div> 
 

@@ -186,30 +186,30 @@
 </div>
     <div class="post-content">
     <h1>3.5 死結 Deadlock</h1>
-<h2>目錄</h2>
+<h2 id="目錄">目錄</h2>
 <ul>
 <li>四要件</li>
 <li><strong>Deadlock 處理方式</strong></li>
 <li><strong>Deadlock Free</strong></li>
 </ul>
 <hr>
-<h2>deadlock 處理</h2>
+<h2 id="deadlock-處理">deadlock 處理</h2>
 <ol>
 <li>Preventation 預防：欲使 deadlock 不會發生<br>
 作法：大破四要件之一</li>
 <li>Avoidance 避免：利用避免演算法確保資源分配不會產生 deadlock<br>
-作法：Banker's algo. check 安全否</li>
+作法：Banker’s algo. check 安全否</li>
 <li>Detection &amp; Recovery 偵測, 若有恢復</li>
 </ol>
-<h3>Deadlock Preventation =&gt; 打破四要件之一 (打破其中一個即可)</h3>
+<h3 id="Deadlock-Preventation-打破四要件之一-打破其中一個即可">Deadlock Preventation =&gt; 打破四要件之一 (打破其中一個即可)</h3>
 <ol>
-<li><strong>打破 &quot;互斥&quot;</strong></li>
+<li><strong>打破 “互斥”</strong></li>
 </ol>
 <ul>
 <li><strong>難達成, 因為此為資源先天的限制</strong>, ex: 印表機</li>
 </ul>
 <ol start="2">
-<li><strong>打破 &quot;Hold and Wait&quot;</strong> (要就全拿, 不要就都不拿)</li>
+<li><strong>打破 “Hold and Wait”</strong> (要就全拿, 不要就都不拿)</li>
 </ol>
 <ul>
 <li>作法 1: process 若無法取得, 所需的所有資源, 則需空手</li>
@@ -217,7 +217,7 @@
 <li>圖：<img src="%E6%89%93%E7%A0%B4Hold&amp;wait.png" alt=""></li>
 </ul>
 <ol start="3">
-<li><strong>打破 &quot;No preemptive&quot; =&gt; 將之改為 preemptive</strong></li>
+<li><strong>打破 “No preemptive” =&gt; 將之改為 preemptive</strong></li>
 </ol>
 <ul>
 <li>不建議, 因為資源先天限制, ex: 印表機, 印了 3 行被搶奪</li>
@@ -230,14 +230,14 @@
 <ul>
 <li>給予各 resource 一獨立編號</li>
 <li>資源申請須以編號遞增的方式提出</li>
-<li>圖：<img src="%E6%89%93%E7%A0%B4circular1.png" alt="">
+<li>圖：<img src="%E6%89%93%E7%A0%B4circular1.png" alt=""><br>
 <img src="%E6%89%93%E7%A0%B4circular2.png" alt=""></li>
 </ul>
 </li>
-<li>反證：令仍然會有 Circular waiting, 假設滿足 2 條件下, 則存在如下的 waiting cycle:
+<li>反證：令仍然會有 Circular waiting, 假設滿足 2 條件下, 則存在如下的 waiting cycle:<br>
 <img src="%E5%8F%8D%E8%AD%89.png" alt=""></li>
 </ul>
-<h3>Deadlock Avoidance</h3>
+<h3 id="Deadlock-Avoidance">Deadlock Avoidance</h3>
 <ul>
 <li>圖：<img src="deadlockAvoidance.png" alt=""></li>
 <li>Note:
@@ -251,13 +251,13 @@ Ex: <code>P2-&gt;P4-&gt;.....?</code></li>
 </ul>
 </li>
 </ul>
-<h4>Avoidance algo.</h4>
+<h4 id="Avoidance-algo">Avoidance algo.</h4>
 <ul>
 <li>
 <p>資源皆單一量 =&gt; 修改資源分配圖</p>
 </li>
 <li>
-<p>資源非單一量 =&gt; Banker's algo. <code>m * n^2</code>, O(n^2) 效率較佳</p>
+<p>資源非單一量 =&gt; Banker’s algo. <code>m * n^2</code>, O(n^2) 效率較佳</p>
 <ul>
 <li>m = 資源種類數 (印表機, disk, 螢幕) , n = process 數量</li>
 </ul>
@@ -271,7 +271,7 @@ Def: 一圖形 G = &lt;V, E&gt;, 其中 V 為頂點, E 為邊</p>
 <li>在 Resource Allocation Graph 中的性質
 <ol>
 <li>當資源皆為單一量 -&gt; 有 cycle, 有 deadlock</li>
-<li>當資源非單一量 -&gt; 有 cycle, &quot;不見得有 deadlock&quot;
+<li>當資源非單一量 -&gt; 有 cycle, “不見得有 deadlock”
 <ul>
 <li>圖：<img src="resourceAllocate.png" alt=""></li>
 </ul>
@@ -282,8 +282,9 @@ Def: 一圖形 G = &lt;V, E&gt;, 其中 V 為頂點, E 為邊</p>
 </li>
 </ul>
 <ol>
-<li>資源皆為單一量的 avoidance algo.<br>
-於 Resource Allocation Graph 中多加入一種邊 &quot;chian edge&quot; 鏈結邊, Pi...Rj =&gt; 指 Pi 在未來會對 Rj 提出申請
+<li>
+<p>資源皆為單一量的 avoidance algo.<br>
+於 Resource Allocation Graph 中多加入一種邊 “chian edge” 鏈結邊, Pi…Rj =&gt; 指 Pi 在未來會對 Rj 提出申請</p>
 <ul>
 <li>判別： <strong>Pi 正式對 Rj 提申請</strong>
 <ol>
@@ -302,12 +303,11 @@ Def: 一圖形 G = &lt;V, E&gt;, 其中 V 為頂點, E 為邊</p>
 Sol: 有 cycle, 故 unsafe state, 所以申請駁回 (若 P1 則可以)</li>
 </ul>
 </li>
-</ol>
-<ol start="2">
-<li>Banker's algo. 題型<br>
-Ex: 系統有 5 個 process {P0...P4}, 三種 resource {A, B, C}, A = 10, B = 5, C = 7, 令時間 T0 時如下圖, 問若 P1 提出 Request1 = (1, 0, 2), 是否可配置？<br>
+<li>
+<p>Banker’s algo. 題型<br>
+Ex: 系統有 5 個 process {P0…P4}, 三種 resource {A, B, C}, A = 10, B = 5, C = 7, 令時間 T0 時如下圖, 問若 P1 提出 Request1 = (1, 0, 2), 是否可配置？<br>
 圖：<img src="%E6%9A%AB%E6%99%82%E6%80%A7%E9%85%8D%E7%BD%AE1.png" alt=""><br>
-Sol:
+Sol:</p>
 <ul>
 <li>
 <p>Step 1: Need = Max - Allocation (Need: 指 process i 最多尚需多少資源才能完成工作)</p>
@@ -329,21 +329,21 @@ Request i (1, 0, 2) ≤ Available i (3, 3, 2)</p>
 </li>
 </ol>
 <hr>
-<h3>Deadlock detection algo</h3>
+<h3 id="Deadlock-detection-algo">Deadlock detection algo</h3>
 <ul>
-<li>資源皆單一量：<strong>修改資源分配圖 (&quot;Wait-for&quot; graph) =&gt; O(n^2)</strong></li>
+<li>資源皆單一量：<strong>修改資源分配圖 (“Wait-for” graph) =&gt; O(n^2)</strong></li>
 <li>資源非單一量：<strong>deadlock detection algo. =&gt; O(m * n^2)</strong></li>
 </ul>
-<h4>Deadlock detection &amp; recovery (資源皆單一量 =&gt; 採&quot;Wait-for&quot; graph 等候圖)</h4>
+<h4 id="Deadlock-detection-recovery-資源皆單一量-採-Wait-for-graph-等候圖">Deadlock detection &amp; recovery (資源皆單一量 =&gt; 採&quot;Wait-for&quot; graph 等候圖)</h4>
 <ul>
 <li>Def: 定期偵測系統是否有 deadlock, 若有則須設法做 deadlock recovery 的動作</li>
 <li>說明: 將 Resource Allocation Graph 中的<br>
 <img src="desc.png" alt=""></li>
 <li>Check: <code>有 cycle =&gt; 有 deadlock</code>, <code>No cycle =&gt; No deadlock</code></li>
-<li>Ex:
+<li>Ex:<br>
 <img src="deadlockDetection.png" alt=""></li>
 </ul>
-<h4>Deadlock recovery</h4>
+<h4 id="Deadlock-recovery">Deadlock recovery</h4>
 <ul>
 <li>由 user 自己處理</li>
 <li>由系統處理
@@ -364,7 +364,7 @@ Request i (1, 0, 2) ≤ Available i (3, 3, 2)</p>
 </li>
 </ul>
 <hr>
-<h2>deadlock free</h2>
+<h2 id="deadlock-free">deadlock free</h2>
 <p>Def: 在此條件下, 系統沒有 deadlock 問題, 故不需對其做處理, <strong>欲滿足 deadlock free</strong>, 則：</p>
 <ol>
 <li>1 ≤ Max i ≤ m (資源數量)</li>

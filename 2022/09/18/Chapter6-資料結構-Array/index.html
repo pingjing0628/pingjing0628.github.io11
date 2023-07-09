@@ -163,7 +163,7 @@
     <div class="post-content">
     <h1>6.2 Array</h1>
 <hr>
-<h2>陣列 Array</h2>
+<h2 id="陣列-Array">陣列 Array</h2>
 <ul>
 <li>Def: array 用來表示 orderlist 的一種資料結構, 又可稱為 dense list 或 sequential list</li>
 <li>概念: 將 data 的第 i 格元素存到第 i 格子之中</li>
@@ -177,7 +177,7 @@
 </ol>
 </li>
 </ul>
-<h2>陣列儲存位址計算</h2>
+<h2 id="陣列儲存位址計算">陣列儲存位址計算</h2>
 <ul>
 <li>一維陣列
 <ol>
@@ -245,19 +245,19 @@ Sol:
 <code>A[i2, j2] = A[i1, j1] + [(j2-j1)*m+(i2-i1)]*1</code></li>
 </ol>
 </li>
-<li>Row Major 中可以推得 <strong>&quot;行&quot;</strong>, &quot;列&quot;不得而知</li>
-<li>Column Major 中可以推得 <strong>&quot;列&quot;</strong>, &quot;行&quot;不得而知</li>
+<li>Row Major 中可以推得 <strong>“行”</strong>, &quot;列&quot;不得而知</li>
+<li>Column Major 中可以推得 <strong>“列”</strong>, &quot;行&quot;不得而知</li>
 <li>Ex: <code>A[4, 2]</code> 之 address = 1978, <code>A[2, 3]</code> 之 address = 1986, 問 <code>A[3, 8]</code> 之 address = ?<br>
-Sol:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Step1: check Row Major or Column Major</span><br><span class="line">A[4, 2] &#x3D; 1978</span><br><span class="line">A[2, 3] &#x3D; 1986  &#x2F;&#x2F; Column Major</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Step2: </span><br><span class="line">&#x2F;&#x2F; 求 行 &#x3D;&gt; 當為 Row Major, 可求得行數 </span><br><span class="line">&#x2F;&#x2F; 求 列 &#x3D;&gt; 當為 Column Major, 可求得列數 </span><br><span class="line">A[2, 3] &#x3D; A[4, 2] + [(3-2) * m + (2-4)]*1</span><br><span class="line">1986 &#x3D; 1978+m-2</span><br><span class="line">m &#x3D; 10</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Step3: 求 A[i, j]</span><br><span class="line">A[3, 8] &#x3D; A[4, 2] + [(8-2)*10+(3-4)]*1</span><br><span class="line">        &#x3D; 1978+59</span><br><span class="line">        &#x3D; 2037</span><br></pre></td></tr></table></figure></li>
+Sol:  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// Step1: check Row Major or Column Major</span><br><span class="line">A[4, 2] = 1978</span><br><span class="line">A[2, 3] = 1986  // Column Major</span><br><span class="line"></span><br><span class="line">// Step2: </span><br><span class="line">// 求 行 =&gt; 當為 Row Major, 可求得行數 </span><br><span class="line">// 求 列 =&gt; 當為 Column Major, 可求得列數 </span><br><span class="line">A[2, 3] = A[4, 2] + [(3-2) * m + (2-4)]*1</span><br><span class="line">1986 = 1978+m-2</span><br><span class="line">m = 10</span><br><span class="line"></span><br><span class="line">// Step3: 求 A[i, j]</span><br><span class="line">A[3, 8] = A[4, 2] + [(8-2)*10+(3-4)]*1</span><br><span class="line">        = 1978+59</span><br><span class="line">        = 2037</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <ol start="3">
 <li>同題型2, 但無法判別 Row Major or Column Major</li>
 </ol>
 <ul>
 <li>Ex: <code>A[3, 3]</code> 之 address = 121, <code>A[6, 4]</code> 之 address = 159, 問 <code>A[4, 9]</code> 之 address = ?<br>
-Sol:<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Step1: check Row Major or Column Major</span><br><span class="line">A[3, 3] &#x3D; 121</span><br><span class="line">A[6, 4] &#x3D; 159  &#x2F;&#x2F; Row Major or Column Major 皆有可能</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Step2: </span><br><span class="line">&#x2F;&#x2F; 1. Row Major</span><br><span class="line">A[6, 4] &#x3D; A[2, 2] + [(6-3) * n + (4-3)]*1</span><br><span class="line">159 &#x3D; 121+3n+1</span><br><span class="line">n &#x3D; 37&#x2F;3 &#x3D; 12.33333 &#x2F;&#x2F;不符合</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 2. Column Major</span><br><span class="line">A[6, 4] &#x3D; A[2, 2] + [(4-3) * m + (6-3)]*1</span><br><span class="line">159 &#x3D; 121+m+3</span><br><span class="line">m &#x3D; 35 </span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Step3: 求 A[i, j], 以 Column Major</span><br><span class="line">A[4, 9] &#x3D; A[3, 3] + [(9-3)*35+(4-3)]*1</span><br><span class="line">        &#x3D; 121+211</span><br><span class="line">        &#x3D; 332</span><br></pre></td></tr></table></figure></li>
+Sol:  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// Step1: check Row Major or Column Major</span><br><span class="line">A[3, 3] = 121</span><br><span class="line">A[6, 4] = 159  // Row Major or Column Major 皆有可能</span><br><span class="line"></span><br><span class="line">// Step2: </span><br><span class="line">// 1. Row Major</span><br><span class="line">A[6, 4] = A[2, 2] + [(6-3) * n + (4-3)]*1</span><br><span class="line">159 = 121+3n+1</span><br><span class="line">n = 37/3 = 12.33333 //不符合</span><br><span class="line"></span><br><span class="line">// 2. Column Major</span><br><span class="line">A[6, 4] = A[2, 2] + [(4-3) * m + (6-3)]*1</span><br><span class="line">159 = 121+m+3</span><br><span class="line">m = 35 </span><br><span class="line"></span><br><span class="line">// Step3: 求 A[i, j], 以 Column Major</span><br><span class="line">A[4, 9] = A[3, 3] + [(9-3)*35+(4-3)]*1</span><br><span class="line">        = 121+211</span><br><span class="line">        = 332</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
 <li>三維陣列
@@ -280,7 +280,7 @@ Sol:<br>
 </ul>
 </li>
 </ul>
-<h2>多項式的資料結構</h2>
+<h2 id="多項式的資料結構">多項式的資料結構</h2>
 <ul>
 <li>方法:
 <ol>
@@ -294,15 +294,15 @@ Sol:<br>
 <li>只存放非零項次的係數與指數</li>
 </ol>
 <ul>
-<li>作法: 若非0項有 &quot;k&quot; 個 -&gt; 準備 2k+1 個格子</li>
+<li>作法: 若非0項有 “k” 個 -&gt; 準備 2k+1 個格子</li>
 </ul>
 <ol start="3">
 <li>利用 linked list 表示</li>
 </ol>
 </li>
 </ul>
-<h2>特殊矩陣</h2>
-<h3>稀疏矩陣</h3>
+<h2 id="特殊矩陣">特殊矩陣</h2>
+<h3 id="稀疏矩陣">稀疏矩陣</h3>
 <ul>
 <li>指矩陣的非零項元素很少</li>
 <li>Ex: 矩陣 A4x3</li>
@@ -313,7 +313,7 @@ Sol:<br>
 </ul>
 </li>
 </ul>
-<h3>上三角, 下三角矩陣</h3>
+<h3 id="上三角-下三角矩陣">上三角, 下三角矩陣</h3>
 <ul>
 <li>說明:
 <ul>
@@ -321,8 +321,10 @@ Sol:<br>
 <li>下三角: 即對角線以上的元素皆0, aij = 0, if i &lt; j</li>
 </ul>
 </li>
-<li>特色: 一 n * n 的上或下三角矩陣其元素共有:
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1+2+...+n &#x3D; n(n+1) &#x2F; 2</span><br><span class="line">&#x3D;&gt; 若採用 &quot;二維陣列&quot;, 則</span><br><span class="line">&#x3D;&gt; 浪費 space n^2-n(n+1)&#x2F;2</span><br><span class="line"></span><br><span class="line">Solution:</span><br><span class="line">利用一維陣列 B[1....n(n+1)&#x2F;2]</span><br><span class="line">來將上 下三角之資料一一對應</span><br></pre></td></tr></table></figure></li>
+<li>特色: 一 n * n 的上或下三角矩陣其元素共有:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1+2+...+n = n(n+1) / 2</span><br><span class="line">=&gt; 若採用 &quot;二維陣列&quot;, 則</span><br><span class="line">=&gt; 浪費 space n^2-n(n+1)/2</span><br><span class="line"></span><br><span class="line">Solution:</span><br><span class="line">利用一維陣列 B[1....n(n+1)/2]</span><br><span class="line">來將上 下三角之資料一一對應</span><br></pre></td></tr></table></figure>
+<ul>
 <li>上三角
 <ul>
 <li>Row Major</li>
@@ -336,7 +338,7 @@ Sol:<br>
 </ul>
 </li>
 </ul>
-<h3>對稱矩陣</h3>
+<h3 id="對稱矩陣">對稱矩陣</h3>
 <ul>
 <li>定義: 一矩陣 An*n: 若 Aij = Aji謂之, 有效率地存放方式, 只存上 or 下三角即可</li>
 <li>上三角: <code>aij : k = j(j-1)/2 +i</code></li>

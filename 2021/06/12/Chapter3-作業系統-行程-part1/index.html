@@ -180,7 +180,7 @@
 </div>
     <div class="post-content">
     <h1>3.4 行程</h1>
-<h2>目錄</h2>
+<h2 id="目錄">目錄</h2>
 <ul>
 <li><strong>Process Definition</strong></li>
 <li><strong>Program vs Process</strong></li>
@@ -190,7 +190,7 @@
 <li>Thread 執行緒</li>
 </ul>
 <hr>
-<h2>Process Definition</h2>
+<h2 id="Process-Definition">Process Definition</h2>
 <p>執行中的程式 (即：程式碼 + 當前執行環境)</p>
 <ul>
 <li>執行環境為：
@@ -205,7 +205,7 @@
 </li>
 </ul>
 <hr>
-<h3>Program and Process Compare</h3>
+<h3 id="Program-and-Process-Compare">Program and Process Compare</h3>
 <table>
 <thead>
 <tr>
@@ -225,9 +225,9 @@
 </tbody>
 </table>
 <hr>
-<h2>Process STD (State Transitive Diagram) 行程狀態轉換圖</h2>
-<h2><img src="STD.png" alt=""></h2>
-<h2>Scheduler 種類</h2>
+<h2 id="Process-STD-State-Transitive-Diagram-行程狀態轉換圖">Process STD (State Transitive Diagram) 行程狀態轉換圖</h2>
+<h2 id=""><img src="STD.png" alt=""></h2>
+<h2 id="Scheduler-種類">Scheduler 種類</h2>
 <ol>
 <li><strong>LTS (Long Term Scheduler)</strong><br>
 Def: 從 Job Queue 挑選 Job 進入 Memory 之中, 使其來到 Ready 的狀態<br>
@@ -253,11 +253,11 @@ MTS 所挑選的部分為：1. priority 低的 process 2. waiting time 過長<br
 圖：<img src="MTS.png" alt=""></li>
 </ol>
 <hr>
-<h2>PCB (Process Control Block)</h2>
+<h2 id="PCB-Process-Control-Block">PCB (Process Control Block)</h2>
 <p>Def: 為方便管理 process 的相關資訊, 故將之集合成一記錄區塊, 謂之 PCB<br>
 圖：<img src="PCB.png" alt=""></p>
 <hr>
-<h2>Context Switching (內文轉換)</h2>
+<h2 id="Context-Switching-內文轉換">Context Switching (內文轉換)</h2>
 <p>Def: 當 process P1 需 wait I/O 時, 則 CPU 將切換給 P2, 此時需將 P1 的 PCB 保存, P2 的 PCB 載入<br>
 影響 context switching 效能大多為硬體的層次如：</p>
 <ul>

@@ -161,47 +161,48 @@
     </div>
 </div>
     <div class="post-content">
-    <h2>Create Dockerfile</h2>
-<h2>&lt;!--more--&gt;</h2>
-<h3>產出簡單的dockerfile</h3>
-<ol>
-<li>先產出簡單的 <code>dockerfile</code>，再添加相關指令
-<code>FROM alpine:3.9</code></li>
-<li>將 <code>dockerfile</code>轉換成 <code>image</code> 再用此 <code>image</code>生成 <code>container</code>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker build -t dockerfile .</span><br><span class="line">docker run -it -p 8080:8080 dockerfile</span><br></pre></td></tr></table></figure></li>
-</ol>
+    <h2 id="Create-Dockerfile">Create Dockerfile</h2>
+<span id="more"></span>
 <hr>
-<h3>嘗試透過一般流程指令安裝nginx</h3>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apk update upgrade</span><br><span class="line">apk add nginx</span><br><span class="line">nginx -t</span><br></pre></td></tr></table></figure></p>
-<p><strong>問題一</strong>
-<code>nginx: [emerg] open() &quot;/run/nginx/nginx.pid&quot; failed (2: No such file or directory)</code>
-原因是找不到nginx.pid，經檢查是沒有/run/nginx 這個資料夾，所以nginx無法執行成功
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p &#x2F;run&#x2F;nginx</span><br><span class="line">nginx -t</span><br></pre></td></tr></table></figure></p>
-<p><strong>問題二</strong>
-測試 http://localhost:8080/，依舊不行
-原因是設port 8080:8080 ，但nginx裡設定為80，所以添加一個設定檔
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt; EOF &gt; &#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;localhost.conf</span><br><span class="line">server &#123;</span><br><span class="line">        listen       8080;</span><br><span class="line">        server_name  localhost;</span><br><span class="line">location &#x2F; &#123;</span><br><span class="line">            root   &#x2F;var&#x2F;www;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
-如此一來會多了一個檔案 <code>/etc/nginx/conf.d/localhost.conf</code>
-且指向 <code>/var/www</code>，現在給一個index.html
+<h3 id="產出簡單的dockerfile">產出簡單的dockerfile</h3>
+<ol>
+<li>先產出簡單的 <code>dockerfile</code>，再添加相關指令<br>
+<code>FROM alpine:3.9</code></li>
+<li>將 <code>dockerfile</code>轉換成 <code>image</code> 再用此 <code>image</code>生成 <code>container</code></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker build -t dockerfile .</span><br><span class="line">docker run -it -p 8080:8080 dockerfile</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="嘗試透過一般流程指令安裝nginx">嘗試透過一般流程指令安裝nginx</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apk update upgrade</span><br><span class="line">apk add nginx</span><br><span class="line">nginx -t</span><br></pre></td></tr></table></figure>
+<p><strong>問題一</strong><br>
+<code>nginx: [emerg] open() &quot;/run/nginx/nginx.pid&quot; failed (2: No such file or directory)</code><br>
+原因是找不到nginx.pid，經檢查是沒有/run/nginx 這個資料夾，所以nginx無法執行成功</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /run/nginx</span><br><span class="line">nginx -t</span><br></pre></td></tr></table></figure>
+<p><strong>問題二</strong><br>
+測試 <a target="_blank" rel="noopener" href="http://localhost:8080/%EF%BC%8C%E4%BE%9D%E8%88%8A%E4%B8%8D%E8%A1%8C">http://localhost:8080/，依舊不行</a><br>
+原因是設port 8080:8080 ，但nginx裡設定為80，所以添加一個設定檔</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt; EOF &gt; /etc/nginx/conf.d/localhost.conf</span><br><span class="line">server &#123;</span><br><span class="line">        listen       8080;</span><br><span class="line">        server_name  localhost;</span><br><span class="line">location / &#123;</span><br><span class="line">            root   /var/www;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<p>如此一來會多了一個檔案 <code>/etc/nginx/conf.d/localhost.conf</code><br>
+且指向 <code>/var/www</code>，現在給一個index.html<br>
 <code>echo hi &gt;&gt; /var/www/index.html</code></p>
 <p>執行 <code>nginx -s reload</code></p>
-<p><strong>問題三</strong>
-<code>nginx: [error] invalid PID number &quot;&quot; in &quot;/run/nginx/nginx.pid&quot;</code>
-原因是只有創建資料夾，還尚未啟用nginx ，來啟用nginx
+<p><strong>問題三</strong><br>
+<code>nginx: [error] invalid PID number &quot;&quot; in &quot;/run/nginx/nginx.pid&quot;</code><br>
+原因是只有創建資料夾，還尚未啟用nginx ，來啟用nginx<br>
 <code>nginx -c /etc/nginx/nginx.conf</code></p>
-<p>###安裝nginx成功後需將指令寫進dockerfile
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">FROM alpine:3.9</span><br><span class="line">RUN apk update</span><br><span class="line">RUN apk upgrade</span><br><span class="line">RUN apk add nginx</span><br><span class="line">RUN mkdir -p &#x2F;run&#x2F;nginx</span><br><span class="line"></span><br><span class="line">COPY localhost.conf &#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;localhost.conf</span><br><span class="line"></span><br><span class="line">COPY index.html &#x2F;var&#x2F;www&#x2F;index.html</span><br><span class="line"></span><br><span class="line">CMD nginx -g &quot;daemon off;&quot;</span><br></pre></td></tr></table></figure></p>
-<p>一次 <code>command</code>，在 <code>dockerfile</code>就是 <code>RUN</code>
-中間新增兩個檔案，是先把檔案創建好，再COPY進去
+<p>###安裝nginx成功後需將指令寫進dockerfile</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">FROM alpine:3.9</span><br><span class="line">RUN apk update</span><br><span class="line">RUN apk upgrade</span><br><span class="line">RUN apk add nginx</span><br><span class="line">RUN mkdir -p /run/nginx</span><br><span class="line"></span><br><span class="line">COPY localhost.conf /etc/nginx/conf.d/localhost.conf</span><br><span class="line"></span><br><span class="line">COPY index.html /var/www/index.html</span><br><span class="line"></span><br><span class="line">CMD nginx -g &quot;daemon off;&quot;</span><br></pre></td></tr></table></figure>
+<p>一次 <code>command</code>，在 <code>dockerfile</code>就是 <code>RUN</code><br>
+中間新增兩個檔案，是先把檔案創建好，再COPY進去<br>
 最後給一個要執行的指令 ，使用 <code>nginx -g &quot;daemon off;&quot;</code>，是為了能正確在容器上正常執行，需要保持 <code>daemon off;</code></p>
-<p>###測試是否能執行
-因為要執行在「背景」，跟剛剛run的指令不一樣
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker build -t dockerfile .</span><br><span class="line">docker run -d --name nginx -p 8080:8080 dockerfile</span><br></pre></td></tr></table></figure>
-接著可以再docker ps 中檢查</p>
+<p>###測試是否能執行<br>
+因為要執行在「背景」，跟剛剛run的指令不一樣</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker build -t dockerfile .</span><br><span class="line">docker run -d --name nginx -p 8080:8080 dockerfile</span><br></pre></td></tr></table></figure>
+<p>接著可以再docker ps 中檢查</p>
 <hr>
-<h3>REFERENCES</h3>
+<h3 id="REFERENCES">REFERENCES</h3>
 <ul>
-<li><a href="https://medium.com/@tasslin/%E9%9A%A8%E6%89%8B%E5%AF%AB%E5%AF%AB-docker-5-dockerfile-3c26d5043279" target="_blank" rel="noopener">隨手寫寫‒‒Docker(5)Dockerfile</a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/@tasslin/%E9%9A%A8%E6%89%8B%E5%AF%AB%E5%AF%AB-docker-5-dockerfile-3c26d5043279">隨手寫寫‒‒Docker(5)Dockerfile</a></li>
 </ul>
 
 </div> 

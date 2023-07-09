@@ -162,29 +162,30 @@
 </div>
     <div class="post-content">
     <h1>Kubernetes Introduction</h1>
-<h2>&lt;!--more--&gt;</h2>
-<h2>What is kubernetes?</h2>
+<span id="more"></span>
+<p>–</p>
+<h2 id="What-is-kubernetes">What is kubernetes?</h2>
 <ul>
 <li>
 <p>用於自動部署、擴充和管理「容器化」應用程式的開源系統，組成 kubernetes 的設計概念為鬆耦合和可延伸</p>
 </li>
 <li>
-<p>是一個可以幫助&lt;b&gt;管理微服務&lt;/b&gt;的系統，其可自動化部署和管理多台機器上的多個容器</p>
+<p>是一個可以幫助<b>管理微服務</b>的系統，其可自動化部署和管理多台機器上的多個容器</p>
 </li>
 <li>
 <p><code>解決手動部署多個容器到多台機器上並監測管理這些容器的狀態非常麻煩</code></p>
 </li>
 <li>
-<p>K8S 提供一個平台以&lt;b&gt;較高層次&lt;/b&gt;的&lt;b&gt;抽象化&lt;/b&gt;去&lt;b&gt;自動化&lt;/b&gt;操作和管理容器們</p>
+<p>K8S 提供一個平台以<b>較高層次</b>的<b>抽象化</b>去<b>自動化</b>操作和管理容器們</p>
 </li>
 </ul>
-<h4>Automated container deployment, scaling, and management</h4>
+<h4 id="Automated-container-deployment-scaling-and-management">Automated container deployment, scaling, and management</h4>
 <ul>
 <li>同時部署多個 containers 至多台機器上 =&gt; Deployment</li>
 <li>服務的乘載量有變化時，可對容器做自動擴展 =&gt; Scaling</li>
 <li>管理多個 containers 的狀態，自動偵測和遇故障時重啟 container =&gt; Management</li>
 </ul>
-<h2>K8S 4 elements</h2>
+<h2 id="K8S-4-elements">K8S 4 elements</h2>
 <ol>
 <li>Pod</li>
 </ol>
@@ -196,8 +197,8 @@
 </ul>
 <ol start="2">
 <li>
-<p>Worker node
-K8S 運作最小的硬體單位，1 worker node -&gt; 1 台機器(Notebook, VM =&gt; AWS EC2 | GCP computer engine)
+<p>Worker node<br>
+K8S 運作最小的硬體單位，1 worker node -&gt; 1 台機器(Notebook, VM =&gt; AWS EC2 | GCP computer engine)<br>
 每個 node 有 3 個元件：</p>
 <ol>
 <li>kubelet: 該 node 的 manager, 負責管理該 node 上所有的 pods 的狀態並負責與 master 溝通</li>
@@ -206,8 +207,8 @@ K8S 運作最小的硬體單位，1 worker node -&gt; 1 台機器(Notebook, VM =
 </ol>
 </li>
 <li>
-<p>Master node
-K8S 運作指揮中心，一個特化的 node，負責管理所有其他的 node
+<p>Master node<br>
+K8S 運作指揮中心，一個特化的 node，負責管理所有其他的 node<br>
 一個 master node 有 4 個組件：</p>
 <ol>
 <li>kube-apiserver:
@@ -228,21 +229,21 @@ K8S 運作指揮中心，一個特化的 node，負責管理所有其他的 node
 <li>kube-scheduler:
 <ul>
 <li>整個 K8S 的 pods 調度員</li>
-<li>scheduler 會監視新建立但尚未被指定要跑在哪個 node 上的 pod，並根據每個 node 上面的資源規定，硬體限制...條件去協調出一個最適合放置的 node 讓該 pod 跑</li>
+<li>scheduler 會監視新建立但尚未被指定要跑在哪個 node 上的 pod，並根據每個 node 上面的資源規定，硬體限制…條件去協調出一個最適合放置的 node 讓該 pod 跑</li>
 </ul>
 </li>
 </ol>
 </li>
 <li>
-<p>Cluster
-K8S 中多個 node 和 master 的集合
+<p>Cluster<br>
+K8S 中多個 node 和 master 的集合<br>
 基本上可以想成在同一個環境裡，所有 node 集合在一起的單位</p>
 </li>
 </ol>
 <p><img src="kubernetes_flow.png" alt=""></p>
-<h3>REFERENCES</h3>
+<h3 id="REFERENCES">REFERENCES</h3>
 <ul>
-<li><a href="https://medium.com/@C.W.Hu/kubernetes-basic-concept-tutorial-e033e3504ec0" target="_blank" rel="noopener">Kubernetes 基礎教學</a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/@C.W.Hu/kubernetes-basic-concept-tutorial-e033e3504ec0">Kubernetes 基礎教學</a></li>
 </ul>
 
 </div> 

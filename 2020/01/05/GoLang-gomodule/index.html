@@ -161,40 +161,41 @@
     </div>
 </div>
     <div class="post-content">
-    <h2>GoModule</h2>
-<h2>&lt;!--more--&gt;</h2>
-<p>先建立一個範例檔
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"pingjing/example/first"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	first.Printfirst()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3>使用傳統govendor的做法</h3>
+    <h2 id="GoModule">GoModule</h2>
+<span id="more"></span>
+<hr>
+<p>先建立一個範例檔</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;pingjing/example/first&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	first.Printfirst()</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="使用傳統govendor的做法">使用傳統govendor的做法</h3>
 <p><strong>govendor</strong> 是一種vendor管理，是一個PackageManagementTools</p>
-<p><code>govendor init</code>
-<code>govendor fetch pingjing/example/first</code>
-用<code>go build -v -o main .</code> 產生 main binary檔案
+<p><code>govendor init</code><br>
+<code>govendor fetch pingjing/example/first</code><br>
+用<code>go build -v -o main .</code> 產生 main binary檔案<br>
 若不在 GOPATH 裡面工作，就會遇到錯誤訊息 -&gt; 使用go module</p>
 <hr>
-<h3>使用go module</h3>
+<h3 id="使用go-module">使用go module</h3>
 <p>用 <strong>go module</strong> 解決兩個問題</p>
 <ol>
 <li>專案內不必再使用 vendor 管理套件</li>
 <li>可任意 clone 專案到任何地方，直接下 <code>go build</code> 就可拿到執行檔</li>
 </ol>
-<p><code>export GO111MODULE=on</code> 啟動module變數
+<p><code>export GO111MODULE=on</code> 啟動module變數<br>
 <code>go mod init 專案目錄</code> 專案會多一個 <code>go.mod</code> 檔案，用來記錄使用到的套件版本，</p>
 <blockquote>
-<p>example: 專案目錄 <code>Users/pingjing/docker/goPractice</code>
+<p>example: 專案目錄 <code>Users/pingjing/docker/goPractice</code><br>
 於程式碼 import時 需使用此路徑</p>
 </blockquote>
-<p>若已在使用 <code>vendor</code> 管理， 則 <code>mod init</code> 會自動將 <code>vendor</code> 紀錄的版本寫入到 <code>go.mod</code>
-<code>go mod download</code> 專案內會多 <code>go.sum</code> 檔案，在專案內下 <code>go build|test|install</code>，會自動將 <code>pkg</code> 下載到 <code>GOPATH/pkg/mod</code> 內
+<p>若已在使用 <code>vendor</code> 管理， 則 <code>mod init</code> 會自動將 <code>vendor</code> 紀錄的版本寫入到 <code>go.mod</code><br>
+<code>go mod download</code> 專案內會多 <code>go.sum</code> 檔案，在專案內下 <code>go build|test|install</code>，會自動將 <code>pkg</code> 下載到 <code>GOPATH/pkg/mod</code> 內<br>
 <code>go clean -i -x -modcache</code> 將 pkg 目錄清空</p>
 <p><code>Go build -v -o main</code> 產生 main binary檔案</p>
 <blockquote>
 <p>記得 package 後加上的是 folder 名稱</p>
 </blockquote>
 <hr>
-<h3>REFERENCES</h3>
+<h3 id="REFERENCES">REFERENCES</h3>
 <ul>
-<li><a href="https://blog.wu-boy.com/2018/10/go-1-11-support-go-module/" target="_blank" rel="noopener">Go 語言 1.11 版本推出 go module</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.wu-boy.com/2018/10/go-1-11-support-go-module/">Go 語言 1.11 版本推出 go module</a></li>
 </ul>
 
 </div> 

@@ -156,7 +156,7 @@
 </div>
     <div class="post-content">
     <h1>3.9 磁碟管理 (Disk Management)</h1>
-<h2>目錄</h2>
+<h2 id="目錄">目錄</h2>
 <ul>
 <li>Free space management
 <ul>
@@ -207,7 +207,7 @@
 <li><strong>Summary</strong></li>
 </ul>
 <hr>
-<h2>RAID Redundant Array of Independent Disks 磁碟陣列</h2>
+<h2 id="RAID-Redundant-Array-of-Independent-Disks-磁碟陣列">RAID Redundant Array of Independent Disks 磁碟陣列</h2>
 <ul>
 <li>Why RAID?
 <ol>
@@ -217,7 +217,7 @@
 </li>
 <li>Solution:
 <ul>
-<li>採用 &quot;<strong>data striping</strong>&quot; 資料切割：指將 data 分成幾個等分, 同時存到不同 disk 之中, <strong>以達平行 I/O 之效</strong></li>
+<li>採用 “<strong>data striping</strong>” 資料切割：指將 data 分成幾個等分, 同時存到不同 disk 之中, <strong>以達平行 I/O 之效</strong></li>
 </ul>
 </li>
 <li>RAID:
@@ -227,7 +227,7 @@
 </ul>
 </li>
 </ul>
-<h2>RAID 的種類</h2>
+<h2 id="RAID-的種類">RAID 的種類</h2>
 <ol>
 <li><strong>RAID 0 (striping RAID)</strong></li>
 </ol>
@@ -269,13 +269,13 @@
 <li><strong>RAID 2</strong> (被 RAID 3 ~ 5 取代)</li>
 </ol>
 <ul>
-<li>採用 &quot;ECC&quot; (Error Correcting Code) 技術, 達容錯效果</li>
+<li>採用 “ECC” (Error Correcting Code) 技術, 達容錯效果</li>
 </ul>
 <ol start="5">
-<li><strong>RAID 3 vs RAID 4</strong>
-|RAID 3|RAID 4|
-|--|--|
-|以 &quot;bit&quot; 為切割單位 (太頻繁)|以 &quot;block&quot; 為單位|
+<li><strong>RAID 3 vs RAID 4</strong><br>
+|RAID 3|RAID 4|<br>
+|–|–|<br>
+|以 “bit” 為切割單位 (太頻繁)|以 “block” 為單位|<br>
 |效能較差|效能較好|</li>
 </ol>
 <ul>
@@ -330,10 +330,10 @@
 <li><strong>RAID 6</strong></li>
 </ol>
 <ul>
-<li>採 &quot;parity check&quot; + &quot;read soloman code&quot; =&gt; 可允許同時 2 顆 disk 損壞, 仍可恢復</li>
+<li>採 “parity check” + “read soloman code” =&gt; 可允許同時 2 顆 disk 損壞, 仍可恢復</li>
 <li><strong>可靠性優於 RAID 3 ~ 5</strong></li>
 </ul>
-<h2>Summary</h2>
+<h2 id="Summary">Summary</h2>
 <table>
 <thead>
 <tr>

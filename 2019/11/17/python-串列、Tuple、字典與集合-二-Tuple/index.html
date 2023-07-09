@@ -155,52 +155,46 @@
     </div>
 </div>
     <div class="post-content">
-    <h2>Python 串列與tuple</h2>
-<p>&lt;!--more--&gt;</p>
+    <h2 id="Python-串列與tuple">Python 串列與tuple</h2>
+<span id="more"></span>
 <hr>
-<h3>Tuple</h3>
+<h3 id="Tuple">Tuple</h3>
 <ul>
 <li>Tuple與串列很像，都是一系列的任意項目，但與串列不同的事，tuple是<strong>不可變</strong>的，也就是說定義tuple後，就無法添加、刪除，或更改他的項目了，因此tuple很像常數串列</li>
 </ul>
-<h4>用 <code>()</code> 建立Tuple</h4>
+<h4 id="用-建立Tuple">用 <code>()</code> 建立Tuple</h4>
 <ul>
-<li>
-<p>先用 <code>()</code>製作一個空的tuple：
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>empty_tuple = ()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>empty_tuple</span><br><span class="line">()</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>讓tuple有一或多個元素，在每個元素後面加上一個逗號
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>one_marx = <span class="string">'Groucho'</span>,</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>one_marx</span><br><span class="line">(<span class="string">'Groucho'</span>,)</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>若有多個元素，請依序列舉，除了最後一個元素之外，都要加上一個逗號
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>marx_table = <span class="string">'Groucho'</span>, <span class="string">'Chico'</span>, <span class="string">'Harpo'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>marx_table</span><br><span class="line">(<span class="string">'Groucho'</span>, <span class="string">'Chico'</span>, <span class="string">'Harpo'</span>)</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>Python 在印出tuple時，會加上括號</p>
-</li>
-<li>
-<p>真正定義tuple的是元素後的逗號，但使用括號不會有任何不良的影響，用括號把值包起來，讓tuple看起來更清楚
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>marx_tuple = (<span class="string">'Groucho'</span>, <span class="string">'Chico'</span>, <span class="string">'Harpo'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>marx_tuple</span><br><span class="line">(<span class="string">'Groucho'</span>, <span class="string">'Chico'</span>, <span class="string">'Harpo'</span>)</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>tuple 可以被一次指派給多個變數</p>
-</li>
-<li>
-<p>有時這稱為<strong>tuple開箱(unpacking)</strong>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>marx_tuple = (<span class="string">'Groucho'</span>, <span class="string">'Chico'</span>, <span class="string">'Harpo'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a, b, c = marx_tuple</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a </span><br><span class="line"><span class="string">'Groucho'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line"><span class="string">'Chico'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c</span><br><span class="line"><span class="string">'Harpo'</span></span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>可以在一個陳述式中，使用tuple來交換值，不需要用到暫時性的變數
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>password = <span class="string">'swordfish'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>icecream = <span class="string">'tuttifrutti'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>password, icecream = icecream, password</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>password</span><br><span class="line"><span class="string">'tuttifrutti'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>icecream</span><br><span class="line"><span class="string">'swordfish'</span></span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p><code>tuple()</code>轉換函式可將其他的東西做成tuple
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>marx_list = [<span class="string">'Groucho'</span>, <span class="string">'Chico'</span>, <span class="string">'Harpo'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>tuple(marx_list)</span><br><span class="line">(<span class="string">'Groucho'</span>, <span class="string">'Chico'</span>, <span class="string">'Harpo'</span>)</span><br></pre></td></tr></table></figure></p>
-</li>
+<li>先用 <code>()</code>製作一個空的tuple：</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>empty_tuple = ()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>empty_tuple</span><br><span class="line">()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>讓tuple有一或多個元素，在每個元素後面加上一個逗號</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>one_marx = <span class="string">&#x27;Groucho&#x27;</span>,</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>one_marx</span><br><span class="line">(<span class="string">&#x27;Groucho&#x27;</span>,)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>若有多個元素，請依序列舉，除了最後一個元素之外，都要加上一個逗號</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>marx_table = <span class="string">&#x27;Groucho&#x27;</span>, <span class="string">&#x27;Chico&#x27;</span>, <span class="string">&#x27;Harpo&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>marx_table</span><br><span class="line">(<span class="string">&#x27;Groucho&#x27;</span>, <span class="string">&#x27;Chico&#x27;</span>, <span class="string">&#x27;Harpo&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Python 在印出tuple時，會加上括號</li>
+<li>真正定義tuple的是元素後的逗號，但使用括號不會有任何不良的影響，用括號把值包起來，讓tuple看起來更清楚</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>marx_tuple = (<span class="string">&#x27;Groucho&#x27;</span>, <span class="string">&#x27;Chico&#x27;</span>, <span class="string">&#x27;Harpo&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>marx_tuple</span><br><span class="line">(<span class="string">&#x27;Groucho&#x27;</span>, <span class="string">&#x27;Chico&#x27;</span>, <span class="string">&#x27;Harpo&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>tuple 可以被一次指派給多個變數</li>
+<li>有時這稱為<strong>tuple開箱(unpacking)</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>marx_tuple = (<span class="string">&#x27;Groucho&#x27;</span>, <span class="string">&#x27;Chico&#x27;</span>, <span class="string">&#x27;Harpo&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a, b, c = marx_tuple</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a </span><br><span class="line"><span class="string">&#x27;Groucho&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line"><span class="string">&#x27;Chico&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c</span><br><span class="line"><span class="string">&#x27;Harpo&#x27;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>可以在一個陳述式中，使用tuple來交換值，不需要用到暫時性的變數</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>password = <span class="string">&#x27;swordfish&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>icecream = <span class="string">&#x27;tuttifrutti&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>password, icecream = icecream, password</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>password</span><br><span class="line"><span class="string">&#x27;tuttifrutti&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>icecream</span><br><span class="line"><span class="string">&#x27;swordfish&#x27;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>tuple()</code>轉換函式可將其他的東西做成tuple</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>marx_list = [<span class="string">&#x27;Groucho&#x27;</span>, <span class="string">&#x27;Chico&#x27;</span>, <span class="string">&#x27;Harpo&#x27;</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">tuple</span>(marx_list)</span><br><span class="line">(<span class="string">&#x27;Groucho&#x27;</span>, <span class="string">&#x27;Chico&#x27;</span>, <span class="string">&#x27;Harpo&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <hr>
-<h3>Tuple vs 串列</h3>
+<h3 id="Tuple-vs-串列">Tuple vs 串列</h3>
 <ul>
 <li>Tuple通常可以用來取代串列，但他們的功能比較少，沒有 <code>append()</code>、<code>insert()</code>，為什麼不使用串列來取代所有的tuple就好？</li>
 </ul>

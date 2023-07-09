@@ -155,10 +155,10 @@
     </div>
 </div>
     <div class="post-content">
-    <h2>Database 實體關聯模型(E-R model)</h2>
-<p>&lt;!--more--&gt;</p>
+    <h2 id="Database-實體關聯模型-E-R-model">Database 實體關聯模型(E-R model)</h2>
+<span id="more"></span>
 <hr>
-<h3>實體 (Entity)</h3>
+<h3 id="實體-Entity">實體 (Entity)</h3>
 <ul>
 <li>將真實世界的人、事、物等實體，以一個方框圖來表示，如果實體必須依附其他實體而存在，則為弱實體，使用雙方v框圖表示。</li>
 <li>例如選課系統中的學生與課程兩個實體:
@@ -167,59 +167,43 @@
 <li>因為學生轉學，則該學生的緊急連絡人資料便不需要被紀錄</li>
 </ul>
 </li>
-<li>下圖是學生選課系統中的實體：
-<img src="http://database.klab.tw/teach/img/t4_2_01.png" class="" width="300" height="150" title="vi-vim-cheat-sheet"></li>
+<li>下圖是學生選課系統中的實體：</li>
 </ul>
-<h3>屬性 (Attribute)</h3>
+<img src="http://database.klab.tw/teach/img/t4_2_01.png" class="" width="300" height="150" title="vi-vim-cheat-sheet">
+<h3 id="屬性-Attribute">屬性 (Attribute)</h3>
 <ul>
-<li>
-<p>實體擁有的特性稱為屬性(Attribute)，以橢圓形來表示屬性，</p>
-</li>
-<li>
-<p>當屬性具有多重值時，則以雙橢圓形來表示，</p>
-</li>
-<li>
-<p>屬性為主鍵，則屬性名稱底下畫一條底線區別，</p>
-</li>
-<li>
-<p>複合屬性(Composite attribute)則為屬性再分割，</p>
-</li>
-<li>
-<p>衍生屬性(Derived attribute)則以虛橢圓形來表示，</p>
-</li>
-<li>
-<p>例如選課系統中的學生實體擁有學號、姓名、性別、地址、年齡和電話等屬性，可以如下所示：
-<img src="http://database.klab.tw/teach/img/t4_2_02.png" class="" width="400" height="350" title="vi-vim-cheat-sheet"></p>
-</li>
-<li>
-<p>課程實體其屬性如下圖所示：
-<img src="http://database.klab.tw/teach/img/t4_2_03.png" class="" width="200" height="150" title="vi-vim-cheat-sheet"></p>
-</li>
-<li>
-<p>緊急聯絡人是弱實體，必須依附著學生實體，其主鍵若設定為學生學號，則此處不必繪出，如下圖所示：
-<img src="http://database.klab.tw/teach/img/t4_2_04.png" class="" width="150" height="100" title="vi-vim-cheat-sheet"></p>
-</li>
+<li>實體擁有的特性稱為屬性(Attribute)，以橢圓形來表示屬性，</li>
+<li>當屬性具有多重值時，則以雙橢圓形來表示，</li>
+<li>屬性為主鍵，則屬性名稱底下畫一條底線區別，</li>
+<li>複合屬性(Composite attribute)則為屬性再分割，</li>
+<li>衍生屬性(Derived attribute)則以虛橢圓形來表示，</li>
+<li>例如選課系統中的學生實體擁有學號、姓名、性別、地址、年齡和電話等屬性，可以如下所示：</li>
 </ul>
-<h3>實體關係 (Relationship)</h3>
+<img src="http://database.klab.tw/teach/img/t4_2_02.png" class="" width="400" height="350" title="vi-vim-cheat-sheet">
 <ul>
-<li>
-<p>說明各實體之間相互關聯(relationship)的限制(constraints)，是指實體與實體之間如果有關聯，則將此關聯以菱形連結兩實體，並寫出對應的基數。</p>
-</li>
-<li>
-<p>例如：每一個學生可以選修許多課程，一門課程可以被許多學生所選；每位學生皆有一位緊急聯絡人，每位聯絡人也只對應到一位學生。
-<img src="http://database.klab.tw/teach/img/t4_2_05.png" class="" width="300" height="200" title="vi-vim-cheat-sheet"></p>
-</li>
-<li>
-<p>當實體間的關聯為多對多時，並需將此關聯改為一個實體，如下圖所示：
-<img src="http://database.klab.tw/teach/img/t4_2_06.png" class="" width="400" height="200" title="vi-vim-cheat-sheet"></p>
-</li>
+<li>課程實體其屬性如下圖所示：</li>
 </ul>
-<h3>E-R關聯圖 (E-R Diagram)</h3>
+<img src="http://database.klab.tw/teach/img/t4_2_03.png" class="" width="200" height="150" title="vi-vim-cheat-sheet">
 <ul>
-<li>第4步驟則畫出完整之E-R關聯圖(E-R Diagram)。例如學生選課的ER model如下：
-<img src="http://database.klab.tw/teach/img/t4_2_07.png" class="" width="500" height="450" title="vi-vim-cheat-sheet"></li>
+<li>緊急聯絡人是弱實體，必須依附著學生實體，其主鍵若設定為學生學號，則此處不必繪出，如下圖所示：</li>
 </ul>
-<h3>外來鍵參考圖 (relational model schema)</h3>
+<img src="http://database.klab.tw/teach/img/t4_2_04.png" class="" width="150" height="100" title="vi-vim-cheat-sheet">
+<h3 id="實體關係-Relationship">實體關係 (Relationship)</h3>
+<ul>
+<li>說明各實體之間相互關聯(relationship)的限制(constraints)，是指實體與實體之間如果有關聯，則將此關聯以菱形連結兩實體，並寫出對應的基數。</li>
+<li>例如：每一個學生可以選修許多課程，一門課程可以被許多學生所選；每位學生皆有一位緊急聯絡人，每位聯絡人也只對應到一位學生。</li>
+</ul>
+<img src="http://database.klab.tw/teach/img/t4_2_05.png" class="" width="300" height="200" title="vi-vim-cheat-sheet">
+<ul>
+<li>當實體間的關聯為多對多時，並需將此關聯改為一個實體，如下圖所示：</li>
+</ul>
+<img src="http://database.klab.tw/teach/img/t4_2_06.png" class="" width="400" height="200" title="vi-vim-cheat-sheet">
+<h3 id="E-R關聯圖-E-R-Diagram">E-R關聯圖 (E-R Diagram)</h3>
+<ul>
+<li>第4步驟則畫出完整之E-R關聯圖(E-R Diagram)。例如學生選課的ER model如下：</li>
+</ul>
+<img src="http://database.klab.tw/teach/img/t4_2_07.png" class="" width="500" height="450" title="vi-vim-cheat-sheet">
+<h3 id="外來鍵參考圖-relational-model-schema">外來鍵參考圖 (relational model schema)</h3>
 <ol>
 <li>實體轉成一個資料表</li>
 <li>多值屬性轉成一個資料表</li>
@@ -231,15 +215,13 @@
 <li>1對1關聯時，如果其中一個實體只有單一屬性，則可併入另一個資料表中，否則獨立為一個資料表，則仍須多一個外來鍵置已便關聯到另一個資料表的主鍵。</li>
 </ol>
 <ul>
-<li>
-<p>例如學生選課資料表之ER model轉成綱要如下：
-<img src="http://database.klab.tw/teach/img/t4_2_08.png" class="" width="500" height="450" title="vi-vim-cheat-sheet"></p>
-</li>
-<li>
-<p>外來鍵參考圖(relational model schema)如下：
-<img src="http://database.klab.tw/teach/img/t4_2_09.png" class="" width="500" height="450" title="vi-vim-cheat-sheet"></p>
-</li>
+<li>例如學生選課資料表之ER model轉成綱要如下：</li>
 </ul>
+<img src="http://database.klab.tw/teach/img/t4_2_08.png" class="" width="500" height="450" title="vi-vim-cheat-sheet">
+<ul>
+<li>外來鍵參考圖(relational model schema)如下：</li>
+</ul>
+<img src="http://database.klab.tw/teach/img/t4_2_09.png" class="" width="500" height="450" title="vi-vim-cheat-sheet">
 
 </div> 
 

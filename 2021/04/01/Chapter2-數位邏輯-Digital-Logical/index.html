@@ -197,13 +197,13 @@
 <p>布林代數 (Boolean Algebra)<br>
 Def: 用來表示 true (真) 或 false (偽)的邏輯運算, 通常以 0 表示 false, 1 表示 true</p>
 </blockquote>
-<h2>常用的布林代數</h2>
+<h2 id="常用的布林代數">常用的布林代數</h2>
 <ol>
 <li>
 <p>NOT (<strong>~</strong>, <strong>‾</strong>, <strong>'</strong>)</p>
 <ul>
 <li>概念： <code>true -&gt; false</code>, <code>false -&gt; true</code></li>
-<li>truth table (真值表)
+<li>truth table (真值表)<br>
 將所有 input 變數組合對應的 output 皆列出來謂之
 <table>
 <thead>
@@ -314,7 +314,7 @@ output: A, B 只要有一個 1 =&gt; 1, 若 A, B 皆為 0 =&gt; 0</li>
 <p>XOR (exclusive - OR): ⊕</p>
 <ul>
 <li>規則：<br>
-input: A, B
+input: A, B<br>
 output: A, B 相同 =&gt; 0, A, B 相異 =&gt; 1</li>
 <li>truth table
 <table>
@@ -354,7 +354,7 @@ output: A, B 相同 =&gt; 0, A, B 相異 =&gt; 1</li>
 <p>XNOR (exclusive - NOR): ⊙</p>
 <ul>
 <li>規則：<br>
-input: A, B
+input: A, B<br>
 output: A, B 相同 =&gt; 1, A, B 相異 =&gt; 0</li>
 <li>truth table
 <table>
@@ -394,7 +394,7 @@ output: A, B 相同 =&gt; 1, A, B 相異 =&gt; 0</li>
 <p>implies (→)</p>
 <ul>
 <li>規則：<br>
-input: A, B
+input: A, B<br>
 output: A → B, 即 ((NOT A) or B)</li>
 <li>truth table
 <table>
@@ -435,8 +435,8 @@ output: A → B, 即 ((NOT A) or B)</li>
 <p>NAND</p>
 <ul>
 <li>規則：<br>
-input: A, B
-output: ‾A • B (先做 AND 在做 NOT)
+input: A, B<br>
+output: ‾A • B (先做 AND 在做 NOT)<br>
 <img src="AB.png" alt=""></li>
 <li>truth table
 <table>
@@ -477,8 +477,8 @@ output: ‾A • B (先做 AND 在做 NOT)
 <p>NOR</p>
 <ul>
 <li>規則：<br>
-input: A, B
-output: ‾ A + B (先做 OR 在做 NOT)
+input: A, B<br>
+output: ‾ A + B (先做 OR 在做 NOT)<br>
 <img src="A+B.png" alt=""></li>
 <li>truth table
 <table>
@@ -517,16 +517,16 @@ output: ‾ A + B (先做 OR 在做 NOT)
 </li>
 </ol>
 <blockquote>
-<p>Priority:
+<p>Priority:<br>
 NOT &gt; AND &gt; OR &gt; Implies, NOT 為單元運算子, 所以最高</p>
 </blockquote>
 <ul>
 <li>Note: 7, 8 為萬用閘 universal gate</li>
 </ul>
-<h2>定理</h2>
+<h2 id="定理">定理</h2>
 <ol>
 <li>
-<p>單一律：
+<p>單一律：<br>
 x + x = x<br>
 x • x = x</p>
 <table>
@@ -573,9 +573,9 @@ x • 1 = x</p>
 </table>
 </li>
 <li>
-<p>補數定律
-<img src="%E8%A3%9C%E6%95%B8x.png" alt="">
-‾ ‾x = x, 即 (x')' = x</p>
+<p>補數定律<br>
+<img src="%E8%A3%9C%E6%95%B8x.png" alt=""><br>
+‾ ‾x = x, 即 (x’)’ = x</p>
 <table>
 <thead>
 <tr>
@@ -638,8 +638,8 @@ x • (x + y) = x • x + x • y<br>
 </li>
 <li>
 <p><strong>延展:</strong><br>
-(A+AB+AC+AD+......)<br>
-= A (1+B+....)<br>
+(A+AB+AC+AD+…)<br>
+= A (1+B+…)<br>
 = A • 1<br>
 = A</p>
 </li>
@@ -666,7 +666,7 @@ A • 0 = 0<br>
 </li>
 </ol>
 <hr>
-<h2>布林函式</h2>
+<h2 id="布林函式">布林函式</h2>
 <p><strong>min-term:</strong> 包含所有變數的乘積項, ex: A, B, C =&gt; ‾A•B•‾C, A•‾B•C, A•B•C<br>
 <strong>max-term:</strong> 包含所有變數的加總項, ex: A, B, C =&gt; ‾A+‾B+C, A+‾B+C, A+B+C<br>
 <strong>ex1:</strong>  3個 input 變數 (x, y, z)的 min-term, max-term</p>
@@ -719,9 +719,13 @@ A • 0 = 0<br>
 <td>x • y • z (m7)</td>
 <td>‾x + ‾y + ‾z (M7)</td>
 </tr>
+<tr>
+<td><strong>特色：</strong></td>
+<td></td>
+<td></td>
+</tr>
 </tbody>
 </table>
-<p><strong>特色：</strong></p>
 <ul>
 <li>‾mi = Mi, ‾Mi = mi<br>
 ‾m3 = M3<br>
@@ -733,9 +737,9 @@ f(xyz) = (x + ‾y + z) • (‾x + y + z) = M2 • M4 = Σm(2, 4)</li>
 <li><strong>ex:</strong> f(x, y, z) = Σm(1, 2, 3, 4) = π(0, 5, 6, 7)</li>
 </ul>
 <p><strong>正規化：</strong><br>
-f(x, y, z....) = ......(正規化)</p>
+f(x, y, z…) = …(正規化)</p>
 <ol>
-<li>Sum of min-term (最小項之和)
+<li>Sum of min-term (最小項之和)<br>
 格式：<br>
 f(xy) = xy + ‾x y + x ‾y<br>
 f(xy) = xy + ‾y (Sum of product) (sop 每一個都用乘, 則乘跟乘之間用加的)</li>
@@ -746,7 +750,7 @@ f(xy) = (x + y) • ‾x (product of sum) (pos)</li>
 </ol>
 <p><strong>ex2:</strong> 將 f(xyz) = x + ‾ y‾z (‾x+y) 化成 Sum of min-term<br>
 <strong>Sol:</strong><br>
-step1: 利用笛摩根定律, 將 '‾' 置於單一變數上, 形成 sop 格式<br>
+step1: 利用笛摩根定律, 將 ‘‾’ 置於單一變數上, 形成 sop 格式<br>
 f(x, y, z) = x + ‾ y‾z(‾x+y)<br>
 = x + (‾y + ‾ ‾z) (‾x • ‾y)<br>
 = x + ‾x‾y • ‾y + ‾x‾y • z<br>
@@ -764,7 +768,7 @@ f(x, y, z) = x + ‾ y‾z(‾x+y)<br>
 = Σm(0, 1, 4, 5, 6, 7)</p>
 <p><strong>ex3:</strong> 將 f(x, y, z) = x + ‾yz (x + ‾y) 化成 Product of max-term<br>
 <strong>Sol:</strong><br>
-step1: 利用笛摩根定律, 將 '‾' 置於單一變數上, 形成 pos 格式</p>
+step1: 利用笛摩根定律, 將 ‘‾’ 置於單一變數上, 形成 pos 格式</p>
 <p>f(x, y, z) = x + ‾yz(x + ‾y)<br>
 = x + (‾y + ‾z) • (x + ‾y)<br>
 = (x + ‾y + ‾z) • (x + x + ‾y)<br>
@@ -781,7 +785,7 @@ step1: 利用笛摩根定律, 將 '‾' 置於單一變數上, 形成 pos 格式
 = M2 • M3<br>
 = π(2, 3)</p>
 <hr>
-<h2>布林函式化簡 (simplity circuit)</h2>
+<h2 id="布林函式化簡-simplity-circuit">布林函式化簡 (simplity circuit)</h2>
 <p>化成：</p>
 <ol>
 <li>最簡的 sop</li>
@@ -810,9 +814,9 @@ step1: 利用笛摩根定律, 將 '‾' 置於單一變數上, 形成 pos 格式
 <li>最簡 sop
 <ul>
 <li>作法：<br>
-(1) 將布林函式的 min-term 填 &quot;<strong>1</strong>&quot; 於卡諾圖的對應方格<br>
-(2) 用最少的矩形方格將 &quot;1&quot; 包含, 其中 <strong>單一矩形方格越大越好</strong> (為 2 的冪次方)<br>
-(3) &quot;1&quot; 全部被包含, &quot;1&quot; 可重複被包含<br>
+(1) 將布林函式的 min-term 填 “<strong>1</strong>” 於卡諾圖的對應方格<br>
+(2) 用最少的矩形方格將 “1” 包含, 其中 <strong>單一矩形方格越大越好</strong> (為 2 的冪次方)<br>
+(3) “1” 全部被包含, “1” 可重複被包含<br>
 (4) 矩形方格為 2^k <strong>=&gt; 消除 k 個變數</strong></li>
 <li>Ex1: 求 sop?<br>
 <img src="%E5%8C%96%E7%B0%A13.png" alt=""></li>
@@ -828,7 +832,7 @@ step1: 利用笛摩根定律, 將 '‾' 置於單一變數上, 形成 pos 格式
 </li>
 </ol>
 <hr>
-<h2>Don't care condition (隨意條件)</h2>
+<h2 id="Don’t-care-condition-隨意條件">Don’t care condition (隨意條件)</h2>
 <ul>
 <li>
 <p>Def: 對結果不具影響之變數組合</p>
@@ -837,11 +841,11 @@ step1: 利用笛摩根定律, 將 '‾' 置於單一變數上, 形成 pos 格式
 <p>目的： 進一步化簡電路</p>
 </li>
 <li>
-<p>規則： Don't care condition 於卡諾圖, 當中填入 &quot;x&quot; 其中：</p>
+<p>規則： Don’t care condition 於卡諾圖, 當中填入 “x” 其中：</p>
 <ol>
-<li>&quot;x&quot; 不見得要用</li>
-<li>&quot;x&quot; 可重複使用</li>
-<li>&quot;x&quot; 可增加相鄰方格數</li>
+<li>“x” 不見得要用</li>
+<li>“x” 可重複使用</li>
+<li>“x” 可增加相鄰方格數</li>
 </ol>
 </li>
 <li>
@@ -849,7 +853,7 @@ step1: 利用笛摩根定律, 將 '‾' 置於單一變數上, 形成 pos 格式
 <img src="Don1.png" alt=""></p>
 </li>
 <li>
-<p>Ex2: f(A, B, C, D) = Σm(1, 3, 8, 9, 10, 12) + Σd(0, 11, 13, 14) [d means don't care], 求最簡 sop?<br>
+<p>Ex2: f(A, B, C, D) = Σm(1, 3, 8, 9, 10, 12) + Σd(0, 11, 13, 14) [d means don’t care], 求最簡 sop?<br>
 <img src="Don2.png" alt=""></p>
 </li>
 <li>
@@ -858,7 +862,7 @@ step1: 利用笛摩根定律, 將 '‾' 置於單一變數上, 形成 pos 格式
 </li>
 </ul>
 <hr>
-<h2>邏輯閘 (Logical Gate)</h2>
+<h2 id="邏輯閘-Logical-Gate">邏輯閘 (Logical Gate)</h2>
 
 </div> 
 

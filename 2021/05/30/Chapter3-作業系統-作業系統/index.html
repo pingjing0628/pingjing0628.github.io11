@@ -156,7 +156,7 @@
 </div>
     <div class="post-content">
     <h1>3.1 作業系統</h1>
-<h2>O.S. 作用</h2>
+<h2 id="O-S-作用">O.S. 作用</h2>
 <ol>
 <li>為 user 和 Hardware 間溝通的橋樑</li>
 <li>提供一個易於執行的環境 ex: Dos -&gt; Windows</li>
@@ -164,7 +164,7 @@
 <li>避免為和系統的動作發生</li>
 </ol>
 <hr>
-<h2>作業系統型態</h2>
+<h2 id="作業系統型態">作業系統型態</h2>
 <ol>
 <li>
 <p><strong>Multiprogramming (多元程式規劃)</strong><br>
@@ -203,11 +203,9 @@ Def:</p>
 </ol>
 <p>單工：一次只處理一個工作, 結束才換下一個, ex: 早期的 Dos 系統<br>
 多工(Multitasking)：一次可同時(以並行或平行的方式)執行多個工作, 利用 Time-sharing 達成<br>
-ex: Unix</p>
-<ol start="3">
-<li>Batched System (批次系統) =&gt; offline<br>
-將同質性的作業收集, 於一特定時間在統一處理, ex: 會計帳</li>
-</ol>
+ex: Unix<br>
+3. Batched System (批次系統) =&gt; offline<br>
+將同質性的作業收集, 於一特定時間在統一處理, ex: 會計帳</p>
 </li>
 <li>
 <p><img src="perfermance_compare.png" alt=""></p>
@@ -220,7 +218,7 @@ Def: 指一電腦內有多顆 processor, 如此可同時執行多個工作(以�
 特色：</p>
 <ol>
 <li>各 processor 受相同的 O.S., Clock 控制, 並共用 Memory space</li>
-<li>processor 之間溝通 =&gt; <strong>&quot;Shared Memory&quot;</strong></li>
+<li>processor 之間溝通 =&gt; <strong>“Shared Memory”</strong></li>
 <li>為 tightly coupled (緊密, 耦合)的架構 =&gt; 一個掛, 全掛<br>
 <img src="multiprocessor.png" alt=""></li>
 </ol>
@@ -232,7 +230,7 @@ Def: 指一電腦內有多顆 processor, 如此可同時執行多個工作(以�
 <p>特色：</p>
 <ol>
 <li>各 process 有專屬的 O.S., Clock, Memory 等資源</li>
-<li>Process 間的溝通採 <strong>&quot;Message passing&quot;</strong></li>
+<li>Process 間的溝通採 <strong>“Message passing”</strong></li>
 <li>為 loosely coupled (鬆散, 耦合) system</li>
 </ol>
 </li>
@@ -246,12 +244,12 @@ Def: 指一電腦內有多顆 processor, 如此可同時執行多個工作(以�
 </ol>
 </li>
 <li>
-<h3>Network Computing</h3>
-<h4>Clustered System (叢集式)</h4>
+<h3 id="Network-Computing">Network Computing</h3>
+<h4 id="Clustered-System-叢集式">Clustered System (叢集式)</h4>
 <p>Def:</p>
 <ul>
 <li>類似平行系統, 可同時執行多個工作</li>
-<li>But 一般採用 &quot;LAN 將多台 Host 連結&quot;, 形成一大型的服務網路</li>
+<li>But 一般採用 “LAN 將多台 Host 連結”, 形成一大型的服務網路</li>
 <li>圖：<img src="clustered.png" alt=""></li>
 <li>可達：
 <ol>
@@ -261,7 +259,7 @@ Def: 指一電腦內有多顆 processor, 如此可同時執行多個工作(以�
 </ol>
 </li>
 </ul>
-<h4>Grid Computing (網格計算)</h4>
+<h4 id="Grid-Computing-網格計算">Grid Computing (網格計算)</h4>
 <p>Def:</p>
 <ul>
 <li>利用世界各地分享的資源來共同完成一大型任務</li>
@@ -269,19 +267,19 @@ Def: 指一電腦內有多顆 processor, 如此可同時執行多個工作(以�
 缺點：難以普及 (需專家才有辦法對巨大問題分割)<br>
 圖：<img src="grid_computing.png" alt=""></li>
 </ul>
-<h4>Cloud</h4>
+<h4 id="Cloud">Cloud</h4>
 <p>Def:</p>
 <ul>
 <li>data &amp; service in the cloud</li>
 <li>accessiable with any device</li>
 <li>ingeneral device will use browser to connect into cloud<br>
 特色：</li>
-<li>user &quot;just use&quot;, 不需做</li>
+<li>user “just use”, 不需做</li>
 <li>系統具強大的可擴充性 (scalability)<br>
 Cloud 衍生的服務</li>
 <li>圖：<img src="cloud.png" alt=""></li>
 </ul>
-<h4>Compare</h4>
+<h4 id="Compare">Compare</h4>
 <table>
 <thead>
 <tr>
@@ -311,9 +309,13 @@ Cloud 衍生的服務</li>
 <td>完全</td>
 <td>部分開放</td>
 </tr>
+<tr>
+<td>圖：<img src="compare.png" alt=""></td>
+<td></td>
+<td></td>
+</tr>
 </tbody>
 </table>
-<p>圖：<img src="compare.png" alt=""></p>
 </li>
 </ul>
 </li>
@@ -344,7 +346,7 @@ Def: 指開發出的系統, 並非在一般 PC 執行, 而是嵌入 3C 家電等
 </li>
 </ol>
 <hr>
-<h2>作業系統演進</h2>
+<h2 id="作業系統演進">作業系統演進</h2>
 <ul>
 <li>
 <p>Offline (離線作業)<br>
@@ -353,7 +355,7 @@ Def: 指藉由系統的離峰時間, 將 data 先行載入到高速 device, 使 
 </li>
 <li>
 <p>Spooling (電腦週邊同步連線作業)<br>
-Def: 利用高速 device (disk), 存方低速 device (tape) 的 data 使 CPU idle time 下降, 且於 Spooling 中 <strong>&quot;可共用 I/O device 之資源&quot;</strong><br>
+Def: 利用高速 device (disk), 存方低速 device (tape) 的 data 使 CPU idle time 下降, 且於 Spooling 中 <strong>“可共用 I/O device 之資源”</strong><br>
 圖：<img src="spooling.png" alt=""></p>
 </li>
 <li>
@@ -430,7 +432,7 @@ Def: 將常用的 data 複製一份到高速 device 中以提高 CPU 存取的 I
 </table>
 </li>
 </ul>
-<h3>Summary</h3>
+<h3 id="Summary">Summary</h3>
 <p><img src="memory_hierarchy.png" alt=""></p>
 
 </div> 

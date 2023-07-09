@@ -149,19 +149,19 @@
     </div>
 </div>
     <div class="post-content">
-    <h2>安裝主程式</h2>
-<p>&lt;!-- more --&gt;</p>
+    <h2 id="安裝主程式">安裝主程式</h2>
+<span id="more"></span> 
 <hr>
 <ul>
 <li>主程式是指 go 指令，它能處理編譯、直譯、建置、格式化程式碼、測試、下載依賴等多種工具的組合。</li>
 </ul>
-<h3>MacOS</h3>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ brew install go</span><br><span class="line">$ go version</span><br><span class="line">go version go1.9.2 darwin&#x2F;amd64</span><br></pre></td></tr></table></figure></p>
-<h3>環境變數設定</h3>
+<h3 id="MacOS">MacOS</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ brew install go</span><br><span class="line">$ go version</span><br><span class="line">go version go1.9.2 darwin/amd64</span><br></pre></td></tr></table></figure>
+<h3 id="環境變數設定">環境變數設定</h3>
 <ul>
 <li>可下 <code>go env</code> 取得環境變數：</li>
 </ul>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">$ go env</span><br><span class="line">GO111MODULE&#x3D;&quot;&quot;</span><br><span class="line">GOARCH&#x3D;&quot;amd64&quot;</span><br><span class="line">GOBIN&#x3D;&quot;&quot;</span><br><span class="line">GOCACHE&#x3D;&quot;&#x2F;Users&#x2F;pingjing&#x2F;Library&#x2F;Caches&#x2F;go-build&quot;</span><br><span class="line">GOENV&#x3D;&quot;&#x2F;Users&#x2F;pingjing&#x2F;Library&#x2F;Application Support&#x2F;go&#x2F;env&quot;</span><br><span class="line">GOEXE&#x3D;&quot;&quot;</span><br><span class="line">GOFLAGS&#x3D;&quot;&quot;</span><br><span class="line">GOHOSTARCH&#x3D;&quot;amd64&quot;</span><br><span class="line">GOHOSTOS&#x3D;&quot;darwin&quot;</span><br><span class="line">GONOPROXY&#x3D;&quot;&quot;</span><br><span class="line">GONOSUMDB&#x3D;&quot;&quot;</span><br><span class="line">GOOS&#x3D;&quot;darwin&quot;</span><br><span class="line">GOPATH&#x3D;&quot;&#x2F;Users&#x2F;pingjing&#x2F;go&quot;</span><br><span class="line">GOPRIVATE&#x3D;&quot;&quot;</span><br><span class="line">GOPROXY&#x3D;&quot;https:&#x2F;&#x2F;proxy.golang.org,direct&quot;</span><br><span class="line">GOROOT&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;go&#x2F;1.13.4&#x2F;libexec&quot;</span><br><span class="line">GOSUMDB&#x3D;&quot;sum.golang.org&quot;</span><br><span class="line">GOTMPDIR&#x3D;&quot;&quot;</span><br><span class="line">GOTOOLDIR&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;go&#x2F;1.13.4&#x2F;libexec&#x2F;pkg&#x2F;tool&#x2F;darwin_amd64&quot;</span><br><span class="line">GCCGO&#x3D;&quot;gccgo&quot;</span><br><span class="line">AR&#x3D;&quot;ar&quot;</span><br><span class="line">CC&#x3D;&quot;clang&quot;</span><br><span class="line">CXX&#x3D;&quot;clang++&quot;</span><br><span class="line">CGO_ENABLED&#x3D;&quot;1&quot;</span><br><span class="line">GOMOD&#x3D;&quot;&quot;</span><br><span class="line">CGO_CFLAGS&#x3D;&quot;-g -O2&quot;</span><br><span class="line">CGO_CPPFLAGS&#x3D;&quot;&quot;</span><br><span class="line">CGO_CXXFLAGS&#x3D;&quot;-g -O2&quot;</span><br><span class="line">CGO_FFLAGS&#x3D;&quot;-g -O2&quot;</span><br><span class="line">CGO_LDFLAGS&#x3D;&quot;-g -O2&quot;</span><br><span class="line">PKG_CONFIG&#x3D;&quot;pkg-config&quot;</span><br><span class="line">GOGCCFLAGS&#x3D;&quot;-fPIC -m64 -pthread -fno-caret-diagnostics -Qunused-arguments -fmessage-length&#x3D;0 -fdebug-prefix-map&#x3D;&#x2F;var&#x2F;folders&#x2F;2l&#x2F;n_g57dsd76n0xvwjmnx5xf6h0000gn&#x2F;T&#x2F;go-build181465848&#x3D;&#x2F;tmp&#x2F;go-build -gno-record-gcc-switches -fno-common&quot;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">$ go env</span><br><span class="line">GO111MODULE=&quot;&quot;</span><br><span class="line">GOARCH=&quot;amd64&quot;</span><br><span class="line">GOBIN=&quot;&quot;</span><br><span class="line">GOCACHE=&quot;/Users/pingjing/Library/Caches/go-build&quot;</span><br><span class="line">GOENV=&quot;/Users/pingjing/Library/Application Support/go/env&quot;</span><br><span class="line">GOEXE=&quot;&quot;</span><br><span class="line">GOFLAGS=&quot;&quot;</span><br><span class="line">GOHOSTARCH=&quot;amd64&quot;</span><br><span class="line">GOHOSTOS=&quot;darwin&quot;</span><br><span class="line">GONOPROXY=&quot;&quot;</span><br><span class="line">GONOSUMDB=&quot;&quot;</span><br><span class="line">GOOS=&quot;darwin&quot;</span><br><span class="line">GOPATH=&quot;/Users/pingjing/go&quot;</span><br><span class="line">GOPRIVATE=&quot;&quot;</span><br><span class="line">GOPROXY=&quot;https://proxy.golang.org,direct&quot;</span><br><span class="line">GOROOT=&quot;/usr/local/Cellar/go/1.13.4/libexec&quot;</span><br><span class="line">GOSUMDB=&quot;sum.golang.org&quot;</span><br><span class="line">GOTMPDIR=&quot;&quot;</span><br><span class="line">GOTOOLDIR=&quot;/usr/local/Cellar/go/1.13.4/libexec/pkg/tool/darwin_amd64&quot;</span><br><span class="line">GCCGO=&quot;gccgo&quot;</span><br><span class="line">AR=&quot;ar&quot;</span><br><span class="line">CC=&quot;clang&quot;</span><br><span class="line">CXX=&quot;clang++&quot;</span><br><span class="line">CGO_ENABLED=&quot;1&quot;</span><br><span class="line">GOMOD=&quot;&quot;</span><br><span class="line">CGO_CFLAGS=&quot;-g -O2&quot;</span><br><span class="line">CGO_CPPFLAGS=&quot;&quot;</span><br><span class="line">CGO_CXXFLAGS=&quot;-g -O2&quot;</span><br><span class="line">CGO_FFLAGS=&quot;-g -O2&quot;</span><br><span class="line">CGO_LDFLAGS=&quot;-g -O2&quot;</span><br><span class="line">PKG_CONFIG=&quot;pkg-config&quot;</span><br><span class="line">GOGCCFLAGS=&quot;-fPIC -m64 -pthread -fno-caret-diagnostics -Qunused-arguments -fmessage-length=0 -fdebug-prefix-map=/var/folders/2l/n_g57dsd76n0xvwjmnx5xf6h0000gn/T/go-build181465848=/tmp/go-build -gno-record-gcc-switches -fno-common&quot;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>
 <p>其中 <code>GOPATH</code> ，是需要設定的環境變數。</p>
@@ -178,8 +178,8 @@
 </ul>
 </li>
 <li>
-<p>接著使用 go 的第一個指令 <code>go get</code> ，它會把目標下載回來放在 <code>src</code> 裡，如：
-<code>go get github.com/MilesChou/book-start-golang-30-days</code></p>
+<p>接著使用 go 的第一個指令 <code>go get</code> ，它會把目標下載回來放在 <code>src</code> 裡，如：<br>
+<code> go get github.com/MilesChou/book-start-golang-30-days</code></p>
 </li>
 <li>
 <p>這樣會把上面這個 repo ，使用 HTTPS 協定 clone 到硬碟裡。</p>
@@ -188,20 +188,20 @@
 <p>當編譯需要第三方的原始碼時，即可使用 go get 下載，同時這也可以用來下載自己或是第三方的原始碼。把所有原始碼集中成一個大大的 workspace ，這就是 go 管理原始碼的概念。</p>
 </li>
 </ul>
-<h3>Hello World</h3>
-<p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"Hello, 世界"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Hello-World">Hello World</h3>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;Hello, 世界&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>讓程式在建好的環境執行，先建個目錄，檔案名叫 <code>main.go</code>，切換到目錄後，將以上的內容輸入到檔案內，接著 <code>go run main.go</code>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p &#x2F;path&#x2F;to&#x2F;helloworld</span><br><span class="line">$ cd &#x2F;path&#x2F;to&#x2F;helloworld</span><br><span class="line"># 輸入程式碼</span><br><span class="line">$ vim main.go</span><br><span class="line"># 執行程式碼</span><br><span class="line">$ go run main.go</span><br><span class="line">Hello, 世界</span><br></pre></td></tr></table></figure></li>
+<li>讓程式在建好的環境執行，先建個目錄，檔案名叫 <code>main.go</code>，切換到目錄後，將以上的內容輸入到檔案內，接著 <code>go run main.go</code></li>
 </ul>
-<h3>解釋</h3>
-<p><strong>go run</strong>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ go run main.go</span><br><span class="line">Hello, 世界</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p /path/to/helloworld</span><br><span class="line">$ cd /path/to/helloworld</span><br><span class="line"># 輸入程式碼</span><br><span class="line">$ vim main.go</span><br><span class="line"># 執行程式碼</span><br><span class="line">$ go run main.go</span><br><span class="line">Hello, 世界</span><br></pre></td></tr></table></figure>
+<h3 id="解釋">解釋</h3>
+<p><strong>go run</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ go run main.go</span><br><span class="line">Hello, 世界</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>go run</code> 所做的事正是直譯，也就是直接拿原始碼編譯，同時執行。</li>
 </ul>
-<p><strong>package</strong>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br></pre></td></tr></table></figure></p>
+<p><strong>package</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br></pre></td></tr></table></figure>
 <ul>
 <li>
 <p><code>package</code> 指的是定義套件名稱。</p>
@@ -213,25 +213,25 @@
 <p><code>main</code> 套件是有特殊意義的套件名，它是程式的起始點。執行程式的時候，將會從 <code>main</code> 套件開始。</p>
 </li>
 <li>
-<p>若把 <code>main</code> 名字換成其他名字，再執行一次，將會出現錯誤訊息：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ go run main.go</span><br><span class="line">go run: cannot run non-main package</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>不能跑非 <code>main</code> 的套件。這個概念與大多數 PHP 框架的 <code>index.php</code> 類似，是所有 <code>request</code> 的起始點。</p>
+<p>若把 <code>main</code> 名字換成其他名字，再執行一次，將會出現錯誤訊息：</p>
 </li>
 </ul>
-<p><strong>import</strong>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &quot;fmt&quot;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ go run main.go</span><br><span class="line">go run: cannot run non-main package</span><br></pre></td></tr></table></figure>
+<ul>
+<li>不能跑非 <code>main</code> 的套件。這個概念與大多數 PHP 框架的 <code>index.php</code> 類似，是所有 <code>request</code> 的起始點。</li>
+</ul>
+<p><strong>import</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &quot;fmt&quot;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>import</code> 表示要引用套件，而 <code>fmt</code> 套件是 <code>Go</code> 內建的處理格式化輸入輸出函式庫。</li>
 <li><code>Hello World</code> 的目的是要輸出文字，所以需要這個函式庫。</li>
 </ul>
 <p><strong>func</strong></p>
 <ul>
-<li>
-<p>這是定義函式，也就是要寫流程了。
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">func main() &#123;</span><br><span class="line">	fmt.Println(&quot;Hello, 世界&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</li>
+<li>這是定義函式，也就是要寫流程了。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">func main() &#123;</span><br><span class="line">	fmt.Println(&quot;Hello, 世界&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
 <li>
 <p><code>func</code> 定義了程式流程，供其他函式呼叫使用。</p>
 </li>

@@ -149,10 +149,10 @@
     </div>
 </div>
     <div class="post-content">
-    <h2>Constants</h2>
-<p>&lt;!-- more --&gt;</p>
+    <h2 id="Constants">Constants</h2>
+<span id="more"></span> 
 <hr>
-<h3>Go 的常數類型</h3>
+<h3 id="Go-的常數類型">Go 的常數類型</h3>
 <ul>
 <li>boolean constants ，布林常數。</li>
 <li>rune constants ，表示字元的常數。</li>
@@ -182,24 +182,24 @@
 <p>常數有可能是已定義型態（typed）或是未定型態（untyped），實字常數、 <code>true</code> 、 <code>false</code> 、 <code>iota</code> 都屬於未定型態。</p>
 </li>
 <li>
-<p>常數運算式裡的運算元都是未定型態時，運算完的結果也會是未定型態。example：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">10        &#x2F;&#x2F; 10, Untyped integer constant.</span><br><span class="line">10 + 20   &#x2F;&#x2F; 30, Untyped integer constant.</span><br><span class="line">10 &#x2F; 20   &#x2F;&#x2F; 0,  Untyped integer constant.</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>但如果有一個型態是確定的，那運算完的結果也會是確定的，如：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int32(10)           &#x2F;&#x2F; 10,  type int32</span><br><span class="line">int32(10) + 20      &#x2F;&#x2F; 30,  type int32</span><br><span class="line">float64(10) &#x2F; 20    &#x2F;&#x2F; 0.5, type float64</span><br></pre></td></tr></table></figure></p>
+<p>常數運算式裡的運算元都是未定型態時，運算完的結果也會是未定型態。example：</p>
 </li>
 </ul>
-<h3>Boolean constants</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">10        // 10, Untyped integer constant.</span><br><span class="line">10 + 20   // 30, Untyped integer constant.</span><br><span class="line">10 / 20   // 0,  Untyped integer constant.</span><br></pre></td></tr></table></figure>
 <ul>
-<li>布林常數是內建的常數，就只有兩個： <code>true</code> 和 <code>false</code>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// true and false are the two untyped boolean values.</span></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	<span class="literal">true</span>  = <span class="number">0</span> == <span class="number">0</span> <span class="comment">// Untyped bool.</span></span><br><span class="line">	<span class="literal">false</span> = <span class="number">0</span> != <span class="number">0</span> <span class="comment">// Untyped bool.</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
+<li>但如果有一個型態是確定的，那運算完的結果也會是確定的，如：</li>
 </ul>
-<h3>Rune constants</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int32(10)           // 10,  type int32</span><br><span class="line">int32(10) + 20      // 30,  type int32</span><br><span class="line">float64(10) / 20    // 0.5, type float64</span><br></pre></td></tr></table></figure>
+<h3 id="Boolean-constants">Boolean constants</h3>
 <ul>
-<li>Rune 常數使用 Rune 實字（rune literal）來表示，它其實是代表一個 Unicode 的整數。可以使用單引號 <code>'</code> 括住 Unicode 字元，或是 byte 值來表示，如下面的範例是輸出 <code>a</code> 的三種方法，與輸出 <code>中</code> 的三種方法：
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(<span class="string">'a'</span>))</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(<span class="string">'\141'</span>))</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(<span class="string">'\x61'</span>))</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(<span class="string">'中'</span>))</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(<span class="string">'\u4e2d'</span>))</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(<span class="string">'\U00004e2d'</span>))</span><br><span class="line">	fmt.Println(<span class="keyword">string</span>(<span class="string">'\n'</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>布林常數是內建的常數，就只有兩個： <code>true</code> 和 <code>false</code></li>
 </ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// true and false are the two untyped boolean values.</span></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	<span class="literal">true</span>  = <span class="number">0</span> == <span class="number">0</span> <span class="comment">// Untyped bool.</span></span><br><span class="line">	<span class="literal">false</span> = <span class="number">0</span> != <span class="number">0</span> <span class="comment">// Untyped bool.</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="Rune-constants">Rune constants</h3>
+<ul>
+<li>Rune 常數使用 Rune 實字（rune literal）來表示，它其實是代表一個 Unicode 的整數。可以使用單引號 <code>'</code> 括住 Unicode 字元，或是 byte 值來表示，如下面的範例是輸出 <code>a</code> 的三種方法，與輸出 <code>中</code> 的三種方法：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="type">string</span>(<span class="string">&#x27;a&#x27;</span>))</span><br><span class="line">	fmt.Println(<span class="type">string</span>(<span class="string">&#x27;\141&#x27;</span>))</span><br><span class="line">	fmt.Println(<span class="type">string</span>(<span class="string">&#x27;\x61&#x27;</span>))</span><br><span class="line">	fmt.Println(<span class="type">string</span>(<span class="string">&#x27;中&#x27;</span>))</span><br><span class="line">	fmt.Println(<span class="type">string</span>(<span class="string">&#x27;\u4e2d&#x27;</span>))</span><br><span class="line">	fmt.Println(<span class="type">string</span>(<span class="string">&#x27;\U00004e2d&#x27;</span>))</span><br><span class="line">	fmt.Println(<span class="type">string</span>(<span class="string">&#x27;\n&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>string() 函式為強制轉型字串</p>
 </blockquote>
@@ -208,21 +208,21 @@
 <p>Byte 值的表示方法：</p>
 <ul>
 <li>直接給字元 <code>a</code></li>
-<li><code>\</code> 開頭為八進制，後面必須是 3 個八進位的字元（<code>[0-9]{3}</code>）</li>
-<li><code>\x</code> 開頭為十六進制表示，後面必須是 2 個十六進位的字元（<code>[0-9a-f]{2}</code>）</li>
+<li><code>\</code> 開頭為八進制，後面必須是 3 個八進位的字元（<code>[0-9]&#123;3&#125;</code>）</li>
+<li><code>\x</code> 開頭為十六進制表示，後面必須是 2 個十六進位的字元（<code>[0-9a-f]&#123;2&#125;</code>）</li>
 </ul>
 </li>
 <li>
 <p>Unicode 表示方法：</p>
 <ul>
 <li>直接給字元 <code>中</code></li>
-<li><code>\u</code> 開頭，後面必須是 4 個十六進位的字元（<code>[0-9a-f]{4}</code>）</li>
-<li><code>\U</code> 開頭，後面必須是 8 個十六進位的字元（<code>[0-9a-f]{8}</code>）</li>
+<li><code>\u</code> 開頭，後面必須是 4 個十六進位的字元（<code>[0-9a-f]&#123;4&#125;</code>）</li>
+<li><code>\U</code> 開頭，後面必須是 8 個十六進位的字元（<code>[0-9a-f]&#123;8&#125;</code>）</li>
 <li>跳脫字元： <code>\</code> 後面接 <code>a</code> <code>b</code> <code>f</code> <code>n</code> <code>r</code> <code>t</code> <code>v</code> <code>\</code> <code>'</code> <code>&quot;</code> 。</li>
 </ul>
 </li>
 </ul>
-<h3>Integer constants</h3>
+<h3 id="Integer-constants">Integer constants</h3>
 <ul>
 <li>數字常數使用數字實字（integer literal）表示。數字實字有三種表示法：
 <ul>
@@ -232,38 +232,34 @@
 </ul>
 </li>
 </ul>
-<h3>Floating-point constants</h3>
+<h3 id="Floating-point-constants">Floating-point constants</h3>
 <ul>
-<li>浮點數常數使用浮點數實字（floating-point literal）表示，浮點數使用的兩種表示法：小數點與科學符號：
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 10.0</span></span><br><span class="line">	fmt.Println(<span class="number">10.</span>)</span><br><span class="line">	fmt.Println(<span class="number">10.0</span>)</span><br><span class="line">	fmt.Println(<span class="number">010.0</span>)</span><br><span class="line">	fmt.Println(<span class="number">10.e+0</span>)</span><br><span class="line">	fmt.Println(<span class="number">1E1</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 0.1</span></span><br><span class="line">	fmt.Println(<span class="number">.1e+0</span>)</span><br><span class="line">	fmt.Println(<span class="number">.1E0</span>)</span><br><span class="line">	fmt.Println(<span class="number">.1</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 10.1</span></span><br><span class="line">	fmt.Println(<span class="number">10.1</span>)</span><br><span class="line">	fmt.Println(<span class="number">1.01E1</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>浮點數常數使用浮點數實字（floating-point literal）表示，浮點數使用的兩種表示法：小數點與科學符號：</li>
 </ul>
-<h3>Complex constants</h3>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 10.0</span></span><br><span class="line">	fmt.Println(<span class="number">10.</span>)</span><br><span class="line">	fmt.Println(<span class="number">10.0</span>)</span><br><span class="line">	fmt.Println(<span class="number">010.0</span>)</span><br><span class="line">	fmt.Println(<span class="number">10.e+0</span>)</span><br><span class="line">	fmt.Println(<span class="number">1E1</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 0.1</span></span><br><span class="line">	fmt.Println(<span class="number">.1e+0</span>)</span><br><span class="line">	fmt.Println(<span class="number">.1E0</span>)</span><br><span class="line">	fmt.Println(<span class="number">.1</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 10.1</span></span><br><span class="line">	fmt.Println(<span class="number">10.1</span>)</span><br><span class="line">	fmt.Println(<span class="number">1.01E1</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Complex-constants">Complex constants</h3>
 <ul>
 <li>複數常數為數字實字加虛數實字（imaginary literal）組合而成。</li>
 <li>虛數實字的表示法為：
 <ul>
 <li>十進位 + 小寫 <code>i</code> ，如 <code>10i</code></li>
-<li>浮點數 + 小寫 <code>i</code> ，如 <code>1E1i</code>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="number">10</span> + <span class="number">10i</span>)</span><br><span class="line">	fmt.Println(<span class="number">1E1</span> + <span class="number">1E1i</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>浮點數 + 小寫 <code>i</code> ，如 <code>1E1i</code></li>
 </ul>
 </li>
 </ul>
-<h3>String constants</h3>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="number">10</span> + <span class="number">10i</span>)</span><br><span class="line">	fmt.Println(<span class="number">1E1</span> + <span class="number">1E1i</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="String-constants">String constants</h3>
 <ul>
-<li>
-<p>字串常數使用字串實字（string literal）表示。如果是純字串，可以使用 ` 括要表示的字串，如：
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">`\n`</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>這樣就會輸出 <code>\n</code> 兩個字元</p>
-</li>
-<li>
-<p>如果需要轉譯 rune 常數為字元的話，可以用雙引號 <code>&quot;</code> 括要表示的字串，如：
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"這是\u4e2d\u6587"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>這樣就會輸出 <code>這是中文</code></p>
-</li>
+<li>字串常數使用字串實字（string literal）表示。如果是純字串，可以使用 ` 括要表示的字串，如：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">`\n`</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>這樣就會輸出 <code>\n</code> 兩個字元</li>
+<li>如果需要轉譯 rune 常數為字元的話，可以用雙引號 <code>&quot;</code> 括要表示的字串，如：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;這是\u4e2d\u6587&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>這樣就會輸出 <code>這是中文</code></li>
 </ul>
 
 </div> 

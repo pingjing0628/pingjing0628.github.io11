@@ -149,10 +149,10 @@
     </div>
 </div>
     <div class="post-content">
-    <h2>Introduction</h2>
-<p>&lt;!-- more --&gt;</p>
+    <h2 id="Introduction">Introduction</h2>
+<span id="more"></span> 
 <hr>
-<h3>語言本身的特性</h3>
+<h3 id="語言本身的特性">語言本身的特性</h3>
 <ul>
 <li><strong>Go是為軟體工程服務而設計的語言</strong></li>
 <li>現代程式語言最大特徵之一是混合了多種典範</li>
@@ -160,12 +160,12 @@
 <li>實際上，Go不是物件導向語言，沒有物件，沒有繼承，然而在精神的實現上，使用了struct作為資料與邏輯的聯結（就實現方式上，感覺又有點像Python了），以組合、has-a的關係來消弭程式碼重複的問題，就操作上，又滿像是物件導向語言了。</li>
 <li>因應多核處理器普及，並行（Concurrency）程式設計的支援是現代語言的目標，Go就直接在語法上支援並行程式設計，只要在函式前放一個go關鍵字，就可以建立可與其他函式並行運作的goroutine，之間的通訊，則透過channel來實現。</li>
 </ul>
-<h3>慣例方面的特性</h3>
+<h3 id="慣例方面的特性">慣例方面的特性</h3>
 <ul>
 <li>Workspaces開頭就提到，go工具一開始就是為了公開檔案庫（repositories）中的開放原始碼而設計，不管你是否發布程式碼，都得遵守它既定的環境設置規範，無從選擇。</li>
 <li>原始碼必須放在 <code>src</code>目錄（依<code>package</code>放在各自子目錄），編譯出來的套件會放在<code>pkg</code>目錄，執行檔就放在<code>bin</code>中（也可以自定義<code>GOBIN</code>環境變數），對於相依套件，也可以透過<code>GOPATH</code>來管理。</li>
 </ul>
-<h3>工具與文件上的特性</h3>
+<h3 id="工具與文件上的特性">工具與文件上的特性</h3>
 <ul>
 <li>
 <p>談到工具，現代程式語言在工具的完備性上也有所重視，比方說最常見的是程式庫、套件等的管理，</p>

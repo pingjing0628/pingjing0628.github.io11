@@ -199,7 +199,7 @@
 1. Dynamic Loading =&gt; 為 <strong>programmer</strong> 的負擔<br>
 2. Virtual Memory =&gt; 為 <strong>O.S.</strong> 的負擔</li>
 </ul>
-<h2>目錄</h2>
+<h2 id="目錄">目錄</h2>
 <ul>
 <li>Dynamic Loading 動態載入</li>
 <li>Virtual Memory</li>
@@ -238,14 +238,14 @@
 </li>
 </ul>
 <hr>
-<h2>Virtual Memory 實施方式</h2>
+<h2 id="Virtual-Memory-實施方式">Virtual Memory 實施方式</h2>
 <ol>
 <li>Demand Paging
 <ul>
 <li>Def:
 <ul>
 <li>執行初期只載入部分的 page (有需要, 才載入)</li>
-<li>當遇到 &quot;所需 page 不在 memory 之中&quot;, 則通知 O.S. 做 **page fault (頁面缺失)**處理, <strong>將 lose page 載入 memory 之中</strong></li>
+<li>當遇到 “所需 page 不在 memory 之中”, 則通知 O.S. 做 **page fault (頁面缺失)**處理, <strong>將 lose page 載入 memory 之中</strong></li>
 </ul>
 </li>
 <li>作法：
@@ -260,7 +260,7 @@
 </li>
 <li>Demand Segment</li>
 </ol>
-<h3>Page Fault 處理</h3>
+<h3 id="Page-Fault-處理">Page Fault 處理</h3>
 <ol>
 <li>產生 page fault interrupt 訊號給系統</li>
 <li>find: 找一 free frame</li>
@@ -269,7 +269,7 @@
 <li>將控制權交還 user</li>
 </ol>
 <hr>
-<h2>Virtual Memory Performance 評估</h2>
+<h2 id="Virtual-Memory-Performance-評估">Virtual Memory Performance 評估</h2>
 <p>=&gt; 由 Memory 存取時間來決定 (effect memory access time)<br>
 =&gt; <strong><code>(1 - P) x ma + P x PFPT</code></strong></p>
 <ul>
@@ -289,7 +289,7 @@
 <li>ma: memory access time (硬體不能改)</li>
 <li>PFPT: page fault processing time (不能改)</li>
 </ul>
-<h3>P 的影響因素為</h3>
+<h3 id="P-的影響因素為">P 的影響因素為</h3>
 <ol>
 <li>frame 數量<br>
 <img src="P1.png" alt=""></li>
@@ -334,17 +334,17 @@
 </ul>
 </li>
 </ol>
-<h4>1. FIFO - First In First Out</h4>
+<h4 id="1-FIFO-First-In-First-Out">1. FIFO - First In First Out</h4>
 <ul>
 <li>先到達, 先被置換</li>
 <li>特色：
 <ul>
 <li>easy to implement</li>
 <li>效益不佳 (page fault ratio 太高, I/O 就多, 效益一定不好)</li>
-<li>有 <strong>Belady's 異常</strong>
+<li>有 <strong>Belady’s 異常</strong>
 <ul>
 <li>一般：frame 數給越多 =&gt; page fault ratio 下降</li>
-<li>在 Belady's 之下：frame 數給越多 =&gt; page fault ratio 上升</li>
+<li>在 Belady’s 之下：frame 數給越多 =&gt; page fault ratio 上升</li>
 </ul>
 </li>
 </ul>
@@ -352,13 +352,13 @@
 <li>Ex: 採 FIFO, 且用 pure demand paging, page fault 幾次？<br>
 <img src="exFIFO.png" alt=""></li>
 </ul>
-<h4>2. OPT (Optimal) 最佳法則</h4>
+<h4 id="2-OPT-Optimal-最佳法則">2. OPT (Optimal) 最佳法則</h4>
 <ul>
 <li>Def: 替換掉 <strong>未來長期不用</strong>的</li>
 <li>特質：
 <ol>
 <li>效益最佳 (因為 page fault ratio 最小)</li>
-<li>No Belady's 異常</li>
+<li>No Belady’s 異常</li>
 <li>要預測未來不易 (實作困難)</li>
 <li>拿來當作理論的依據</li>
 </ol>
@@ -372,13 +372,13 @@
 <li>Ex: 呈上例才 OPT<br>
 <img src="OPT.png" alt=""></li>
 </ul>
-<h4>3. LRU (Least Recently Used) =&gt; 看過去的歷史 (Stack)</h4>
+<h4 id="3-LRU-Least-Recently-Used-看過去的歷史-Stack">3. LRU (Least Recently Used) =&gt; 看過去的歷史 (Stack)</h4>
 <ul>
 <li>Def: 替換<strong>過去</strong>長期不用的 page</li>
 <li>特色：
 <ol>
 <li>效果不錯</li>
-<li>No Belady's 異常</li>
+<li>No Belady’s 異常</li>
 <li>需 Hardware Support (大量硬體)</li>
 </ol>
 </li>
@@ -393,7 +393,7 @@
 <li>Ex: LRU<br>
 <img src="LRU.png" alt=""></li>
 </ul>
-<h4>4. LRU 近似法則</h4>
+<h4 id="4-LRU-近似法則">4. LRU 近似法則</h4>
 <ul>
 <li>Def: 由於 LRU 近 <strong>花費大量的 Hardware</strong>, 故採用 LRU 近似法來模擬 LRU 之效</li>
 <li>作法：
@@ -415,7 +415,7 @@
 <li>Ex: <img src="secondChance.png" alt=""></li>
 <li>Special Case:
 <ul>
-<li>當 R.B 全為 0, 或 R.B 全為 1, 代表 =&gt; 退化成 FIFO (可能有 Belady's)</li>
+<li>當 R.B 全為 0, 或 R.B 全為 1, 代表 =&gt; 退化成 FIFO (可能有 Belady’s)</li>
 </ul>
 </li>
 </ul>
@@ -441,7 +441,7 @@ enhanced second chance 挑 4</li>
 </ol>
 </li>
 </ul>
-<h4>5. Frequency of reference</h4>
+<h4 id="5-Frequency-of-reference">5. Frequency of reference</h4>
 <ul>
 <li>紀錄各 page 被參考的次數</li>
 <li>方式：
@@ -452,7 +452,7 @@ enhanced second chance 挑 4</li>
 </li>
 </ul>
 <hr>
-<h2>Demand Paging 的問題：「Thrashing」猛移/輾轉</h2>
+<h2 id="Demand-Paging-的問題：「Thrashing」猛移-輾轉">Demand Paging 的問題：「Thrashing」猛移/輾轉</h2>
 <ul>
 <li>Def: 於 demand paging 下, 當 <strong>process frame 不足</strong>產生 page fault 又 <strong>memory 的 frame</strong>亦不足, 此時需搶奪其他 process 的 frame, 導致：
 <ul>
@@ -475,7 +475,7 @@ Sol:
 </ol>
 </li>
 </ul>
-<h3>防止 Thrashing 作法</h3>
+<h3 id="防止-Thrashing-作法">防止 Thrashing 作法</h3>
 <ol>
 <li>控制 page fault ratio <strong>合理 range</strong>
 <ul>
@@ -484,7 +484,7 @@ Sol:
 </li>
 <li>採 <strong>Working Set Model</strong>(工作集模式)
 <ul>
-<li>Def: 利用程式執行時有 **&quot;局部性&quot;**之特性, 將各 process 於此 working set 所需之 frame 加以配置, 避免 Thrashing
+<li>Def: 利用程式執行時有 **“局部性”**之特性, 將各 process 於此 working set 所需之 frame 加以配置, 避免 Thrashing
 <ul>
 <li><strong>Locality: 指程式於一特定時間會集中執行部分的區塊, 而不是 uniform 的執行</strong></li>
 </ul>

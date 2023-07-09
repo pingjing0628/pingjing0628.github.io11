@@ -179,58 +179,57 @@
     </div>
 </div>
     <div class="post-content">
-    <h2>Docker Multi-Stage compile Golang Image</h2>
-<h2>&lt;!--more--&gt;</h2>
-<h3>Single Build</h3>
+    <h2 id="Docker-Multi-Stage-compile-Golang-Image">Docker Multi-Stage compile Golang Image</h2>
+<span id="more"></span>
+<hr>
+<h3 id="Single-Build">Single Build</h3>
 <ol>
-<li>
-<p>Go 語言
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">  fmt.Println(<span class="string">"Hey Yu!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>用 <code>alpine</code> 的 Golang Image 來編譯出執行檔
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FROM golang:alpine</span><br><span class="line">WORKDIR &#x2F;app</span><br><span class="line">ADD . &#x2F;app</span><br><span class="line">RUN cd &#x2F;app &amp;&amp; go build -o app</span><br><span class="line">ENTRYPOINT .&#x2F;app</span><br></pre></td></tr></table></figure></p>
-</li>
+<li>Go 語言</li>
 </ol>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">  fmt.Println(<span class="string">&quot;Hey Yu!&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>用 <code>alpine</code> 的 Golang Image 來編譯出執行檔</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FROM golang:alpine</span><br><span class="line">WORKDIR /app</span><br><span class="line">ADD . /app</span><br><span class="line">RUN cd /app &amp;&amp; go build -o app</span><br><span class="line">ENTRYPOINT ./app</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>補充說明：</p>
 <ol>
-<li><code>WORKDIR &lt;工作目錄路徑&gt;</code>
+<li><code>WORKDIR &lt;工作目錄路徑&gt;</code><br>
 使用<code>WORKDIR</code>指令用來指定工作目錄（或稱為當前目錄），以後各層的當前目錄就被改為指定的目錄，如該目錄不存在，<code>WORKDIR</code>會幫你建立目錄。</li>
-<li><code>COPY</code>和<code>ADD</code>兩個的功用都一樣，就是將檔案複製進去image
-差別在於：
-• <code>COPY</code>只能複製本機端的檔案或目錄
-• <code>ADD</code>能增加遠端url的檔案到docker image
-• <code>ADD</code>能順手將本機端複製進去的tar檔解開(遠端的tar不行！)
-在實例上並不建議使用<code>ADD</code>來抓取網路上的檔案，會使用<code>RUN curl or wget</code>的方式。
+<li><code>COPY</code>和<code>ADD</code>兩個的功用都一樣，就是將檔案複製進去image<br>
+差別在於：<br>
+• <code>COPY</code>只能複製本機端的檔案或目錄<br>
+• <code>ADD</code>能增加遠端url的檔案到docker image<br>
+• <code>ADD</code>能順手將本機端複製進去的tar檔解開(遠端的tar不行！)<br>
+在實例上並不建議使用<code>ADD</code>來抓取網路上的檔案，會使用<code>RUN curl or wget</code>的方式。<br>
 原因是使用一次<code>ADD</code>指令會增加docker image layers一次，layers越多，docker image size就會越大</li>
 <li><code>ENTRYPOINT</code>的部分，待其他章節說明</li>
 </ol>
 </blockquote>
 <ol start="3">
-<li>執行編譯指令
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker build -t yu&#x2F;go-app .</span><br><span class="line">docker run --rm yu&#x2F;go-app</span><br></pre></td></tr></table></figure>
-檢查看看編譯出來的 Image 大小，使用 <code>docker images | grep go-app</code>，會發現 Image 大小為 258 MB</li>
+<li>執行編譯指令</li>
 </ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker build -t yu/go-app .</span><br><span class="line">docker run --rm yu/go-app</span><br></pre></td></tr></table></figure>
+<p>檢查看看編譯出來的 Image 大小，使用 <code>docker images | grep go-app</code>，會發現 Image 大小為 258 MB</p>
 <hr>
-<h3>Multiple build</h3>
-<p>Multiple build 可以在 <code>Dockerfile</code> 使用多個不同的 Image 來源
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># build stage</span><br><span class="line">FROM golang:alpine AS build-env</span><br><span class="line">ADD . &#x2F;src</span><br><span class="line">RUN cd &#x2F;src &amp;&amp; go build -o app</span><br><span class="line"> </span><br><span class="line"># final stage</span><br><span class="line">FROM alpine</span><br><span class="line">WORKDIR &#x2F;app</span><br><span class="line">COPY --from&#x3D;build-env &#x2F;src&#x2F;app &#x2F;app&#x2F;</span><br><span class="line">ENTRYPOINT .&#x2F;app</span><br></pre></td></tr></table></figure>
-<code>AS</code> 及 <code>--from</code> 互相溝通，以往需要寫兩個 <code>Dockerfile</code>，現在只要一個就可以。最後執行編譯指令:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker build -t yu&#x2F;go-app .</span><br><span class="line">docker run --rm yu&#x2F;go-app</span><br></pre></td></tr></table></figure>
-最後大小為 6.35 MB，比較小了</p>
-<p>參考範例:
-<code>cmd/server/server.go</code> 需要被更改成你的檔案
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">FROM golang:1.13 as builder</span><br><span class="line"></span><br><span class="line">WORKDIR &#x2F;app</span><br><span class="line">COPY . &#x2F;app</span><br><span class="line">RUN CGO_ENABLED&#x3D;0 GOOS&#x3D;linux GOPROXY&#x3D;https:&#x2F;&#x2F;proxy.golang.org go build -o app cmd&#x2F;server&#x2F;server.go</span><br><span class="line"></span><br><span class="line">FROM alpine:latest</span><br><span class="line"># mailcap adds mime detection and ca-certificates help with TLS (basic stuff)</span><br><span class="line">RUN apk --no-cache add ca-certificates mailcap &amp;&amp; addgroup -S app &amp;&amp; adduser -S app -G app</span><br><span class="line">USER app</span><br><span class="line">WORKDIR &#x2F;app</span><br><span class="line">COPY --from&#x3D;builder &#x2F;app&#x2F;app .</span><br><span class="line">ENTRYPOINT [&quot;.&#x2F;app&quot;]</span><br></pre></td></tr></table></figure></p>
+<h3 id="Multiple-build">Multiple build</h3>
+<p>Multiple build 可以在 <code>Dockerfile</code> 使用多個不同的 Image 來源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># build stage</span><br><span class="line">FROM golang:alpine AS build-env</span><br><span class="line">ADD . /src</span><br><span class="line">RUN cd /src &amp;&amp; go build -o app</span><br><span class="line"> </span><br><span class="line"># final stage</span><br><span class="line">FROM alpine</span><br><span class="line">WORKDIR /app</span><br><span class="line">COPY --from=build-env /src/app /app/</span><br><span class="line">ENTRYPOINT ./app</span><br></pre></td></tr></table></figure>
+<p><code>AS</code> 及 <code>--from</code> 互相溝通，以往需要寫兩個 <code>Dockerfile</code>，現在只要一個就可以。最後執行編譯指令:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker build -t yu/go-app .</span><br><span class="line">docker run --rm yu/go-app</span><br></pre></td></tr></table></figure>
+<p>最後大小為 6.35 MB，比較小了</p>
+<p>參考範例:<br>
+<code>cmd/server/server.go</code> 需要被更改成你的檔案</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">FROM golang:1.13 as builder</span><br><span class="line"></span><br><span class="line">WORKDIR /app</span><br><span class="line">COPY . /app</span><br><span class="line">RUN CGO_ENABLED=0 GOOS=linux GOPROXY=https://proxy.golang.org go build -o app cmd/server/server.go</span><br><span class="line"></span><br><span class="line">FROM alpine:latest</span><br><span class="line"># mailcap adds mime detection and ca-certificates help with TLS (basic stuff)</span><br><span class="line">RUN apk --no-cache add ca-certificates mailcap &amp;&amp; addgroup -S app &amp;&amp; adduser -S app -G app</span><br><span class="line">USER app</span><br><span class="line">WORKDIR /app</span><br><span class="line">COPY --from=builder /app/app .</span><br><span class="line">ENTRYPOINT [&quot;./app&quot;]</span><br></pre></td></tr></table></figure>
 <hr>
-<h3>Docker 提供的 image scratch</h3>
-<p>並不適用於每一個案例
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">FROM golang as base</span><br><span class="line"></span><br><span class="line">WORKDIR &#x2F;app</span><br><span class="line"></span><br><span class="line">ENV GO111MODULE&#x3D;on \</span><br><span class="line">    CGO_ENABLED&#x3D;0 \</span><br><span class="line">    GOOS&#x3D;linux \</span><br><span class="line">    GOARCH&#x3D;amd64</span><br><span class="line"></span><br><span class="line">COPY go.mod .</span><br><span class="line">COPY go.sum .</span><br><span class="line"></span><br><span class="line">RUN go mod download</span><br><span class="line"></span><br><span class="line">COPY . .</span><br><span class="line"></span><br><span class="line"># it will take the flags from the environment</span><br><span class="line">RUN go build</span><br><span class="line"></span><br><span class="line">### Certs</span><br><span class="line">FROM alpine:latest as certs</span><br><span class="line">RUN apk --update add ca-certificates</span><br><span class="line"></span><br><span class="line">### App</span><br><span class="line">FROM scratch as app</span><br><span class="line">COPY --from&#x3D;certs &#x2F;etc&#x2F;ssl&#x2F;certs&#x2F;ca-certificates.crt &#x2F;etc&#x2F;ssl&#x2F;certs&#x2F;ca-certificates.crt</span><br><span class="line">COPY --from&#x3D;base app &#x2F;</span><br><span class="line">ENTRYPOINT [&quot;&#x2F;app&quot;]</span><br></pre></td></tr></table></figure></p>
-<h3>REFERENCES</h3>
+<h3 id="Docker-提供的-image-scratch">Docker 提供的 image scratch</h3>
+<p>並不適用於每一個案例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">FROM golang as base</span><br><span class="line"></span><br><span class="line">WORKDIR /app</span><br><span class="line"></span><br><span class="line">ENV GO111MODULE=on \</span><br><span class="line">    CGO_ENABLED=0 \</span><br><span class="line">    GOOS=linux \</span><br><span class="line">    GOARCH=amd64</span><br><span class="line"></span><br><span class="line">COPY go.mod .</span><br><span class="line">COPY go.sum .</span><br><span class="line"></span><br><span class="line">RUN go mod download</span><br><span class="line"></span><br><span class="line">COPY . .</span><br><span class="line"></span><br><span class="line"># it will take the flags from the environment</span><br><span class="line">RUN go build</span><br><span class="line"></span><br><span class="line">### Certs</span><br><span class="line">FROM alpine:latest as certs</span><br><span class="line">RUN apk --update add ca-certificates</span><br><span class="line"></span><br><span class="line">### App</span><br><span class="line">FROM scratch as app</span><br><span class="line">COPY --from=certs /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt</span><br><span class="line">COPY --from=base app /</span><br><span class="line">ENTRYPOINT [&quot;/app&quot;]</span><br></pre></td></tr></table></figure>
+<h3 id="REFERENCES">REFERENCES</h3>
 <ul>
-<li><a href="https://blog.wu-boy.com/2017/04/build-minimal-docker-container-using-multi-stage-for-go-app/" target="_blank" rel="noopener">用 Docker Multi-Stage 編譯 Golang 最小 Image</a></li>
-<li><a href="https://dev.to/andrioid/slim-docker-images-for-your-go-application-11oo" target="_blank" rel="noopener">Slim Docker images for your Go application</a></li>
-<li><a href="https://ithelp.ithome.com.tw/articles/10209304" target="_blank" rel="noopener">使用 Docker build 一個 Golang image</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.wu-boy.com/2017/04/build-minimal-docker-container-using-multi-stage-for-go-app/">用 Docker Multi-Stage 編譯 Golang 最小 Image</a></li>
+<li><a target="_blank" rel="noopener" href="https://dev.to/andrioid/slim-docker-images-for-your-go-application-11oo">Slim Docker images for your Go application</a></li>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10209304">使用 Docker build 一個 Golang image</a></li>
 </ul>
 
 </div> 

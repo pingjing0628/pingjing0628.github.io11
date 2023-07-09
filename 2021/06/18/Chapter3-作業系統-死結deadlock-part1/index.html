@@ -186,14 +186,14 @@
 </div>
     <div class="post-content">
     <h1>3.5 死結 Deadlock</h1>
-<h2>目錄</h2>
+<h2 id="目錄">目錄</h2>
 <ul>
 <li><strong>四要件</strong></li>
 <li>Deadlock 處理方式</li>
 <li>Deadlock Free</li>
 </ul>
 <hr>
-<h2>四要件</h2>
+<h2 id="四要件">四要件</h2>
 <ol>
 <li><strong>Mutual Exclusion 互斥</strong><br>
 Def: 指資源同時只允許一個 process 使用之, ex: printer, card reader</li>
@@ -204,7 +204,7 @@ Def: 指一 process 取得部分資源, 又在等其他資源<br>
 Def: 指一旦 process 取得某資源, 則其他的 process 無法搶奪, 除非其自願放棄</li>
 <li><strong>Circular waiting 循環式等待</strong><br>
 Def: 只存在一組 process, 形成如下的 waiting cycle:<br>
-<img src="circularWaiting.png" alt="">
+<img src="circularWaiting.png" alt=""><br>
 Note: Pi -&gt; Pj =&gt; Process i 在等 Process j 手中的資源</li>
 </ol>
 <ul>
@@ -212,7 +212,7 @@ Note: Pi -&gt; Pj =&gt; Process i 在等 Process j 手中的資源</li>
 <img src="deadlock.png" alt=""></li>
 </ul>
 <hr>
-<h2>Compare</h2>
+<h2 id="Compare">Compare</h2>
 <table>
 <thead>
 <tr>

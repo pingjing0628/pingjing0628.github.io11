@@ -179,22 +179,22 @@
 <ol>
 <li>Shared Memory</li>
 <li>Message Passing<br>
-圖：
+圖：<br>
 <img src="3.6.png" alt=""></li>
 </ol>
-<h2>目錄</h2>
+<h2 id="目錄">目錄</h2>
 <ul>
 <li><strong>Shared Memory</strong></li>
 <li>Message Passing</li>
 </ul>
 <hr>
-<h2>Shared Memory 分享記憶體</h2>
+<h2 id="Shared-Memory-分享記憶體">Shared Memory 分享記憶體</h2>
 <p>Def: 指多個 process 藉由共用相同的 memory space 達到行程間溝通之效 (Multiprocessor)<br>
 問題：<strong>Race Condition 競爭情況</strong><br>
 Def: 相同的運作. 因執行順序不同, 造成處理的結果不同謂之<br>
 解決：<strong>Critical Section 臨界區間</strong><br>
 Def: 為一程式片段, 用來提供多 process 共用一 memory space 時的存取控管機制 =&gt; <strong>避免 race conditional</strong></p>
-<h3>Critical Section Design</h3>
+<h3 id="Critical-Section-Design">Critical Section Design</h3>
 <p>格式：<br>
 <img src="C.S.png" alt=""><br>
 良好的 C.S Design 需滿足：</p>
@@ -207,7 +207,7 @@ Def: 為一程式片段, 用來提供多 process 共用一 memory space 時的�
 </li>
 <li>Bounded waiting (有限性等待)：指 n 個 process 存在於進入 C.S., 最多只需 wait n-1 次 =&gt; <strong>公平, No starvation</strong></li>
 </ol>
-<h3>C.S. Design 目錄</h3>
+<h3 id="C-S-Design-目錄">C.S. Design 目錄</h3>
 <ul>
 <li>algo
 <ul>
@@ -223,8 +223,8 @@ Def: 為一程式片段, 用來提供多 process 共用一 memory space 時的�
 </li>
 </ul>
 <hr>
-<h3>2 個 process 的 C.S. Design</h3>
-<h4>algorithm1:</h4>
+<h3 id="2-個-process-的-C-S-Design">2 個 process 的 C.S. Design</h3>
+<h4 id="algorithm1">algorithm1:</h4>
 <ul>
 <li>資料結構 (宣告變數)：<br>
 <code>var turn: integer (0~1);</code></li>
@@ -241,7 +241,7 @@ Def: 為一程式片段, 用來提供多 process 共用一 memory space 時的�
 </ol>
 </li>
 </ul>
-<h4>algorithm2:</h4>
+<h4 id="algorithm2">algorithm2:</h4>
 <ul>
 <li>
 <p>資料結構：<br>
@@ -264,13 +264,13 @@ Def: 為一程式片段, 用來提供多 process 共用一 memory space 時的�
 </ol>
 </li>
 <li>
-<p>中山<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">flag[i] &#x3D; true;</span><br><span class="line">while (flag[j]) do no-op;</span><br></pre></td></tr></table></figure>
-若交換上述兩行程式, 會發生什麼事？<br>
-Ans: 違反互斥性, 變成先問對方在舉手</p>
+<p>中山</p>
 </li>
 </ul>
-<h4>algorithm3:</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">flag[i] = true;</span><br><span class="line">while (flag[j]) do no-op;</span><br></pre></td></tr></table></figure>
+<p>若交換上述兩行程式, 會發生什麼事？<br>
+Ans: 違反互斥性, 變成先問對方在舉手</p>
+<h4 id="algorithm3">algorithm3:</h4>
 <ul>
 <li>
 <p>資料結構：<br>
@@ -303,12 +303,12 @@ Ans: 違反互斥性, 變成先問對方在舉手</p>
 </li>
 </ul>
 <hr>
-<h3>多 process 的 C.S. Design =&gt; Bakery's algorithm</h3>
+<h3 id="多-process-的-C-S-Design-Bakery’s-algorithm">多 process 的 C.S. Design =&gt; Bakery’s algorithm</h3>
 <ul>
-<li>
-<p>資料結構：<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var choosing: Array[0....n-1] of Boolean;</span><br><span class="line">    number: Array[0....n-1] of Integer; (initial 皆為 0)</span><br></pre></td></tr></table></figure></p>
-</li>
+<li>資料結構：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var choosing: Array[0....n-1] of Boolean;</span><br><span class="line">    number: Array[0....n-1] of Integer; (initial 皆為 0)</span><br></pre></td></tr></table></figure>
+<ul>
 <li>
 <p>數字假設：</p>
 <ol>
@@ -322,12 +322,12 @@ Ans: 違反互斥性, 變成先問對方在舉手</p>
 </ol>
 </li>
 <li>
-<p>Pi 之程式片段：
+<p>Pi 之程式片段：<br>
 <img src="%E5%A4%9Aprocess.png" alt=""></p>
 </li>
 </ul>
 <hr>
-<h3>Semaphore (號誌) (可有互斥的效果)</h3>
+<h3 id="Semaphore-號誌-可有互斥的效果">Semaphore (號誌) (可有互斥的效果)</h3>
 <ul>
 <li>Def: 為解決同步問題的一種機制, 本身為一整數型別 (通常初始為 1), <strong>會提供 2 個 atomically execution (不可分割, 指過程中不能被中斷) 的運作</strong>
 <ul>
@@ -340,26 +340,26 @@ Ans: 違反互斥性, 變成先問對方在舉手</p>
 <li>Note:<br>
 Semaphore 初始值為 1 時, 則狀態永遠為 0 或 1, 故 Pj 謂之 <strong>Binary Semaphore (二元號誌)</strong></li>
 </ul>
-<h3>Counting Semaphore (計數號誌)</h3>
-<p>Def: 有別於 Binary Semaphore, 於 counting semaphore 之中, 值可能為 1, 0, -1, -2....-n, <strong>若值為 -n, 代表有 n 個 process 卡在 wait 之中</strong><br>
+<h3 id="Counting-Semaphore-計數號誌">Counting Semaphore (計數號誌)</h3>
+<p>Def: 有別於 Binary Semaphore, 於 counting semaphore 之中, 值可能為 1, 0, -1, -2…-n, <strong>若值為 -n, 代表有 n 個 process 卡在 wait 之中</strong><br>
 =&gt; 製作方式：</p>
 <ol>
 <li>用 Block, wakeup 製作</li>
 <li>用 Binary Semaphore 製作</li>
 </ol>
-<h4>&lt;法一&gt;：用 Block, wakeup 及 Queue 製作</h4>
+<h4 id="法一-：用-Block-wakeup-及-Queue-製作">&lt;法一&gt;：用 Block, wakeup 及 Queue 製作</h4>
 <ul>
-<li>作法：將 Semaphore 定義成一 Record (紀錄) (like class)<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">type countingSemaphore: record</span><br><span class="line">    value: integer; &#x2F;&#x2F;initial &#x3D; 1</span><br><span class="line">    L: Queue;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure></li>
+<li>作法：將 Semaphore 定義成一 Record (紀錄) (like class)</li>
 </ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">type countingSemaphore: record</span><br><span class="line">    value: integer; //initial = 1</span><br><span class="line">    L: Queue;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
 <p><img src="way1.png" alt=""></p>
-<h4>&lt;法二&gt;：用 Binary Semaphore 製作出 counting semaphore</h4>
+<h4 id="法二-：用-Binary-Semaphore-製作出-counting-semaphore">&lt;法二&gt;：用 Binary Semaphore 製作出 counting semaphore</h4>
 <ul>
-<li>資料結構：<br>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var c: integer; initial &#x3D; 1 &#x2F;&#x2F; 計數器, like value, c 當 signal &amp; wait</span><br><span class="line">    S1: Binary Semaphore; initial &#x3D; 1 &#x2F;&#x2F; 對 C 做存取控制</span><br><span class="line">    S2: Binary Semaphore; initial &#x3D; 0 &#x2F;&#x2F; 用來模擬 block, wakeup 之效</span><br></pre></td></tr></table></figure></li>
+<li>資料結構：</li>
 </ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var c: integer; initial = 1 // 計數器, like value, c 當 signal &amp; wait</span><br><span class="line">    S1: Binary Semaphore; initial = 1 // 對 C 做存取控制</span><br><span class="line">    S2: Binary Semaphore; initial = 0 // 用來模擬 block, wakeup 之效</span><br></pre></td></tr></table></figure>
 <p><img src="way2.png" alt=""></p>
-<h4>Compare</h4>
+<h4 id="Compare">Compare</h4>
 <table>
 <thead>
 <tr>
@@ -382,7 +382,7 @@ Semaphore 初始值為 1 時, 則狀態永遠為 0 或 1, 故 Pj 謂之 <strong>
 </tbody>
 </table>
 <hr>
-<h3>思考</h3>
+<h3 id="思考">思考</h3>
 <p><img src="think.png" alt=""></p>
 
 </div> 

@@ -161,26 +161,26 @@
     </div>
 </div>
     <div class="post-content">
-    <h2>Data Structures</h2>
-<p>&lt;!-- more --&gt;</p>
+    <h2 id="Data-Structures">Data Structures</h2>
+<span id="more"></span> 
 <hr>
-<h3>用struct 定義一個Page 其擁有兩個欄位，title 和 body</h3>
-<p><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Page <span class="keyword">struct</span> &#123;</span><br><span class="line">    Title <span class="keyword">string</span></span><br><span class="line">    Body  []<span class="keyword">byte</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<code>[]byte</code> means &quot;a byte slice&quot;</p>
-<h3>建立save 方法</h3>
-<p><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p *Page)</span> <span class="title">save</span><span class="params">()</span> <span class="title">error</span></span> &#123;</span><br><span class="line">    filename := p.Title + <span class="string">".txt"</span></span><br><span class="line">    <span class="keyword">return</span> ioutil.WriteFile(filename, p.Body, <span class="number">0600</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-Takes as its receiver p, a pointer to Page.
+<h3 id="用struct-定義一個Page-其擁有兩個欄位，title-和-body">用struct 定義一個Page 其擁有兩個欄位，title 和 body</h3>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Page <span class="keyword">struct</span> &#123;</span><br><span class="line">    Title <span class="type">string</span></span><br><span class="line">    Body  []<span class="type">byte</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>[]byte</code> means “a byte slice”</p>
+<h3 id="建立save-方法">建立save 方法</h3>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p *Page)</span></span> save() <span class="type">error</span> &#123;</span><br><span class="line">    filename := p.Title + <span class="string">&quot;.txt&quot;</span></span><br><span class="line">    <span class="keyword">return</span> ioutil.WriteFile(filename, p.Body, <span class="number">0600</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Takes as its receiver p, a pointer to Page.<br>
 It takes no parameters, and returns a value of type error.</p>
 <p>0600, 傳送第三參數給 WriteFile, 指出這個檔案只應被建立於目前使用者可讀可寫的權限</p>
-<h3>建立loadPage 方法</h3>
-<p><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">loadPage</span><span class="params">(title <span class="keyword">string</span>)</span> <span class="params">(*Page, error)</span></span> &#123;</span><br><span class="line">    filename := title + <span class="string">".txt"</span></span><br><span class="line">    body, err := ioutil.ReadFile(filename)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &amp;Page&#123;Title: title, Body: body&#125;, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3>建立main 方法</h3>
-<p><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    p1 := &amp;Page&#123;Title: <span class="string">"TestPage"</span>, Body: []<span class="keyword">byte</span>(<span class="string">"This is a sample Page."</span>)&#125;</span><br><span class="line">    p1.save()</span><br><span class="line">    p2, _ := loadPage(<span class="string">"TestPage"</span>)</span><br><span class="line">    fmt.Println(<span class="keyword">string</span>(p2.Body))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><code>go build wiki.go</code>
+<h3 id="建立loadPage-方法">建立loadPage 方法</h3>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">loadPage</span><span class="params">(title <span class="type">string</span>)</span></span> (*Page, <span class="type">error</span>) &#123;</span><br><span class="line">    filename := title + <span class="string">&quot;.txt&quot;</span></span><br><span class="line">    body, err := ioutil.ReadFile(filename)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &amp;Page&#123;Title: title, Body: body&#125;, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="建立main-方法">建立main 方法</h3>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    p1 := &amp;Page&#123;Title: <span class="string">&quot;TestPage&quot;</span>, Body: []<span class="type">byte</span>(<span class="string">&quot;This is a sample Page.&quot;</span>)&#125;</span><br><span class="line">    p1.save()</span><br><span class="line">    p2, _ := loadPage(<span class="string">&quot;TestPage&quot;</span>)</span><br><span class="line">    fmt.Println(<span class="type">string</span>(p2.Body))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>go build wiki.go</code><br>
 <code>./wiki</code></p>
-<h3>REFERENCES</h3>
+<h3 id="REFERENCES">REFERENCES</h3>
 <ul>
-<li><a href="https://golang.org/doc/articles/wiki/#tmp_13" target="_blank" rel="noopener">Writing Web Applications</a></li>
+<li><a target="_blank" rel="noopener" href="https://golang.org/doc/articles/wiki/#tmp_13">Writing Web Applications</a></li>
 </ul>
 
 </div> 

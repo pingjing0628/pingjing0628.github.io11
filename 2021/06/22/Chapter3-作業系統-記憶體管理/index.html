@@ -162,10 +162,10 @@
 </div>
     <div class="post-content">
     <h1>3.7 記憶體管理 (Memory Management)</h1>
-<p>圖：
+<p>圖：<br>
 <img src="%E8%A8%98%E6%86%B6%E9%AB%94.png" alt=""></p>
 <hr>
-<h2>Memory Allocation Strategy 記憶體配置策略</h2>
+<h2 id="Memory-Allocation-Strategy-記憶體配置策略">Memory Allocation Strategy 記憶體配置策略</h2>
 <table>
 <thead>
 <tr>
@@ -197,14 +197,14 @@
 </tbody>
 </table>
 <ul>
-<li>Ex:
+<li>Ex:<br>
 <img src="allocation.png" alt=""></li>
 </ul>
-<h3>First Fit 的小問題</h3>
+<h3 id="First-Fit-的小問題">First Fit 的小問題</h3>
 <p>經長期配置後, 前面的片段都會只剩下一小部分, 後續的 search 每次皆須經過<br>
-=&gt; Solution: 採用 &quot;<strong>Next Fit</strong>&quot;<br>
+=&gt; Solution: 採用 “<strong>Next Fit</strong>”<br>
 Def: 利用 First Fit 概念, 但會從 <strong>上次配置的下一個節點開始 search</strong></p>
-<h2>Memory 中常發生的問題</h2>
+<h2 id="Memory-中常發生的問題">Memory 中常發生的問題</h2>
 <ol>
 <li>外部碎裂：External Fragmentation<br>
 Def: 指 process 所需的 Memory 大小小於 memory 總可用空間, 但卻不能配置 (因為空間不連續, <strong>空間夠但不能給</strong>)<br>
@@ -223,9 +223,9 @@ Solution:
 </ol>
 </li>
 </ol>
-<h3>Multiple Base/ Limit register set. 多重基底限制暫存器</h3>
+<h3 id="Multiple-Base-Limit-register-set-多重基底限制暫存器">Multiple Base/ Limit register set. 多重基底限制暫存器</h3>
 <p><img src="baseLimit.png" alt=""></p>
-<h3>Compaction 壓縮</h3>
+<h3 id="Compaction-壓縮">Compaction 壓縮</h3>
 <ul>
 <li>
 <p>圖：<img src="compaction.png" alt=""></p>
@@ -238,13 +238,13 @@ Solution:
 </ol>
 </li>
 </ul>
-<h3>Paged Memory Management 分頁式</h3>
+<h3 id="Paged-Memory-Management-分頁式">Paged Memory Management 分頁式</h3>
 <ul>
 <li>
 <p>觀念：</p>
 <ol>
 <li>Physical memory 視為一組頁框 (frame) 之集合, <strong>各 frame 大小一致</strong></li>
-<li>Logical memory 視為一組頁面 (page) 之集合, <strong>&quot;page size = 一 frame size&quot;</strong></li>
+<li>Logical memory 視為一組頁面 (page) 之集合, <strong>“page size = 一 frame size”</strong></li>
 </ol>
 </li>
 <li>
@@ -253,7 +253,7 @@ Solution:
 <li>
 <p>配置策略：</p>
 <ol>
-<li>Page 間採 &quot;不連續&quot; 存放</li>
+<li>Page 間採 “不連續” 存放</li>
 <li>Process 為 n 個 page 時, 當 free frames ≥ n 個即可配置 (No 外部碎裂, 夠就一定可以給)</li>
 <li>O.S. 替各 process 準備一 page table, 存放 <strong>page 跟 frame 之對應</strong></li>
 </ol>
@@ -274,7 +274,7 @@ Sol:
 </ol>
 </li>
 </ul>
-<h4>Logical address 對應 Physical address 的方式</h4>
+<h4 id="Logical-address-對應-Physical-address-的方式">Logical address 對應 Physical address 的方式</h4>
 <ul>
 <li>圖：<img src="logical%E5%B0%8D%E6%87%89.png" alt=""></li>
 <li>Ex: 8 frames, each frame size = 4, 一 process 的 Page Table 如下：問
@@ -287,7 +287,7 @@ Sol:</li>
 </ol>
 </li>
 </ul>
-<h4>Page table 的存放製作方式</h4>
+<h4 id="Page-table-的存放製作方式">Page table 的存放製作方式</h4>
 <ol>
 <li>存 register
 <ul>
@@ -329,12 +329,12 @@ Sol:</li>
 </ul>
 </li>
 </ol>
-<h3>Segment memory management 分段式記憶體管理</h3>
+<h3 id="Segment-memory-management-分段式記憶體管理">Segment memory management 分段式記憶體管理</h3>
 <ul>
 <li>觀念：
 <ol>
 <li>將 logical memory 視為一組 segment 之集合, <strong>各 segment 大小不一致</strong></li>
-<li>和 user 對 memory 的看法一致, segment 可能是 main, subroutine...等</li>
+<li>和 user 對 memory 的看法一致, segment 可能是 main, subroutine…等</li>
 </ol>
 </li>
 <li>圖：<img src="segmentManagement.png" alt=""></li>
@@ -352,7 +352,7 @@ Sol:</li>
 </li>
 </ul>
 <hr>
-<h2>Summary</h2>
+<h2 id="Summary">Summary</h2>
 <table>
 <thead>
 <tr>
@@ -389,7 +389,7 @@ Sol:</li>
 <p>圖：<img src="summary.png" alt=""></p>
 </li>
 </ul>
-<h2>Compare</h2>
+<h2 id="Compare">Compare</h2>
 <table>
 <thead>
 <tr>
@@ -425,14 +425,14 @@ Sol:</li>
 </tbody>
 </table>
 <hr>
-<h2>Page segment memory management 分頁是分段記憶體管理</h2>
+<h2 id="Page-segment-memory-management-分頁是分段記憶體管理">Page segment memory management 分頁是分段記憶體管理</h2>
 <ul>
 <li>觀念： 先分段, 在分頁 -&gt; 最終存 page</li>
 <li>圖：<img src="%E5%88%86%E9%A0%81%E5%88%86%E6%AE%B5.png" alt=""></li>
 <li>優點：
 <ol>
 <li>No 外部碎裂</li>
-<li>單一段可以 &quot;不連續性存放&quot;</li>
+<li>單一段可以 “不連續性存放”</li>
 </ol>
 </li>
 <li>缺點：

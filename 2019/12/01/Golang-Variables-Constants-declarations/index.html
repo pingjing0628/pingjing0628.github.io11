@@ -149,80 +149,77 @@
     </div>
 </div>
     <div class="post-content">
-    <h2>變數與常數的宣告</h2>
-<h2>&lt;!--more--&gt;</h2>
-<h3>變數宣告</h3>
+    <h2 id="變數與常數的宣告">變數與常數的宣告</h2>
+<span id="more"></span>
+<hr>
+<h3 id="變數宣告">變數宣告</h3>
 <ul>
-<li>
-<p>宣告變數使用 <code>var</code>，以下宣告num 變數為int 型態，給予初始值 <code>10</code>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num <span class="keyword">int</span> = <span class="number">10</span></span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p><code>int</code>可以省略
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">10</span></span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>若不給初始值，預定義變數都會有預設值，Go語言稱之為零值(The zero value)， <code>int</code>的零值是0，所以下面兩行宣告是等價的
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num <span class="keyword">int</span> = <span class="number">0</span></span><br><span class="line"><span class="keyword">var</span> num <span class="keyword">int</span></span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>Go可以一次宣告多個變數，下面的型態分別會推斷為 <code>string</code>、<code>int</code>、<code>float64</code>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name, age, height = <span class="string">"Miles"</span>, <span class="number">18</span>, <span class="number">169.9</span></span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>也可分多行宣告
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	name = <span class="string">"Miles"</span></span><br><span class="line">	age = <span class="number">18</span></span><br><span class="line">	height = <span class="number">169.9</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>多行宣告並指定型態與指定初始值
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	name <span class="keyword">string</span> = <span class="string">"Miles"</span></span><br><span class="line">	age <span class="keyword">uint</span> = <span class="number">18</span></span><br><span class="line">	height <span class="keyword">float32</span> = <span class="number">169.9</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>多行宣告定指定型態不指定初始值
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	name <span class="keyword">string</span></span><br><span class="line">	age <span class="keyword">uint</span></span><br><span class="line">	height <span class="keyword">float32</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
-</li>
+<li>宣告變數使用 <code>var</code>，以下宣告num 變數為int 型態，給予初始值 <code>10</code></li>
 </ul>
-<h3>短變數宣告</h3>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num <span class="type">int</span> = <span class="number">10</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>在func裡，若要宣告變數同時指定初值，可以使用<strong>短變數宣告</strong>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name := <span class="string">"Miles"</span></span><br><span class="line">age := <span class="number">18</span></span><br><span class="line">height := <span class="number">169.9</span></span><br></pre></td></tr></table></figure></li>
+<li><code>int</code>可以省略</li>
 </ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">10</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>若不給初始值，預定義變數都會有預設值，Go語言稱之為零值(The zero value)， <code>int</code>的零值是0，所以下面兩行宣告是等價的</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num <span class="type">int</span> = <span class="number">0</span></span><br><span class="line"><span class="keyword">var</span> num <span class="type">int</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Go可以一次宣告多個變數，下面的型態分別會推斷為 <code>string</code>、<code>int</code>、<code>float64</code></li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name, age, height = <span class="string">&quot;Miles&quot;</span>, <span class="number">18</span>, <span class="number">169.9</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>也可分多行宣告</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	name = <span class="string">&quot;Miles&quot;</span></span><br><span class="line">	age = <span class="number">18</span></span><br><span class="line">	height = <span class="number">169.9</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>多行宣告並指定型態與指定初始值</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	name <span class="type">string</span> = <span class="string">&quot;Miles&quot;</span></span><br><span class="line">	age <span class="type">uint</span> = <span class="number">18</span></span><br><span class="line">	height <span class="type">float32</span> = <span class="number">169.9</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>多行宣告定指定型態不指定初始值</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	name <span class="type">string</span></span><br><span class="line">	age <span class="type">uint</span></span><br><span class="line">	height <span class="type">float32</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="短變數宣告">短變數宣告</h3>
+<ul>
+<li>在func裡，若要宣告變數同時指定初值，可以使用<strong>短變數宣告</strong></li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name := <span class="string">&quot;Miles&quot;</span></span><br><span class="line">age := <span class="number">18</span></span><br><span class="line">height := <span class="number">169.9</span></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>就如同 PHP 的 $name = 'Miles' 一樣，宣告變數同時給值</p>
+<p>就如同 PHP 的 $name = ‘Miles’ 一樣，宣告變數同時給值</p>
 </blockquote>
 <ul>
-<li>一樣可以寫成一行
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name, age, height := <span class="string">"Miles"</span>, <span class="number">18</span>, <span class="number">169.9</span></span><br></pre></td></tr></table></figure></li>
+<li>一樣可以寫成一行</li>
 </ul>
-<h3>常數宣告</h3>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name, age, height := <span class="string">&quot;Miles&quot;</span>, <span class="number">18</span>, <span class="number">169.9</span></span><br></pre></td></tr></table></figure>
+<h3 id="常數宣告">常數宣告</h3>
 <ul>
-<li>
-<p>宣告變數使用 const 關鍵字，下面宣告了 num 變數為 int 型態，並給值為 10：
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> num <span class="keyword">int</span> = <span class="number">10</span></span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>num 會是不可變的常數，試圖指定新值會在編譯時報錯
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> num <span class="keyword">int</span> = <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Error</span></span><br><span class="line">num = <span class="number">20</span></span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>除了常數一定要給值，其他宣告的方法都跟變數一樣，如一次宣告多個常數
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> name, age, height = <span class="string">"Miles"</span>, <span class="number">18</span>, <span class="number">169.9</span></span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>多行宣告
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	name = <span class="string">"Miles"</span></span><br><span class="line">	age = <span class="number">18</span></span><br><span class="line">	height = <span class="number">169.9</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>多行宣告並指定型態
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	name <span class="keyword">string</span> = <span class="string">"Miles"</span></span><br><span class="line">	age <span class="keyword">uint</span> = <span class="number">18</span></span><br><span class="line">	height <span class="keyword">float32</span> = <span class="number">169.9</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>如果宣告了一個 num 變數沒使用， Go 會在編譯時期出錯：
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./hello.<span class="keyword">go</span>:<span class="number">8</span>:<span class="number">6</span>: num declared and not used</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>常數則可以宣告但不使用。</p>
-</li>
+<li>宣告變數使用 const 關鍵字，下面宣告了 num 變數為 int 型態，並給值為 10：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> num <span class="type">int</span> = <span class="number">10</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>num 會是不可變的常數，試圖指定新值會在編譯時報錯</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> num <span class="type">int</span> = <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Error</span></span><br><span class="line">num = <span class="number">20</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>除了常數一定要給值，其他宣告的方法都跟變數一樣，如一次宣告多個常數</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> name, age, height = <span class="string">&quot;Miles&quot;</span>, <span class="number">18</span>, <span class="number">169.9</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>多行宣告</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	name = <span class="string">&quot;Miles&quot;</span></span><br><span class="line">	age = <span class="number">18</span></span><br><span class="line">	height = <span class="number">169.9</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>多行宣告並指定型態</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	name <span class="type">string</span> = <span class="string">&quot;Miles&quot;</span></span><br><span class="line">	age <span class="type">uint</span> = <span class="number">18</span></span><br><span class="line">	height <span class="type">float32</span> = <span class="number">169.9</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果宣告了一個 num 變數沒使用， Go 會在編譯時期出錯：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./hello.<span class="keyword">go</span>:<span class="number">8</span>:<span class="number">6</span>: num declared and not used</span><br></pre></td></tr></table></figure>
+<ul>
+<li>常數則可以宣告但不使用。</li>
 </ul>
 
 </div> 

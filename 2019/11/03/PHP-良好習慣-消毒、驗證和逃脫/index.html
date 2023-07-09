@@ -149,10 +149,10 @@
     </div>
 </div>
     <div class="post-content">
-    <h2>消毒</h2>
-<p>&lt;!--more--&gt;</p>
+    <h2 id="消毒">消毒</h2>
+<span id="more"></span>
 <hr>
-<h3>別相信任何人</h3>
+<h3 id="別相信任何人">別相信任何人</h3>
 <ul>
 <li>$_GET</li>
 <li>$_POST</li>
@@ -167,39 +167,38 @@
 <li>來自客戶端的資料</li>
 </ul>
 <p>suggestions: <strong>消毒</strong>使用者輸入, <strong>驗證</strong>資料, <strong>逃脫</strong>使用者輸出</p>
-<h3>消毒使用者輸入</h3>
+<h3 id="消毒使用者輸入">消毒使用者輸入</h3>
 <ul>
 <li>消除不安全的字元，在資料到達應用程式存儲層<strong>之前</strong>就消毒</li>
 <li>假設你的網頁允許用HTML下評論，原始設定中，沒有任何東西會阻止使用者在評論中使用不合理的 <code>&lt;script&gt;</code>標籤</li>
 <li>會遭遇到以下幾種類別的輸入資料：HTML、SQL查詢、使用者個人資料</li>
 </ul>
-<h4>HTML</h4>
+<h4 id="HTML">HTML</h4>
 <ul>
 <li>利用 <code>htmlentities()</code>函式，將HTML的特殊字元消毒成對應的HTML代表字元</li>
 </ul>
-<h4>SQL查詢</h4>
+<h4 id="SQL查詢">SQL查詢</h4>
 <ul>
 <li>有些情況會以使用者輸入的資料來建立SQL查詢，有時這些資料由HTTP請求的查詢字串而來(例如 <code>?user = 1</code>)，有時由HTTP請求的URI片段而來(ex: <code>/user/1</code>)</li>
 </ul>
-<h4>使用個人資料</h4>
+<h4 id="使用個人資料">使用個人資料</h4>
 <ul>
 <li>PHP提供 <code>filter_var()</code>和 <code>filter_input()</code>函式</li>
 <li>這兩個函式接受不同的旗標來消毒不同形式的使用者輸入：電子郵件、URL編碼字串、整數、浮點數、HTML字元、URL和指定的ASCII字元範圍</li>
 </ul>
-<h3>驗證資料</h3>
+<h3 id="驗證資料">驗證資料</h3>
 <ul>
 <li>驗證與消毒不同，驗證並沒有把輸入資料中的資訊去除，驗證只有確認輸入資料有達到你的預期，如果你預期一個電子郵件位址，確認這個輸入資料真的是個電子郵件位址</li>
 </ul>
-<h3>逃脫使用者輸出</h3>
+<h3 id="逃脫使用者輸出">逃脫使用者輸出</h3>
 <ul>
 <li>當要把資料輸出到網頁或是API回應時，逃脫你的輸出是重要的，這讓應用程式多增加了一層防護，防止惡意程式被輸出或是被使用者執行</li>
 </ul>
-<h3>密碼雜湊API</h3>
+<h3 id="密碼雜湊API">密碼雜湊API</h3>
 <ul>
-<li>使用者註冊腳本
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	<span class="comment">// 驗證電子郵件</span></span><br><span class="line">	$email = filter_input(INPUT_POST, <span class="string">'email'</span>, FILTER_VALIDATE_EMAIL);</span><br><span class="line">	<span class="keyword">if</span> (! $email) &#123;</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">'Invalid email'</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 驗證密碼</span></span><br><span class="line">	$password = filter_input(INPUT_POST, <span class="string">'password'</span>);</span><br><span class="line">	<span class="keyword">if</span> (! $password || mb_strlen($password) &lt; <span class="number">8</span>) &#123;</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">'Password must contain 8+ characters'</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 建立密碼雜湊值</span></span><br><span class="line">	$passwordHash = password_hash(</span><br><span class="line">		$password,</span><br><span class="line">		PASSWORD_DEFAULT,</span><br><span class="line">		[<span class="string">'cost'</span> =&gt; <span class="number">12</span>]</span><br><span class="line">	);</span><br><span class="line">	<span class="keyword">if</span> ($passwordHash === <span class="keyword">false</span>) &#123;</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">'Password hash failed'</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 建立使用者帳戶（這是虛擬碼）</span></span><br><span class="line">	$user = <span class="keyword">new</span> User();</span><br><span class="line">	$user-&gt;email = $email;</span><br><span class="line">	$user-&gt;password_hash = $passwordHash;</span><br><span class="line">	$user-&gt;save();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 重新導向到登入頁面</span></span><br><span class="line">	header(<span class="string">'HTTP/1.1 302 Bad Redirect'</span>);</span><br><span class="line">	header(<span class="string">'Location: /login.php'</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (<span class="keyword">Exception</span> $e) &#123;</span><br><span class="line">	<span class="comment">// 回報錯誤</span></span><br><span class="line">	header(<span class="string">'HTTP/1.1 400 Bad request'</span>);</span><br><span class="line">	<span class="keyword">echo</span> $e-&gt;getMessage();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>使用者註冊腳本</li>
 </ul>
-
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	<span class="comment">// 驗證電子郵件</span></span><br><span class="line">	<span class="variable">$email</span> = <span class="title function_ invoke__">filter_input</span>(INPUT_POST, <span class="string">&#x27;email&#x27;</span>, FILTER_VALIDATE_EMAIL);</span><br><span class="line">	<span class="keyword">if</span> (! <span class="variable">$email</span>) &#123;</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Exception</span>(<span class="string">&#x27;Invalid email&#x27;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 驗證密碼</span></span><br><span class="line">	<span class="variable">$password</span> = <span class="title function_ invoke__">filter_input</span>(INPUT_POST, <span class="string">&#x27;password&#x27;</span>);</span><br><span class="line">	<span class="keyword">if</span> (! <span class="variable">$password</span> || <span class="title function_ invoke__">mb_strlen</span>(<span class="variable">$password</span>) &lt; <span class="number">8</span>) &#123;</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Exception</span>(<span class="string">&#x27;Password must contain 8+ characters&#x27;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 建立密碼雜湊值</span></span><br><span class="line">	<span class="variable">$passwordHash</span> = <span class="title function_ invoke__">password_hash</span>(</span><br><span class="line">		<span class="variable">$password</span>,</span><br><span class="line">		PASSWORD_DEFAULT,</span><br><span class="line">		[<span class="string">&#x27;cost&#x27;</span> =&gt; <span class="number">12</span>]</span><br><span class="line">	);</span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$passwordHash</span> === <span class="literal">false</span>) &#123;</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Exception</span>(<span class="string">&#x27;Password hash failed&#x27;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 建立使用者帳戶（這是虛擬碼）</span></span><br><span class="line">	<span class="variable">$user</span> = <span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">	<span class="variable">$user</span>-&gt;email = <span class="variable">$email</span>;</span><br><span class="line">	<span class="variable">$user</span>-&gt;password_hash = <span class="variable">$passwordHash</span>;</span><br><span class="line">	<span class="variable">$user</span>-&gt;<span class="title function_ invoke__">save</span>();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 重新導向到登入頁面</span></span><br><span class="line">	<span class="title function_ invoke__">header</span>(<span class="string">&#x27;HTTP/1.1 302 Bad Redirect&#x27;</span>);</span><br><span class="line">	<span class="title function_ invoke__">header</span>(<span class="string">&#x27;Location: /login.php&#x27;</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (<span class="built_in">Exception</span> <span class="variable">$e</span>) &#123;</span><br><span class="line">	<span class="comment">// 回報錯誤</span></span><br><span class="line">	<span class="title function_ invoke__">header</span>(<span class="string">&#x27;HTTP/1.1 400 Bad request&#x27;</span>);</span><br><span class="line">	<span class="keyword">echo</span> <span class="variable">$e</span>-&gt;<span class="title function_ invoke__">getMessage</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </div> 
 
 <script>

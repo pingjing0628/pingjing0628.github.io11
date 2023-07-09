@@ -162,45 +162,45 @@
 </div>
     <div class="post-content">
     <h1>3.2 電腦系統結構</h1>
-<h2>I/O process 方式</h2>
-<h3>Polling I/O (詢問式) 又稱 busy wait 或 &quot;programmed I/O&quot;</h3>
+<h2 id="I-O-process-方式">I/O process 方式</h2>
+<h3 id="Polling-I-O-詢問式-又稱-busy-wait-或-“programmed-I-O”">Polling I/O (詢問式) 又稱 busy wait 或 “programmed I/O”</h3>
 <p>Def:</p>
 <ul>
 <li>當一 process 需 wait I/O, <strong>過程中 CPU 需不斷反覆詢問 I/O 是否完成</strong></li>
 <li>若過程中將 CPU 切換給其他 process, 可能造成<strong>資料遺失</strong>的現象</li>
 </ul>
-<h3>Interrupt I/O (中斷式)</h3>
+<h3 id="Interrupt-I-O-中斷式">Interrupt I/O (中斷式)</h3>
 <p>Def: 當 process 需 wait I/O 由 <strong>Device Controller 負責監督 I/O 是否完成</strong>, 若完成則通知 O.S. 接手處理 5 ~ 8<br>
-<img src="interrupt_IO.png" alt="">
+<img src="interrupt_IO.png" alt=""><br>
 Note: 過程中 CPU 不需介入故可切給另一 process 專心處理之<br>
-Interrupt vector table
-<img src="interrupt_IO_ISR.png" alt="">
+Interrupt vector table<br>
+<img src="interrupt_IO_ISR.png" alt=""><br>
 <strong>ISR: Interrupt Service Routine(中斷服務常式)</strong></p>
 <p><img src="interrupt_vs_dma.png" alt=""></p>
 <p>說明：</p>
 <ul>
-<li>採 interrupt 時, &quot;I/O 和 Mem 傳輸&quot;, CPU 需參與監督, 改良後 next</li>
-<li>採 DMA (Direct Memory Access 直接記憶體存取)
+<li>採 interrupt 時, “I/O 和 Mem 傳輸”, CPU 需參與監督, 改良後 next</li>
+<li>採 DMA (Direct Memory Access 直接記憶體存取)<br>
 Def: 由 DMA Controller 負責 I/O 和 Mem. 傳輸 <strong>(CPU 不需介入)</strong></li>
 </ul>
-<h3>DMA 會採用 &quot;Cycle stealing&quot; 的技術</h3>
+<h3 id="DMA-會採用-“Cycle-stealing”-的技術">DMA 會採用 “Cycle stealing” 的技術</h3>
 <ul>
-<li>週期竊取: 偷取 FO 和 WM 此 2 週期
-說明：
+<li>週期竊取: 偷取 FO 和 WM 此 2 週期<br>
+說明：<br>
 <img src="cycle_stealing.png" alt=""><br>
 Note: DMA 適用於高速的 I/O Device (ex: disk)</li>
 </ul>
-<h3>Summary</h3>
+<h3 id="Summary">Summary</h3>
 <p><img src="summary.png" alt=""></p>
-<h2>中斷種類</h2>
+<h2 id="中斷種類">中斷種類</h2>
 <p><img src="%E4%B8%AD%E6%96%B7%E7%A8%AE%E9%A1%9E.png" alt=""><br>
 Note: (Non-maskable interrupt) =&gt; NMI 不可遮蔽式中斷</p>
 <ul>
 <li>為 Priority 最高的 interrupt</li>
 <li>O.S. 需無條件接收, 且立即執行之 (Hardware error)</li>
 </ul>
-<h2>Hardware Protection</h2>
-<h3>I/O protection</h3>
+<h2 id="Hardware-Protection">Hardware Protection</h2>
+<h3 id="I-O-protection">I/O protection</h3>
 <ul>
 <li>
 <p>目的：避免 user program 直接存取 I/O resource</p>
@@ -211,12 +211,12 @@ Note: (Non-maskable interrupt) =&gt; NMI 不可遮蔽式中斷</p>
 <li>
 <p>作法：</p>
 <ol>
-<li>採用 <strong>&quot;Dual Mode&quot;</strong>, 將 I/O 相關的指令, 設為特權指令</li>
+<li>採用 <strong>“Dual Mode”</strong>, 將 I/O 相關的指令, 設為特權指令</li>
 <li>避免 user program 去改變中斷向量表或 ISR</li>
 </ol>
 </li>
 <li>
-<p>Dual Mode (雙重模式)
+<p>Dual Mode (雙重模式)<br>
 <img src="dual_mode.png" alt=""></p>
 </li>
 <li>
@@ -231,12 +231,12 @@ Sol: 1, 3, 4, 5</li>
 </ol>
 </li>
 </ul>
-<h3>CPU protection</h3>
+<h3 id="CPU-protection">CPU protection</h3>
 <ul>
 <li>目的：避免 CPU 長期被某個 process 持有</li>
 <li>作法：設定一個 Timer (計時器), 一旦 process 取得 CPU 就開始倒數, 當時間為 0 , 則換其他 process 執行</li>
 </ul>
-<h3>Memory protection</h3>
+<h3 id="Memory-protection">Memory protection</h3>
 <ul>
 <li>目的：避免 user program 之執行影響到其他的 user program 或 monitor program (O.S.) 之執行</li>
 <li>圖：<img src="memory_protection_pur.png" alt=""></li>
@@ -247,16 +247,16 @@ Sol: 1, 3, 4, 5</li>
 </ol>
 </li>
 </ul>
-<h4>1. Monitor Area Protection</h4>
+<h4 id="1-Monitor-Area-Protection">1. Monitor Area Protection</h4>
 <ul>
-<li>作法：採用 **&quot;Fence Register&quot;**紀錄 M.A.大小</li>
+<li>作法：採用 **“Fence Register”**紀錄 M.A.大小</li>
 <li>Problem: M.A. 的大小會更動(因為 error routine 是動態載入), 故所有的 user program 需動態更新位址, 需有 Dynamic Binding (只要沒有就不行,程式不會動)</li>
-<li>Solution:
+<li>Solution:<br>
 <img src="memory_protection_sol.png" alt=""></li>
 </ul>
-<h4>2. User Program Area Protection</h4>
+<h4 id="2-User-Program-Area-Protection">2. User Program Area Protection</h4>
 <ul>
-<li>作法：採用 <strong>&quot;base/limit&quot; register</strong>來記錄各 user program 的起始位址跟 U.P. 的大小</li>
+<li>作法：採用 <strong>“base/limit” register</strong>來記錄各 user program 的起始位址跟 U.P. 的大小</li>
 </ul>
 
 </div> 
