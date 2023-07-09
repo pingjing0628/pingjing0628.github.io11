@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>2. Laravel blade</title>
-    <url>/2019/10/27/2-Laravel-blade/</url>
+    <url>/repository/2019/10/27/2-Laravel-blade/</url>
     <content><![CDATA[<h2>Laravel blade</h2>
 <p>&lt;!--more--&gt;</p>
 <hr>
@@ -73,7 +73,7 @@
   </entry>
   <entry>
     <title>3. 搭建Laravel後台</title>
-    <url>/2019/10/27/3-%E6%90%AD%E5%BB%BALaravel%E5%BE%8C%E5%8F%B0/</url>
+    <url>/repository/2019/10/27/3-%E6%90%AD%E5%BB%BALaravel%E5%BE%8C%E5%8F%B0/</url>
     <content><![CDATA[<h2>搭建Laravel後台</h2>
 <p>&lt;!--more--&gt;</p>
 <hr>
@@ -138,7 +138,7 @@
   </entry>
   <entry>
     <title>1. Laravel Practice</title>
-    <url>/2019/10/27/1-Laravel-Practice/</url>
+    <url>/repository/2019/10/27/1-Laravel-Practice/</url>
     <content><![CDATA[<h1>Installation</h1>
 <p>&lt;!--more--&gt;</p>
 <hr>
@@ -268,7 +268,7 @@ We edit its &quot;up&quot; function:
   </entry>
   <entry>
     <title>About GoLang</title>
-    <url>/2019/12/01/About-GoLang/</url>
+    <url>/repository/2019/12/01/About-GoLang/</url>
     <content><![CDATA[<h2>Introduction</h2>
 <p>&lt;!-- more --&gt;</p>
 <hr>
@@ -321,7 +321,7 @@ We edit its &quot;up&quot; function:
   </entry>
   <entry>
     <title>4. Laravel Restful</title>
-    <url>/2019/10/27/4-Laravel-Restful/</url>
+    <url>/repository/2019/10/27/4-Laravel-Restful/</url>
     <content><![CDATA[<h2>Restful</h2>
 <p>&lt;!--more--&gt;</p>
 <hr>
@@ -506,7 +506,7 @@ We edit its &quot;up&quot; function:
   </entry>
   <entry>
     <title>5.利用Laravel建立評論系統</title>
-    <url>/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/</url>
+    <url>/repository/2019/10/27/5-%E5%88%A9%E7%94%A8Laravel%E5%BB%BA%E7%AB%8B%E8%A9%95%E8%AB%96%E7%B3%BB%E7%B5%B1/</url>
     <content><![CDATA[<h3>基礎規則</h3>
 <ul>
 <li>需要新建一個表專門用來存放每一條評論，每一條評論都屬於某一篇文章。</li>
@@ -582,7 +582,7 @@ model可利用「create」方法將array型態的資料進行模型(實體)的�
   </entry>
   <entry>
     <title>Chapter1-基本電腦概論-補數(Complement)</title>
-    <url>/2021/02/21/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E8%A3%9C%E6%95%B8-Complement/</url>
+    <url>/repository/2021/02/21/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E8%A3%9C%E6%95%B8-Complement/</url>
     <content><![CDATA[<h1>1.3 補數</h1>
 <hr>
 <h2>補數</h2>
@@ -756,7 +756,7 @@ range 為 -2^8-1 ~ +(2^8-1 -1)<br>
   </entry>
   <entry>
     <title>Chapter1-基本電腦概論-進制轉換</title>
-    <url>/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/</url>
+    <url>/repository/2021/02/17/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%80%B2%E5%88%B6%E8%BD%89%E6%8F%9B/</url>
     <content><![CDATA[<h1>1.2 進制轉換</h1>
 <hr>
 <h2>10 進制 -&gt; r 進制</h2>
@@ -900,7 +900,7 @@ Sol: CB.A = 16^1 * C + 16^0 * B + 16^-1 * A<br>
   </entry>
   <entry>
     <title>Chapter1-基本電腦概論-數碼, 文字碼</title>
-    <url>/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/</url>
+    <url>/repository/2021/04/01/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%95%B8%E7%A2%BC-%E6%96%87%E5%AD%97%E7%A2%BC/</url>
     <content><![CDATA[<h1>1.5 數碼、文字碼</h1>
 <hr>
 <h2>BCD 碼</h2>
@@ -1176,7 +1176,7 @@ C: 000011<br>
   </entry>
   <entry>
     <title>Chapter1-基本電腦概論-浮點數表示方法(Floating - Point)</title>
-    <url>/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/</url>
+    <url>/repository/2021/03/29/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E6%B5%AE%E9%BB%9E%E6%95%B8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95-Floating-Point/</url>
     <content><![CDATA[<h1>1.3 補數</h1>
 <hr>
 <h2>對應方式</h2>
@@ -1462,7 +1462,7 @@ C: 000011<br>
   </entry>
   <entry>
     <title>Chapter2-數位邏輯-Digital Logical</title>
-    <url>/2021/04/01/Chapter2-%E6%95%B8%E4%BD%8D%E9%82%8F%E8%BC%AF-Digital-Logical/</url>
+    <url>/repository/2021/04/01/Chapter2-%E6%95%B8%E4%BD%8D%E9%82%8F%E8%BC%AF-Digital-Logical/</url>
     <content><![CDATA[<h1>數位邏輯 Digital Logical</h1>
 <hr>
 <blockquote>
@@ -2150,7 +2150,7 @@ step1: 利用笛摩根定律, 將 '‾' 置於單一變數上, 形成 pos 格式
   </entry>
   <entry>
     <title>Chapter3-作業系統-作業系統結構</title>
-    <url>/2021/06/06/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/</url>
+    <url>/repository/2021/06/06/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/</url>
     <content><![CDATA[<h1>3.3 作業系統結構</h1>
 <p><img src="structure.png" alt=""></p>
 <hr>
@@ -2228,7 +2228,7 @@ step1: 利用笛摩根定律, 將 '‾' 置於單一變數上, 形成 pos 格式
   </entry>
   <entry>
     <title>Chapter3-作業系統-死結deadlock-part1</title>
-    <url>/2021/06/18/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part1/</url>
+    <url>/repository/2021/06/18/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part1/</url>
     <content><![CDATA[<h1>3.5 死結 Deadlock</h1>
 <h2>目錄</h2>
 <ul>
@@ -2306,7 +2306,7 @@ Note: Pi -&gt; Pj =&gt; Process i 在等 Process j 手中的資源</li>
   </entry>
   <entry>
     <title>Chapter3-作業系統-磁碟管理-part1</title>
-    <url>/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/</url>
+    <url>/repository/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part1/</url>
     <content><![CDATA[<h1>3.9 磁碟管理 (Disk Management)</h1>
 <h2>目錄</h2>
 <ul>
@@ -2535,7 +2535,7 @@ total data size = ?<br>
   </entry>
   <entry>
     <title>Chapter3-作業系統-磁碟管理-part2</title>
-    <url>/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part2/</url>
+    <url>/repository/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part2/</url>
     <content><![CDATA[<h1>3.9 磁碟管理 (Disk Management)</h1>
 <h2>目錄</h2>
 <ul>
@@ -2706,7 +2706,7 @@ Sol: <img src="FCFS.png" alt=""></li>
   </entry>
   <entry>
     <title>Chapter3-作業系統-死結deadlock-part2</title>
-    <url>/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/</url>
+    <url>/repository/2021/06/19/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E6%AD%BB%E7%B5%90deadlock-part2/</url>
     <content><![CDATA[<h1>3.5 死結 Deadlock</h1>
 <h2>目錄</h2>
 <ul>
@@ -2920,7 +2920,7 @@ Sol:</li>
   </entry>
   <entry>
     <title>Chapter3-作業系統-磁碟管理-part3</title>
-    <url>/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part3/</url>
+    <url>/repository/2021/07/02/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A3%81%E7%A2%9F%E7%AE%A1%E7%90%86-part3/</url>
     <content><![CDATA[<h1>3.9 磁碟管理 (Disk Management)</h1>
 <h2>目錄</h2>
 <ul>
@@ -3161,7 +3161,7 @@ Sol:</li>
   </entry>
   <entry>
     <title>Chapter3-作業系統-程序間的溝通-part2</title>
-    <url>/2021/06/20/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A8%8B%E5%BA%8F%E9%96%93%E7%9A%84%E6%BA%9D%E9%80%9A-part2/</url>
+    <url>/repository/2021/06/20/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A8%8B%E5%BA%8F%E9%96%93%E7%9A%84%E6%BA%9D%E9%80%9A-part2/</url>
     <content><![CDATA[<h1>3.6 程序間的溝通 (Process Communication)</h1>
 <p>又稱為 <strong>inter-process communication</strong> IPC<br>
 方法有兩種：</p>
@@ -3234,7 +3234,7 @@ R.S. // 放下筷子
   </entry>
   <entry>
     <title>Chapter3-作業系統-作業系統</title>
-    <url>/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/</url>
+    <url>/repository/2021/05/30/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1/</url>
     <content><![CDATA[<h1>3.1 作業系統</h1>
 <h2>O.S. 作用</h2>
 <ol>
@@ -3525,7 +3525,7 @@ Def: 將常用的 data 複製一份到高速 device 中以提高 CPU 存取的 I
   </entry>
   <entry>
     <title>Chapter1-基本電腦概論-電腦系統介紹</title>
-    <url>/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/</url>
+    <url>/repository/2021/01/31/Chapter1-%E5%9F%BA%E6%9C%AC%E9%9B%BB%E8%85%A6%E6%A6%82%E8%AB%96-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E4%BB%8B%E7%B4%B9/</url>
     <content><![CDATA[<h1>1.1 電腦系統介紹</h1>
 <hr>
 <h2>電腦發展史</h2>
@@ -3977,7 +3977,7 @@ Sol: 8 bits = 1 byte
   </entry>
   <entry>
     <title>Chapter3-作業系統-程序間的溝通-part1</title>
-    <url>/2021/06/20/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A8%8B%E5%BA%8F%E9%96%93%E7%9A%84%E6%BA%9D%E9%80%9A-part1/</url>
+    <url>/repository/2021/06/20/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E7%A8%8B%E5%BA%8F%E9%96%93%E7%9A%84%E6%BA%9D%E9%80%9A-part1/</url>
     <content><![CDATA[<h1>3.6 程序間的溝通 (Process Communication)</h1>
 <p>又稱為 <strong>inter-process communication</strong> IPC<br>
 方法有兩種：</p>
@@ -4205,7 +4205,7 @@ Semaphore 初始值為 1 時, 則狀態永遠為 0 或 1, 故 Pj 謂之 <strong>
   </entry>
   <entry>
     <title>Chapter3-作業系統-虛擬記憶體-part1</title>
-    <url>/2021/06/24/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%99%9B%E6%93%AC%E8%A8%98%E6%86%B6%E9%AB%94-part1/</url>
+    <url>/repository/2021/06/24/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%99%9B%E6%93%AC%E8%A8%98%E6%86%B6%E9%AB%94-part1/</url>
     <content><![CDATA[<h1>3.8 虛擬記憶體 (Virtual Memory)</h1>
 <ul>
 <li>目的：允許 program size &gt; physical memory size, 而程式仍能執行</li>
@@ -4291,7 +4291,7 @@ Semaphore 初始值為 1 時, 則狀態永遠為 0 或 1, 故 Pj 謂之 <strong>
   </entry>
   <entry>
     <title>Chapter3-作業系統-行程-part1</title>
-    <url>/2021/06/12/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A1%8C%E7%A8%8B-part1/</url>
+    <url>/repository/2021/06/12/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A1%8C%E7%A8%8B-part1/</url>
     <content><![CDATA[<h1>3.4 行程</h1>
 <h2>目錄</h2>
 <ul>
@@ -4396,7 +4396,7 @@ MTS 所挑選的部分為：1. priority 低的 process 2. waiting time 過長<br
   </entry>
   <entry>
     <title>Chapter3-作業系統-行程-part2</title>
-    <url>/2021/06/12/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A1%8C%E7%A8%8B-part2/</url>
+    <url>/repository/2021/06/12/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A1%8C%E7%A8%8B-part2/</url>
     <content><![CDATA[<h1>3.4 行程</h1>
 <h2>目錄</h2>
 <ul>
@@ -4759,7 +4759,7 @@ Def: 同 6. , 但 <strong>process 可於 Queue 之間挪動</strong><br>
   </entry>
   <entry>
     <title>Chapter3-作業系統-虛擬記憶體-part2</title>
-    <url>/2021/06/24/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%99%9B%E6%93%AC%E8%A8%98%E6%86%B6%E9%AB%94-part2/</url>
+    <url>/repository/2021/06/24/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%99%9B%E6%93%AC%E8%A8%98%E6%86%B6%E9%AB%94-part2/</url>
     <content><![CDATA[<h1>3.8 虛擬記憶體 (Virtual Memory)</h1>
 <ul>
 <li>目的：允許 program size &gt; physical memory size, 而程式仍能執行</li>
@@ -5141,7 +5141,7 @@ Total: 9</li>
   </entry>
   <entry>
     <title>Chapter3-作業系統-行程-part3</title>
-    <url>/2021/06/12/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A1%8C%E7%A8%8B-part3/</url>
+    <url>/repository/2021/06/12/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A1%8C%E7%A8%8B-part3/</url>
     <content><![CDATA[<h1>3.4 行程</h1>
 <h2>目錄</h2>
 <ul>
@@ -5216,7 +5216,7 @@ Total: 9</li>
   </entry>
   <entry>
     <title>Chapter3-作業系統-記憶體管理</title>
-    <url>/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/</url>
+    <url>/repository/2021/06/22/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E8%A8%98%E6%86%B6%E9%AB%94%E7%AE%A1%E7%90%86/</url>
     <content><![CDATA[<h1>3.7 記憶體管理 (Memory Management)</h1>
 <p>圖：
 <img src="%E8%A8%98%E6%86%B6%E9%AB%94.png" alt=""></p>
@@ -5512,7 +5512,7 @@ Sol:</li>
   </entry>
   <entry>
     <title>Chapter4-系統程式-part2</title>
-    <url>/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/</url>
+    <url>/repository/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part2/</url>
     <content><![CDATA[<h1>4 系統程式 (System Program)</h1>
 <hr>
 <h2>補充 - Linking 的種類</h2>
@@ -5594,7 +5594,7 @@ Sol:</li>
   </entry>
   <entry>
     <title>Chapter3-作業系統-電腦系統結構</title>
-    <url>/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/</url>
+    <url>/repository/2021/06/03/Chapter3-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1-%E9%9B%BB%E8%85%A6%E7%B3%BB%E7%B5%B1%E7%B5%90%E6%A7%8B/</url>
     <content><![CDATA[<h1>3.2 電腦系統結構</h1>
 <h2>I/O process 方式</h2>
 <h3>Polling I/O (詢問式) 又稱 busy wait 或 &quot;programmed I/O&quot;</h3>
@@ -5706,7 +5706,7 @@ Sol: 1, 3, 4, 5</li>
   </entry>
   <entry>
     <title>Chapter4-系統程式-part1</title>
-    <url>/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/</url>
+    <url>/repository/2021/07/02/Chapter4-%E7%B3%BB%E7%B5%B1%E7%A8%8B%E5%BC%8F-part1/</url>
     <content><![CDATA[<h1>4 系統程式 (System Program)</h1>
 <hr>
 <h2>Software License</h2>
@@ -6080,7 +6080,7 @@ Ex: <code>A = 3.14 * 2.56 / 3.2 + 8 - E</code><br>
   </entry>
   <entry>
     <title>Chapter5-程式介紹-JAVA</title>
-    <url>/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/</url>
+    <url>/repository/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-JAVA/</url>
     <content><![CDATA[<h1>5.5 JAVA</h1>
 <hr>
 <h2>Java VS C++</h2>
@@ -6484,7 +6484,7 @@ Note: java 中的 thread 的環境有較妥善的機制和方便 api 供 user �
   </entry>
   <entry>
     <title>Chapter5-程式介紹-C++程式語言介紹</title>
-    <url>/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C-%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/</url>
+    <url>/repository/2022/06/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C-%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80%E4%BB%8B%E7%B4%B9/</url>
     <content><![CDATA[<h1>5.4 C++ 程式語言介紹</h1>
 <hr>
 <h2>C++ Language</h2>
@@ -6725,7 +6725,7 @@ Sol:<br>
   </entry>
   <entry>
     <title>Chapter5-程式介紹-物件導向概論</title>
-    <url>/2022/04/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E6%A6%82%E8%AB%96/</url>
+    <url>/repository/2022/04/20/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E6%A6%82%E8%AB%96/</url>
     <content><![CDATA[<h1>5.3 物件導向概論</h1>
 <hr>
 <h2>Object Oriented:</h2>
@@ -6878,7 +6878,7 @@ Note:</p>
   </entry>
   <entry>
     <title>Database ERModel</title>
-    <url>/2019/11/26/Database-ERModel/</url>
+    <url>/repository/2019/11/26/Database-ERModel/</url>
     <content><![CDATA[<h2>Database 實體關聯模型(E-R model)</h2>
 <p>&lt;!--more--&gt;</p>
 <hr>
@@ -6977,7 +6977,7 @@ Note:</p>
   </entry>
   <entry>
     <title>Chapter6-資料結構-Algorithm&#39;s Time Complexity and Recursive Program</title>
-    <url>/2022/06/20/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Algorithm-s-Time-Complexity-and-Recursive-Program/</url>
+    <url>/repository/2022/06/20/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Algorithm-s-Time-Complexity-and-Recursive-Program/</url>
     <content><![CDATA[<h1>6.1 Algorithm 的時間複雜度及遞迴程式</h1>
 <hr>
 <h2>algorithm 演算法</h2>
@@ -7475,7 +7475,7 @@ O(1) &lt; O(log n) &lt; O(n) &lt; O(nlog n) &lt; O(n^2) &lt; O(n^3) &lt;...&lt; 
   </entry>
   <entry>
     <title>Chapter5-程式介紹-C語言重點</title>
-    <url>/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/</url>
+    <url>/repository/2021/07/08/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-C%E8%AA%9E%E8%A8%80%E9%87%8D%E9%BB%9E/</url>
     <content><![CDATA[<h1>5.2 C 語言重點</h1>
 <hr>
 <h2>C Language</h2>
@@ -8213,7 +8213,7 @@ char *S = &quot;hello&quot;;
   </entry>
   <entry>
     <title>GoLang-1a2b game practice</title>
-    <url>/2020/01/04/GoLang-1a2b-game-practice/</url>
+    <url>/repository/2020/01/04/GoLang-1a2b-game-practice/</url>
     <content><![CDATA[<h2>1a2b Game practice</h2>
 <h2>&lt;!--more--&gt;</h2>
 <h3>說明</h3>
@@ -8239,7 +8239,7 @@ char *S = &quot;hello&quot;;
   </entry>
   <entry>
     <title>Eloquent</title>
-    <url>/2019/10/27/Eloquent/</url>
+    <url>/repository/2019/10/27/Eloquent/</url>
     <content><![CDATA[<h2>What is Eloquent?</h2>
 <p>&lt;!-- more --&gt;</p>
 <hr>
@@ -8355,7 +8355,7 @@ char *S = &quot;hello&quot;;
   </entry>
   <entry>
     <title>GoLang-Anonymous Function</title>
-    <url>/2019/12/03/GoLang-Anonymous-Function/</url>
+    <url>/repository/2019/12/03/GoLang-Anonymous-Function/</url>
     <content><![CDATA[<h2>Anonymous Function</h2>
 <h2>&lt;!--more--&gt;</h2>
 <ul>
@@ -8411,7 +8411,7 @@ char *S = &quot;hello&quot;;
   </entry>
   <entry>
     <title>Chapter5-程式介紹-基本介紹</title>
-    <url>/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/</url>
+    <url>/repository/2021/07/05/Chapter5-%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9-%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/</url>
     <content><![CDATA[<h1>5.1 基本介紹</h1>
 <hr>
 <h2>Programming Language 程式語言</h2>
@@ -8627,7 +8627,7 @@ char *S = &quot;hello&quot;;
   </entry>
   <entry>
     <title>GoLang-Channel</title>
-    <url>/2020/09/10/GoLang-Channel/</url>
+    <url>/repository/2020/09/10/GoLang-Channel/</url>
     <content><![CDATA[<h1>Channel</h1>
 <h2>&lt;!--more--&gt;</h2>
 <p>Channel is a pipeline, push and pull the value.
@@ -8701,7 +8701,7 @@ The second variable will define buffer length, it will only be blocked cause to 
   </entry>
   <entry>
     <title>GoLang-First class function</title>
-    <url>/2019/12/03/GoLang-First-class-function/</url>
+    <url>/repository/2019/12/03/GoLang-First-class-function/</url>
     <content><![CDATA[<h2>First class function</h2>
 <h2>&lt;!--more--&gt;</h2>
 <p><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"reflect"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">(a, b <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> a + b</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	add2 := add</span><br><span class="line"></span><br><span class="line">	fmt.Println(add(<span class="number">1</span>, <span class="number">2</span>))               <span class="comment">// 3</span></span><br><span class="line">	fmt.Println(add2(<span class="number">1</span>, <span class="number">2</span>))              <span class="comment">// 3</span></span><br><span class="line">	fmt.Println(reflect.TypeOf(add))     <span class="comment">// func(int, int) int</span></span><br><span class="line">	fmt.Println(reflect.TypeOf(add2))    <span class="comment">// func(int, int) int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -8741,7 +8741,7 @@ The second variable will define buffer length, it will only be blocked cause to 
   </entry>
   <entry>
     <title>GoLang - Environment</title>
-    <url>/2019/11/30/GoLang-Environment/</url>
+    <url>/repository/2019/11/30/GoLang-Environment/</url>
     <content><![CDATA[<h2>安裝主程式</h2>
 <p>&lt;!-- more --&gt;</p>
 <hr>
@@ -8864,7 +8864,7 @@ The second variable will define buffer length, it will only be blocked cause to 
   </entry>
   <entry>
     <title>GoLang - Constants</title>
-    <url>/2019/11/30/GoLang-Constants/</url>
+    <url>/repository/2019/11/30/GoLang-Constants/</url>
     <content><![CDATA[<h2>Constants</h2>
 <p>&lt;!-- more --&gt;</p>
 <hr>
@@ -8992,7 +8992,7 @@ The second variable will define buffer length, it will only be blocked cause to 
   </entry>
   <entry>
     <title>GoLang-Array Type</title>
-    <url>/2019/12/01/GoLang-Array-Type/</url>
+    <url>/repository/2019/12/01/GoLang-Array-Type/</url>
     <content><![CDATA[<h2>Array Type</h2>
 <h2>&lt;!--more--&gt;</h2>
 <ul>
@@ -9074,7 +9074,7 @@ The second variable will define buffer length, it will only be blocked cause to 
   </entry>
   <entry>
     <title>GoLang-Database model design using gorm</title>
-    <url>/2020/02/27/GoLang-Database-model-design-using-gorm/</url>
+    <url>/repository/2020/02/27/GoLang-Database-model-design-using-gorm/</url>
     <content><![CDATA[<h2>DB Setting</h2>
 <h2>&lt;!--more--&gt;</h2>
 <h3>DB Connection</h3>
@@ -9101,7 +9101,7 @@ The second variable will define buffer length, it will only be blocked cause to 
   </entry>
   <entry>
     <title>GoLang-Function declarations</title>
-    <url>/2019/12/02/GoLang-Function-declarations/</url>
+    <url>/repository/2019/12/02/GoLang-Function-declarations/</url>
     <content><![CDATA[<h2>Function declarations</h2>
 <h2>&lt;!--more--&gt;</h2>
 <h3>定義函式</h3>
@@ -9154,7 +9154,7 @@ The second variable will define buffer length, it will only be blocked cause to 
   </entry>
   <entry>
     <title>GoLang-Method</title>
-    <url>/2019/12/08/GoLang-Method/</url>
+    <url>/repository/2019/12/08/GoLang-Method/</url>
     <content><![CDATA[<h2>Method</h2>
 <h2>&lt;!--more--&gt;</h2>
 <ul>
@@ -9194,7 +9194,7 @@ The second variable will define buffer length, it will only be blocked cause to 
   </entry>
   <entry>
     <title>GoLang-Map Type</title>
-    <url>/2019/12/02/GoLang-Map-Type/</url>
+    <url>/repository/2019/12/02/GoLang-Map-Type/</url>
     <content><![CDATA[<h2>Map Type</h2>
 <h2>&lt;!--more--&gt;</h2>
 <ul>
@@ -9255,7 +9255,7 @@ The second variable will define buffer length, it will only be blocked cause to 
   </entry>
   <entry>
     <title>GoLang-Inheritance</title>
-    <url>/2019/12/08/GoLang-Inheritance/</url>
+    <url>/repository/2019/12/08/GoLang-Inheritance/</url>
     <content><![CDATA[<h2>Inheritance</h2>
 <h2>&lt;!--more--&gt;</h2>
 <p><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> People <span class="keyword">struct</span> &#123;</span><br><span class="line">	name  <span class="keyword">string</span></span><br><span class="line">	age   <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(people People)</span> <span class="title">Hello</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">`Hi! I am `</span> + people.name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	yu := People&#123;<span class="string">`Yu`</span>, <span class="number">18</span>&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Println(yu.Hello()) <span class="comment">// Hi! Someone, I am Yu</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -9291,7 +9291,7 @@ The second variable will define buffer length, it will only be blocked cause to 
   </entry>
   <entry>
     <title>GoLang-Protocol Buffer</title>
-    <url>/2020/06/01/GoLang-Protocol-Buffer/</url>
+    <url>/repository/2020/06/01/GoLang-Protocol-Buffer/</url>
     <content><![CDATA[<h2>Protocol Buffer</h2>
 <p>&lt;!--more--&gt;</p>
 <p>&lt;b&gt;Protocol Buffer&lt;/b&gt; is like json、xml, but smaller, faster, simplifier.
@@ -9375,7 +9375,7 @@ These will make you remove one of the field without messing up entire data struc
   </entry>
   <entry>
     <title>GoLang-Predeclared Type</title>
-    <url>/2019/12/01/GoLang-Predeclared-Type/</url>
+    <url>/repository/2019/12/01/GoLang-Predeclared-Type/</url>
     <content><![CDATA[<h2>Predeclared Type</h2>
 <h2>&lt;!--more--&gt;</h2>
 <ul>
@@ -9436,7 +9436,7 @@ These will make you remove one of the field without messing up entire data struc
   </entry>
   <entry>
     <title>GoLang-Struct</title>
-    <url>/2019/12/03/GoLang-Struct/</url>
+    <url>/repository/2019/12/03/GoLang-Struct/</url>
     <content><![CDATA[<h2>Struct</h2>
 <h2>&lt;!--more--&gt;</h2>
 <ul>
@@ -9488,7 +9488,7 @@ These will make you remove one of the field without messing up entire data struc
   </entry>
   <entry>
     <title>GoLang-Token &amp; Middleware</title>
-    <url>/2020/05/31/GoLang-Token/</url>
+    <url>/repository/2020/05/31/GoLang-Token/</url>
     <content><![CDATA[<h2>Token 使用</h2>
 <h2>&lt;!--more--&gt;</h2>
 <p>建立一個 services folder，使用於 authorization</p>
@@ -9528,7 +9528,7 @@ These will make you remove one of the field without messing up entire data struc
   </entry>
   <entry>
     <title>GoLang-gomodule</title>
-    <url>/2020/01/05/GoLang-gomodule/</url>
+    <url>/repository/2020/01/05/GoLang-gomodule/</url>
     <content><![CDATA[<h2>GoModule</h2>
 <h2>&lt;!--more--&gt;</h2>
 <p>先建立一個範例檔
@@ -9577,7 +9577,7 @@ These will make you remove one of the field without messing up entire data struc
   </entry>
   <entry>
     <title>GoLang-Goroutine</title>
-    <url>/2020/09/07/GoLang-Goroutine/</url>
+    <url>/repository/2020/09/07/GoLang-Goroutine/</url>
     <content><![CDATA[<h1>Goroutine</h1>
 <h2>&lt;!--more--&gt;</h2>
 <p>Goroutine is like the thread in Go, which makes Go create multitask.
@@ -9678,7 +9678,7 @@ Put <code>WaitGroup</code> to goroutine, using <code>wg.Done()</code> to  minus 
   </entry>
   <entry>
     <title>GoLang-grpc</title>
-    <url>/2020/07/08/GoLang-grpc/</url>
+    <url>/repository/2020/07/08/GoLang-grpc/</url>
     <content><![CDATA[<h2>GRPC</h2>
 <p>&lt;!--more--&gt;</p>
 ]]></content>
@@ -9693,7 +9693,7 @@ Put <code>WaitGroup</code> to goroutine, using <code>wg.Done()</code> to  minus 
   </entry>
   <entry>
     <title>GoLang-Router design</title>
-    <url>/2020/02/27/GoLang-Router-design/</url>
+    <url>/repository/2020/02/27/GoLang-Router-design/</url>
     <content><![CDATA[<h2>規劃路由</h2>
 <h2>&lt;!--more--&gt;</h2>
 <h3>定義路由</h3>
@@ -9724,7 +9724,7 @@ Put <code>WaitGroup</code> to goroutine, using <code>wg.Done()</code> to  minus 
   </entry>
   <entry>
     <title>GoLang-Slice Type</title>
-    <url>/2019/12/01/GoLang-Slice-Type/</url>
+    <url>/repository/2019/12/01/GoLang-Slice-Type/</url>
     <content><![CDATA[<h2>Slice Type</h2>
 <h2>&lt;!--more--&gt;</h2>
 <ul>
@@ -9809,7 +9809,7 @@ Put <code>WaitGroup</code> to goroutine, using <code>wg.Done()</code> to  minus 
   </entry>
   <entry>
     <title>GoLang-語法筆記整理</title>
-    <url>/2019/12/15/GoLang-%E8%AA%9E%E6%B3%95%E7%AD%86%E8%A8%98%E6%95%B4%E7%90%86/</url>
+    <url>/repository/2019/12/15/GoLang-%E8%AA%9E%E6%B3%95%E7%AD%86%E8%A8%98%E6%95%B4%E7%90%86/</url>
     <content><![CDATA[<h2>整理</h2>
 <h2>&lt;!--more--&gt;</h2>
 <ol>
@@ -9900,7 +9900,7 @@ Put <code>WaitGroup</code> to goroutine, using <code>wg.Done()</code> to  minus 
   </entry>
   <entry>
     <title>Golang-Variables &amp; Constants declarations</title>
-    <url>/2019/12/01/Golang-Variables-Constants-declarations/</url>
+    <url>/repository/2019/12/01/Golang-Variables-Constants-declarations/</url>
     <content><![CDATA[<h2>變數與常數的宣告</h2>
 <h2>&lt;!--more--&gt;</h2>
 <h3>變數宣告</h3>
@@ -9987,7 +9987,7 @@ Put <code>WaitGroup</code> to goroutine, using <code>wg.Done()</code> to  minus 
   </entry>
   <entry>
     <title>Hexo command</title>
-    <url>/2021/01/31/Hexo-command/</url>
+    <url>/repository/2021/01/31/Hexo-command/</url>
     <content><![CDATA[<h1>Hexo Command</h1>
 <h2>&lt;!--more--&gt;</h2>
 <h3>Command</h3>
@@ -10009,7 +10009,7 @@ Put <code>WaitGroup</code> to goroutine, using <code>wg.Done()</code> to  minus 
   </entry>
   <entry>
     <title>GoLang-web application-Creating a data structure with methods</title>
-    <url>/2020/01/08/GoLang-web-application-Creating-a-data-structure-with-methods/</url>
+    <url>/repository/2020/01/08/GoLang-web-application-Creating-a-data-structure-with-methods/</url>
     <content><![CDATA[<h2>Data Structures</h2>
 <p>&lt;!-- more --&gt;</p>
 <hr>
@@ -10044,7 +10044,7 @@ It takes no parameters, and returns a value of type error.</p>
   </entry>
   <entry>
     <title>GoLang-web application-The net/http package</title>
-    <url>/2020/01/08/GoLang-web-application-The-net-http-package/</url>
+    <url>/repository/2020/01/08/GoLang-web-application-The-net-http-package/</url>
     <content><![CDATA[<h2>Using net/http to serve</h2>
 <hr>
 <p>承上篇文章，針對wiki 檔案進行http的操作</p>
@@ -10174,7 +10174,7 @@ It takes no parameters, and returns a value of type error.</p>
   </entry>
   <entry>
     <title>Kubernetes-intro</title>
-    <url>/2020/09/20/Kubernetes-intro/</url>
+    <url>/repository/2020/09/20/Kubernetes-intro/</url>
     <content><![CDATA[<h1>Kubernetes Introduction</h1>
 <h2>&lt;!--more--&gt;</h2>
 <h2>What is kubernetes?</h2>
@@ -10271,7 +10271,7 @@ K8S 中多個 node 和 master 的集合
   </entry>
   <entry>
     <title>Laravel CSRF</title>
-    <url>/2019/10/27/Laravel-CSRF/</url>
+    <url>/repository/2019/10/27/Laravel-CSRF/</url>
     <content><![CDATA[<h2>CSRF</h2>
 <p>&lt;!--more--&gt;</p>
 <hr>
@@ -10314,12 +10314,12 @@ K8S 中多個 node 和 master 的集合
   </entry>
   <entry>
     <title>Laravel service container</title>
-    <url>/2019/11/24/Laravel-service-container/</url>
+    <url>/repository/2019/11/24/Laravel-service-container/</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>PHP Operators</title>
-    <url>/2019/10/27/PHP-Operators/</url>
+    <url>/repository/2019/10/27/PHP-Operators/</url>
     <content><![CDATA[<h2>PHP Operators</h2>
 <p>&lt;!--more--&gt;</p>
 <hr>
@@ -10363,7 +10363,7 @@ K8S 中多個 node 和 master 的集合
   </entry>
   <entry>
     <title>Laravel Database</title>
-    <url>/2019/10/27/Laravel-Database/</url>
+    <url>/repository/2019/10/27/Laravel-Database/</url>
     <content><![CDATA[<p>Laravel 將Model分成三個部分</p>
 <ol>
 <li>原生 SQL 查詢</li>
@@ -10509,7 +10509,7 @@ K8S 中多個 node 和 master 的集合
   </entry>
   <entry>
     <title>GoLang-練習姓名產生器-dep</title>
-    <url>/2019/12/09/GoLang-%E7%B7%B4%E7%BF%92%E5%A7%93%E5%90%8D%E7%94%A2%E7%94%9F%E5%99%A8-dep/</url>
+    <url>/repository/2019/12/09/GoLang-%E7%B7%B4%E7%BF%92%E5%A7%93%E5%90%8D%E7%94%A2%E7%94%9F%E5%99%A8-dep/</url>
     <content><![CDATA[<h2>Practice</h2>
 <h2>&lt;!--more--&gt;</h2>
 <ul>
@@ -10564,7 +10564,7 @@ K8S 中多個 node 和 master 的集合
   </entry>
   <entry>
     <title>GoLang-REST API with Mux</title>
-    <url>/2019/12/17/GoLang-REST-API-with-Mux/</url>
+    <url>/repository/2019/12/17/GoLang-REST-API-with-Mux/</url>
     <content><![CDATA[<h2>REST API with Mux</h2>
 <h2>&lt;!--more--&gt;</h2>
 <p><figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span>(</span><br><span class="line">    <span class="string">"encoding/json"</span></span><br><span class="line">    <span class="string">"log"</span></span><br><span class="line">    <span class="string">"net/http"</span></span><br><span class="line">    <span class="string">"math/rand"</span></span><br><span class="line">    <span class="string">"strconv"</span></span><br><span class="line">    <span class="string">"github.com/gorilla/mux"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Book Struct (Model)</span></span><br><span class="line"><span class="comment">// Struct is kind of like a class, it's used for OOP in Golang</span></span><br><span class="line"><span class="keyword">type</span> Book <span class="keyword">struct</span> &#123;</span><br><span class="line">    ID      <span class="keyword">string</span>  <span class="string">`json:"id"`</span></span><br><span class="line">    Isbn    <span class="keyword">string</span>  <span class="string">`json:"isbn"`</span></span><br><span class="line">    Title   <span class="keyword">string</span>  <span class="string">`json:"title"`</span></span><br><span class="line">    Author  *Author <span class="string">`json:"author"`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Author Struct</span></span><br><span class="line"><span class="keyword">type</span> Author <span class="keyword">struct</span> &#123;</span><br><span class="line">    Firstname  <span class="keyword">string</span>  <span class="string">`json:"firstname"`</span></span><br><span class="line">    Lastname   <span class="keyword">string</span>  <span class="string">`json:"lastname"`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Init books var as a slice Book struct</span></span><br><span class="line"><span class="keyword">var</span> books []Book</span><br><span class="line"></span><br><span class="line"><span class="comment">// Get All Books</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getBooks</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    w.Header().Set(<span class="string">"Content-Type"</span>, <span class="string">"application/json"</span>)</span><br><span class="line">    json.NewEncoder(w).Encode(books)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Get Single Book</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getBook</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    w.Header().Set(<span class="string">"Content-Type"</span>, <span class="string">"application/json"</span>)</span><br><span class="line">    params := mux.Vars(r) <span class="comment">// Get params</span></span><br><span class="line">    <span class="comment">// Loop through books and find with id</span></span><br><span class="line">    <span class="keyword">for</span> _, item := <span class="keyword">range</span> books &#123;</span><br><span class="line">        <span class="keyword">if</span> item.ID == params[<span class="string">"id"</span>] &#123;</span><br><span class="line">            json.NewEncoder(w).Encode(item)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    json.NewEncoder(w).Encode(&amp;Book&#123;&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Create a New Book</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">createBook</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    w.Header().Set(<span class="string">"Content-Type"</span>, <span class="string">"application/json"</span>)</span><br><span class="line">    <span class="keyword">var</span> book Book</span><br><span class="line">    _ = json.NewDecoder(r.Body).Decode(&amp;book)</span><br><span class="line">    book.ID = strconv.Itoa(rand.Intn(<span class="number">10000000</span>)) <span class="comment">// Mock ID - not safe</span></span><br><span class="line">    books = <span class="built_in">append</span>(books, book)</span><br><span class="line">    json.NewEncoder(w).Encode(book)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Update a Book</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">updateBook</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    w.Header().Set(<span class="string">"Content-Type"</span>, <span class="string">"application/json"</span>)</span><br><span class="line">    params := mux.Vars(r)</span><br><span class="line">    <span class="keyword">for</span> index, item := <span class="keyword">range</span> books &#123;</span><br><span class="line">        <span class="keyword">if</span> item.ID == params[<span class="string">"id"</span>] &#123;</span><br><span class="line">            books = <span class="built_in">append</span>(books[:index], books[index+<span class="number">1</span>:]...)</span><br><span class="line">            <span class="keyword">var</span> book Book</span><br><span class="line">            _ = json.NewDecoder(r.Body).Decode(&amp;book)</span><br><span class="line">            book.ID = params[<span class="string">"id"</span>]</span><br><span class="line">            books = <span class="built_in">append</span>(books, book)</span><br><span class="line">            json.NewEncoder(w).Encode(book)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    json.NewEncoder(w).Encode(books)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Delete a Book</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">deleteBook</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    w.Header().Set(<span class="string">"Content-Type"</span>, <span class="string">"application/json"</span>)</span><br><span class="line">    params := mux.Vars(r)</span><br><span class="line">    <span class="keyword">for</span> index, item := <span class="keyword">range</span> books &#123;</span><br><span class="line">        <span class="keyword">if</span> item.ID == params[<span class="string">"id"</span>] &#123;</span><br><span class="line">            books = <span class="built_in">append</span>(books[:index], books[index+<span class="number">1</span>:]...)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    json.NewEncoder(w).Encode(books)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// Init Router</span></span><br><span class="line">    r := mux.NewRouter()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Mock Data - @todo - implemet DB</span></span><br><span class="line">    books = <span class="built_in">append</span>(books, Book&#123;ID: <span class="string">"1"</span>, Isbn: <span class="string">"443322"</span>, Title: <span class="string">"Section 1"</span>, Author: &amp;Author&#123;Firstname: <span class="string">"Yu"</span>, Lastname: <span class="string">"Wang"</span>&#125;&#125;)</span><br><span class="line">    books = <span class="built_in">append</span>(books, Book&#123;ID: <span class="string">"2"</span>, Isbn: <span class="string">"554433"</span>, Title: <span class="string">"Section 2"</span>, Author: &amp;Author&#123;Firstname: <span class="string">"Ping"</span>, Lastname: <span class="string">"Wang"</span>&#125;&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Route Handlers / Endpoints</span></span><br><span class="line">    r.HandleFunc(<span class="string">"/api/books"</span>, getBooks).Methods(<span class="string">"GET"</span>)</span><br><span class="line">    r.HandleFunc(<span class="string">"/api/books/&#123;id&#125;"</span>, getBook).Methods(<span class="string">"GET"</span>)</span><br><span class="line">    r.HandleFunc(<span class="string">"/api/books"</span>, createBook).Methods(<span class="string">"POST"</span>)</span><br><span class="line">    r.HandleFunc(<span class="string">"/api/books/&#123;id&#125;"</span>, updateBook).Methods(<span class="string">"PUT"</span>)</span><br><span class="line">    r.HandleFunc(<span class="string">"/api/books/&#123;id&#125;"</span>, deleteBook).Methods(<span class="string">"DELETE"</span>)</span><br><span class="line">    log.Fatal(http.ListenAndServe(<span class="string">":8090"</span>, r))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -10611,7 +10611,7 @@ create and update are manipulate memory space, so when you disconnect, then the 
   </entry>
   <entry>
     <title>PHP 特點- 名稱空間&amp;介面</title>
-    <url>/2019/11/03/PHP-%E7%89%B9%E9%BB%9E-%E5%90%8D%E7%A8%B1%E7%A9%BA%E9%96%93-%E4%BB%8B%E9%9D%A2/</url>
+    <url>/repository/2019/11/03/PHP-%E7%89%B9%E9%BB%9E-%E5%90%8D%E7%A8%B1%E7%A9%BA%E9%96%93-%E4%BB%8B%E9%9D%A2/</url>
     <content><![CDATA[<h2>名稱空間 Namespaces</h2>
 <p>&lt;!--more--&gt;</p>
 <hr>
@@ -10656,7 +10656,7 @@ create and update are manipulate memory space, so when you disconnect, then the 
   </entry>
   <entry>
     <title>PHP 特點- 閉包</title>
-    <url>/2019/11/03/PHP-%E7%89%B9%E9%BB%9E-%E9%96%89%E5%8C%85/</url>
+    <url>/repository/2019/11/03/PHP-%E7%89%B9%E9%BB%9E-%E9%96%89%E5%8C%85/</url>
     <content><![CDATA[<h2>閉包</h2>
 <p>&lt;!--more--&gt;</p>
 <hr>
@@ -10683,7 +10683,7 @@ create and update are manipulate memory space, so when you disconnect, then the 
   </entry>
   <entry>
     <title>PHP Setter and Getter</title>
-    <url>/2019/10/27/PHP-Setter-and-Getter/</url>
+    <url>/repository/2019/10/27/PHP-Setter-and-Getter/</url>
     <content><![CDATA[<h2>Setter and Getter</h2>
 <p>&lt;!--more--&gt;</p>
 <hr>
@@ -10729,7 +10729,7 @@ create and update are manipulate memory space, so when you disconnect, then the 
   </entry>
   <entry>
     <title>PHP 良好習慣- 消毒、驗證和逃脫</title>
-    <url>/2019/11/03/PHP-%E8%89%AF%E5%A5%BD%E7%BF%92%E6%85%A3-%E6%B6%88%E6%AF%92%E3%80%81%E9%A9%97%E8%AD%89%E5%92%8C%E9%80%83%E8%84%AB/</url>
+    <url>/repository/2019/11/03/PHP-%E8%89%AF%E5%A5%BD%E7%BF%92%E6%85%A3-%E6%B6%88%E6%AF%92%E3%80%81%E9%A9%97%E8%AD%89%E5%92%8C%E9%80%83%E8%84%AB/</url>
     <content><![CDATA[<h2>消毒</h2>
 <p>&lt;!--more--&gt;</p>
 <hr>
@@ -10791,7 +10791,7 @@ create and update are manipulate memory space, so when you disconnect, then the 
   </entry>
   <entry>
     <title>Laravel Middleware</title>
-    <url>/2019/10/27/Laravel-Middleware/</url>
+    <url>/repository/2019/10/27/Laravel-Middleware/</url>
     <content><![CDATA[<h2>Middleware</h2>
 <p>&lt;!--more--&gt;</p>
 <hr>
@@ -10935,7 +10935,7 @@ Kao 為 handle 中的參數 $name</p>
   </entry>
   <entry>
     <title>What is Kubernetes?</title>
-    <url>/2019/11/11/What-is-Kubernetes/</url>
+    <url>/repository/2019/11/11/What-is-Kubernetes/</url>
     <content><![CDATA[<h3>Kubernetes</h3>
 <p>&lt;!--more--&gt;</p>
 <hr>
@@ -11104,7 +11104,7 @@ ex: 譬如今天保證要有3台在運作，那麼就可以把replica設成3，�
   </entry>
   <entry>
     <title>PHP 特點- 特徵機制</title>
-    <url>/2019/11/03/PHP-%E7%89%B9%E9%BB%9E-%E7%89%B9%E5%BE%B5%E6%A9%9F%E5%88%B6/</url>
+    <url>/repository/2019/11/03/PHP-%E7%89%B9%E9%BB%9E-%E7%89%B9%E5%BE%B5%E6%A9%9F%E5%88%B6/</url>
     <content><![CDATA[<h2>特徵機制 Traits</h2>
 <p>&lt;!--more--&gt;</p>
 <hr>
@@ -11153,7 +11153,7 @@ ex: 譬如今天保證要有3台在運作，那麼就可以把replica設成3，�
   </entry>
   <entry>
     <title>PHP 良好習慣- 資料庫</title>
-    <url>/2019/11/03/PHP-%E8%89%AF%E5%A5%BD%E7%BF%92%E6%85%A3-%E8%B3%87%E6%96%99%E5%BA%AB/</url>
+    <url>/repository/2019/11/03/PHP-%E8%89%AF%E5%A5%BD%E7%BF%92%E6%85%A3-%E8%B3%87%E6%96%99%E5%BA%AB/</url>
     <content><![CDATA[<h2>Database</h2>
 <p>&lt;!--more--&gt;</p>
 <hr>
@@ -11179,7 +11179,7 @@ ex: 譬如今天保證要有3台在運作，那麼就可以把replica設成3，�
   </entry>
   <entry>
     <title>PHP vs GoLang</title>
-    <url>/2019/12/09/PHP-vs-GoLang/</url>
+    <url>/repository/2019/12/09/PHP-vs-GoLang/</url>
     <content><![CDATA[<h2>PHP vs GoLang</h2>
 <h2>&lt;!--more--&gt;</h2>
 <h3>定義變數－Variables</h3>
@@ -11434,7 +11434,7 @@ Golang 在進行 <code>Foo</code> 嵌入 <code>Bar</code> 時，會自動將 <co
   </entry>
   <entry>
     <title>docker-create dockerfile(1)</title>
-    <url>/2019/12/22/docker-create-dockerfile-1/</url>
+    <url>/repository/2019/12/22/docker-create-dockerfile-1/</url>
     <content><![CDATA[<h2>Create Dockerfile</h2>
 <h2>&lt;!--more--&gt;</h2>
 <h3>產出簡單的dockerfile</h3>
@@ -11490,7 +11490,7 @@ Golang 在進行 <code>Foo</code> 嵌入 <code>Bar</code> 時，會自動將 <co
   </entry>
   <entry>
     <title>docker-ENTRYPOINT介紹</title>
-    <url>/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/</url>
+    <url>/repository/2019/12/22/docker-ENTRYPOINT%E4%BB%8B%E7%B4%B9/</url>
     <content><![CDATA[<h2>Docker ENTRYPOINT</h2>
 <h2>&lt;!--more--&gt;</h2>
 <ul>
@@ -11542,7 +11542,7 @@ Golang 在進行 <code>Foo</code> 嵌入 <code>Bar</code> 時，會自動將 <co
   </entry>
   <entry>
     <title>docker-Multi-Stage</title>
-    <url>/2019/12/22/docker-Multi-Stage/</url>
+    <url>/repository/2019/12/22/docker-Multi-Stage/</url>
     <content><![CDATA[<h2>Docker Multi-Stage compile Golang Image</h2>
 <h2>&lt;!--more--&gt;</h2>
 <h3>Single Build</h3>
@@ -11612,7 +11612,7 @@ Golang 在進行 <code>Foo</code> 嵌入 <code>Bar</code> 時，會自動將 <co
   </entry>
   <entry>
     <title>docker-intro</title>
-    <url>/2020/09/20/docker-intro/</url>
+    <url>/repository/2020/09/20/docker-intro/</url>
     <content><![CDATA[<h1>Docker Introduction</h1>
 <h2>&lt;!--more--&gt;</h2>
 <h2>The Existence of docker</h2>
@@ -11676,7 +11676,7 @@ image 可由 dockerfile 建立</p>
   </entry>
   <entry>
     <title>python 串列、Tuple、字典與集合(三)-字典</title>
-    <url>/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/</url>
+    <url>/repository/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%B8%89-%E5%AD%97%E5%85%B8/</url>
     <content><![CDATA[<h2>Python 字典</h2>
 <p>&lt;!--more--&gt;</p>
 <hr>
@@ -11825,7 +11825,7 @@ image 可由 dockerfile 建立</p>
   </entry>
   <entry>
     <title>python 生成式</title>
-    <url>/2019/11/17/python-%E7%94%9F%E6%88%90%E5%BC%8F/</url>
+    <url>/repository/2019/11/17/python-%E7%94%9F%E6%88%90%E5%BC%8F/</url>
     <content><![CDATA[<h2>Python 生成式</h2>
 <p>&lt;!--more--&gt;</p>
 <hr>
@@ -11902,7 +11902,7 @@ image 可由 dockerfile 建立</p>
   </entry>
   <entry>
     <title>python 產生器</title>
-    <url>/2019/11/21/python-%E7%94%A2%E7%94%9F%E5%99%A8/</url>
+    <url>/repository/2019/11/21/python-%E7%94%A2%E7%94%9F%E5%99%A8/</url>
     <content><![CDATA[<h2>Python 產生器</h2>
 <p>&lt;!--more--&gt;</p>
 <hr>
@@ -11939,7 +11939,7 @@ image 可由 dockerfile 建立</p>
   </entry>
   <entry>
     <title>python 串列、Tuple、字典與集合(四)-集合</title>
-    <url>/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E5%9B%9B-%E9%9B%86%E5%90%88/</url>
+    <url>/repository/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E5%9B%9B-%E9%9B%86%E5%90%88/</url>
     <content><![CDATA[<h2>Python 集合</h2>
 <p>&lt;!--more--&gt;</p>
 <hr>
@@ -12102,7 +12102,7 @@ image 可由 dockerfile 建立</p>
   </entry>
   <entry>
     <title>python 裝飾器</title>
-    <url>/2019/11/21/python-%E8%A3%9D%E9%A3%BE%E5%99%A8/</url>
+    <url>/repository/2019/11/21/python-%E8%A3%9D%E9%A3%BE%E5%99%A8/</url>
     <content><![CDATA[<h2>Python 裝飾器</h2>
 <p>&lt;!--more--&gt;</p>
 <hr>
@@ -12162,7 +12162,7 @@ image 可由 dockerfile 建立</p>
   </entry>
   <entry>
     <title>python 串列、Tuple、字典與集合(一)-串列</title>
-    <url>/2019/11/16/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88/</url>
+    <url>/repository/2019/11/16/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88/</url>
     <content><![CDATA[<h2>Python 串列與tuple</h2>
 <p>&lt;!--more--&gt;</p>
 <hr>
@@ -12350,7 +12350,7 @@ image 可由 dockerfile 建立</p>
   </entry>
   <entry>
     <title>python 函式</title>
-    <url>/2019/11/17/python-%E5%87%BD%E5%BC%8F/</url>
+    <url>/repository/2019/11/17/python-%E5%87%BD%E5%BC%8F/</url>
     <content><![CDATA[<h2>Python 函式</h2>
 <p>&lt;!--more--&gt;</p>
 <hr>
@@ -12527,7 +12527,7 @@ image 可由 dockerfile 建立</p>
   </entry>
   <entry>
     <title>利用 PHPUnit + Mockery 開發 API</title>
-    <url>/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/</url>
+    <url>/repository/2019/11/03/%E5%88%A9%E7%94%A8-PHPUnit-Mockery-%E9%96%8B%E7%99%BC-API/</url>
     <content><![CDATA[<h2>Mockery</h2>
 <p>&lt;!---more--&gt;</p>
 <hr>
@@ -12629,7 +12629,7 @@ image 可由 dockerfile 建立</p>
   </entry>
   <entry>
     <title>python 串列、Tuple、字典與集合(二)-Tuple</title>
-    <url>/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%BA%8C-Tuple/</url>
+    <url>/repository/2019/11/17/python-%E4%B8%B2%E5%88%97%E3%80%81Tuple%E3%80%81%E5%AD%97%E5%85%B8%E8%88%87%E9%9B%86%E5%90%88-%E4%BA%8C-Tuple/</url>
     <content><![CDATA[<h2>Python 串列與tuple</h2>
 <p>&lt;!--more--&gt;</p>
 <hr>
@@ -12698,7 +12698,7 @@ image 可由 dockerfile 建立</p>
   </entry>
   <entry>
     <title>python 命名空間與範圍</title>
-    <url>/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/</url>
+    <url>/repository/2019/11/22/python-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%96%93%E8%88%87%E7%AF%84%E5%9C%8D/</url>
     <content><![CDATA[<h2>Python 命名空間與範圍</h2>
 <p>&lt;!--more--&gt;</p>
 <hr>
@@ -12734,7 +12734,7 @@ image 可由 dockerfile 建立</p>
   </entry>
   <entry>
     <title>Chapter6-資料結構-Array</title>
-    <url>/2022/09/18/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Array/</url>
+    <url>/repository/2022/09/18/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Array/</url>
     <content><![CDATA[<h1>6.2 Array</h1>
 <hr>
 <h2>陣列 Array</h2>
@@ -12932,7 +12932,7 @@ Sol:<br>
   </entry>
   <entry>
     <title>Chapter6-資料結構-Stack and Queue 堆疊與佇列</title>
-    <url>/2022/09/22/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Stack-and-Queue-%E5%A0%86%E7%96%8A%E8%88%87%E4%BD%87%E5%88%97/</url>
+    <url>/repository/2022/09/22/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Stack-and-Queue-%E5%A0%86%E7%96%8A%E8%88%87%E4%BD%87%E5%88%97/</url>
     <content><![CDATA[<h1>6.3 Stack and Queue 堆疊與佇列</h1>
 <h2>Stack 堆疊</h2>
 <ul>
@@ -13079,7 +13079,7 @@ Sol:<br>
   </entry>
   <entry>
     <title>Chapter6-資料結構-Linked List 鏈結串列</title>
-    <url>/2022/12/05/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Linked-List-%E9%8F%88%E7%B5%90%E4%B8%B2%E5%88%97/</url>
+    <url>/repository/2022/12/05/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Linked-List-%E9%8F%88%E7%B5%90%E4%B8%B2%E5%88%97/</url>
     <content><![CDATA[<h1>6.4 Linked List 鏈結串列</h1>
 <h2>Linked List</h2>
 <ul>
@@ -13099,32 +13099,32 @@ Sol:<br>
   </entry>
   <entry>
     <title>Chapter6-資料結構-Binary Tree &amp; Tree</title>
-    <url>/2022/12/11/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Binary-Tree-Tree/</url>
+    <url>/repository/2022/12/11/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Binary-Tree-Tree/</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>Chapter6-資料結構-Graph 圖形</title>
-    <url>/2022/12/11/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Graph-%E5%9C%96%E5%BD%A2/</url>
+    <url>/repository/2022/12/11/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Graph-%E5%9C%96%E5%BD%A2/</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>Chapter6-資料結構-Hashing 雜湊法</title>
-    <url>/2022/12/11/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Hashing-%E9%9B%9C%E6%B9%8A%E6%B3%95/</url>
+    <url>/repository/2022/12/11/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Hashing-%E9%9B%9C%E6%B9%8A%E6%B3%95/</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>Chapter6-資料結構-Search &amp; Sort</title>
-    <url>/2022/12/11/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Search-Sort/</url>
+    <url>/repository/2022/12/11/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Search-Sort/</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>Chapter6-資料結構-Advance Tree 高等樹</title>
-    <url>/2022/12/11/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Advance-Tree-%E9%AB%98%E7%AD%89%E6%A8%B9/</url>
+    <url>/repository/2022/12/11/Chapter6-%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Advance-Tree-%E9%AB%98%E7%AD%89%E6%A8%B9/</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>Caddy - Installation </title>
-    <url>/2022/12/11/Caddy-Installation/</url>
+    <url>/repository/2022/12/11/Caddy-Installation/</url>
     <content><![CDATA[<h1>Caddy Installation</h1>
 <h2>Build Caddy</h2>
 <ol>
@@ -13240,7 +13240,7 @@ Sol:<br>
   </entry>
   <entry>
     <title>PSM-Learning</title>
-    <url>/2022/12/11/PSM-Learning/</url>
+    <url>/repository/2022/12/11/PSM-Learning/</url>
     <content><![CDATA[<h1>PSM Learning</h1>
 <h2>Role</h2>
 <h2>Step</h2>
@@ -13255,5 +13255,29 @@ Sol:<br>
         <tag>Scrum</tag>
         <tag>Sprint</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>About</title>
+    <url>/repository/about/index.html</url>
+    <content><![CDATA[<h1>Hello, This is PinJin !</h1>
+<ul>
+<li><a href="https://www.lumos.tw/" target="_blank" rel="noopener">Introduction_Link</a></li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>categories</title>
+    <url>/repository/categories/index.html</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>Search</title>
+    <url>/repository/search/index.html</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>tag</title>
+    <url>/repository/tag/index.html</url>
+    <content><![CDATA[]]></content>
   </entry>
 </search>

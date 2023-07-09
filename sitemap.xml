@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://pingjing0628.github.io/about/</loc>
+    <loc>https://pingjing0628.github.io/about/index.html</loc>
     
     <lastmod>2023-07-09</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://pingjing0628.github.io/tag/</loc>
+    <loc>https://pingjing0628.github.io/tag/index.html</loc>
     
     <lastmod>2023-07-09</lastmod>
     
@@ -947,7 +947,7 @@
   </url>
   
   <url>
-    <loc>https://pingjing0628.github.io/search/</loc>
+    <loc>https://pingjing0628.github.io/search/index.html</loc>
     
     <lastmod>2021-05-30</lastmod>
     
@@ -965,7 +965,7 @@
   </url>
   
   <url>
-    <loc>https://pingjing0628.github.io/categories/</loc>
+    <loc>https://pingjing0628.github.io/categories/index.html</loc>
     
     <lastmod>2020-12-15</lastmod>
     
