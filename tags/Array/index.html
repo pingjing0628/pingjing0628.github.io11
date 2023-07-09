@@ -120,7 +120,7 @@
 
     <p class="tag-title">
       / <a href="/repository/tag/">tags</a>
-      / <a href="">Array</a> /
+      / <a href="undefined">Array</a> /
     </p>
     <div class="post-list">
     
@@ -205,40 +205,20 @@
     
     
 
-  </body>
-</html>
-h-popup">
-    <div class="search-popup-overlay">  
-    </div>
-    <div class="search-popup-window" >
-        <div class="search-header">
-            <div class="search-input-container">
-              <input autocomplete="off" autocapitalize="off" maxlength="80"
-                     placeholder="Search Anything" spellcheck="false"
-                     type="search" class="search-input">
-            </div>
-            <div class="search-close-btn">
-                <div class="icon close-btn"></div>
-            </div>
-        </div>
-        <div class="search-result-container">
-        </div>
-    </div>
-</div>
-
-<script>
-    const searchConfig = {
-        path             : "/repository/search.xml",
-        top_n_per_article: "1",
-        unescape         : "false",
-        trigger: "auto",
-        preload: "false"
-    }
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script>
-<script src="/js/search.js"></script>
-    
-    
-
-  </body>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
 </html>
