@@ -525,6 +525,8 @@ person P; (類別 物件)&lt;/p&gt;
       <category term="程式介紹" scheme="https://pingjing0628.github.io/categories/Note/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9/"/>
     
     
+      <category term="Structure Programming Language" scheme="https://pingjing0628.github.io/tags/Structure-Programming-Language/"/>
+    
       <category term="C" scheme="https://pingjing0628.github.io/tags/C/"/>
     
       <category term="運算子" scheme="https://pingjing0628.github.io/tags/%E9%81%8B%E7%AE%97%E5%AD%90/"/>
@@ -534,8 +536,6 @@ person P; (類別 物件)&lt;/p&gt;
       <category term="Pointer" scheme="https://pingjing0628.github.io/tags/Pointer/"/>
     
       <category term="雙重指標" scheme="https://pingjing0628.github.io/tags/%E9%9B%99%E9%87%8D%E6%8C%87%E6%A8%99/"/>
-    
-      <category term="Structure Programming Language" scheme="https://pingjing0628.github.io/tags/Structure-Programming-Language/"/>
     
   </entry>
   
@@ -575,8 +575,6 @@ person P; (類別 物件)&lt;/p&gt;
       <category term="程式介紹" scheme="https://pingjing0628.github.io/categories/Note/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9/"/>
     
     
-      <category term="Structure Programming Language" scheme="https://pingjing0628.github.io/tags/Structure-Programming-Language/"/>
-    
       <category term="OOP" scheme="https://pingjing0628.github.io/tags/OOP/"/>
     
       <category term="Call by value" scheme="https://pingjing0628.github.io/tags/Call-by-value/"/>
@@ -586,6 +584,8 @@ person P; (類別 物件)&lt;/p&gt;
       <category term="Call by name" scheme="https://pingjing0628.github.io/tags/Call-by-name/"/>
     
       <category term="Call by value result" scheme="https://pingjing0628.github.io/tags/Call-by-value-result/"/>
+    
+      <category term="Structure Programming Language" scheme="https://pingjing0628.github.io/tags/Structure-Programming-Language/"/>
     
   </entry>
   
