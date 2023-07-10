@@ -13082,23 +13082,4 @@ image 可由 dockerfile 建立</p>
         <tag>mockery</tag>
       </tags>
   </entry>
-  <entry>
-    <title>About</title>
-    <url>/repository/about/index.html</url>
-    <content><![CDATA[<h1>Hello, This is PinJin !</h1>
-<ul>
-<li><a href="https://www.lumos.tw/">Introduction_Link</a></li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
-    <title>categories</title>
-    <url>/repository/categories/index.html</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>tag</title>
-    <url>/repository/tag/index.html</url>
-    <content><![CDATA[]]></content>
-  </entry>
 </search>
