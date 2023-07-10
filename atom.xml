@@ -347,15 +347,15 @@
     
     <category term="Overriding" scheme="https://pingjing0628.github.io/tags/Overriding/"/>
     
-    <category term="繼承" scheme="https://pingjing0628.github.io/tags/%E7%B9%BC%E6%89%BF/"/>
-    
-    <category term="多型" scheme="https://pingjing0628.github.io/tags/%E5%A4%9A%E5%9E%8B/"/>
-    
     <category term="Java" scheme="https://pingjing0628.github.io/tags/Java/"/>
+    
+    <category term="繼承" scheme="https://pingjing0628.github.io/tags/%E7%B9%BC%E6%89%BF/"/>
     
     <category term="Exception" scheme="https://pingjing0628.github.io/tags/Exception/"/>
     
     <category term="Static" scheme="https://pingjing0628.github.io/tags/Static/"/>
+    
+    <category term="多型" scheme="https://pingjing0628.github.io/tags/%E5%A4%9A%E5%9E%8B/"/>
     
     <category term="Final" scheme="https://pingjing0628.github.io/tags/Final/"/>
     
@@ -442,11 +442,11 @@ person P; (類別 物件)&lt;/p&gt;
     <category term="程式介紹" scheme="https://pingjing0628.github.io/categories/Note/%E8%A8%88%E7%AE%97%E6%A9%9F%E6%A6%82%E8%AB%96/%E7%A8%8B%E5%BC%8F%E4%BB%8B%E7%B4%B9/"/>
     
     
-    <category term="物件導向" scheme="https://pingjing0628.github.io/tags/%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91/"/>
-    
     <category term="繼承" scheme="https://pingjing0628.github.io/tags/%E7%B9%BC%E6%89%BF/"/>
     
     <category term="多型" scheme="https://pingjing0628.github.io/tags/%E5%A4%9A%E5%9E%8B/"/>
+    
+    <category term="物件導向" scheme="https://pingjing0628.github.io/tags/%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91/"/>
     
     <category term="封裝" scheme="https://pingjing0628.github.io/tags/%E5%B0%81%E8%A3%9D/"/>
     
